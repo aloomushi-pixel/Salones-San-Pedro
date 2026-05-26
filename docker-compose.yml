@@ -1,0 +1,35 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+        - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+    expose:
+      - "3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+    networks:
+      - coolify
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=coolify"
+      # HTTP Router (redirect to HTTPS)
+      - "traefik.http.routers.salones-http.rule=Host(`sanpedro.aionia.com.mx`)"
+      - "traefik.http.routers.salones-http.entrypoints=web"
+      - "traefik.http.routers.salones-http.middlewares=redirect-to-https@file"
+      # HTTPS Router
+      - "traefik.http.routers.salones-https.rule=Host(`sanpedro.aionia.com.mx`)"
+      - "traefik.http.routers.salones-https.entrypoints=websecure"
+      - "traefik.http.routers.salones-https.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.salones-https.service=salones-web"
+      # Service definition
+      - "traefik.http.services.salones-web.loadbalancer.server.port=3000"
+
+networks:
+  coolify:
+    external: true

@@ -17,12 +17,12 @@ const usersToCreate = [
     user_metadata: { role: 'admin', name: 'Juan García' }
   },
   {
-    email: 'samantha@ccurity.com.mx',
+    email: 'ventas@sanpedro.com.mx',
     password: 'E4ae5d6c0c.',
     user_metadata: { role: 'admin', name: 'Samantha' }
   },
   {
-    email: 'jose@ccurity.com.mx',
+    email: 'admin@sanpedro.com.mx',
     password: 'E4ae5d6c0c.',
     user_metadata: { role: 'admin', name: 'José' }
   }
