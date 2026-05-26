@@ -1,4 +1,5 @@
 import Image from "next/image";
+import LeadForm from "../components/LeadForm";
 
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
           <img
             alt="SALONES SAN PEDRO"
             className="h-12 w-auto object-contain"
-            src="https://lh3.googleusercontent.com/aida/ADBb0ugkaea2DMIVRYoiD2ao4qKwviLHjCo5f8M4QZiUpOfm8jVw4XH0SKXGOc26cYxmn2Kt2TX0hhEpcnFxgyXZTNsS7m_VGxl-eaps0VtAhrA8feH8DwpiluSODd0cXT5cA5UnP3YgkBEV8B5MR-ELuBmydHACkye-Pd69wfnMnzK40-Ir8A13fIlzcCuSx0mo8kQsoet21eU19DIHY-PN3WnrckBxsbgO8Avzx31MhHrbtSmFML8Y4_RHFtVm"
+            src="/logo.png"
           />
         </div>
         <div className="hidden md:flex items-center gap-8 font-body-md text-body-md">
@@ -240,42 +241,7 @@ export default function Home() {
               </p>
             </div>
             <div className="max-w-3xl mx-auto bg-surface-container-lowest p-8 md:p-12 rounded-xl shadow-2xl border border-outline-variant/30">
-              <form className="space-y-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-                  {/* Step 1 */}
-                  <div className="space-y-3">
-                    <label className="font-label-sm text-primary uppercase flex items-center gap-2">
-                      <span className="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-[10px]">1</span>
-                      ¿Qué evento celebras?
-                    </label>
-                    <select className="w-full border-0 border-b-2 border-outline-variant bg-transparent py-3 focus:ring-0 focus:border-primary transition-all text-on-surface font-body-md appearance-none" defaultValue="">
-                      <option disabled value="">Selecciona una opción</option>
-                      <option value="boda">Boda</option>
-                      <option value="xv">XV Años</option>
-                      <option value="bautizo">Bautizo</option>
-                    </select>
-                  </div>
-                  {/* Step 2 */}
-                  <div className="space-y-3">
-                    <label className="font-label-sm text-primary uppercase flex items-center gap-2">
-                      <span className="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-[10px]">2</span>
-                      ¿Fecha aproximada?
-                    </label>
-                    <input className="w-full border-0 border-b-2 border-outline-variant bg-transparent py-3 focus:ring-0 focus:border-primary transition-all text-on-surface font-body-md" type="date" />
-                  </div>
-                </div>
-                {/* Step 3 */}
-                <div className="space-y-3 text-left">
-                  <label className="font-label-sm text-primary uppercase flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-[10px]">3</span>
-                    Confirmación por WhatsApp
-                  </label>
-                  <input className="w-full border-0 border-b-2 border-outline-variant bg-transparent py-3 focus:ring-0 focus:border-primary transition-all text-on-surface font-body-md" placeholder="Déjanos tu WhatsApp para confirmarte si tu fecha está libre en menos de 10 minutos" type="tel" />
-                </div>
-                <button className="w-full py-5 bg-primary text-on-primary rounded-lg font-label-sm shadow-xl hover:bg-primary/90 transition-all scale-100 active:scale-95 text-lg tracking-widest uppercase font-bold" type="submit">
-                  Verificar Disponibilidad
-                </button>
-              </form>
+              <LeadForm />
             </div>
           </div>
         </section>
@@ -287,7 +253,7 @@ export default function Home() {
           <img
             alt="SALONES SAN PEDRO"
             className="h-16 w-auto object-contain"
-            src="https://lh3.googleusercontent.com/aida/ADBb0ugkaea2DMIVRYoiD2ao4qKwviLHjCo5f8M4QZiUpOfm8jVw4XH0SKXGOc26cYxmn2Kt2TX0hhEpcnFxgyXZTNsS7m_VGxl-eaps0VtAhrA8feH8DwpiluSODd0cXT5cA5UnP3YgkBEV8B5MR-ELuBmydHACkye-Pd69wfnMnzK40-Ir8A13fIlzcCuSx0mo8kQsoet21eU19DIHY-PN3WnrckBxsbgO8Avzx31MhHrbtSmFML8Y4_RHFtVm"
+            src="/logo.png"
           />
           <div className="flex gap-6 mt-2">
             <a aria-label="Facebook" className="text-primary hover:scale-110 transition-transform" href="#">

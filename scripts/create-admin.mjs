@@ -10,23 +10,43 @@ if (!supabaseUrl || !supabaseServiceKey) {
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-async function createAdmin() {
-  const { data, error } = await supabase.auth.admin.createUser({
+const usersToCreate = [
+  {
     email: 'juangarcia@ccurity.com.mx',
     password: 'E4ae5d6c0c.',
-    email_confirm: true,
-    user_metadata: { role: 'admin' }
-  });
-  
-  if (error) {
-    if (error.message.includes('already been registered')) {
-      console.log('El usuario administrador ya existe.');
+    user_metadata: { role: 'admin', name: 'Juan García' }
+  },
+  {
+    email: 'samantha@ccurity.com.mx',
+    password: 'E4ae5d6c0c.',
+    user_metadata: { role: 'admin', name: 'Samantha' }
+  },
+  {
+    email: 'jose@ccurity.com.mx',
+    password: 'E4ae5d6c0c.',
+    user_metadata: { role: 'admin', name: 'José' }
+  }
+];
+
+async function setupUsers() {
+  for (const user of usersToCreate) {
+    const { data, error } = await supabase.auth.admin.createUser({
+      email: user.email,
+      password: user.password,
+      email_confirm: true,
+      user_metadata: user.user_metadata
+    });
+    
+    if (error) {
+      if (error.message.includes('already been registered')) {
+        console.log(`El usuario ${user.email} ya existe.`);
+      } else {
+        console.error(`Error al crear usuario ${user.email}:`, error.message);
+      }
     } else {
-      console.error('Error al crear usuario administrador:', error.message);
+      console.log(`Usuario creado exitosamente: ${data.user.email}`);
     }
-  } else {
-    console.log('Usuario administrador creado exitosamente:', data.user.email);
   }
 }
 
-createAdmin();
+setupUsers();
