@@ -203,29 +203,29 @@ export default function Home() {
         </section>
 
         {/* Sección Paquetes */}
-        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-inverse-surface text-surface-container-lowest" id="paquetes">
+        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface text-on-surface" id="paquetes">
           <div className="max-w-container-max mx-auto">
             
             {/* Encabezado de la Sección */}
             <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-              <span className="font-label-sm text-primary-container tracking-widest uppercase">Nuestros Paquetes</span>
-              <h2 className="font-display-lg text-headline-md md:text-display-lg text-primary-container">
+              <span className="font-label-sm text-primary tracking-widest uppercase">Nuestros Paquetes</span>
+              <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface">
                 Paquetes Exclusivos
               </h2>
-              <p className="font-body-lg text-surface-variant max-w-2xl mx-auto">
+              <p className="font-body-lg text-secondary max-w-2xl mx-auto">
                 Es un honor para Salones San Pedro Plus ser considerados para la planeación de tu evento. Te ayudaremos a que sea un día inolvidable.
               </p>
             </div>
 
             {/* Capacidades de los Salones */}
             <div className="flex flex-col md:flex-row justify-center gap-8 mb-16">
-              <div className="bg-surface-container-lowest/10 backdrop-blur-md border border-outline-variant/30 p-6 rounded-xl text-center w-full md:w-1/3">
-                <h3 className="font-display-lg text-2xl text-primary-container mb-2">Salón Platino</h3>
-                <p className="font-body-md text-surface-variant">Capacidad de 50 hasta 180 personas</p>
+              <div className="bg-surface-container-lowest border border-outline-variant/40 p-6 rounded-xl text-center w-full md:w-1/3 shadow-sm">
+                <h3 className="font-display-lg text-2xl text-primary mb-2">Salón Platino</h3>
+                <p className="font-body-md text-secondary">Capacidad de 50 hasta 180 personas</p>
               </div>
-              <div className="bg-surface-container-lowest/10 backdrop-blur-md border border-outline-variant/30 p-6 rounded-xl text-center w-full md:w-1/3">
-                <h3 className="font-display-lg text-2xl text-primary-container mb-2">Salón Diamante</h3>
-                <p className="font-body-md text-surface-variant">Capacidad de 100 hasta 200 personas</p>
+              <div className="bg-surface-container-lowest border border-outline-variant/40 p-6 rounded-xl text-center w-full md:w-1/3 shadow-sm">
+                <h3 className="font-display-lg text-2xl text-primary mb-2">Salón Diamante</h3>
+                <p className="font-body-md text-secondary">Capacidad de 100 hasta 200 personas</p>
               </div>
             </div>
 
@@ -233,7 +233,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
               
               {/* Paquete Premier */}
-              <div className="bg-surface-container-lowest text-on-surface rounded-2xl shadow-xl overflow-hidden flex flex-col justify-between border border-outline-variant/20 transition-transform hover:-translate-y-2 duration-300">
+              <div className="bg-surface-container-lowest text-on-surface rounded-2xl shadow-xl overflow-hidden flex flex-col justify-between border border-outline-variant/30 transition-transform hover:-translate-y-2 duration-300">
                 <div>
                   <div className="p-8 text-center bg-surface-container-low border-b border-outline-variant/30">
                     <h3 className="font-display-lg text-3xl text-on-surface font-bold mb-2">Premier</h3>
@@ -269,12 +269,12 @@ export default function Home() {
                   El Más Elegido
                 </div>
                 <div>
-                  <div className="p-8 text-center bg-inverse-surface text-surface-container-lowest border-b border-outline-variant/20 mt-6">
-                    <h3 className="font-display-lg text-3xl text-primary-container font-bold mb-2">Plus</h3>
-                    <p className="text-surface-variant text-sm">Base 100 personas</p>
-                    <div className="mt-4 space-y-1 text-surface-container-lowest/90 text-sm">
-                      <p>Platino: <span className="font-bold text-lg text-primary-container">$710 p/p</span></p>
-                      <p>Diamante: <span className="font-bold text-lg text-primary-container">$730 p/p</span></p>
+                  <div className="p-8 text-center bg-primary-container/10 border-b border-outline-variant/30 mt-6">
+                    <h3 className="font-display-lg text-3xl text-primary font-bold mb-2">Plus</h3>
+                    <p className="text-secondary text-sm">Base 100 personas</p>
+                    <div className="mt-4 space-y-1 text-on-surface/80 text-sm">
+                      <p>Platino: <span className="font-bold text-lg text-primary">$710 p/p</span></p>
+                      <p>Diamante: <span className="font-bold text-lg text-primary">$730 p/p</span></p>
                     </div>
                   </div>
                   <div className="p-8">
@@ -300,7 +300,7 @@ export default function Home() {
               </div>
 
               {/* Paquete All Inclusive */}
-              <div className="bg-surface-container-lowest text-on-surface rounded-2xl shadow-xl overflow-hidden flex flex-col justify-between border border-outline-variant/20 transition-transform hover:-translate-y-2 duration-300">
+              <div className="bg-surface-container-lowest text-on-surface rounded-2xl shadow-xl overflow-hidden flex flex-col justify-between border border-outline-variant/30 transition-transform hover:-translate-y-2 duration-300">
                 <div>
                   <div className="p-8 text-center bg-surface-container-low border-b border-outline-variant/30">
                     <h3 className="font-display-lg text-3xl text-on-surface font-bold mb-2">All Inclusive</h3>
@@ -334,19 +334,19 @@ export default function Home() {
             </div>
 
             {/* Condiciones de Pago */}
-            <div className="mt-20 bg-surface-container-lowest/5 border border-outline-variant/30 rounded-2xl p-8 max-w-4xl mx-auto shadow-inner">
-              <h4 className="font-display-lg text-2xl font-bold text-primary-container text-center mb-8">Condiciones de Pago</h4>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-surface-variant text-center">
+            <div className="mt-20 bg-surface-container-low border border-outline-variant/30 rounded-2xl p-8 max-w-4xl mx-auto shadow-md">
+              <h4 className="font-display-lg text-2xl font-bold text-primary text-center mb-8">Condiciones de Pago</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-secondary text-center">
                 <div className="space-y-3">
-                  <span className="block text-4xl font-bold text-primary-container">1</span>
+                  <span className="block text-4xl font-bold text-primary">1</span>
                   <p className="font-body-md leading-relaxed">Reserva tu fecha con $3,000.00 MXN a la firma del contrato.</p>
                 </div>
                 <div className="space-y-3">
-                  <span className="block text-4xl font-bold text-primary-container">2</span>
+                  <span className="block text-4xl font-bold text-primary">2</span>
                   <p className="font-body-md leading-relaxed">Liquida el 25% del total a los 30 días posteriores a la firma.</p>
                 </div>
                 <div className="space-y-3">
-                  <span className="block text-4xl font-bold text-primary-container">3</span>
+                  <span className="block text-4xl font-bold text-primary">3</span>
                   <p className="font-body-md leading-relaxed">El monto total deberá ser liquidado 15 días previos al evento.</p>
                 </div>
               </div>
