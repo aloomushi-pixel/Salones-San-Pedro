@@ -61,47 +61,103 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Sección Banquetes */}
-        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-lowest" id="banquetes">
-          <div className="max-w-container-max mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div className="space-y-8">
-                <span className="font-label-sm text-primary tracking-widest uppercase">Gastronomía de Autor</span>
-                <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface">Gastronomía de Salones San Pedro</h2>
-                <p className="font-body-lg text-secondary text-lg">
-                  Nuestra cocina es un homenaje a la herencia poblana reimaginada para el paladar moderno. Ingredientes locales seleccionados se transforman en obras de arte culinarias que deleitan todos los sentidos.
-                </p>
-                <ul className="space-y-4">
-                  <li className="flex items-center gap-3">
-                    <span className="material-symbols-outlined text-primary">restaurant_menu</span>
-                    <span className="font-body-md text-on-surface">Chile en nogada deconstruido con granada cristalizada</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <span className="material-symbols-outlined text-primary">wine_bar</span>
-                    <span className="font-body-md text-on-surface">Maridaje con vinos premium seleccionados</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <span className="material-symbols-outlined text-primary">skillet</span>
-                    <span className="font-body-md text-on-surface">Servicio gourmet de alta escuela</span>
-                  </li>
-                </ul>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="pt-12">
-                  <img
-                    className="rounded-lg shadow-xl w-full h-80 object-cover"
-                    alt="Chile en Nogada deconstruido"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIiyGNFFmnqsT443KWz93rPJtlRMbG8-mP256VYPhaKTRuaIVyGCOEPZJcKVwlphL54XeHuviGj1t5YvXnjqudHTzkfnKR-Hv_6vjPe9ajyQei6XPu-ur6NWTSVlfXr237eY0TzysqFqjGDWELIrsIPBECUlQEUYAtQhwB7zhZvTcTEv8daOLuuubzHuTj9_H0o9rqlilHXHM3Y86TV0hhksV-Q7P7v3tWnOSG9jL4_8lHQzfSeHmBDF8AcNgjNeSKY8oVpuj9UmXi"
-                  />
+        {/* Sección Gastronomía */}
+        <section className="py-section-gap bg-surface-container-lowest" id="banquetes">
+          <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+            <span className="font-label-sm text-primary tracking-widest uppercase">Gastronomía de Autor</span>
+            <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-2">
+              EXPERIENCIA GASTRONÓMICA: MENÚ DE 3 TIEMPOS
+            </h2>
+            <div className="w-24 h-0.5 bg-primary-container mx-auto my-4"></div>
+            <p className="font-body-lg text-secondary max-w-2xl mx-auto mb-12">
+              Descubra nuestra selección exclusiva para eventos inolvidables.
+            </p>
+
+            {/* Menú de 3 Tiempos Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mb-16">
+              {/* Primer Tiempo */}
+              <div className="bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="space-y-6">
+                  <h3 className="font-display-lg text-xl text-primary font-bold tracking-wider uppercase">Primer Tiempo</h3>
+                  <div className="relative h-60 rounded-xl overflow-hidden shadow-md">
+                    <img
+                      className="w-full h-full object-cover"
+                      alt="Primer Tiempo - Ensalada"
+                      src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80"
+                    />
+                  </div>
+                  <h4 className="font-body-md font-bold text-on-surface text-base leading-snug">
+                    Entradas ligeras y sofisticadas para abrir el apetito.
+                  </h4>
+                  <p className="font-body-md text-secondary text-sm leading-relaxed">
+                    Ensalada de Verano con Vinagreta de Cítricos y Frutos Rojos.
+                  </p>
                 </div>
-                <div>
-                  <img
-                    className="rounded-lg shadow-xl w-full h-96 object-cover"
-                    alt="Master chef plating"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3HpPPLtGqhlEVNzWf0ykU5N-7oSNb7fo5p6x6A9VEod_dSxNW_7zLG37nrJBlgDn8YcivcQM8Gnu7lCPAGxyDQWhV0gWJ6vtgEdX05Vupc19PBgY2PQJt0RcLh4wCl1VlR3SQNNJfnU0EQdk13I1Pj0izwl1HrZ97cdaDFexgZH45-akW9U77bGkZYSkTuJyyzxt8nCtkEznqpdRPOG1mM_BEn1a8TAZb6lIkwvemaXgbuXXYuyfbDFMO5FnltTf3XDuPHu0LImCJ"
-                  />
-                </div>
+                <button className="mt-8 bg-inverse-surface hover:bg-primary text-on-primary hover:text-on-primary text-xs uppercase px-6 py-3 rounded-full transition-all duration-300 font-semibold tracking-wider self-center shadow-sm">
+                  Ver Opciones
+                </button>
               </div>
+
+              {/* Segundo Tiempo */}
+              <div className="bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="space-y-6">
+                  <h3 className="font-display-lg text-xl text-primary font-bold tracking-wider uppercase">Segundo Tiempo</h3>
+                  <div className="relative h-60 rounded-xl overflow-hidden shadow-md">
+                    <img
+                      className="w-full h-full object-cover"
+                      alt="Segundo Tiempo - Pasta"
+                      src="https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&w=600&q=80"
+                    />
+                  </div>
+                  <h4 className="font-body-md font-bold text-on-surface text-base leading-snug">
+                    Platos principales elaborados con ingredientes de temporada.
+                  </h4>
+                  <p className="font-body-md text-secondary text-sm leading-relaxed">
+                    Fettuccine al Tartufo con Setas Silvestres.
+                  </p>
+                </div>
+                <button className="mt-8 bg-inverse-surface hover:bg-primary text-on-primary hover:text-on-primary text-xs uppercase px-6 py-3 rounded-full transition-all duration-300 font-semibold tracking-wider self-center shadow-sm">
+                  Ver Opciones
+                </button>
+              </div>
+
+              {/* Tercer Tiempo */}
+              <div className="bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="space-y-6">
+                  <h3 className="font-display-lg text-xl text-primary font-bold tracking-wider uppercase">Tercer Tiempo</h3>
+                  <div className="relative h-60 rounded-xl overflow-hidden shadow-md">
+                    <img
+                      className="w-full h-full object-cover"
+                      alt="Tercer Tiempo - Pollo"
+                      src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80"
+                    />
+                  </div>
+                  <h4 className="font-body-md font-bold text-on-surface text-base leading-snug">
+                    Una culminación deliciosa para su banquete.
+                  </h4>
+                  <p className="font-body-md text-secondary text-sm leading-relaxed">
+                    Pechuga de Pollo Rostizada a las Hierbas Finas y Vegetales de Estación.
+                  </p>
+                </div>
+                <button className="mt-8 bg-inverse-surface hover:bg-primary text-on-primary hover:text-on-primary text-xs uppercase px-6 py-3 rounded-full transition-all duration-300 font-semibold tracking-wider self-center shadow-sm">
+                  Ver Opciones
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Banner inferior de personalización */}
+          <div className="w-full bg-inverse-surface py-12 text-center text-inverse-on-surface">
+            <div className="max-w-4xl mx-auto px-margin-mobile flex flex-col md:flex-row items-center justify-between gap-6">
+              <p className="font-display-lg text-xl md:text-2xl text-surface-container-lowest font-medium">
+                ¿Desea personalizar su menú para su evento?
+              </p>
+              <a
+                href="#disponibilidad"
+                className="bg-primary-container text-on-primary-container hover:bg-primary-container/90 px-8 py-3.5 rounded-full font-label-sm text-sm uppercase tracking-wider font-bold transition-all shadow-md active:scale-95"
+              >
+                Solicitar Cotización
+              </a>
             </div>
           </div>
         </section>
