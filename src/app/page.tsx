@@ -1,6 +1,7 @@
 import Image from "next/image";
 import LeadForm from "../components/LeadForm";
 import TestimoniosCarousel from "../components/TestimoniosCarousel";
+import GaleriaSection from "../components/GaleriaSection";
 
 export default function Home() {
   return (
@@ -356,47 +357,10 @@ export default function Home() {
         </section>
 
         {/* Sección Galería */}
-        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-lowest" id="galeria">
-          <div className="max-w-container-max mx-auto">
-            <div className="flex justify-between items-end mb-12">
-              <div>
-                <span className="font-label-sm text-primary tracking-widest uppercase">Instalaciones</span>
-                <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-2">Galería de Espacios</h2>
-              </div>
-              <p className="hidden md:block text-secondary max-w-xs text-right">Arquitectura contemporánea diseñada para la elegancia funcional.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-[800px]">
-              <div className="md:col-span-2 md:row-span-2 overflow-hidden rounded-lg group">
-                <img
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  alt="Luxury wedding reception"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSf4kmdGeSyJYwNSG3lSoHza4UpObgjsHFhaRY9JfMHzKaxNhDNogK45EcM3of_c8GScAsj4RGvPfrR9z6PapBM43ualufmxSwjgx7GzwA9H7J6QbyQZnSqbPubP8EfRKRUUHhXzvOcdNabRhRA4_SKUcJTQbUD56ZVmYvPTRR-KCHjh0j7vCbnAx2W53xcTCpBFPG95aGQaidxKUZdjhe6XOJYAT7gD-2BVkbBFwAd5IRY1Mr9Z76RHcQUU0EeNHv1u_Ocu70LEsH"
-                />
-              </div>
-              <div className="md:col-span-1 overflow-hidden rounded-lg group">
-                <img
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  alt="Outdoor terrace"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwMEeThPct2BQ74I8Br0-QkDL90_PD3cpOsfFmpKtzEulwTmNM-4wlqxUCHUK6bgj6QE-g1i5evaZhegA3FGINImKwP8pUbwlGqhIEge8Ie9fON-d79rR4SpLuIFmL2rvRrDMCyAtxDgzN8Hb_N6fgWtbzoVpNOjnBeUuEe4e0Gal62CxnPDnkh3fkGy4qsqGN1Val9XOW7vpISx7RwXlOUJxI-XXqohCMwpmR5brTuxe44-_jsSaSOt53HaAJ5gg4Tg1R8O3iNQA0"
-                />
-              </div>
-              <div className="md:col-span-1 overflow-hidden rounded-lg group">
-                <img
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  alt="Cocktail bar"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWUZBL45IhD6lcoOny-X8CV_w3HZ2DXEIzaS3KWL5ZeUBZJnadeHxOvf_2zjJkJSgOwj3Fyguja078-pQUfmoTzgrIesDCU3GfY0GTt7bGplsHJbeThifeSzKpshyBflFNe8k5SoSGE3vY6U9doXCREcmbiej6y-F6Y8eCtqgm29oINxIb5qbti6Lq2qSBBL-m_lcEpoxVjyyu7JwA5l3FNjOEbbWywQ54sM63QH37iILSxwRtASsXug030auUtxQh5XR7dh6l1Sbl"
-                />
-              </div>
-              <div className="md:col-span-2 overflow-hidden rounded-lg group">
-                <img
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  alt="Banquet table set"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHeTnIJ33jk9qkLiLqVUxENCpoXpzhoM1V-bM2WDYn5Q9seks4TwfGfI7JI0oEU8SgaNsow_gR3xn9ACGKpss4EZojFM0cycs09VT9eiCx0vu3p9F6-tsgkoykFHFtSneTyiZ_tLns4NRwKUN2T3g7K5mThA_8qcpnkoDvWjJgppGyFLkgnR3ZmDy-9ptle7WuKqhnH8eOTmGkWZH5uFLv6lpwEgt68uvy-_VG_IBdqNNk31O86UKLfO-ejpe_clBpT4SR5tT8wv2w"
-                />
-              </div>
-            </div>
-          </div>
+        <section className="py-section-gap bg-surface-container-lowest" id="galeria">
+          <GaleriaSection />
         </section>
+
 
         {/* Sección Testimonios */}
         <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface" id="testimonios">
