@@ -93,9 +93,14 @@ export default function Home() {
                     Ensalada de Verano con Vinagreta de Cítricos y Frutos Rojos.
                   </p>
                 </div>
-                <button className="mt-8 bg-inverse-surface hover:bg-primary text-on-primary hover:text-on-primary text-xs uppercase px-6 py-3 rounded-full transition-all duration-300 font-semibold tracking-wider self-center shadow-sm">
+                <a
+                  href="https://wa.me/message/U7UANPSABGW4K1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 bg-inverse-surface hover:bg-primary text-on-primary hover:text-on-primary text-xs uppercase px-6 py-3 rounded-full transition-all duration-300 font-semibold tracking-wider self-center shadow-sm text-center"
+                >
                   Ver Opciones
-                </button>
+                </a>
               </div>
 
               {/* Segundo Tiempo */}
@@ -116,9 +121,14 @@ export default function Home() {
                     Fettuccine al Tartufo con Setas Silvestres.
                   </p>
                 </div>
-                <button className="mt-8 bg-inverse-surface hover:bg-primary text-on-primary hover:text-on-primary text-xs uppercase px-6 py-3 rounded-full transition-all duration-300 font-semibold tracking-wider self-center shadow-sm">
+                <a
+                  href="https://wa.me/message/U7UANPSABGW4K1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 bg-inverse-surface hover:bg-primary text-on-primary hover:text-on-primary text-xs uppercase px-6 py-3 rounded-full transition-all duration-300 font-semibold tracking-wider self-center shadow-sm text-center"
+                >
                   Ver Opciones
-                </button>
+                </a>
               </div>
 
               {/* Tercer Tiempo */}
@@ -139,9 +149,14 @@ export default function Home() {
                     Pechuga de Pollo Rostizada a las Hierbas Finas y Vegetales de Estación.
                   </p>
                 </div>
-                <button className="mt-8 bg-inverse-surface hover:bg-primary text-on-primary hover:text-on-primary text-xs uppercase px-6 py-3 rounded-full transition-all duration-300 font-semibold tracking-wider self-center shadow-sm">
+                <a
+                  href="https://wa.me/message/U7UANPSABGW4K1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 bg-inverse-surface hover:bg-primary text-on-primary hover:text-on-primary text-xs uppercase px-6 py-3 rounded-full transition-all duration-300 font-semibold tracking-wider self-center shadow-sm text-center"
+                >
                   Ver Opciones
-                </button>
+                </a>
               </div>
             </div>
           </div>
