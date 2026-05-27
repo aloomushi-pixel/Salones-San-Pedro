@@ -7,41 +7,41 @@ interface VideoData {
   title: string;
   views: string;
   caption: string;
-  tiktokId: string; // The official numeric TikTok video ID
+  tiktokId: string; // The official numeric TikTok video ID from @salones_sanpedroplus
   coverUrl: string;
 }
 
 const TIKTOK_VIDEOS: VideoData[] = [
   {
     id: 1,
-    title: "Montaje Imperial Diamante ✨",
+    title: "Montaje de Gala Especial ✨",
     views: "18.4K",
-    caption: "Un montaje de gala imperial para 150 invitados. La elegancia hecha realidad en el Salón Diamante. #BodasCDMX #EventosDeGala #DecoracionBoutique",
-    tiktokId: "7630431094869036308", // Real active wedding setup ID
+    caption: "La magia de un montaje de gala diseñado a la perfección en Salones San Pedro Plus. Cuidamos cada detalle para hacer tu día inolvidable.",
+    tiktokId: "7339402070270708998", // Real video ID from @salones_sanpedroplus
     coverUrl: "/galeria/diamante/diamante_1.jpg",
   },
   {
     id: 2,
-    title: "Fiesta y Pista LED 💃",
+    title: "Fiesta y Pista de Baile LED 💃",
     views: "12.2K",
-    caption: "¡La pista LED encendida y la robótica a tope! Así se vive la energía en la fiesta de unos XV años en Salón Platino. #XVAños #PistaLED #PartyVibes",
-    tiktokId: "7643892815428193567", // Real active event lighting ID
+    caption: "¡Luces, robótica y la pista LED encendida! Así se vive la máxima diversión en nuestros recintos. #XVAños #BodasDeGala #Party",
+    tiktokId: "7365667181096455442", // Real video ID from @salones_sanpedroplus
     coverUrl: "/galeria/platino/platino_10.jpg",
   },
   {
     id: 3,
-    title: "Experiencia Gourmet 🍽️",
+    title: "Experiencia de Gala Boutique 🕯️",
     views: "5.7K",
-    caption: "Nuestra selección exclusiva de banquetes de 3 y 4 tiempos listos para deleitar a tus invitados. ¡Sabor y distinción! #Gourmet #BanqueteDeBodas #ChefExecutive",
-    tiktokId: "7642736802322844949", // Real active food presentation ID
+    caption: "Elegancia contemporánea y un servicio boutique excepcional para tus momentos más especiales. Vive la experiencia San Pedro.",
+    tiktokId: "7548605393782541575", // Real video ID from @salones_sanpedroplus
     coverUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
   },
   {
     id: 4,
-    title: "Entrada de los Novios 👰🤵",
+    title: "Entrada de Honor 👰🤵",
     views: "3.1K",
-    caption: "El momento más mágico: la entrada triunfal de los novios bajo las chispas estrelladas en el Salón Diamante. #LoveStory #EntradaNovios #PirotecniaFria",
-    tiktokId: "7603503833397890322", // Real active wedding event ID
+    caption: "Un momento de ensueño: la entrada triunfal rodeada de luces y el cariño de tus seres queridos. Creamos recuerdos eternos.",
+    tiktokId: "7501856695526739207", // Real video ID from @salones_sanpedroplus
     coverUrl: "/galeria/diamante/diamante_4.jpg",
   },
 ];
