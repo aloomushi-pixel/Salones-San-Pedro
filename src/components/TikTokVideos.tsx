@@ -140,7 +140,7 @@ export default function TikTokVideos() {
             {/* TikTok Official Embedded Player Column */}
             <div className="relative w-full md:w-[50%] bg-black flex items-center justify-center aspect-[9/16] md:aspect-auto md:h-[700px] overflow-hidden">
               <iframe
-                src={`https://www.tiktok.com/embed/v2/${selectedVideo.tiktokId}`}
+                src={`https://www.tiktok.com/player/v1/${selectedVideo.tiktokId}?autoplay=1&loop=1&rel=0`}
                 className="w-full h-full"
                 style={{ border: "none" }}
                 allow="autoplay; encrypted-media"
