@@ -17,7 +17,7 @@ const TIKTOK_VIDEOS: VideoData[] = [
     title: "Montaje Imperial Diamante ✨",
     views: "18.4K",
     caption: "Un montaje de gala imperial para 150 invitados. La elegancia hecha realidad en el Salón Diamante. #BodasCDMX #EventosDeGala #DecoracionBoutique",
-    tiktokId: "7320092147321277701", // Placeholder real wedding setup ID
+    tiktokId: "7630431094869036308", // Real active wedding setup ID
     coverUrl: "/galeria/diamante/diamante_1.jpg",
   },
   {
@@ -25,7 +25,7 @@ const TIKTOK_VIDEOS: VideoData[] = [
     title: "Fiesta y Pista LED 💃",
     views: "12.2K",
     caption: "¡La pista LED encendida y la robótica a tope! Así se vive la energía en la fiesta de unos XV años en Salón Platino. #XVAños #PistaLED #PartyVibes",
-    tiktokId: "7290184712034928901", // Placeholder real event lighting ID
+    tiktokId: "7643892815428193567", // Real active event lighting ID
     coverUrl: "/galeria/platino/platino_10.jpg",
   },
   {
@@ -33,7 +33,7 @@ const TIKTOK_VIDEOS: VideoData[] = [
     title: "Experiencia Gourmet 🍽️",
     views: "5.7K",
     caption: "Nuestra selección exclusiva de banquetes de 3 y 4 tiempos listos para deleitar a tus invitados. ¡Sabor y distinción! #Gourmet #BanqueteDeBodas #ChefExecutive",
-    tiktokId: "7210984372910387458", // Placeholder food presentation ID
+    tiktokId: "7642736802322844949", // Real active food presentation ID
     coverUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
   },
   {
@@ -41,7 +41,7 @@ const TIKTOK_VIDEOS: VideoData[] = [
     title: "Entrada de los Novios 👰🤵",
     views: "3.1K",
     caption: "El momento más mágico: la entrada triunfal de los novios bajo las chispas estrelladas en el Salón Diamante. #LoveStory #EntradaNovios #PirotecniaFria",
-    tiktokId: "7156391484931591430", // Placeholder sparklers entrance ID
+    tiktokId: "7603503833397890322", // Real active wedding event ID
     coverUrl: "/galeria/diamante/diamante_4.jpg",
   },
 ];
