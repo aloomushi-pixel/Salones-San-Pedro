@@ -52,7 +52,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
               <a className="bg-primary-container text-on-primary-container px-10 py-4 font-label-sm rounded-lg hover:opacity-90 transition-all uppercase" href="#disponibilidad">
-                Agendar mi recorrido por el salón
+                COTIZAR EVENTO
               </a>
               <a className="border border-surface-container-lowest text-surface-container-lowest px-10 py-4 font-label-sm rounded-lg hover:bg-surface-container-lowest hover:text-primary transition-all uppercase" href="#galeria">
                 VER GALERÍA
