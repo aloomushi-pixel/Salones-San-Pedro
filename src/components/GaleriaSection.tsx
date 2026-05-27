@@ -11,28 +11,53 @@ interface Photo {
 const diamantePhotos: Photo[] = [
   {
     src: "/galeria/diamante/diamante_1.jpg",
-    alt: "Detalle de mesa con vajilla fina y servilletas azules en Salón Diamante",
-    caption: "Montaje de Gala - Vajilla Fina y Cristalería"
+    alt: "Vista panorámica del Salón Diamante con pista de baile LED y techo estrellado",
+    caption: "Vista Panorámica de la Pista LED y Salón Diamante"
   },
   {
     src: "/galeria/diamante/diamante_2.jpg",
-    alt: "Vista del salón Diamante con pista iluminada y letras de LOVE",
-    caption: "Escenario Principal y Pista de Baile Iluminada"
+    alt: "Vista amplia del salón Diamante con pista LED y mesas redondas vestidas de rosa",
+    caption: "Distribución del Salón con Montaje de Gala Rosa"
   },
   {
     src: "/galeria/diamante/diamante_3.jpg",
-    alt: "Detalle de mesa imperial decorada para XV Años en Salón Diamante",
-    caption: "Detalle de Mesa Imperial para Quince Años (XV)"
+    alt: "Escenario principal del salón Diamante con letras gigantes de LOVE",
+    caption: "Escenario Principal y Letras LOVE Iluminadas"
   },
   {
     src: "/galeria/diamante/diamante_4.jpg",
-    alt: "Vista panorámica del salón Diamante con pista LED y globos",
-    caption: "Vista Panorámica y Distribución del Salón"
+    alt: "Mesa imperial número 1 montada con vajilla fina y pista de baile al fondo",
+    caption: "Mesa Imperial de Honor y Pista al Fondo"
   },
   {
     src: "/galeria/diamante/diamante_5.jpg",
-    alt: "Detalle de centros de mesa altos con flores en Salón Diamante",
-    caption: "Centros de Mesa de Cristal y Luces Ambientales"
+    alt: "Detalle de mesa número 1 con cristalería y centro de mesa floral alto",
+    caption: "Detalle de Montaje de Mesa e Iluminación en Mesa 1"
+  },
+  {
+    src: "/galeria/diamante/diamante_6.jpg",
+    alt: "Primer plano de centro de mesa alto con flores blancas y azules",
+    caption: "Centro de Mesa de Cristal con Arreglo Floral Elegante"
+  },
+  {
+    src: "/galeria/diamante/diamante_7.jpg",
+    alt: "Detalle de mesa número 2 con vajilla de filo dorado y servilletas azules en Salón Diamante",
+    caption: "Vajilla con Filo Dorado y Servilletas de Lujo en Mesa 2"
+  },
+  {
+    src: "/galeria/diamante/diamante_8.jpg",
+    alt: "Detalle de mesa con vajilla blanca, servilleta azul y centro de mesa alto iluminado en Salón Diamante",
+    caption: "Mesa Montada de Gala con Vajilla Fina y Servilletas Azules"
+  },
+  {
+    src: "/galeria/diamante/diamante_9.jpg",
+    alt: "Detalle de mesa número 6 con vajilla fina y servilletas de gala azules",
+    caption: "Vajilla de Gala con Copas y Servilletas Azules"
+  },
+  {
+    src: "/galeria/diamante/diamante_10.jpg",
+    alt: "Mesa número 6 vestida con mantelería fina y servilletas rosas para XV Años",
+    caption: "Montaje de Mesa para Quince Años (XV) con Vajilla y Servilletas Rosas"
   }
 ];
 
