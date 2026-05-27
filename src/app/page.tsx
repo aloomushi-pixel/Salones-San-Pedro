@@ -314,11 +314,11 @@ export default function Home() {
                     <p className="text-xs font-bold text-primary uppercase mb-3">Incluye Plus, más:</p>
                     <ul className="space-y-4 text-sm text-secondary">
                       <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Batucada con Robot Iron Man</li>
-                      <li className="flex items-start"><span class="text-primary font-bold mr-2">✓</span> 1 hora de Mariachi</li>
-                      <li className="flex items-start"><span class="text-primary font-bold mr-2">✓</span> Servicio de Limusina</li>
-                      <li className="flex items-start"><span class="text-primary font-bold mr-2">✓</span> Video filmación y fotos con álbum</li>
-                      <li className="flex items-start"><span class="text-primary font-bold mr-2">✓</span> Vino espumoso y 1 botella de licor por mesa</li>
-                      <li className="flex items-start"><span class="text-primary font-bold mr-2">✓</span> Cabina 360 (2 hrs)</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> 1 hora de Mariachi</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Servicio de Limusina</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Video filmación y fotos con álbum</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Vino espumoso y 1 botella de licor por mesa</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Cabina 360 (2 hrs)</li>
                     </ul>
                   </div>
                 </div>
