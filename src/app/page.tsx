@@ -39,8 +39,8 @@ export default function Home() {
           <div className="absolute inset-0">
             <img
               className="w-full h-full object-cover"
-              alt="A grand luxury event ballroom in Puebla"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVMwgJur-c2cosAMZvey9gTxNUXrBb9TfOLSTnPThJ0UrPab0et4l3Za3XKmU8nsArtFIWXI63S14JFnNcYEynO1Y9U4anfBDe95--UvBkUWS8x_U3OikPP1zUbI0gX8k27fWlfa0YMC07GLDaRj1Gp7FWbJFxOePVW12fHq-koFkfjFnrqIYOx0y5stobbsq3w-fCtGwn-Z2hGypq7pIaR2ESClUBYcSa6lsLE0cuU9WQ5NzjrpJjzLkbUtUMTWQycmc1GpkefO-g"
+              alt="Instalación de gala en Salón Diamante"
+              src="/hero_bg.jpg"
             />
             <div className="absolute inset-0 hero-gradient"></div>
           </div>
