@@ -63,24 +63,29 @@ const diamantePhotos: Photo[] = [
 
 const platinoPhotos: Photo[] = [
   {
-    src: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1200&q=80",
-    alt: "Montaje íntimo para banquetes en Salón Platino",
-    caption: "Montaje Íntimo para Bodas y Eventos Sociales (Referencia)"
+    src: "/galeria/platino/platino_1.jpg",
+    alt: "Entrada del Salón Platino decorada con arco de globos azules y negros",
+    caption: "Acceso Principal al Salón Platino"
   },
   {
-    src: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=1200&q=80",
-    alt: "Detalles gourmet y copas en Salón Platino",
-    caption: "Decoración Floral y Detalles de Cristalería (Referencia)"
+    src: "/galeria/platino/platino_2.jpg",
+    alt: "Detalle de mesa montada con servilletas azules y centro de mesa floral en Salón Platino",
+    caption: "Montaje de Gala - Mesa de Honor para XV Años"
   },
   {
-    src: "https://images.unsplash.com/photo-1507504038482-76210214dae1?auto=format&fit=crop&w=1200&q=80",
-    alt: "Iluminación cálida y romántica en Salón Platino",
-    caption: "Iluminación Cálida y Acogedora (Referencia)"
+    src: "/galeria/platino/platino_3.jpg",
+    alt: "Vista amplia de las mesas y candelabro esférico en Salón Platino",
+    caption: "Distribución de Mesas e Iluminación del Salón"
   },
   {
-    src: "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=1200&q=80",
-    alt: "Mesa montada para recepción en Salón Platino",
-    caption: "Estilo Imperial y Ambientación del Espacio (Referencia)"
+    src: "/galeria/platino/platino_4.jpg",
+    alt: "Mampara de shinty azul y arco de globos para set de fotografías en Salón Platino",
+    caption: "Set Fotográfico - Mampara Shimmer y Globos"
+  },
+  {
+    src: "/galeria/platino/platino_5.jpg",
+    alt: "Vista panorámica de la pista de baile iluminada con letras gigantes en Salón Platino",
+    caption: "Vista General con Pista LED y Escenario Principal"
   }
 ];
 
@@ -167,11 +172,6 @@ export default function GaleriaSection() {
             <h3 className="text-white font-display-lg text-lg md:text-2xl font-bold tracking-wide">
               {photos[activeIndex].caption}
             </h3>
-            {activeTab === 'platino' && (
-              <p className="text-white/60 text-xs mt-1 italic">
-                * Las imágenes del Salón Platino son referentes de montajes reales.
-              </p>
-            )}
           </div>
 
           {/* Left Arrow */}
