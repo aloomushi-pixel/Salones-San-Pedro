@@ -1,5 +1,6 @@
 import Image from "next/image";
 import LeadForm from "../components/LeadForm";
+import TestimoniosCarousel from "../components/TestimoniosCarousel";
 
 export default function Home() {
   return (
@@ -19,12 +20,12 @@ export default function Home() {
           />
         </div>
         <div className="hidden md:flex items-center gap-8 font-body-md text-body-md">
-          <a className="text-secondary hover:text-primary transition-colors duration-300" href="#banquetes">Banquetes</a>
-          <a className="text-secondary hover:text-primary transition-colors duration-300" href="#animacion">Animación</a>
-          <a className="text-secondary hover:text-primary transition-colors duration-300 font-semibold" href="#paquetes">Ver qué incluyen los paquetes</a>
+          <a className="text-secondary hover:text-primary transition-colors duration-300" href="#paquetes">Paquetes</a>
           <a className="text-secondary hover:text-primary transition-colors duration-300" href="#galeria">Galería</a>
+          <a className="text-secondary hover:text-primary transition-colors duration-300" href="#banquetes">Gastronomía</a>
+          <a className="text-secondary hover:text-primary transition-colors duration-300" href="#disponibilidad">Verificar espacio</a>
           <a className="text-secondary hover:text-primary transition-colors duration-300" href="#testimonios">Testimonios</a>
-          <a className="text-secondary hover:text-primary transition-colors duration-300" href="#disponibilidad">Verificar si mi fecha está libre</a>
+          <a className="text-secondary hover:text-primary transition-colors duration-300 font-semibold" href="/blog">Blog</a>
         </div>
         <button className="bg-primary-container text-on-primary-container px-6 py-3 font-label-sm rounded-lg hover:opacity-80 transition-all scale-95 active:scale-90 uppercase tracking-wider">
           COTIZAR EVENTO
@@ -228,6 +229,20 @@ export default function Home() {
                 />
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Sección Testimonios */}
+        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface" id="testimonios">
+          <div className="max-w-container-max mx-auto">
+            <div className="text-center mb-12">
+              <span className="font-label-sm text-primary tracking-widest uppercase">Opiniones de Nuestros Clientes</span>
+              <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-2">Testimonios</h2>
+              <p className="text-secondary mt-4 max-w-2xl mx-auto">
+                Lo que dicen nuestros clientes tras vivir su gran día en Salones San Pedro.
+              </p>
+            </div>
+            <TestimoniosCarousel />
           </div>
         </section>
 
