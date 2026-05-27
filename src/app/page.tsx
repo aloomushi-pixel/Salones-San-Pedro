@@ -203,60 +203,155 @@ export default function Home() {
         </section>
 
         {/* Sección Paquetes */}
-        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface" id="paquetes">
+        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-inverse-surface text-surface-container-lowest" id="paquetes">
           <div className="max-w-container-max mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface">Paquetes Exclusivos</h2>
-              <p className="text-secondary mt-4 max-w-2xl mx-auto">Opciones diseñadas para superar las expectativas más exigentes, garantizando una ejecución impecable.</p>
+            
+            {/* Encabezado de la Sección */}
+            <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+              <span className="font-label-sm text-primary-container tracking-widest uppercase">Nuestros Paquetes</span>
+              <h2 className="font-display-lg text-headline-md md:text-display-lg text-primary-container">
+                Paquetes Exclusivos
+              </h2>
+              <p className="font-body-lg text-surface-variant max-w-2xl mx-auto">
+                Es un honor para Salones San Pedro Plus ser considerados para la planeación de tu evento. Te ayudaremos a que sea un día inolvidable.
+              </p>
             </div>
+
+            {/* Capacidades de los Salones */}
+            <div className="flex flex-col md:flex-row justify-center gap-8 mb-16">
+              <div className="bg-surface-container-lowest/10 backdrop-blur-md border border-outline-variant/30 p-6 rounded-xl text-center w-full md:w-1/3">
+                <h3 className="font-display-lg text-2xl text-primary-container mb-2">Salón Platino</h3>
+                <p className="font-body-md text-surface-variant">Capacidad de 50 hasta 180 personas</p>
+              </div>
+              <div className="bg-surface-container-lowest/10 backdrop-blur-md border border-outline-variant/30 p-6 rounded-xl text-center w-full md:w-1/3">
+                <h3 className="font-display-lg text-2xl text-primary-container mb-2">Salón Diamante</h3>
+                <p className="font-body-md text-surface-variant">Capacidad de 100 hasta 200 personas</p>
+              </div>
+            </div>
+
+            {/* Tarjetas de Precios */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-              {/* Básico */}
-              <div className="flex flex-col p-8 rounded-lg bg-surface-container-low border border-outline-variant transition-transform hover:-translate-y-2">
-                <div className="mb-8">
-                  <h3 className="font-display-lg text-headline-md text-on-surface">Básico</h3>
-                  <p className="text-primary font-bold text-2xl mt-2">$550 <span className="text-sm font-normal text-secondary">MXN / persona</span></p>
+              
+              {/* Paquete Premier */}
+              <div className="bg-surface-container-lowest text-on-surface rounded-2xl shadow-xl overflow-hidden flex flex-col justify-between border border-outline-variant/20 transition-transform hover:-translate-y-2 duration-300">
+                <div>
+                  <div className="p-8 text-center bg-surface-container-low border-b border-outline-variant/30">
+                    <h3 className="font-display-lg text-3xl text-on-surface font-bold mb-2">Premier</h3>
+                    <p className="text-secondary text-sm">Base 100 personas</p>
+                    <div className="mt-4 space-y-1 text-on-surface/80 text-sm">
+                      <p>Viernes (Platino): <span className="font-bold text-lg text-primary">$530 p/p</span></p>
+                      <p>Sábado (Diamante): <span className="font-bold text-lg text-primary">$590 p/p</span></p>
+                    </div>
+                  </div>
+                  <div className="p-8">
+                    <ul className="space-y-4 text-sm text-secondary">
+                      <li className="flex items-start"><span className="text-primary-container font-bold mr-2">✓</span> 6 horas de servicio + 1/2 hr recepción</li>
+                      <li className="flex items-start"><span className="text-primary-container font-bold mr-2">✓</span> Menú formal a 3 tiempos y tornafiesta</li>
+                      <li className="flex items-start"><span className="text-primary-container font-bold mr-2">✓</span> Barra libre de mezcladores (descorche libre)</li>
+                      <li className="flex items-start"><span className="text-primary-container font-bold mr-2">✓</span> DJ, iluminación y batucada clásica</li>
+                      <li className="flex items-start"><span className="text-primary-container font-bold mr-2">✓</span> Montaje imperial con mesa de cristal</li>
+                    </ul>
+                  </div>
                 </div>
-                <ul className="flex-grow space-y-4 mb-8 text-secondary">
-                  <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary text-sm">check</span> Menú de 3 tiempos</li>
-                  <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary text-sm">check</span> Mezcladores ilimitados</li>
-                  <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary text-sm">check</span> Personal de servicio</li>
-                  <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary text-sm">check</span> Valet Parking incluido</li>
-                </ul>
-                <button className="w-full py-3 border border-primary text-primary rounded-lg font-label-sm hover:bg-primary hover:text-on-primary transition-all uppercase">Agendar mi recorrido</button>
+                <div className="p-8 pt-0">
+                  <a
+                    href="#disponibilidad"
+                    className="block w-full py-3 border border-primary text-primary hover:bg-primary hover:text-on-primary rounded-lg font-label-sm transition-all uppercase tracking-wider text-center text-xs font-bold"
+                  >
+                    Verificar Disponibilidad
+                  </a>
+                </div>
               </div>
 
-              {/* Gala */}
-              <div className="flex flex-col p-10 rounded-lg bg-surface-container-lowest shadow-2xl border-2 border-primary-container relative z-10 scale-105">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary-container text-on-primary-container px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Recomendado</div>
-                <div className="mb-8">
-                  <h3 className="font-display-lg text-headline-md text-on-surface">Gala</h3>
-                  <p className="text-primary font-bold text-3xl mt-2">$1,200 <span className="text-sm font-normal text-secondary">MXN / persona</span></p>
+              {/* Paquete Plus (Destacado) */}
+              <div className="bg-surface-container-lowest text-on-surface rounded-2xl shadow-2xl transform md:-translate-y-4 overflow-hidden border-2 border-primary-container flex flex-col justify-between relative transition-all duration-300">
+                <div className="absolute top-0 inset-x-0 bg-primary-container text-on-primary-container text-xs font-bold text-center py-1.5 uppercase tracking-wider">
+                  El Más Elegido
                 </div>
-                <ul className="flex-grow space-y-4 mb-8 text-on-surface">
-                  <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary">star</span> Menú degustación 5 tiempos</li>
-                  <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary">star</span> Coctelería de autor premium</li>
-                  <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary">star</span> Decoración floral boutique</li>
-                  <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary">star</span> Iluminación robótica completa</li>
-                  <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary">star</span> Valet Parking &amp; Seguridad VIP</li>
-                </ul>
-                <button className="w-full py-4 bg-primary text-on-primary rounded-lg font-label-sm shadow-lg hover:opacity-90 transition-all uppercase">Agendar mi recorrido por el salón</button>
+                <div>
+                  <div className="p-8 text-center bg-inverse-surface text-surface-container-lowest border-b border-outline-variant/20 mt-6">
+                    <h3 className="font-display-lg text-3xl text-primary-container font-bold mb-2">Plus</h3>
+                    <p className="text-surface-variant text-sm">Base 100 personas</p>
+                    <div className="mt-4 space-y-1 text-surface-container-lowest/90 text-sm">
+                      <p>Platino: <span className="font-bold text-lg text-primary-container">$710 p/p</span></p>
+                      <p>Diamante: <span className="font-bold text-lg text-primary-container">$730 p/p</span></p>
+                    </div>
+                  </div>
+                  <div className="p-8">
+                    <p className="text-xs font-bold text-primary uppercase mb-3">Incluye Premier, más:</p>
+                    <ul className="space-y-4 text-sm text-secondary">
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> 7 horas de servicio</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Menú formal a 4 tiempos</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Batucada espectacular y servicio de robot</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Mesa de dulces y cabina fotográfica</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Letras gigantes y carrito de shots</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Pre-fiesta para 30 personas (L a J, 4 hrs)</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="p-8 pt-0">
+                  <a
+                    href="#disponibilidad"
+                    className="block w-full py-3.5 bg-primary text-on-primary hover:opacity-90 rounded-lg font-label-sm shadow-md transition-all uppercase tracking-wider text-center text-xs font-bold"
+                  >
+                    Verificar Disponibilidad
+                  </a>
+                </div>
               </div>
 
-              {/* Premium */}
-              <div className="flex flex-col p-8 rounded-lg bg-surface-container-low border border-outline-variant transition-transform hover:-translate-y-2">
-                <div className="mb-8">
-                  <h3 className="font-display-lg text-headline-md text-on-surface">Premium</h3>
-                  <p className="text-primary font-bold text-2xl mt-2">$850 <span className="text-sm font-normal text-secondary">MXN / persona</span></p>
+              {/* Paquete All Inclusive */}
+              <div className="bg-surface-container-lowest text-on-surface rounded-2xl shadow-xl overflow-hidden flex flex-col justify-between border border-outline-variant/20 transition-transform hover:-translate-y-2 duration-300">
+                <div>
+                  <div className="p-8 text-center bg-surface-container-low border-b border-outline-variant/30">
+                    <h3 className="font-display-lg text-3xl text-on-surface font-bold mb-2">All Inclusive</h3>
+                    <p className="text-secondary text-sm">Base 100 personas</p>
+                    <div className="mt-4 space-y-1 text-on-surface/80 text-sm">
+                      <p>Platino: <span className="font-bold text-lg text-primary">$1,010 p/p</span></p>
+                      <p>Diamante: <span className="font-bold text-lg text-primary">$1,030 p/p</span></p>
+                    </div>
+                  </div>
+                  <div className="p-8">
+                    <p className="text-xs font-bold text-primary uppercase mb-3">Incluye Plus, más:</p>
+                    <ul className="space-y-4 text-sm text-secondary">
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Batucada con Robot Iron Man</li>
+                      <li className="flex items-start"><span class="text-primary font-bold mr-2">✓</span> 1 hora de Mariachi</li>
+                      <li className="flex items-start"><span class="text-primary font-bold mr-2">✓</span> Servicio de Limusina</li>
+                      <li className="flex items-start"><span class="text-primary font-bold mr-2">✓</span> Video filmación y fotos con álbum</li>
+                      <li className="flex items-start"><span class="text-primary font-bold mr-2">✓</span> Vino espumoso y 1 botella de licor por mesa</li>
+                      <li className="flex items-start"><span class="text-primary font-bold mr-2">✓</span> Cabina 360 (2 hrs)</li>
+                    </ul>
+                  </div>
                 </div>
-                <ul className="flex-grow space-y-4 mb-8 text-secondary">
-                  <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary text-sm">check</span> Menú de 4 tiempos</li>
-                  <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary text-sm">check</span> Barra libre nacional</li>
-                  <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary text-sm">check</span> DJ &amp; Animación básica</li>
-                  <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary text-sm">check</span> Valet Parking incluido</li>
-                </ul>
-                <button className="w-full py-3 border border-primary text-primary rounded-lg font-label-sm hover:bg-primary hover:text-on-primary transition-all uppercase">Agendar mi recorrido</button>
+                <div className="p-8 pt-0">
+                  <a
+                    href="#disponibilidad"
+                    className="block w-full py-3 border border-primary text-primary hover:bg-primary hover:text-on-primary rounded-lg font-label-sm transition-all uppercase tracking-wider text-center text-xs font-bold"
+                  >
+                    Verificar Disponibilidad
+                  </a>
+                </div>
               </div>
             </div>
+
+            {/* Condiciones de Pago */}
+            <div className="mt-20 bg-surface-container-lowest/5 border border-outline-variant/30 rounded-2xl p-8 max-w-4xl mx-auto shadow-inner">
+              <h4 className="font-display-lg text-2xl font-bold text-primary-container text-center mb-8">Condiciones de Pago</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-surface-variant text-center">
+                <div className="space-y-3">
+                  <span className="block text-4xl font-bold text-primary-container">1</span>
+                  <p className="font-body-md leading-relaxed">Reserva tu fecha con $3,000.00 MXN a la firma del contrato.</p>
+                </div>
+                <div className="space-y-3">
+                  <span className="block text-4xl font-bold text-primary-container">2</span>
+                  <p className="font-body-md leading-relaxed">Liquida el 25% del total a los 30 días posteriores a la firma.</p>
+                </div>
+                <div className="space-y-3">
+                  <span className="block text-4xl font-bold text-primary-container">3</span>
+                  <p className="font-body-md leading-relaxed">El monto total deberá ser liquidado 15 días previos al evento.</p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </section>
 
