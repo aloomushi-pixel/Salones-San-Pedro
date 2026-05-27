@@ -48,7 +48,7 @@ export default function Home() {
               Momentos Extraordinarios, Sabores de Tradición
             </h1>
             <p className="font-body-lg text-body-lg text-surface-variant mb-10 max-w-2xl mx-auto">
-              Exclusividad y prestigio en el corazón de la Zona Esmeralda. Creamos experiencias que fusionan la elegancia contemporánea con el alma de Puebla.
+              Exclusividad y prestigio en CDMX. Creamos experiencias que fusionan la elegancia contemporánea.
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
               <a className="bg-primary-container text-on-primary-container px-10 py-4 font-label-sm rounded-lg hover:opacity-90 transition-all uppercase" href="#disponibilidad">
