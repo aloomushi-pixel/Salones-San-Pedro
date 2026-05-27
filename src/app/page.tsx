@@ -15,7 +15,7 @@ export default function Home() {
           <img
             alt="SALONES SAN PEDRO"
             className="h-12 w-auto object-contain"
-            src="https://lh3.googleusercontent.com/aida/ADBb0ugkaea2DMIVRYoiD2ao4qKwviLHjCo5f8M4QZiUpOfm8jVw4XH0SKXGOc26cYxmn2Kt2TX0hhEpcnFxgyXZTNsS7m_VGxl-eaps0VtAhrA8feH8DwpiluSODd0cXT5cA5UnP3YgkBEV8B5MR-ELuBmydHACkye-Pd69wfnMnzK40-Ir8A13fIlzcCuSx0mo8kQsoet21eU19DIHY-PN3WnrckBxsbgO8Avzx31MhHrbtSmFML8Y4_RHFtVm"
+            src="/logo.svg"
           />
         </div>
         <div className="hidden md:flex items-center gap-8 font-body-md text-body-md">
@@ -253,7 +253,7 @@ export default function Home() {
           <img
             alt="SALONES SAN PEDRO"
             className="h-16 w-auto object-contain"
-            src="https://lh3.googleusercontent.com/aida/ADBb0ugkaea2DMIVRYoiD2ao4qKwviLHjCo5f8M4QZiUpOfm8jVw4XH0SKXGOc26cYxmn2Kt2TX0hhEpcnFxgyXZTNsS7m_VGxl-eaps0VtAhrA8feH8DwpiluSODd0cXT5cA5UnP3YgkBEV8B5MR-ELuBmydHACkye-Pd69wfnMnzK40-Ir8A13fIlzcCuSx0mo8kQsoet21eU19DIHY-PN3WnrckBxsbgO8Avzx31MhHrbtSmFML8Y4_RHFtVm"
+            src="/logo.svg"
           />
           <div className="flex gap-6 mt-2">
             <a aria-label="Facebook" className="text-primary hover:scale-110 transition-transform" href="#">
