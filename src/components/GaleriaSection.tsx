@@ -86,6 +86,31 @@ const platinoPhotos: Photo[] = [
     src: "/galeria/platino/platino_5.jpg",
     alt: "Vista panorámica de la pista de baile iluminada con letras gigantes en Salón Platino",
     caption: "Vista General con Pista LED y Escenario Principal"
+  },
+  {
+    src: "/galeria/platino/platino_6.jpg",
+    alt: "Mesa número 6 montada con cristalería y servilletas de gala en Salón Platino",
+    caption: "Mesa Imperial y Vajilla Fina en Mesa 6"
+  },
+  {
+    src: "/galeria/platino/platino_7.jpg",
+    alt: "Primer plano de centro de mesa alto con flores blancas y fondo de pista LED en Salón Platino",
+    caption: "Arreglos Florales de Alta Gama"
+  },
+  {
+    src: "/galeria/platino/platino_8.jpg",
+    alt: "Vista amplia del Salón Platino con mantelería de gala y pista de baile",
+    caption: "Distribución del Espacio y Pista de Baile LED"
+  },
+  {
+    src: "/galeria/platino/platino_9.jpg",
+    alt: "Detalle de cubiertos y mantelería en mesa número 4 en Salón Platino",
+    caption: "Montaje de Cubiertos e Iluminación en Mesa 4"
+  },
+  {
+    src: "/galeria/platino/platino_10.jpg",
+    alt: "Mesa número 1 montada con arco de globos en Salón Platino",
+    caption: "Detalle de Mesa 1 y Set con Globos al Fondo"
   }
 ];
 
