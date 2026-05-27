@@ -2,6 +2,7 @@ import Image from "next/image";
 import LeadForm from "../components/LeadForm";
 import TestimoniosCarousel from "../components/TestimoniosCarousel";
 import GaleriaSection from "../components/GaleriaSection";
+import TikTokVideos from "../components/TikTokVideos";
 
 export default function Home() {
   return (
@@ -361,6 +362,10 @@ export default function Home() {
           <GaleriaSection />
         </section>
 
+        {/* Sección TikTok Videos */}
+        <section className="py-section-gap bg-surface-container-low border-t border-b border-outline-variant/30" id="tiktok-videos">
+          <TikTokVideos />
+        </section>
 
         {/* Sección Testimonios */}
         <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface" id="testimonios">
