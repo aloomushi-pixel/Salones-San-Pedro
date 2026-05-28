@@ -170,6 +170,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <Link className="text-secondary hover:text-primary transition-colors duration-300" href="/#galeria">Galería</Link>
           <Link className="text-secondary hover:text-primary transition-colors duration-300" href="/#banquetes">Gastronomía</Link>
           <Link className="text-secondary hover:text-primary transition-colors duration-300" href="/#disponibilidad">Verificar espacio</Link>
+          <Link className="text-secondary hover:text-primary transition-colors duration-300" href="/#ubicacion">Ubicación</Link>
           <Link className="text-secondary hover:text-primary transition-colors duration-300" href="/#testimonios">Testimonios</Link>
           <Link className="text-primary font-bold transition-colors duration-300" href="/blog">Blog</Link>
         </div>

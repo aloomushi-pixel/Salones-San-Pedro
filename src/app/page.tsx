@@ -26,6 +26,7 @@ export default function Home() {
           <a className="text-secondary hover:text-primary transition-colors duration-300" href="#galeria">Galería</a>
           <a className="text-secondary hover:text-primary transition-colors duration-300" href="#banquetes">Gastronomía</a>
           <a className="text-secondary hover:text-primary transition-colors duration-300" href="#disponibilidad">Verificar espacio</a>
+          <a className="text-secondary hover:text-primary transition-colors duration-300" href="#ubicacion">Ubicación</a>
           <a className="text-secondary hover:text-primary transition-colors duration-300" href="#testimonios">Testimonios</a>
           <a className="text-secondary hover:text-primary transition-colors duration-300 font-semibold" href="/blog">Blog</a>
         </div>
@@ -392,6 +393,82 @@ export default function Home() {
             </div>
             <div className="max-w-3xl mx-auto bg-surface-container-lowest p-8 md:p-12 rounded-xl shadow-2xl border border-outline-variant/30">
               <LeadForm />
+            </div>
+          </div>
+        </section>
+
+        {/* Sección Ubicación */}
+        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface text-on-surface border-t border-outline-variant/30" id="ubicacion">
+          <div className="max-w-container-max mx-auto">
+            <div className="text-center mb-12">
+              <span className="font-label-sm text-primary tracking-widest uppercase">Ubicación Estratégica</span>
+              <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-2">Nuestros Salones</h2>
+              <div className="w-24 h-0.5 bg-primary-container mx-auto my-4"></div>
+              <p className="font-body-lg text-secondary max-w-2xl mx-auto">
+                Visítanos y conoce de cerca la elegancia y el equipamiento que harán único tu gran día.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto">
+              {/* Info Panel */}
+              <div className="lg:col-span-5 flex flex-col justify-between bg-surface-container-low border border-outline-variant/30 rounded-2xl p-8 shadow-md">
+                <div className="space-y-8">
+                  <div className="flex items-start gap-4">
+                    <span className="material-symbols-outlined text-primary text-3xl">pin_drop</span>
+                    <div>
+                      <h4 className="font-display-lg text-lg font-bold text-on-surface mb-2">Dirección</h4>
+                      <p className="font-body-md text-secondary leading-relaxed">
+                        Calle Nte 84 No. 6507, Gustavo A. Madero,<br />
+                        07800 Ciudad de México, CDMX
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <span className="material-symbols-outlined text-primary text-3xl">call</span>
+                    <div>
+                      <h4 className="font-display-lg text-lg font-bold text-on-surface mb-2">Teléfono de Informes</h4>
+                      <a href="tel:5557516268" className="font-body-md text-secondary hover:text-primary transition-colors font-semibold">
+                        55 5751 6268
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <span className="material-symbols-outlined text-primary text-3xl">schedule</span>
+                    <div>
+                      <h4 className="font-display-lg text-lg font-bold text-on-surface mb-2">Horario de Atención</h4>
+                      <p className="font-body-md text-secondary">
+                        Lunes a Sábado: 10:00 AM - 6:00 PM
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-8 border-t border-outline-variant/40 mt-8">
+                  <a
+                    href="https://www.google.com/maps/place/Salones+San+Pedro+plus/@19.469571,-99.2513163,12z/data=!4m10!1m2!2m1!1ssalones+san+pedro!3m6!1s0x85d1fbd833cddd65:0x59fb21f0e39a618a!8m2!3d19.469571!4d-99.098881!15sChFzYWxvbmVzIHNhbiBwZWRyb1oTIhFzYWxvbmVzIHNhbiBwZWRyb5IBFmZ1bmN0aW9uX3Jvb21fZmFjaWxpdHmaASRDaGREU1VoTk1HOW5TMFZKUTBGblNVTnFYMDl5Ym5wblJSQULgAQD6AQQIABA5!16s%2Fg%2F1pzs7jq25?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-primary text-on-primary rounded-xl font-label-sm text-sm hover:opacity-90 transition-opacity uppercase tracking-wider font-bold shadow-md"
+                  >
+                    <span className="material-symbols-outlined text-lg">map</span>
+                    Abrir en Google Maps
+                  </a>
+                </div>
+              </div>
+
+              {/* Map Panel */}
+              <div className="lg:col-span-7 h-[450px] lg:h-auto min-h-[400px] bg-black rounded-2xl overflow-hidden shadow-2xl border border-outline-variant/30">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.5471415170364!2d-99.098881!3d19.469571!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fbd833cddd65%3A0x59fb21f0e39a618a!2sSalones%20San%20Pedro%20plus!5e0!3m2!1ses!2smx!4v1716800000000!5m2!1ses!2smx"
+                  className="w-full h-full"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
             </div>
           </div>
         </section>
