@@ -158,26 +158,32 @@ export default function GaleriaSection() {
       </div>
 
       {/* Tabs Selector */}
-      <div className="flex justify-center gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
         <button
           onClick={() => setActiveTab('diamante')}
-          className={`px-6 py-3 font-label-sm rounded-full transition-all duration-300 text-xs tracking-wider uppercase border ${
+          className={`w-full sm:w-auto px-8 py-3.5 rounded-2xl transition-all duration-300 border flex flex-col items-center text-center ${
             activeTab === 'diamante'
               ? 'bg-primary text-on-primary border-primary shadow-md'
               : 'bg-surface-container-low text-secondary border-outline-variant/30 hover:bg-surface-container-high'
           }`}
         >
-          Salón Diamante (100 - 200 pers.)
+          <span className="text-xs font-bold tracking-wider uppercase">Salón Diamante (100 - 200 pers.)</span>
+          <span className={`text-[10px] mt-1 font-medium ${activeTab === 'diamante' ? 'text-on-primary/90' : 'text-secondary/80'}`}>
+            Primer Piso
+          </span>
         </button>
         <button
           onClick={() => setActiveTab('platino')}
-          className={`px-6 py-3 font-label-sm rounded-full transition-all duration-300 text-xs tracking-wider uppercase border ${
+          className={`w-full sm:w-auto px-8 py-3.5 rounded-2xl transition-all duration-300 border flex flex-col items-center text-center ${
             activeTab === 'platino'
               ? 'bg-primary text-on-primary border-primary shadow-md'
               : 'bg-surface-container-low text-secondary border-outline-variant/30 hover:bg-surface-container-high'
           }`}
         >
-          Salón Platino (50 - 180 pers.)
+          <span className="text-xs font-bold tracking-wider uppercase">Salón Platino (50 - 180 pers.)</span>
+          <span className={`text-[10px] mt-1 font-medium ${activeTab === 'platino' ? 'text-on-primary/90' : 'text-secondary/80'}`}>
+            Planta Baja
+          </span>
         </button>
       </div>
 
@@ -242,12 +248,18 @@ export default function GaleriaSection() {
       </div>
 
       {/* Booking CTA */}
-      <div className="text-center mt-12">
+      <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12 max-w-xl mx-auto px-margin-mobile">
         <a
           href="#disponibilidad"
-          className="inline-block bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary font-label-sm text-sm px-8 py-3.5 rounded-lg shadow-md transition-all uppercase tracking-wider font-semibold active:scale-95"
+          className="flex-1 bg-primary text-on-primary hover:opacity-90 font-label-sm text-xs md:text-sm px-6 py-3.5 rounded-lg shadow-md transition-all uppercase tracking-wider font-semibold active:scale-95 text-center"
         >
-          COTIZAR EVENTO EN {activeTab === 'diamante' ? 'SALÓN DIAMANTE' : 'SALÓN PLATINO'}
+          Cotizar Salón Diamante
+        </a>
+        <a
+          href="#disponibilidad"
+          className="flex-1 border border-primary text-primary hover:bg-primary hover:text-on-primary font-label-sm text-xs md:text-sm px-6 py-3.5 rounded-lg shadow-md transition-all uppercase tracking-wider font-semibold active:scale-95 text-center"
+        >
+          Cotizar Salón Platino
         </a>
       </div>
     </div>
