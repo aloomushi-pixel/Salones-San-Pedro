@@ -1,6 +1,69 @@
 import { createClient } from '@/utils/supabase/server';
 import { updateLeadStatus } from './actions';
 
+// Helper to parse created_at (UTC) and convert to Mexico City local date object
+function getMXDate(dateVal: Date | string) {
+  const d = new Date(dateVal);
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Mexico_City',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: false
+  });
+  const parts = formatter.formatToParts(d);
+  const partValues: Record<string, number> = {};
+  parts.forEach(p => {
+    if (p.type !== 'literal') {
+      partValues[p.type] = parseInt(p.value, 10);
+    }
+  });
+  return new Date(
+    partValues.year,
+    partValues.month - 1,
+    partValues.day,
+    partValues.hour,
+    partValues.minute,
+    partValues.second
+  );
+}
+
+// Helper to format event date string (YYYY-MM-DD) safely without timezone offset shifts
+function formatEventDate(dateStr: string) {
+  if (!dateStr) return '';
+  const parts = dateStr.split('-');
+  if (parts.length === 3) {
+    const year = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1;
+    const day = parseInt(parts[2], 10);
+    const d = new Date(year, month, day);
+    return d.toLocaleDateString('es-MX', {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  }
+  return dateStr;
+}
+
+// Helper to format creation timestamp in Mexico City timezone with 12h format
+function formatMXTimestamp(dateVal: string) {
+  return new Date(dateVal).toLocaleString('es-MX', {
+    timeZone: 'America/Mexico_City',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true
+  });
+}
+
 export default async function AdminDashboard() {
   const supabase = await createClient();
   const { data: leads, error } = await supabase
@@ -15,32 +78,33 @@ export default async function AdminDashboard() {
   // 1. Process data for statistics
   const totalLeads = leads?.length || 0;
   const now = new Date();
+  const nowMX = getMXDate(now);
   
-  // Start of current calendar month
-  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-  const leadsThisMonth = leads?.filter(l => new Date(l.created_at) >= startOfMonth).length || 0;
+  // Start of current calendar month in MX timezone
+  const startOfMonth = new Date(nowMX.getFullYear(), nowMX.getMonth(), 1);
+  const leadsThisMonth = leads?.filter(l => getMXDate(l.created_at) >= startOfMonth).length || 0;
   
-  // Start of current week (Monday)
-  const startOfWeek = new Date();
-  const day = startOfWeek.getDay();
-  const diff = startOfWeek.getDate() - day + (day === 0 ? -6 : 1);
+  // Start of current week (Monday) in MX timezone
+  const startOfWeek = new Date(nowMX);
+  const day = nowMX.getDay();
+  const diff = nowMX.getDate() - day + (day === 0 ? -6 : 1);
   startOfWeek.setDate(diff);
   startOfWeek.setHours(0, 0, 0, 0);
-  const leadsThisWeek = leads?.filter(l => new Date(l.created_at) >= startOfWeek).length || 0;
+  const leadsThisWeek = leads?.filter(l => getMXDate(l.created_at) >= startOfWeek).length || 0;
   
   // Pending leads
   const pendingLeads = leads?.filter(l => l.status === 'Nuevo').length || 0;
   const contactedLeads = leads?.filter(l => l.status === 'Contactado').length || 0;
 
-  // Monthly breakdown
+  // Monthly breakdown using MX local time
   const monthlyData: { [key: string]: number } = {};
   leads?.forEach(l => {
-    const d = new Date(l.created_at);
+    const d = getMXDate(l.created_at);
     const key = d.toLocaleString('es-MX', { month: 'long', year: 'numeric' });
     monthlyData[key] = (monthlyData[key] || 0) + 1;
   });
 
-  // Weekly breakdown
+  // Weekly breakdown using MX local time
   const getWeekRangeString = (date: Date) => {
     const d = new Date(date);
     const day = d.getDay();
@@ -54,7 +118,7 @@ export default async function AdminDashboard() {
 
   const weeklyData: { [key: string]: number } = {};
   leads?.forEach(l => {
-    const d = new Date(l.created_at);
+    const d = getMXDate(l.created_at);
     const key = `Semana ${getWeekRangeString(d)}`;
     weeklyData[key] = (weeklyData[key] || 0) + 1;
   });
@@ -62,7 +126,7 @@ export default async function AdminDashboard() {
   // Generate last 6 months list
   const last6Months: { label: string; count: number }[] = [];
   for (let i = 0; i < 6; i++) {
-    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const d = new Date(nowMX.getFullYear(), nowMX.getMonth() - i, 1);
     const key = d.toLocaleString('es-MX', { month: 'long', year: 'numeric' });
     last6Months.push({
       label: key,
@@ -73,7 +137,7 @@ export default async function AdminDashboard() {
   // Generate last 6 weeks list
   const last6Weeks: { label: string; count: number }[] = [];
   for (let i = 0; i < 6; i++) {
-    const d = new Date();
+    const d = new Date(nowMX);
     d.setDate(d.getDate() - (i * 7));
     const key = `Semana ${getWeekRangeString(d)}`;
     last6Weeks.push({
@@ -92,7 +156,7 @@ export default async function AdminDashboard() {
         <div>
           <h1 className="text-3xl font-display-lg text-primary font-bold">Panel de Administración</h1>
           <p className="text-secondary font-body-sm text-sm mt-1">
-            Visualización en tiempo real de registros y métricas de adquisición.
+            Visualización en tiempo real de registros y métricas de adquisición (Zona Horaria: Ciudad de México).
           </p>
         </div>
         <div className="flex items-center gap-2 bg-surface-container border border-outline-variant/30 px-4 py-2 rounded-lg text-xs font-semibold text-secondary">
@@ -132,7 +196,7 @@ export default async function AdminDashboard() {
           <div className="space-y-2">
             <p className="text-secondary font-label-sm text-xs uppercase tracking-wider font-bold">Esta Semana</p>
             <h3 className="text-4xl font-display-lg font-bold text-[#25D366]">{leadsThisWeek}</h3>
-            <p className="text-secondary font-body-sm text-xs">Últimos 7 días</p>
+            <p className="text-secondary font-body-sm text-xs">Lunes a Domingo local</p>
           </div>
           <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-[#25D366]">
             <span className="material-symbols-outlined text-3xl">date_range</span>
@@ -221,7 +285,7 @@ export default async function AdminDashboard() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-surface-container-low text-on-surface border-b border-outline-variant/35">
-                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Fecha de Registro</th>
+                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Fecha de Registro (CDMX)</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Evento</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold text-center">Invitados</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Fecha del Evento</th>
@@ -240,22 +304,17 @@ export default async function AdminDashboard() {
                 ) : (
                   leads?.map((lead) => (
                     <tr key={lead.id} className="hover:bg-surface-container-low/40 transition-colors">
-                      <td className="p-4 font-body-sm text-secondary text-sm">
-                        {new Date(lead.created_at).toLocaleString('es-MX')}
+                      <td className="p-4 font-body-sm text-on-surface font-semibold text-sm">
+                        {formatMXTimestamp(lead.created_at)}
                       </td>
-                      <td className="p-4 font-body-md text-on-surface font-semibold capitalize">
+                      <td className="p-4 font-body-md text-on-surface capitalize">
                         {lead.event_type}
                       </td>
                       <td className="p-4 font-body-md text-on-surface text-center font-bold">
                         {lead.guests_count}
                       </td>
                       <td className="p-4 font-body-md text-secondary text-sm">
-                        {new Date(lead.event_date).toLocaleDateString('es-MX', {
-                          weekday: 'short',
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric'
-                        })}
+                        {formatEventDate(lead.event_date)}
                       </td>
                       <td className="p-4 font-body-md">
                         <a 
