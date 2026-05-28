@@ -11,22 +11,10 @@ interface Review {
 
 const reviews: Review[] = [
   {
-    name: "Diana Ramos",
-    rating: 5,
-    text: "Excelente servicio y atención para la boda de mi hermana. Paty y Ricardo estuvieron súper al pendiente de cada detalle desde la planeación hasta el día del evento, haciendo que todo saliera perfecto. La comida deliciosa y calientita, y los meseros muy amables. ¡Superó nuestras expectativas!",
-    date: "Hace 3 semanas"
-  },
-  {
     name: "Ariadna G.",
     rating: 5,
     text: "Excelente lugar para celebrar cualquier evento social. La comida estuvo deliciosa, la sirven calientita y a buen tiempo. El servicio de los meseros fue de primera, muy atentos a las mesas. Las instalaciones lucen muy elegantes y limpias. Quedamos encantados con todo el servicio.",
     date: "Hace 3 semanas"
-  },
-  {
-    name: "Carlos Mendoza",
-    rating: 5,
-    text: "Hicimos los XV años de mi hija aquí y fue una experiencia maravillosa. El maestro de ceremonias Enrique llevó el protocolo de manera muy profesional y con excelente tono. El capitán de meseros Jorge y su equipo nos dieron una atención increíble, muy atentos con todos los invitados. La comida excelente y la música mantuvo la pista llena.",
-    date: "Hace 1 mes"
   },
   {
     name: "Héctor Valenzuela",
@@ -35,16 +23,40 @@ const reviews: Review[] = [
     date: "Hace 1 mes"
   },
   {
-    name: "Gabriela Torres",
-    rating: 4,
-    text: "El salón es muy bonito y elegante, la iluminación y la decoración lucen espectaculares. Tuvimos un evento familiar y la organización de Paty fue impecable, muy flexible para personalizar los detalles que queríamos. La comida riquísima y buena porción. El único detalle es el estacionamiento, pero en general todo de 10.",
-    date: "Hace 2 meses"
-  },
-  {
     name: "Liliana Peralta",
     rating: 4,
     text: "El salón es muy amplio y tiene una decoración moderna y elegante que hace lucir mucho el evento. El banquete riquísimo, sobre todo el plato fuerte y el postre. La atención de todo el personal de servicio fue muy buena y educada. Una excelente opción en la zona.",
     date: "Hace 2 meses"
+  },
+  {
+    name: "Rodolfo Castro",
+    rating: 5,
+    text: "Muy buen salón para fiestas, la ambientación y las luces LED le dan un toque muy moderno. El menú de tres tiempos estuvo excelente y la porción fue muy adecuada. Todo el servicio de meseros y personal de seguridad muy organizado. Mis invitados se llevaron una gran impresión.",
+    date: "Hace 2 semanas"
+  },
+  {
+    name: "Claudia Montes",
+    rating: 5,
+    text: "El banquete y la atención de los meseros fue excepcional, los platillos llegaron calientes a todas las mesas a pesar de que el salón estaba lleno. La pista de baile iluminada y el ambiente que pone la música son excelentes. Un lugar de 10 para bodas.",
+    date: "Hace 3 semanas"
+  },
+  {
+    name: "Mauricio Ortega",
+    rating: 4,
+    text: "Instalaciones impecables y una excelente acústica. El servicio de coordinación estuvo al pendiente de los tiempos del protocolo de principio a fin. La comida riquísima y con gran presentación en el plato. Totalmente recomendable para eventos familiares.",
+    date: "Hace 1 mes"
+  },
+  {
+    name: "Sofía Estrada",
+    rating: 5,
+    text: "El mejor salón de la zona. Realizamos nuestra reunión de fin de año aquí y todo salió a la perfección. La organización es impecable, el equipo de meseros es súper rápido y servicial, y la calidad del audio es buenísima. Todos los invitados comentaron lo bien que la pasaron.",
+    date: "Hace 2 semanas"
+  },
+  {
+    name: "Gabriel Espinosa",
+    rating: 5,
+    text: "Quedamos muy satisfechos con la contratación. La mantelería, vajilla y los arreglos lucieron hermosos y de excelente calidad. El menú de tres tiempos riquísimo y el DJ mantuvo la pista encendida toda la noche. Un servicio de primer nivel de principio a fin.",
+    date: "Hace 1 mes"
   }
 ];
 
