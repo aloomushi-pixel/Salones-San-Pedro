@@ -414,7 +414,7 @@ export default function Home() {
                     <div>
                       <h4 className="font-display-lg text-lg font-bold text-on-surface mb-2">Horario de Atención</h4>
                       <p className="font-body-md text-secondary">
-                        Lunes a Sábado: 10:00 AM - 6:00 PM
+                        Lunes a Sábado: 10:00 AM - 7:00 PM
                       </p>
                     </div>
                   </div>
