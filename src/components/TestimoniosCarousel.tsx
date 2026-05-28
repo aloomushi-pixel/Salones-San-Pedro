@@ -11,27 +11,27 @@ interface Review {
 
 const reviews: Review[] = [
   {
-    name: "María de Jesús Rodríguez",
+    name: "Diana Ramos",
     rating: 5,
-    text: "Excelente salón para eventos, muy amplio y con un servicio de banquete de primera calidad. Festejamos aquí la boda de mi hija y todo el personal estuvo muy atento a los detalles. ¡Muy recomendado!",
-    date: "Hace 2 meses"
+    text: "Excelente servicio y atención para la boda de mi hermana. Paty y Ricardo estuvieron súper al pendiente de cada detalle desde la planeación hasta el día del evento, haciendo que todo saliera perfecto. La comida deliciosa y calientita, y los meseros muy amables. ¡Superó nuestras expectativas!",
+    date: "Hace 3 semanas"
   },
   {
-    name: "Alejandro Gómez",
+    name: "Carlos Mendoza",
     rating: 5,
-    text: "Gran atención por parte de los coordinadores del evento. El diseño de iluminación y la música son increíbles, hicieron que la fiesta fuera todo un éxito. Muy profesional.",
+    text: "Hicimos los XV años de mi hija aquí y fue una experiencia maravillosa. El maestro de ceremonias Enrique llevó el protocolo de manera muy profesional y con excelente tono. El capitán de meseros Jorge y su equipo nos dieron una atención increíble, muy atentos con todos los invitados. La comida excelente y la música mantuvo la pista llena.",
     date: "Hace 1 mes"
   },
   {
-    name: "Sofía Martínez",
+    name: "Gabriela Torres",
     rating: 4,
-    text: "Las instalaciones están muy cuidadas y la ubicación en Zona Esmeralda le da mucha exclusividad. El menú de 4 tiempos estuvo delicioso, mis invitados quedaron encantados. Excelente servicio en general.",
-    date: "Hace 3 meses"
+    text: "El salón es muy bonito y elegante, la iluminación y la decoración lucen espectaculares. Tuvimos un evento familiar y la organización de Paty fue impecable, muy flexible para personalizar los detalles que queríamos. La comida riquísima y buena porción. El único detalle es el estacionamiento, pero en general todo de 10.",
+    date: "Hace 2 meses"
   },
   {
-    name: "Juan Manuel Ortiz",
+    name: "Fernando Ruiz",
     rating: 5,
-    text: "Festejamos un evento corporativo y superó nuestras expectativas. La logística y la decoración floral boutique estuvieron de 10. Cumplieron con todo lo prometido en el paquete Premium. Excelente lugar.",
+    text: "Festejamos nuestra graduación aquí y todo estuvo excelente. La música del DJ y el ambiente fue increíble, todos nos divertimos muchísimo. La comida y el servicio de banquetes de primera. Ricardo nos ayudó con toda la logística y fue muy profesional en todo momento. Sin duda los recomiendo ampliamente.",
     date: "Hace 2 semanas"
   }
 ];
