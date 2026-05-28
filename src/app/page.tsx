@@ -363,7 +363,7 @@ export default function Home() {
             <div className="mb-12">
               <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mb-6">Verificador de Disponibilidad</h2>
               <p className="font-body-lg text-secondary max-w-2xl mx-auto">
-                Asegura tu fecha en el escenario más exclusivo de Puebla. Elige tu evento y descubre si aún tenemos espacio para ti.
+                Asegura tu fecha en el escenario más exclusivo de la CDMX. Elige tu evento y descubre si aún tenemos espacio para ti.
               </p>
             </div>
             <div className="max-w-3xl mx-auto bg-surface-container-lowest p-8 md:p-12 rounded-xl shadow-2xl border border-outline-variant/30">

@@ -15,8 +15,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "SALONES SAN PEDRO | Eventos de Alta Gama en Puebla",
-  description: "Exclusividad y prestigio en el corazón de la Zona Esmeralda. Creamos experiencias que fusionan la elegancia contemporánea con el alma de Puebla.",
+  title: "SALONES SAN PEDRO | Eventos de Alta Gama en CDMX y EDOMEX",
+  description: "Salón de eventos exclusivos en CDMX y Zona Metropolitana del Estado de México. Creamos experiencias de alta gama y banquetes de lujo con elegancia contemporánea.",
   icons: {
     icon: "/logo.svg",
     shortcut: "/logo.svg",
