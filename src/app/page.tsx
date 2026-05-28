@@ -296,7 +296,7 @@ export default function Home() {
                       <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Servicio de Limusina</li>
                       <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Video filmación y fotos con álbum</li>
                       <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Vino espumoso y 1 botella de licor por mesa</li>
-                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Cabina 360 (2 hrs)</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Cabina 360 (1.30 hrs)</li>
                     </ul>
                   </div>
                 </div>
