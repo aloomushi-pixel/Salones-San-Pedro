@@ -3,60 +3,12 @@ import LeadForm from "../components/LeadForm";
 import TestimoniosCarousel from "../components/TestimoniosCarousel";
 import GaleriaSection from "../components/GaleriaSection";
 import TikTokVideos from "../components/TikTokVideos";
+import Header from "../components/Header";
 
 export default function Home() {
   return (
     <>
-      {/* Announcement Bar */}
-      <div className="w-full bg-error text-on-error py-3 px-4 text-center font-label-sm sticky top-0 z-[60] shadow-md">
-        🚨 Fechas de temporada alta agotándose rápido. ¡Aparta tu fecha con precio especial este mes!
-      </div>
-
-      {/* TopNavBar */}
-      <nav className="sticky top-[48px] w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 bg-surface/90 dark:bg-surface/90 backdrop-blur-md shadow-sm relative">
-        <div className="flex items-center">
-          <img
-            alt="SALONES SAN PEDRO"
-            className="h-12 w-auto object-contain"
-            src="/logo.svg"
-          />
-        </div>
-        
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8 font-body-md text-body-md">
-          <a className="text-secondary hover:text-primary transition-colors duration-300" href="#paquetes">Paquetes</a>
-          <a className="text-secondary hover:text-primary transition-colors duration-300" href="#galeria">Galería</a>
-          <a className="text-secondary hover:text-primary transition-colors duration-300" href="#banquetes">Gastronomía</a>
-          <a className="text-secondary hover:text-primary transition-colors duration-300" href="#disponibilidad">Verificar espacio</a>
-          <a className="text-secondary hover:text-primary transition-colors duration-300" href="#ubicacion">Ubicación</a>
-          <a className="text-secondary hover:text-primary transition-colors duration-300" href="#testimonios">Testimonios</a>
-          <a className="text-secondary hover:text-primary transition-colors duration-300 font-semibold" href="/blog">Blog</a>
-        </div>
-        
-        <div className="flex items-center gap-4">
-          <a href="#disponibilidad" className="bg-primary-container text-on-primary-container px-4 md:px-6 py-2.5 md:py-3 font-label-sm text-xs md:text-sm rounded-lg hover:opacity-80 transition-all scale-95 active:scale-90 uppercase tracking-wider text-center">
-            COTIZAR EVENTO
-          </a>
-          
-          <label htmlFor="menu-toggle" className="cursor-pointer md:hidden block p-2 hover:bg-surface-container-low rounded-lg transition-colors">
-            <span className="material-symbols-outlined text-2xl text-on-surface">menu</span>
-          </label>
-        </div>
-
-        {/* CSS-only Menu Toggle Checkbox */}
-        <input type="checkbox" id="menu-toggle" className="hidden peer" />
-
-        {/* Mobile Dropdown Menu */}
-        <div className="hidden peer-checked:flex flex-col absolute top-full left-0 right-0 bg-surface/95 backdrop-blur-md shadow-lg p-6 border-b border-outline-variant/30 space-y-4 md:hidden z-50">
-          <a className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10" href="#paquetes">Paquetes</a>
-          <a className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10" href="#galeria">Galería</a>
-          <a className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10" href="#banquetes">Gastronomía</a>
-          <a className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10" href="#disponibilidad">Verificar espacio</a>
-          <a className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10 font-bold text-primary" href="#ubicacion">Ubicación</a>
-          <a className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10" href="#testimonios">Testimonios</a>
-          <a className="text-secondary hover:text-primary transition-colors duration-300 font-semibold py-1" href="/blog">Blog</a>
-        </div>
-      </nav>
+      <Header />
 
       <main>
         {/* Hero Section */}

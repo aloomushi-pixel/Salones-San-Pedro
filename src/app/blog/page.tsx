@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Header from "../../components/Header";
 
 interface BlogPost {
   slug: string;
@@ -18,83 +19,32 @@ const BLOG_POSTS: BlogPost[] = [
     date: "24 de Mayo, 2026",
     readTime: "5 min de lectura",
     category: "Gastronomía",
-    imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuC3HpPPLtGqhlEVNzWf0ykU5N-7oSNb7fo5p6x6A9VEod_dSxNW_7zLG37nrJBlgDn8YcivcQM8Gnu7lCPAGxyDQWhV0gWJ6vtgEdX05Vupc19PBgY2PQJt0RcLh4wCl1VlR3SQNNJfnU0EQdk13I1Pj0izwl1HrZ97cdaDFexgZH45-akW9U77bGkZYSkTuJyyzxt8nCtkEznqpdRPOG1mM_BEn1a8TAZb6lIkwvemaXgbuXXYuyfbDFMO5FnltTf3XDuPHu0LImCJ"
+    imageUrl: "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=800&q=80"
   },
   {
-    slug: "la-importancia-de-la-iluminacion-en-eventos",
+    slug: "importancia-de-la-iluminacion-en-eventos",
     title: "La importancia de la iluminación en eventos de gala",
-    excerpt: "La luz no solo ilumina, crea emociones. Te explicamos cómo diseñar la atmósfera perfecta con tecnología robótica y efectos dinámicos para tu gran día.",
+    excerpt: "Cómo el diseño lumínico y los efectos especiales pueden transformar un espacio y crear la atmósfera emocional adecuada para tu boda o XV años.",
     date: "18 de Mayo, 2026",
     readTime: "4 min de lectura",
-    category: "Planeación",
-    imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCSf4kmdGeSyJYwNSG3lSoHza4UpObgjsHFhaRY9JfMHzKaxNhDNogK45EcM3of_c8GScAsj4RGvPfrR9z6PapBM43ualufmxSwjgx7GzwA9H7J6QbyQZnSqbPubP8EfRKRUUHhXzvOcdNabRhRA4_SKUcJTQbUD56ZVmYvPTRR-KCHjh0j7vCbnAx2W53xcTCpBFPG95aGQaidxKUZdjhe6XOJYAT7gD-2BVkbBFwAd5IRY1Mr9Z76RHcQUU0EeNHv1u_Ocu70LEsH"
+    category: "Producción",
+    imageUrl: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80"
   },
   {
-    slug: "tendencias-decoracion-floral-boutique",
-    title: "Tendencias en decoración floral boutique para este año",
-    excerpt: "Desde arreglos suspendidos hasta paletas de colores orgánicos y follajes exóticos. Inspírate con las últimas corrientes de diseño floral para salones exclusivos.",
+    slug: "tendencias-decoracion-boutique-este-ano",
+    title: "Tendencias de decoración floral boutique para este año",
+    excerpt: "Desde arreglos suspendidos hasta centros de mesa orgánicos. Te presentamos lo último en interiorismo floral para eventos con sello de distinción.",
     date: "10 de Mayo, 2026",
     readTime: "6 min de lectura",
     category: "Decoración",
-    imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCHeTnIJ33jk9qkLiLqVUxENCpoXpzhoM1V-bM2WDYn5Q9seks4TwfGfI7JI0oEU8SgaNsow_gR3xn9ACGKpss4EZojFM0cycs09VT9eiCx0vu3p9F6-tsgkoykFHFtSneTyiZ_tLns4NRwKUN2T3g7K5mThA_8qcpnkoDvWjJgppGyFLkgnR3ZmDy-9ptle7WuKqhnH8eOTmGkWZH5uFLv6lpwEgt68uvy-_VG_IBdqNNk31O86UKLfO-ejpe_clBpT4SR5tT8wv2w"
+    imageUrl: "https://images.unsplash.com/photo-1519225495810-7517c2965a7d?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
 export default function BlogPage() {
   return (
     <>
-      {/* Announcement Bar */}
-      <div className="w-full bg-error text-on-error py-3 px-4 text-center font-label-sm sticky top-0 z-[60] shadow-md">
-        🚨 Fechas de temporada alta agotándose rápido. ¡Aparta tu fecha con precio especial este mes!
-      </div>
-
-      {/* TopNavBar */}
-      <nav className="sticky top-[48px] w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 bg-surface/90 dark:bg-surface/90 backdrop-blur-md shadow-sm relative">
-        <div className="flex items-center">
-          <Link href="/">
-            <img
-              alt="SALONES SAN PEDRO"
-              className="h-12 w-auto cursor-pointer object-contain"
-              src="/logo.svg"
-            />
-          </Link>
-        </div>
-        
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8 font-body-md text-body-md">
-          <Link className="text-secondary hover:text-primary transition-colors duration-300" href="/#paquetes">Paquetes</Link>
-          <Link className="text-secondary hover:text-primary transition-colors duration-300" href="/#galeria">Galería</Link>
-          <Link className="text-secondary hover:text-primary transition-colors duration-300" href="/#banquetes">Gastronomía</Link>
-          <Link className="text-secondary hover:text-primary transition-colors duration-300" href="/#disponibilidad">Verificar espacio</Link>
-          <Link className="text-secondary hover:text-primary transition-colors duration-300" href="/#ubicacion">Ubicación</Link>
-          <Link className="text-secondary hover:text-primary transition-colors duration-300" href="/#testimonios">Testimonios</Link>
-          <Link className="text-primary font-bold transition-colors duration-300" href="/blog">Blog</Link>
-        </div>
-        
-        <div className="flex items-center gap-4">
-          <Link href="/#disponibilidad" className="bg-primary-container text-on-primary-container px-4 md:px-6 py-2.5 md:py-3 font-label-sm text-xs md:text-sm rounded-lg hover:opacity-80 transition-all scale-95 active:scale-90 uppercase tracking-wider text-center">
-            COTIZAR EVENTO
-          </Link>
-          
-          <label htmlFor="menu-toggle" className="cursor-pointer md:hidden block p-2 hover:bg-surface-container-low rounded-lg transition-colors">
-            <span className="material-symbols-outlined text-2xl text-on-surface">menu</span>
-          </label>
-        </div>
-
-        {/* CSS-only Menu Toggle Checkbox */}
-        <input type="checkbox" id="menu-toggle" className="hidden peer" />
-
-        {/* Mobile Dropdown Menu */}
-        <div className="hidden peer-checked:flex flex-col absolute top-full left-0 right-0 bg-surface/95 backdrop-blur-md shadow-lg p-6 border-b border-outline-variant/30 space-y-4 md:hidden z-50">
-          <Link className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10" href="/#paquetes">Paquetes</Link>
-          <Link className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10" href="/#galeria">Galería</Link>
-          <Link className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10" href="/#banquetes">Gastronomía</Link>
-          <Link className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10" href="/#disponibilidad">Verificar espacio</Link>
-          <Link className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10 font-bold text-primary" href="/#ubicacion">Ubicación</Link>
-          <Link className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10" href="/#testimonios">Testimonios</Link>
-          <Link className="text-secondary hover:text-primary transition-colors duration-300 font-semibold py-1" href="/blog">Blog</Link>
-        </div>
-      </nav>
+      <Header />
 
       <main className="min-h-screen bg-surface py-16 px-margin-mobile md:px-margin-desktop">
         <div className="max-w-container-max mx-auto">
