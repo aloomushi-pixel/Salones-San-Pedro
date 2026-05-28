@@ -155,7 +155,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       </div>
 
       {/* TopNavBar */}
-      <nav className="sticky top-[48px] w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 bg-surface/90 dark:bg-surface/90 backdrop-blur-md shadow-sm">
+      <nav className="sticky top-[48px] w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 bg-surface/90 dark:bg-surface/90 backdrop-blur-md shadow-sm relative">
         <div className="flex items-center">
           <Link href="/">
             <img
@@ -165,6 +165,8 @@ export default async function BlogPostPage({ params }: PageProps) {
             />
           </Link>
         </div>
+        
+        {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8 font-body-md text-body-md">
           <Link className="text-secondary hover:text-primary transition-colors duration-300" href="/#paquetes">Paquetes</Link>
           <Link className="text-secondary hover:text-primary transition-colors duration-300" href="/#galeria">Galería</Link>
@@ -174,9 +176,30 @@ export default async function BlogPostPage({ params }: PageProps) {
           <Link className="text-secondary hover:text-primary transition-colors duration-300" href="/#testimonios">Testimonios</Link>
           <Link className="text-primary font-bold transition-colors duration-300" href="/blog">Blog</Link>
         </div>
-        <Link href="/#disponibilidad" className="bg-primary-container text-on-primary-container px-6 py-3 font-label-sm rounded-lg hover:opacity-80 transition-all scale-95 active:scale-90 uppercase tracking-wider text-center">
-          COTIZAR EVENTO
-        </Link>
+        
+        <div className="flex items-center gap-4">
+          <Link href="/#disponibilidad" className="bg-primary-container text-on-primary-container px-4 md:px-6 py-2.5 md:py-3 font-label-sm text-xs md:text-sm rounded-lg hover:opacity-80 transition-all scale-95 active:scale-90 uppercase tracking-wider text-center">
+            COTIZAR EVENTO
+          </Link>
+          
+          <label htmlFor="menu-toggle" className="cursor-pointer md:hidden block p-2 hover:bg-surface-container-low rounded-lg transition-colors">
+            <span className="material-symbols-outlined text-2xl text-on-surface">menu</span>
+          </label>
+        </div>
+
+        {/* CSS-only Menu Toggle Checkbox */}
+        <input type="checkbox" id="menu-toggle" className="hidden peer" />
+
+        {/* Mobile Dropdown Menu */}
+        <div className="hidden peer-checked:flex flex-col absolute top-full left-0 right-0 bg-surface/95 backdrop-blur-md shadow-lg p-6 border-b border-outline-variant/30 space-y-4 md:hidden z-50">
+          <Link className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10" href="/#paquetes">Paquetes</Link>
+          <Link className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10" href="/#galeria">Galería</Link>
+          <Link className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10" href="/#banquetes">Gastronomía</Link>
+          <Link className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10" href="/#disponibilidad">Verificar espacio</Link>
+          <Link className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10 font-bold text-primary" href="/#ubicacion">Ubicación</Link>
+          <Link className="text-secondary hover:text-primary transition-colors duration-300 py-1 border-b border-outline-variant/10" href="/#testimonios">Testimonios</Link>
+          <Link className="text-secondary hover:text-primary transition-colors duration-300 font-semibold py-1" href="/blog">Blog</Link>
+        </div>
       </nav>
 
       <main className="min-h-screen bg-surface py-12 md:py-16 px-margin-mobile md:px-margin-desktop">
