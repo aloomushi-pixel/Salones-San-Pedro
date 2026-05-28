@@ -54,21 +54,21 @@ export default function Home() {
             {/* Menú de 3 Tiempos Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mb-16">
               {/* Primer Tiempo */}
-              <div className="bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="group bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:shadow-xl transition-all duration-300">
                 <div className="space-y-6">
                   <h3 className="font-display-lg text-xl text-primary font-bold tracking-wider uppercase">Primer Tiempo</h3>
                   <div className="relative h-60 rounded-xl overflow-hidden shadow-md">
                     <img
-                      className="w-full h-full object-cover"
-                      alt="Primer Tiempo - Ensalada"
-                      src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 saturate-[1.15] contrast-[1.05] brightness-[1.02]"
+                      alt="Primer Tiempo - Ensalada Gourmet"
+                      src="/gastronomia/primer_tiempo.jpg"
                     />
                   </div>
                   <h4 className="font-body-md font-bold text-on-surface text-base leading-snug">
                     Entradas ligeras y sofisticadas para abrir el apetito.
                   </h4>
                   <p className="font-body-md text-secondary text-sm leading-relaxed">
-                    Ensalada de Verano con Vinagreta de Cítricos y Frutos Rojos.
+                    Ensalada gourmet de frutos rojos, zarzamoras frescas y queso de cabra.
                   </p>
                 </div>
                 <a
@@ -82,21 +82,21 @@ export default function Home() {
               </div>
 
               {/* Segundo Tiempo */}
-              <div className="bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="group bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:shadow-xl transition-all duration-300">
                 <div className="space-y-6">
                   <h3 className="font-display-lg text-xl text-primary font-bold tracking-wider uppercase">Segundo Tiempo</h3>
                   <div className="relative h-60 rounded-xl overflow-hidden shadow-md">
                     <img
-                      className="w-full h-full object-cover"
-                      alt="Segundo Tiempo - Pasta"
-                      src="https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&w=600&q=80"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 saturate-[1.15] contrast-[1.05] brightness-[1.02]"
+                      alt="Segundo Tiempo - Fetuccini al pesto"
+                      src="/gastronomia/segundo_tiempo.jpg"
                     />
                   </div>
                   <h4 className="font-body-md font-bold text-on-surface text-base leading-snug">
-                    Platos principales elaborados con ingredientes de temporada.
+                    Pastas artesanales preparadas con salsas clásicas.
                   </h4>
                   <p className="font-body-md text-secondary text-sm leading-relaxed">
-                    Fettuccine al Tartufo con Setas Silvestres.
+                    Fetuccini al pesto.
                   </p>
                 </div>
                 <a
@@ -110,21 +110,21 @@ export default function Home() {
               </div>
 
               {/* Tercer Tiempo */}
-              <div className="bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="group bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:shadow-xl transition-all duration-300">
                 <div className="space-y-6">
                   <h3 className="font-display-lg text-xl text-primary font-bold tracking-wider uppercase">Tercer Tiempo</h3>
                   <div className="relative h-60 rounded-xl overflow-hidden shadow-md">
                     <img
-                      className="w-full h-full object-cover"
-                      alt="Tercer Tiempo - Pollo"
-                      src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 saturate-[1.15] contrast-[1.05] brightness-[1.02]"
+                      alt="Tercer Tiempo - Lomo al ciruelo"
+                      src="/gastronomia/tercer_tiempo.jpg"
                     />
                   </div>
                   <h4 className="font-body-md font-bold text-on-surface text-base leading-snug">
-                    Una culminación deliciosa para su banquete.
+                    Especialidades principales preparadas al punto ideal.
                   </h4>
                   <p className="font-body-md text-secondary text-sm leading-relaxed">
-                    Pechuga de Pollo Rostizada a las Hierbas Finas y Vegetales de Estación.
+                    Lomo al ciruelo.
                   </p>
                 </div>
                 <a
