@@ -91,7 +91,7 @@ export default function TikTokVideos() {
       <div className="text-center mb-12">
         <span className="font-label-sm text-primary tracking-widest uppercase">Momentos Reales</span>
         <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-2">
-          Salones San Pedro en TikTok
+          Así se vive la experiencia San Pedro Plus
         </h2>
         <div className="w-24 h-0.5 bg-primary-container mx-auto my-4"></div>
         <p className="font-body-lg text-secondary max-w-2xl mx-auto">
