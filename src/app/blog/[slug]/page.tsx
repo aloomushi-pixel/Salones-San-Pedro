@@ -94,10 +94,10 @@ export default async function BlogPostPage({ params }: PageProps) {
               <div className="bg-primary text-on-primary rounded-xl p-6 space-y-4 text-center shadow-lg">
                 <h4 className="font-display-lg text-xl font-bold">¡Haz realidad tu gran día!</h4>
                 <p className="text-sm opacity-90 leading-relaxed">
-                  Aparta tu recorrido guiado por Salones San Pedro hoy mismo y recibe atención personalizada de nuestros coordinadores.
+                  Verifica la disponibilidad para tu evento en Salones San Pedro hoy mismo y recibe atención personalizada de nuestros coordinadores.
                 </p>
                 <Link href="/#disponibilidad" className="block w-full py-3 bg-surface text-primary rounded-lg font-label-sm text-xs font-bold shadow hover:bg-surface-variant transition-all uppercase tracking-wider">
-                  Agendar Recorrido
+                  Ver disponibilidad
                 </Link>
               </div>
             </div>
