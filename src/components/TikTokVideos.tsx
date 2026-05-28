@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface VideoData {
   id: number;
@@ -48,6 +48,44 @@ const TIKTOK_VIDEOS: VideoData[] = [
 
 export default function TikTokVideos() {
   const [selectedVideo, setSelectedVideo] = useState<VideoData | null>(null);
+
+  const handleNextVideo = () => {
+    setSelectedVideo((current) => {
+      if (!current) return null;
+      const currentIndex = TIKTOK_VIDEOS.findIndex((v) => v.id === current.id);
+      const nextIndex = (currentIndex + 1) % TIKTOK_VIDEOS.length;
+      return TIKTOK_VIDEOS[nextIndex];
+    });
+  };
+
+  const handlePrevVideo = () => {
+    setSelectedVideo((current) => {
+      if (!current) return null;
+      const currentIndex = TIKTOK_VIDEOS.findIndex((v) => v.id === current.id);
+      const prevIndex = (currentIndex - 1 + TIKTOK_VIDEOS.length) % TIKTOK_VIDEOS.length;
+      return TIKTOK_VIDEOS[prevIndex];
+    });
+  };
+
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      const data = event.data;
+      if (data && data["x-tiktok-player"]) {
+        // If the video ends (value === 0), go to the next one
+        if (
+          (data.type === "onStateChange" && data.value === 0) ||
+          data.type === "ended"
+        ) {
+          handleNextVideo();
+        }
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, []);
 
   return (
     <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
@@ -138,14 +176,31 @@ export default function TikTokVideos() {
             </button>
 
             {/* TikTok Official Embedded Player Column */}
-            <div className="relative w-full md:w-[50%] bg-black flex items-center justify-center aspect-[9/16] md:aspect-auto md:h-[700px] overflow-hidden">
+            <div className="relative w-full md:w-[50%] bg-black flex items-center justify-center aspect-[9/16] md:aspect-auto md:h-[700px] overflow-hidden group/player">
               <iframe
-                src={`https://www.tiktok.com/player/v1/${selectedVideo.tiktokId}?autoplay=1&loop=1&rel=0`}
+                src={`https://www.tiktok.com/player/v1/${selectedVideo.tiktokId}?autoplay=1&loop=0&rel=0`}
                 className="w-full h-full"
                 style={{ border: "none" }}
                 allow="autoplay; encrypted-media"
                 allowFullScreen
               />
+
+              {/* Navigation Arrows */}
+              <button
+                onClick={handlePrevVideo}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-40 w-10 h-10 bg-black/50 text-white rounded-full flex items-center justify-center transition-all opacity-70 md:opacity-0 md:group-hover/player:opacity-100 focus:opacity-100 hover:bg-black/80 hover:scale-105 active:scale-95 shadow-md"
+                aria-label="Video anterior"
+              >
+                <span className="material-symbols-outlined text-2xl font-bold">chevron_left</span>
+              </button>
+
+              <button
+                onClick={handleNextVideo}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-40 w-10 h-10 bg-black/50 text-white rounded-full flex items-center justify-center transition-all opacity-70 md:opacity-0 md:group-hover/player:opacity-100 focus:opacity-100 hover:bg-black/80 hover:scale-105 active:scale-95 shadow-md"
+                aria-label="Siguiente video"
+              >
+                <span className="material-symbols-outlined text-2xl font-bold">chevron_right</span>
+              </button>
             </div>
 
             {/* Content Column */}
