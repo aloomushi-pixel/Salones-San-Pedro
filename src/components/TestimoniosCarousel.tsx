@@ -17,9 +17,21 @@ const reviews: Review[] = [
     date: "Hace 3 semanas"
   },
   {
+    name: "Ariadna G.",
+    rating: 5,
+    text: "Excelente lugar para celebrar cualquier evento social. La comida estuvo deliciosa, la sirven calientita y a buen tiempo. El servicio de los meseros fue de primera, muy atentos a las mesas. Las instalaciones lucen muy elegantes y limpias. Quedamos encantados con todo el servicio.",
+    date: "Hace 3 semanas"
+  },
+  {
     name: "Carlos Mendoza",
     rating: 5,
     text: "Hicimos los XV años de mi hija aquí y fue una experiencia maravillosa. El maestro de ceremonias Enrique llevó el protocolo de manera muy profesional y con excelente tono. El capitán de meseros Jorge y su equipo nos dieron una atención increíble, muy atentos con todos los invitados. La comida excelente y la música mantuvo la pista llena.",
+    date: "Hace 1 mes"
+  },
+  {
+    name: "Héctor Valenzuela",
+    rating: 5,
+    text: "Festejamos una graduación y la experiencia fue increíble. El sonido y la iluminación espectacular, el DJ mantuvo un ambientazo en la pista todo el tiempo. La coordinación del evento fue sumamente profesional y cuidaron cada detalle de la logística. Muy recomendable.",
     date: "Hace 1 mes"
   },
   {
@@ -29,10 +41,10 @@ const reviews: Review[] = [
     date: "Hace 2 meses"
   },
   {
-    name: "Fernando Ruiz",
-    rating: 5,
-    text: "Festejamos nuestra graduación aquí y todo estuvo excelente. La música del DJ y el ambiente fue increíble, todos nos divertimos muchísimo. La comida y el servicio de banquetes de primera. Ricardo nos ayudó con toda la logística y fue muy profesional en todo momento. Sin duda los recomiendo ampliamente.",
-    date: "Hace 2 semanas"
+    name: "Liliana Peralta",
+    rating: 4,
+    text: "El salón es muy amplio y tiene una decoración moderna y elegante que hace lucir mucho el evento. El banquete riquísimo, sobre todo el plato fuerte y el postre. La atención de todo el personal de servicio fue muy buena y educada. Una excelente opción en la zona.",
+    date: "Hace 2 meses"
   }
 ];
 
