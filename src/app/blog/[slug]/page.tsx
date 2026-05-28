@@ -1,140 +1,16 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "../../../components/Header";
-
-interface BlogPostDetail {
-  slug: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  readTime: string;
-  category: string;
-  imageUrl: string;
-  content: React.ReactNode;
-}
-
-const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
-  "como-elegir-el-menu-de-bodas-perfecto": {
-    slug: "como-elegir-el-menu-de-bodas-perfecto",
-    title: "Cómo elegir el menú de bodas perfecto: 5 consejos gourmet",
-    excerpt: "Descubre los secretos de nuestro chef ejecutivo para crear una experiencia gastronómica inolvidable que deleite a todos tus invitados con toques poblanos contemporáneos.",
-    date: "24 de Mayo, 2026",
-    readTime: "5 min de lectura",
-    category: "Gastronomía",
-    imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuC3HpPPLtGqhlEVNzWf0ykU5N-7oSNb7fo5p6x6A9VEod_dSxNW_7zLG37nrJBlgDn8YcivcQM8Gnu7lCPAGxyDQWhV0gWJ6vtgEdX05Vupc19PBgY2PQJt0RcLh4wCl1VlR3SQNNJfnU0EQdk13I1Pj0izwl1HrZ97cdaDFexgZH45-akW9U77bGkZYSkTuJyyzxt8nCtkEznqpdRPOG1mM_BEn1a8TAZb6lIkwvemaXgbuXXYuyfbDFMO5FnltTf3XDuPHu0LImCJ",
-    content: (
-      <div className="space-y-6">
-        <p>
-          La gastronomía es uno de los pilares más recordados en cualquier boda. No se trata simplemente de alimentar a los invitados, sino de ofrecer una experiencia sensorial que refleje la personalidad de la pareja y la riqueza cultural del entorno. En <strong>Salones San Pedro</strong>, entendemos que cada platillo cuenta una historia.
-        </p>
-        <p>
-          A continuación, nuestro chef ejecutivo comparte 5 consejos gourmet para diseñar el menú perfecto para tu boda:
-        </p>
-        
-        <h3 className="font-display-lg text-2xl text-on-surface pt-4">1. Conoce el perfil de tus invitados</h3>
-        <p>
-          Antes de decidir los platillos, es fundamental contemplar si entre tus invitados hay personas con restricciones alimenticias (vegetarianos, veganos, celíacos o alérgicos). Contar con opciones alternativas preparadas con el mismo nivel de sofisticación asegura que todos se sientan incluidos y atendidos.
-        </p>
-
-        <h3 className="font-display-lg text-2xl text-on-surface pt-4">2. Estructura un menú con ritmo y balance</h3>
-        <p>
-          Un menú clásico de alta escuela suele estructurarse en 4 tiempos: una entrada ligera (fría o caliente), una crema o sopa fina, el plato fuerte (generalmente una proteína premium de res o ave) y el postre. La clave está en balancear los sabores: si el plato fuerte es intenso y especiado, las entradas deben ser más sutiles y frescas.
-        </p>
-
-        <h3 className="font-display-lg text-2xl text-on-surface pt-4">3. La importancia del maridaje</h3>
-        <p>
-          El vino y la coctelería de autor deben complementar perfectamente cada bocado. Un maridaje adecuado potencia los sabores de la comida. Por ejemplo, un vino tinto de barrica resalta la jugosidad de un filete de res en salsa de tres chiles, mientras que un blanco fresco o rosado acompaña idealmente las notas cremosas de una entrada de mariscos.
-        </p>
-
-        <h3 className="font-display-lg text-2xl text-on-surface pt-4">4. Incorpora la herencia culinaria con técnica moderna</h3>
-        <p>
-          Puebla es famosa por su gastronomía histórica. Fieles a esta tradición, en nuestro salón nos encanta sorprender a los novios con reinterpretaciones de autor. ¿Qué tal un chile en nogada deconstruido con granada cristalizada, o un solomillo bañado en mole boutique aterciopelado? Este toque local le dará un carácter exclusivo e identitario a tu banquete.
-        </p>
-
-        <h3 className="font-display-lg text-2xl text-on-surface pt-4">5. Un cierre espectacular</h3>
-        <p>
-          El postre es el último recuerdo del banquete. Te sugerimos optar por una combinación de sabores clásicos con texturas innovadoras. Además del pastel tradicional, las mesas de dulces boutique y las estaciones de postres vivos (como helados artesanales flameados al momento) añaden un factor de entretenimiento que fascinará a todos.
-        </p>
-      </div>
-    )
-  },
-  "la-importancia-de-la-iluminacion-en-eventos": {
-    slug: "la-importancia-de-la-iluminacion-en-eventos",
-    title: "La importancia de la iluminación en eventos de gala",
-    excerpt: "La luz no solo ilumina, crea emociones. Te explicamos cómo diseñar la atmósfera perfecta con tecnología robótica y efectos dinámicos para tu gran día.",
-    date: "18 de Mayo, 2026",
-    readTime: "4 min de lectura",
-    category: "Planeación",
-    imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCSf4kmdGeSyJYwNSG3lSoHza4UpObgjsHFhaRY9JfMHzKaxNhDNogK45EcM3of_c8GScAsj4RGvPfrR9z6PapBM43ualufmxSwjgx7GzwA9H7J6QbyQZnSqbPubP8EfRKRUUHhXzvOcdNabRhRA4_SKUcJTQbUD56ZVmYvPTRR-KCHjh0j7vCbnAx2W53xcTCpBFPG95aGQaidxKUZdjhe6XOJYAT7gD-2BVkbBFwAd5IRY1Mr9Z76RHcQUU0EeNHv1u_Ocu70LEsH",
-    content: (
-      <div className="space-y-6">
-        <p>
-          Cuando planeamos un evento de gala, solemos enfocarnos en las flores, la mantelería y el menú. Sin embargo, hay un elemento invisible que tiene el poder de transformar por completo cómo se ve y se siente todo el lugar: <strong>la iluminación</strong>.
-        </p>
-        <p>
-          Un mal diseño de iluminación puede arruinar una decoración costosa, mientras que un diseño lumínico profesional resalta cada detalle arquitectónico y genera una atmósfera de lujo.
-        </p>
-
-        <h3 className="font-display-lg text-2xl text-on-surface pt-4">Iluminación Ambiental vs. Iluminación Dinámica</h3>
-        <p>
-          Para lograr el equilibrio perfecto, es necesario combinar dos tipos de luz:
-        </p>
-        <ul className="list-disc pl-6 space-y-2">
-          <li><strong>Iluminación Ambiental (o arquitectónica):</strong> Es la luz estática que tiñe las columnas, techos y paredes del salón. En Salones San Pedro utilizamos tonos cálidos y dorados para acentuar los detalles sofisticados del espacio, creando una sensación de amplitud y elegancia acogedora.</li>
-          <li><strong>Iluminación Dinámica (robótica):</strong> Es la que se utiliza durante los momentos de fiesta. Cabezas móviles y proyectores LED siguen el ritmo de la música, cambiando de color y patrones para incentivar a los invitados a llenar la pista de baile.</li>
-        </ul>
-
-        <h3 className="font-display-lg text-2xl text-on-surface pt-4">Los momentos clave del evento</h3>
-        <p>
-          La luz debe adaptarse a las distintas fases del evento. Durante la recepción y el banquete, la iluminación debe ser tenue y elegante, permitiendo que la gente converse cómodamente y resalten las velas de las mesas. En cambio, para el vals de los novios, un reflector de seguimiento o una luz cenital suave los convertirá en el foco absoluto de atención, logrando fotos y videos verdaderamente cinematográficos.
-        </p>
-        <p>
-          En tu próxima planeación, no subestimes el poder de la luz. Invertir en una curaduría sonora y lumínica de alta calidad marcará la diferencia entre un evento bonito y una experiencia extraordinaria.
-        </p>
-      </div>
-    )
-  },
-  "tendencias-decoracion-floral-boutique": {
-    slug: "tendencias-decoracion-floral-boutique",
-    title: "Tendencias en decoración floral boutique para este año",
-    excerpt: "Desde arreglos suspendidos hasta paletas de colores orgánicos y follajes exóticos. Inspírate con las últimas corrientes de diseño floral para salones exclusivos.",
-    date: "10 de Mayo, 2026",
-    readTime: "6 min de lectura",
-    category: "Decoración",
-    imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCHeTnIJ33jk9qkLiLqVUxENCpoXpzhoM1V-bM2WDYn5Q9seks4TwfGfI7JI0oEU8SgaNsow_gR3xn9ACGKpss4EZojFM0cycs09VT9eiCx0vu3p9F6-tsgkoykFHFtSneTyiZ_tLns4NRwKUN2T3g7K5mThA_8qcpnkoDvWjJgppGyFLkgnR3ZmDy-9ptle7WuKqhnH8eOTmGkWZH5uFLv6lpwEgt68uvy-_VG_IBdqNNk31O86UKLfO-ejpe_clBpT4SR5tT8wv2w",
-    content: (
-      <div className="space-y-6">
-        <p>
-          Las flores tienen el poder único de dar vida, aroma y romanticismo a cualquier salón de eventos. El diseño floral ya no se limita a colocar centros de mesa tradicionales; hoy en día se trata de crear instalaciones artísticas tridimensionales.
-        </p>
-        <p>
-          En el segmento boutique de alta gama, las tendencias están evolucionando hacia composiciones más orgánicas y sofisticadas. Aquí te presentamos las corrientes que están dominando los eventos más exclusivos de Puebla:
-        </p>
-
-        <h3 className="font-display-lg text-2xl text-on-surface pt-4">1. Estructuras florales suspendidas</h3>
-        <p>
-          Aprovechando los techos altos de recintos prestigiosos, los diseñadores florales crean nubes de follaje y flores que flotan sobre las mesas de los invitados o la pista de baile. Esta técnica aporta un factor 'wow' instantáneo y crea una atmósfera de bosque encantado o jardín flotante.
-        </p>
-
-        <h3 className="font-display-lg text-2xl text-on-surface pt-4">2. Paletas de colores orgánicas y monocromía</h3>
-        <p>
-          Atrás quedaron las combinaciones saturadas. Ahora domina la sofisticación de las paletas orgánicas: colores arena, melocotón suave, terracota, blanco puro y acentos en verde olivo. Las propuestas monocromáticas (por ejemplo, utilizar únicamente rosas blancas de distintas variedades y tamaños) proyectan un lujo minimalista de gran impacto visual.
-        </p>
-
-        <h3 className="font-display-lg text-2xl text-on-surface pt-4">3. Integración de texturas y materiales no tradicionales</h3>
-        <p>
-          Las flores ahora se mezclan con ramas secas texturizadas, musgo natural, frutos de temporada e incluso velas flotantes en tubos de vidrio soplado. Las bases de los arreglos se seleccionan con cuidado: herrerías esbeltas en acabados dorados mate, cerámica artesanal o piedra pulida que complementan la propuesta floral de forma armónica.
-        </p>
-        <p>
-          Al planear las flores de tu boda en Salones San Pedro, te recomendamos asesorarte con nuestros coordinadores para integrar las flores con el diseño de mantelería e iluminación, garantizando que todo el salón hable el mismo lenguaje de exclusividad.
-        </p>
-      </div>
-    )
-  }
-};
+import { BLOG_POSTS_DETAILS } from "@/utils/blogData";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  return Object.keys(BLOG_POSTS_DETAILS).map((slug) => ({
+    slug,
+  }));
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
@@ -145,8 +21,10 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
 
-  // Generate lists of other posts for the sidebar/recommendations
-  const otherPosts = Object.values(BLOG_POSTS_DETAILS).filter((p) => p.slug !== slug);
+  // Generate lists of other posts for the sidebar/recommendations (limit to 4 for clean UI)
+  const otherPosts = Object.values(BLOG_POSTS_DETAILS)
+    .filter((p) => p.slug !== slug)
+    .slice(0, 4);
 
   return (
     <>

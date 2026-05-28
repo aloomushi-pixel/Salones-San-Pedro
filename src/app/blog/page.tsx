@@ -1,45 +1,6 @@
 import Link from "next/link";
 import Header from "../../components/Header";
-
-interface BlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  readTime: string;
-  category: string;
-  imageUrl: string;
-}
-
-const BLOG_POSTS: BlogPost[] = [
-  {
-    slug: "como-elegir-el-menu-de-bodas-perfecto",
-    title: "Cómo elegir el menú de bodas perfecto: 5 consejos gourmet",
-    excerpt: "Descubre los secretos de nuestro chef ejecutivo para crear una experiencia gastronómica inolvidable que deleite a todos tus invitados con toques poblanos contemporáneos.",
-    date: "24 de Mayo, 2026",
-    readTime: "5 min de lectura",
-    category: "Gastronomía",
-    imageUrl: "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    slug: "importancia-de-la-iluminacion-en-eventos",
-    title: "La importancia de la iluminación en eventos de gala",
-    excerpt: "Cómo el diseño lumínico y los efectos especiales pueden transformar un espacio y crear la atmósfera emocional adecuada para tu boda o XV años.",
-    date: "18 de Mayo, 2026",
-    readTime: "4 min de lectura",
-    category: "Producción",
-    imageUrl: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    slug: "tendencias-decoracion-boutique-este-ano",
-    title: "Tendencias de decoración floral boutique para este año",
-    excerpt: "Desde arreglos suspendidos hasta centros de mesa orgánicos. Te presentamos lo último en interiorismo floral para eventos con sello de distinción.",
-    date: "10 de Mayo, 2026",
-    readTime: "6 min de lectura",
-    category: "Decoración",
-    imageUrl: "https://images.unsplash.com/photo-1519225495810-7517c2965a7d?auto=format&fit=crop&w=800&q=80"
-  }
-];
+import { BLOG_POSTS } from "@/utils/blogData";
 
 export default function BlogPage() {
   return (
