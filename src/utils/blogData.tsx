@@ -191,7 +191,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Gastronomía",
-    imageUrl: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/postres.jpg"
   },
   {
     slug: "carrito-de-shots-para-animacion-de-fiestas",
@@ -209,7 +209,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "4 min de lectura",
     category: "Servicios Plus",
-    imageUrl: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/limosinas.jpg"
   },
   {
     slug: "renta-de-auto-clasico-para-bodas",
@@ -218,7 +218,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Servicios Plus",
-    imageUrl: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/auto-clasico.jpg"
   }
 ];
 
@@ -644,7 +644,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Gastronomía",
-    imageUrl: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/postres.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>El postre es el último recuerdo culinario que tus invitados se llevan de la noche. Para los paladares más dulces, añadir un postre extra o un servicio de repostería fina es la mejor manera de cerrar con broche de oro la cena y complementar el banquete principal.</p>
@@ -687,7 +687,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "4 min de lectura",
     category: "Servicios Plus",
-    imageUrl: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/limosinas.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>La llegada al salón es el primer momento de gran impacto de tus XV años o tu boda. Hacer un recorrido por la ciudad y descender de una espectacular limusina Hummer o Lincoln es una experiencia de celebridad que recordaras para siempre y que iniciará tu evento con la máxima elegancia.</p>
@@ -714,7 +714,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Servicios Plus",
-    imageUrl: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/auto-clasico.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>Para las bodas que buscan un estilo clásico, romántico e inolvidable, el traslado de los novios en un automóvil de época de los años 1930 es la opción idónea. Añade un glamour nostálgico que luce de ensueño en la sesión de fotografía nupcial.</p>
