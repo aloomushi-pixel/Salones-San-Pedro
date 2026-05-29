@@ -43,7 +43,7 @@ export async function sendEmailResponse(
   }
 
   const resend = new Resend(resendApiKey);
-  let sender = 'Salones San Pedro <ventas@ccurity.com.mx>';
+  let sender = 'Salones San Pedro <ventas@sanpedro.com.mx>';
   const htmlContent = bodyText.replace(/\n/g, '<br />');
 
   try {
@@ -53,7 +53,7 @@ export async function sendEmailResponse(
       to: toEmail,
       subject: subject,
       html: htmlContent,
-      replyTo: 'juangarcia@ccurity.com.mx',
+      replyTo: 'ventas@sanpedro.com.mx',
     });
 
     // Check for errors (e.g. unverified domain) and fallback to onboarding@resend.dev
@@ -66,7 +66,7 @@ export async function sendEmailResponse(
           to: toEmail,
           subject: subject,
           html: htmlContent,
-          replyTo: 'juangarcia@ccurity.com.mx',
+          replyTo: 'ventas@sanpedro.com.mx',
         });
         if (response.error) {
           throw response.error;
