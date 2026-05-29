@@ -47,7 +47,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "10 de Mayo, 2026",
     readTime: "6 min de lectura",
     category: "Decoración",
-    imageUrl: "https://images.unsplash.com/photo-1519225495810-7517c2965a7d?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/decoracion-floral.png"
   },
   {
     slug: "salones-para-fiestas-con-mesa-de-dulces-personalizada",
@@ -289,7 +289,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "10 de Mayo, 2026",
     readTime: "6 min de lectura",
     category: "Decoración",
-    imageUrl: "https://images.unsplash.com/photo-1519225495810-7517c2965a7d?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/decoracion-floral.png",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>El interiorismo de eventos ha evolucionado hacia la naturalidad y la personalización boutique. Este año, las tendencias de diseño floral se enfocan en crear ambientes envolventes que transporten a los invitados a un escenario de fantasía y lujo sutil.</p>
