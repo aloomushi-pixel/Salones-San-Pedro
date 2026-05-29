@@ -46,14 +46,14 @@ export default async function AdminCorreoPage() {
       <div>
         <h1 className="text-3xl font-display-lg text-primary font-bold">Bandeja de Correo</h1>
         <p className="text-secondary font-body-sm text-sm mt-1">
-          Visualiza, recibe y responde correos de prospectos en tiempo real desde ventas@sanpedro.com.mx.
+          Visualiza, recibe y responde correos de prospectos en tiempo real.
         </p>
       </div>
 
       <MailboxClient 
         initialLeads={leads || []} 
         initialMessages={messages} 
-        currentUser={{ name: adminName, role: adminRole }}
+        currentUser={{ name: adminName, role: adminRole, email: userEmail }}
       />
     </div>
   );

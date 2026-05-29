@@ -27,6 +27,7 @@ interface MailboxClientProps {
   currentUser: {
     name: string;
     role: string;
+    email?: string;
   };
 }
 
@@ -35,6 +36,19 @@ export default function MailboxClient({ initialLeads, initialMessages, currentUs
   const [activeFolder, setActiveFolder] = useState<'inbox' | 'sent' | 'deleted' | 'compose'>('inbox');
   const [messages, setMessages] = useState<ParsedMessage[]>(initialMessages);
   const [selectedMessage, setSelectedMessage] = useState<ParsedMessage | null>(null);
+
+  // Determinar remitente dinámico según el usuario actual
+  let senderDisplay = 'Salones San Pedro <ventas@sanpedro.com.mx>';
+  if (currentUser.email === 'ventas@sanpedro.com.mx') {
+    senderDisplay = 'Samantha Flores <ventas@sanpedro.com.mx>';
+  } else if (currentUser.email === 'admin@sanpedro.com.mx') {
+    senderDisplay = 'José Martinez <admin@sanpedro.com.mx>';
+  } else if (currentUser.email === 'juangarcia@ccurity.com.mx') {
+    senderDisplay = 'Juan García <admin@sanpedro.com.mx>';
+  } else if (currentUser.email) {
+    const namePart = currentUser.email.split('@')[0];
+    senderDisplay = `${currentUser.name} <${namePart}@sanpedro.com.mx>`;
+  }
   
   // Search & Filter
   const [searchQuery, setSearchQuery] = useState('');
@@ -203,7 +217,7 @@ export default function MailboxClient({ initialLeads, initialMessages, currentUs
           id: Math.random().toString(), // Temporal
           lead_id: initialLeads.find(l => l.email === toEmail)?.id || 'dummy',
           subject: subject,
-          sender: 'Salones San Pedro <ventas@sanpedro.com.mx>',
+          sender: senderDisplay,
           created_at: new Date().toISOString(),
           bodyText: body,
           to_email: toEmail,
@@ -407,7 +421,7 @@ export default function MailboxClient({ initialLeads, initialMessages, currentUs
                 <input
                   type="text"
                   disabled
-                  value="Salones San Pedro <ventas@sanpedro.com.mx>"
+                  value={senderDisplay}
                   className="w-full bg-surface-container border border-outline-variant/40 rounded-lg px-3 py-2 text-xs text-secondary font-semibold outline-none"
                 />
               </div>

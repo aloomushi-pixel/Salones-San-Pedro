@@ -31,13 +31,12 @@ export interface ParsedMessage {
 
 // Función auxiliar para parsear el cuerpo del mensaje
 function parseMessageBody(msg: MessageRecord, leadEmail: string = ''): ParsedMessage {
-  const defaultTo = msg.sender.includes('ventas@sanpedro.com.mx') || msg.sender.includes('onboarding@resend.dev')
-    ? leadEmail 
-    : 'ventas@sanpedro.com.mx';
-    
-  const defaultDirection = msg.sender.includes('ventas@sanpedro.com.mx') || msg.sender.includes('onboarding@resend.dev')
-    ? 'outbound' 
-    : 'inbound';
+  const isOutbound = msg.sender.includes('ventas@sanpedro.com.mx') || 
+                     msg.sender.includes('admin@sanpedro.com.mx') || 
+                     msg.sender.includes('onboarding@resend.dev');
+
+  const defaultTo = isOutbound ? leadEmail : 'ventas@sanpedro.com.mx';
+  const defaultDirection = isOutbound ? 'outbound' : 'inbound';
 
   try {
     const rawBody = msg.body.trim();
@@ -157,7 +156,9 @@ export async function toggleMessageDeleted(messageId: string, isDeleted: boolean
 
     if (!parsedBody || typeof parsedBody.body !== 'string') {
       // Si era texto plano, lo convertimos a la estructura JSON
-      const isOutbound = msg.sender.includes('ventas@sanpedro.com.mx') || msg.sender.includes('onboarding@resend.dev');
+      const isOutbound = msg.sender.includes('ventas@sanpedro.com.mx') || 
+                         msg.sender.includes('admin@sanpedro.com.mx') || 
+                         msg.sender.includes('onboarding@resend.dev');
       parsedBody = {
         body: msg.body,
         to_email: isOutbound ? '' : 'ventas@sanpedro.com.mx',
@@ -215,8 +216,38 @@ export async function sendEmailResponse(
     return { success: false, error: 'Clave API de Resend no configurada.' };
   }
 
+  const supabase = await createClient();
+  
+  // Obtener el usuario autenticado actual para configurar remitente y firma de manera dinámica
+  const { data: { user } } = await supabase.auth.getUser();
+  const userEmail = user?.email || '';
+  
+  let senderName = 'Salones San Pedro';
+  let senderEmail = 'ventas@sanpedro.com.mx';
+  let replyToEmail = 'ventas@sanpedro.com.mx';
+  
+  if (userEmail === 'ventas@sanpedro.com.mx') {
+    senderName = 'Samantha Flores';
+    senderEmail = 'ventas@sanpedro.com.mx';
+    replyToEmail = 'ventas@sanpedro.com.mx';
+  } else if (userEmail === 'admin@sanpedro.com.mx') {
+    senderName = 'José Martinez';
+    senderEmail = 'admin@sanpedro.com.mx';
+    replyToEmail = 'admin@sanpedro.com.mx';
+  } else if (userEmail === 'juangarcia@ccurity.com.mx') {
+    senderName = 'Juan García';
+    // Se usa un email bajo el dominio verificado sanpedro.com.mx para pasar la autorización de Resend
+    senderEmail = 'admin@sanpedro.com.mx';
+    replyToEmail = 'juangarcia@ccurity.com.mx';
+  } else if (userEmail) {
+    const namePart = userEmail.split('@')[0];
+    senderName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
+    senderEmail = `${namePart}@sanpedro.com.mx`;
+    replyToEmail = userEmail;
+  }
+
   const resend = new Resend(resendApiKey);
-  let sender = 'Salones San Pedro <ventas@sanpedro.com.mx>';
+  let sender = `${senderName} <${senderEmail}>`;
   const htmlContent = bodyText.replace(/\n/g, '<br />');
 
   try {
@@ -226,7 +257,7 @@ export async function sendEmailResponse(
       to: toEmail,
       subject: subject,
       html: htmlContent,
-      replyTo: 'ventas@sanpedro.com.mx',
+      replyTo: replyToEmail,
     };
 
     if (ccEmail.trim()) {
