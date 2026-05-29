@@ -240,11 +240,26 @@ export async function sendEmailResponse(
     // Si falla por dominio no verificado, hacer fallback a onboarding@resend.dev
     if (response.error) {
       const errMsg = response.error.message.toLowerCase();
-      if (errMsg.includes('domain') || errMsg.includes('verify') || errMsg.includes('restrict')) {
+      if (
+        errMsg.includes('domain') ||
+        errMsg.includes('verify') ||
+        errMsg.includes('restrict') ||
+        errMsg.includes('authorized')
+      ) {
         sender = 'Salones San Pedro <onboarding@resend.dev>';
         sendOptions.from = sender;
         response = await resend.emails.send(sendOptions);
         if (response.error) {
+          const fbMsg = response.error.message.toLowerCase();
+          if (
+            fbMsg.includes('onboarding') ||
+            fbMsg.includes('verify') ||
+            fbMsg.includes('domain') ||
+            fbMsg.includes('restrict') ||
+            fbMsg.includes('authorized')
+          ) {
+            throw new Error('No se pudo enviar el correo porque el dominio "sanpedro.com.mx" no está verificado en Resend. Además, el correo de prueba (onboarding@resend.dev) solo permite enviar correos a la dirección registrada del propietario de la cuenta de Resend. Por favor, verifica tu dominio en el panel de Resend.');
+          }
           throw response.error;
         }
       } else {
