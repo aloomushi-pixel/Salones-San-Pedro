@@ -101,7 +101,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "4 min de lectura",
     category: "Producción",
-    imageUrl: "https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/fotografia.jpg"
   },
   {
     slug: "video-profesional-para-bodas-y-xv-anos",
@@ -119,7 +119,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Decoración",
-    imageUrl: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/letras.jpg"
   },
   {
     slug: "renta-de-cabina-de-fotos-instantanea",
@@ -128,7 +128,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Servicios Plus",
-    imageUrl: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/cabina-fotos.jpg"
   },
   {
     slug: "grupo-musical-versatil-para-fiestas",
@@ -137,7 +137,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "4 min de lectura",
     category: "Música",
-    imageUrl: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/grupo-musical.jpg"
   },
   {
     slug: "salones-con-show-de-mariachi-incluido",
@@ -146,7 +146,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Música",
-    imageUrl: "https://images.unsplash.com/photo-1593115057323-228795c37d6e?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/mariachi.jpg"
   },
   {
     slug: "renta-de-inflables-seguros-para-eventos-infantiles",
@@ -435,7 +435,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "4 min de lectura",
     category: "Producción",
-    imageUrl: "https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/fotografia.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>El día de tu boda o los XV años de tu hija transcurren rápidamente, pero las fotografías quedan para siempre. Contar con un equipo de fotografía profesional que domine la iluminación en interiores y capte las expresiones espontáneas de alegría y emoción es vital para documentar tu evento.</p>
@@ -481,7 +481,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Decoración",
-    imageUrl: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/letras.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>Las letras gigantes iluminadas con focos tipo vintage o luces LED se han convertido en un elemento decorativo de gran impacto para bodas y XV años. No solo delimitan un espacio elegante dentro del salón, sino que sirven como el fondo perfecto para la sesión de fotos de los invitados.</p>
@@ -504,7 +504,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Servicios Plus",
-    imageUrl: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/cabina-fotos.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>Una cabina de fotos instantánea (photo booth) es una excelente manera de entretener a tus invitados durante el cóctel de bienvenida y el baile. Es una actividad divertida y dinámica donde las personas pueden ponerse pelucas, sombreros y lentes graciosos para tomarse fotos que se imprimen al momento.</p>
@@ -525,7 +525,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "4 min de lectura",
     category: "Música",
-    imageUrl: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/grupo-musical.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>La música en vivo tiene una energía incomparable que contagia a los invitados y los invita a bailar. Contratar un grupo versátil profesional que domine géneros desde cumbia, salsa y rock en español, hasta pop moderno y éxitos de los 80, es la clave de un evento exitoso.</p>
@@ -549,7 +549,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Música",
-    imageUrl: "https://images.unsplash.com/photo-1593115057323-228795c37d6e?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/mariachi.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>El mariachi es sinónimo de fiesta mexicana. El sonido de las trompetas y los violines al entonar 'El Son de la Negra' o 'Sabes una cosa' crea un momento mágico y emotivo que toca las fibras de todos los asistentes. Es el cierre perfecto para el banquete o la apertura ideal de la tornaboda.</p>
