@@ -1,5 +1,6 @@
 import { createClient } from '@/utils/supabase/server';
 import MailboxClient from './MailboxClient';
+import { getAllMessages } from '../emailActions';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,6 +23,9 @@ export default async function AdminCorreoPage() {
     );
   }
 
+  // Fetch all messages parsed
+  const messages = await getAllMessages();
+
   return (
     <div className="max-w-7xl mx-auto mt-6 space-y-6">
       <div>
@@ -31,7 +35,7 @@ export default async function AdminCorreoPage() {
         </p>
       </div>
 
-      <MailboxClient initialLeads={leads || []} />
+      <MailboxClient initialLeads={leads || []} initialMessages={messages} />
     </div>
   );
 }

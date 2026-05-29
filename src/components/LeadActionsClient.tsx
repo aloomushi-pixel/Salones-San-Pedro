@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { getLeadMessages, sendEmailResponse, MessageRecord } from '../app/admin/emailActions';
+import { getLeadMessages, sendEmailResponse, ParsedMessage } from '../app/admin/emailActions';
 import { updateLeadStatus } from '../app/admin/actions';
 
 interface LeadActionsClientProps {
@@ -26,7 +26,7 @@ export default function LeadActionsClient({
   const [isOpen, setIsOpen] = useState(false);
   const [loadingHistory, setLoadingHistory] = useState(false);
   const [sending, setSending] = useState(false);
-  const [messages, setMessages] = useState<MessageRecord[]>([]);
+  const [messages, setMessages] = useState<ParsedMessage[]>([]);
   const [subject, setSubject] = useState(`Información de Disponibilidad - Salones San Pedro`);
   const [body, setBody] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
@@ -255,7 +255,7 @@ export default function LeadActionsClient({
                         </div>
                         <h5 className="font-semibold text-xs text-on-surface">{msg.subject}</h5>
                         <p className="text-xs text-secondary whitespace-pre-line leading-relaxed font-body-sm bg-surface-container-lowest p-2 rounded-lg border border-outline-variant/10">
-                          {msg.body}
+                          {msg.bodyText}
                         </p>
                       </div>
                     ))}

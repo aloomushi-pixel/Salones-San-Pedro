@@ -20,7 +20,7 @@ export async function submitLead(formData: FormData) {
   const location = formData.get('location') as string;
 
   try {
-    const { error } = await supabase.from('leads').insert([
+    const { data: leadData, error } = await supabase.from('leads').insert([
       {
         event_type,
         guests_count,
@@ -30,11 +30,36 @@ export async function submitLead(formData: FormData) {
         location,
         status: 'Nuevo'
       }
-    ]);
+    ]).select();
 
     if (error) {
       console.error('Error insertando lead:', error);
       return { success: false, error: error.message };
+    }
+
+    if (leadData && leadData.length > 0) {
+      const leadId = leadData[0].id;
+      
+      const initialMessageBody = JSON.stringify({
+        body: `Hola,\n\nMe gustaría solicitar información y verificar disponibilidad para mi evento.\n\nDetalles del evento:\n- Tipo de evento: ${event_type.toUpperCase()}\n- Cantidad de invitados: ${guests_count} personas\n- Fecha estimada: ${event_date}\n- Teléfono de contacto: ${phone_number}\n- Ubicación: ${location || 'No especificada'}\n\nQuedo a la espera de su amable respuesta.\n\nSaludos,\n${email}`,
+        to_email: 'ventas@sanpedro.com.mx',
+        cc: '',
+        direction: 'inbound',
+        is_deleted: false
+      });
+
+      const { error: msgError } = await supabase.from('messages').insert([
+        {
+          lead_id: leadId,
+          subject: `Consulta de Disponibilidad: ${event_type.toUpperCase()}`,
+          body: initialMessageBody,
+          sender: email
+        }
+      ]);
+
+      if (msgError) {
+        console.error('Error insertando mensaje inicial:', msgError);
+      }
     }
 
     return { success: true };
