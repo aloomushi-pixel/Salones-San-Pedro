@@ -16,6 +16,8 @@ export async function submitLead(formData: FormData) {
   const guests_count = parseInt(formData.get('guestsCount') as string);
   const event_date = formData.get('eventDate') as string;
   const phone_number = formData.get('phoneNumber') as string;
+  const email = formData.get('email') as string;
+  const location = formData.get('location') as string;
 
   try {
     const { error } = await supabase.from('leads').insert([
@@ -24,6 +26,8 @@ export async function submitLead(formData: FormData) {
         guests_count,
         event_date,
         phone_number,
+        email,
+        location,
         status: 'Nuevo'
       }
     ]);

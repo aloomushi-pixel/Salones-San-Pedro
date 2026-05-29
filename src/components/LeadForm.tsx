@@ -47,7 +47,7 @@ export default function LeadForm() {
           {error}
         </div>
       )}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
         {/* Step 1 */}
         <div className="space-y-3">
           <label className="font-label-sm text-primary uppercase flex items-center gap-2">
@@ -86,6 +86,22 @@ export default function LeadForm() {
             Número de teléfono
           </label>
           <input required name="phoneNumber" className="w-full border-0 border-b-2 border-outline-variant bg-transparent py-3 focus:ring-0 focus:border-primary transition-all text-on-surface font-body-md" placeholder="Tu WhatsApp o celular" type="tel" />
+        </div>
+        {/* Step 5 */}
+        <div className="space-y-3">
+          <label className="font-label-sm text-primary uppercase flex items-center gap-2">
+            <span className="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-[10px]">5</span>
+            Correo electrónico
+          </label>
+          <input required name="email" className="w-full border-0 border-b-2 border-outline-variant bg-transparent py-3 focus:ring-0 focus:border-primary transition-all text-on-surface font-body-md" placeholder="correo@ejemplo.com" type="email" />
+        </div>
+        {/* Step 6 */}
+        <div className="space-y-3">
+          <label className="font-label-sm text-primary uppercase flex items-center gap-2">
+            <span className="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-[10px]">6</span>
+            Ubicación del evento
+          </label>
+          <input required name="location" className="w-full border-0 border-b-2 border-outline-variant bg-transparent py-3 focus:ring-0 focus:border-primary transition-all text-on-surface font-body-md" placeholder="Ej. Gustavo A. Madero, CDMX" type="text" />
         </div>
       </div>
 

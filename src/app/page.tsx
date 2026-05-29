@@ -366,7 +366,7 @@ export default function Home() {
                 Asegura tu fecha en el escenario más exclusivo de la CDMX. Elige tu evento y descubre si aún tenemos espacio para ti.
               </p>
             </div>
-            <div className="max-w-3xl mx-auto bg-surface-container-lowest p-8 md:p-12 rounded-xl shadow-2xl border border-outline-variant/30">
+            <div className="max-w-4xl mx-auto bg-surface-container-lowest p-8 md:p-12 rounded-xl shadow-2xl border border-outline-variant/30">
               <LeadForm />
             </div>
           </div>

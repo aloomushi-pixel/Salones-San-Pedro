@@ -1,5 +1,6 @@
 import { createClient } from '@/utils/supabase/server';
 import { updateLeadStatus } from './actions';
+import LeadActionsClient from '@/components/LeadActionsClient';
 
 // Helper to parse created_at (UTC) and convert to Mexico City local date object
 function getMXDate(dateVal: Date | string) {
@@ -289,7 +290,9 @@ export default async function AdminDashboard() {
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Evento</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold text-center">Invitados</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Fecha del Evento</th>
-                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Teléfono (WhatsApp)</th>
+                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Teléfono</th>
+                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Correo electrónico</th>
+                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Ubicación</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold text-center">Estado</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold text-right">Acción</th>
                 </tr>
@@ -297,7 +300,7 @@ export default async function AdminDashboard() {
               <tbody className="divide-y divide-outline-variant/25">
                 {leads?.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="p-12 text-center text-secondary font-body-md">
+                    <td colSpan={9} className="p-12 text-center text-secondary font-body-md">
                       Aún no hay registros de disponibilidad.
                     </td>
                   </tr>
@@ -328,6 +331,18 @@ export default async function AdminDashboard() {
                           <span className="material-symbols-outlined text-[14px] opacity-70">open_in_new</span>
                         </a>
                       </td>
+                      <td className="p-4 font-body-md text-sm text-on-surface break-all max-w-[200px]">
+                        {lead.email ? (
+                          <a href={`mailto:${lead.email}`} className="text-secondary hover:text-primary transition-colors">
+                            {lead.email}
+                          </a>
+                        ) : (
+                          <span className="text-secondary/60 italic text-xs">Sin correo</span>
+                        )}
+                      </td>
+                      <td className="p-4 font-body-md text-sm text-on-surface truncate max-w-[150px]" title={lead.location || ''}>
+                        {lead.location || <span className="text-secondary/60 italic text-xs">Sin ubicación</span>}
+                      </td>
                       <td className="p-4 text-center">
                         <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest ${
                           lead.status === 'Nuevo' ? 'bg-error/10 text-error' : 'bg-green-500/10 text-green-500'
@@ -336,11 +351,15 @@ export default async function AdminDashboard() {
                         </span>
                       </td>
                       <td className="p-4 text-right">
-                        <form action={updateLeadStatus.bind(null, lead.id, lead.status)}>
-                          <button className="text-xs font-semibold bg-surface-container border border-outline-variant/30 hover:border-primary/40 text-on-surface hover:text-primary px-3 py-1.5 rounded-lg transition-all shadow-sm active:scale-95">
-                            {lead.status === 'Nuevo' ? 'Marcar Contactado' : 'Marcar Nuevo'}
-                          </button>
-                        </form>
+                        <LeadActionsClient
+                          leadId={lead.id}
+                          eventType={lead.event_type}
+                          guestsCount={lead.guests_count}
+                          eventDate={formatEventDate(lead.event_date)}
+                          email={lead.email}
+                          phoneNumber={lead.phone_number}
+                          status={lead.status}
+                        />
                       </td>
                     </tr>
                   ))
