@@ -7,6 +7,21 @@ export const dynamic = 'force-dynamic';
 export default async function AdminCorreoPage() {
   const supabase = await createClient();
 
+  // Fetch authenticated user to customize signatures dynamically
+  const { data: { user } } = await supabase.auth.getUser();
+  const userEmail = user?.email || '';
+  
+  let adminName = 'Juan García';
+  let adminRole = 'Coordinador de Eventos';
+
+  if (userEmail === 'ventas@sanpedro.com.mx') {
+    adminName = 'Samantha Flores';
+    adminRole = 'Coordinadora de Ventas';
+  } else if (userEmail === 'admin@sanpedro.com.mx') {
+    adminName = 'José Martinez';
+    adminRole = 'Administrador de Eventos';
+  }
+
   // Fetch all leads that have an email registered
   const { data: leads, error } = await supabase
     .from('leads')
@@ -35,7 +50,11 @@ export default async function AdminCorreoPage() {
         </p>
       </div>
 
-      <MailboxClient initialLeads={leads || []} initialMessages={messages} />
+      <MailboxClient 
+        initialLeads={leads || []} 
+        initialMessages={messages} 
+        currentUser={{ name: adminName, role: adminRole }}
+      />
     </div>
   );
 }

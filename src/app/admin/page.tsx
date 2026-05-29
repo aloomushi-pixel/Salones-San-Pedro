@@ -67,6 +67,17 @@ function formatMXTimestamp(dateVal: string) {
 
 export default async function AdminDashboard() {
   const supabase = await createClient();
+  
+  // Fetch user to customize dynamic signatures
+  const { data: { user } } = await supabase.auth.getUser();
+  const userEmail = user?.email || '';
+  let adminName = 'Juan García';
+  if (userEmail === 'ventas@sanpedro.com.mx') {
+    adminName = 'Samantha Flores';
+  } else if (userEmail === 'admin@sanpedro.com.mx') {
+    adminName = 'José Martinez';
+  }
+
   const { data: leads, error } = await supabase
     .from('leads')
     .select('*')
@@ -359,6 +370,7 @@ export default async function AdminDashboard() {
                           email={lead.email}
                           phoneNumber={lead.phone_number}
                           status={lead.status}
+                          adminName={adminName}
                         />
                       </td>
                     </tr>

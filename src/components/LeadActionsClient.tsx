@@ -12,6 +12,7 @@ interface LeadActionsClientProps {
   email: string | null;
   phoneNumber: string;
   status: string;
+  adminName: string;
 }
 
 export default function LeadActionsClient({
@@ -21,7 +22,8 @@ export default function LeadActionsClient({
   eventDate,
   email,
   phoneNumber,
-  status
+  status,
+  adminName
 }: LeadActionsClientProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [loadingHistory, setLoadingHistory] = useState(false);
@@ -31,6 +33,12 @@ export default function LeadActionsClient({
   const [body, setBody] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
+
+  const adminRole = adminName === 'Samantha Flores'
+    ? 'Coordinadora de Ventas'
+    : adminName === 'José Martinez'
+    ? 'Administrador de Eventos'
+    : 'Coordinador de Eventos';
 
   const loadHistory = async () => {
     setLoadingHistory(true);
@@ -53,7 +61,7 @@ export default function LeadActionsClient({
     loadHistory();
     // Set default body template
     setBody(
-      `Hola,\n\nMuchas gracias por contactar a Salones San Pedro plus.\n\nHemos recibido tu solicitud de disponibilidad para tu evento de ${eventType.toUpperCase()} con ${guestsCount} invitados para la fecha ${eventDate}.\n\nCon gusto te confirmamos que tu fecha está pre-reservada en nuestro sistema. Nos gustaría agendar una llamada de 5 minutos o una cita en nuestras instalaciones para mostrarte los salones Diamante (Primer Piso) y Platino (Planta Baja), así como nuestros paquetes y degustaciones de menú.\n\n¿Qué horario te queda mejor para ponernos en contacto?\n\nSaludos cordiales,\nJuan García\nCoordinador de Eventos | Salones San Pedro`
+      `Hola,\n\nMuchas gracias por contactar a Salones San Pedro plus.\n\nHemos recibido tu solicitud de disponibilidad para tu evento de ${eventType.toUpperCase()} con ${guestsCount} invitados para la fecha ${eventDate}.\n\nCon gusto te confirmamos que tu fecha está pre-reservada en nuestro sistema. Nos gustaría agendar una llamada de 5 minutos o una cita en nuestras instalaciones para mostrarte los salones Diamante (Primer Piso) y Platino (Planta Baja), así como nuestros paquetes y degustaciones de menú.\n\n¿Qué horario te queda mejor para ponernos en contacto?\n\nSaludos cordiales,\n${adminName}\n${adminRole} | Salones San Pedro`
     );
   };
 
@@ -64,15 +72,15 @@ export default function LeadActionsClient({
   const loadTemplate = (type: 'disponible' | 'no_disponible' | 'seguimiento') => {
     if (type === 'disponible') {
       setBody(
-        `Hola,\n\nMuchas gracias por contactar a Salones San Pedro plus.\n\nHemos recibido tu solicitud de disponibilidad para tu evento de ${eventType.toUpperCase()} con ${guestsCount} invitados para la fecha ${eventDate}.\n\nCon gusto te confirmamos que tu fecha está pre-reservada en nuestro sistema. Nos gustaría agendar una llamada de 5 minutos o una cita en nuestras instalaciones para mostrarte los salones Diamante (Primer Piso) y Platino (Planta Baja), así como nuestros paquetes y degustaciones de menú.\n\n¿Qué horario te queda mejor para ponernos en contacto?\n\nSaludos cordiales,\nJuan García\nCoordinador de Eventos | Salones San Pedro`
+        `Hola,\n\nMuchas gracias por contactar a Salones San Pedro plus.\n\nHemos recibido tu solicitud de disponibilidad para tu evento de ${eventType.toUpperCase()} con ${guestsCount} invitados para la fecha ${eventDate}.\n\nCon gusto te confirmamos que tu fecha está pre-reservada en nuestro sistema. Nos gustaría agendar una llamada de 5 minutos o una cita en nuestras instalaciones para mostrarte los salones Diamante (Primer Piso) y Platino (Planta Baja), así como nuestros paquetes y degustaciones de menú.\n\n¿Qué horario te queda mejor para ponernos en contacto?\n\nSaludos cordiales,\n${adminName}\n${adminRole} | Salones San Pedro`
       );
     } else if (type === 'no_disponible') {
       setBody(
-        `Hola,\n\nMuchas gracias por tu interés en Salones San Pedro plus.\n\nReferente a tu consulta para tu evento de ${eventType.toUpperCase()} para el día ${eventDate}, lamentablemente esa fecha ya se encuentra reservada en su totalidad.\n\nSin embargo, contamos con disponibilidad en los fines de semana adyacentes o fechas de temporada baja con precios especiales. ¿Te interesaría agendar una llamada rápida para proponerte alternativas?\n\nSaludos cordiales,\nJuan García\nCoordinador de Eventos | Salones San Pedro`
+        `Hola,\n\nMuchas gracias por tu interés en Salones San Pedro plus.\n\nReferente a tu consulta para tu evento de ${eventType.toUpperCase()} para el día ${eventDate}, lamentablemente esa fecha ya se encuentra reservada en su totalidad.\n\nSin embargo, contamos con disponibilidad en los fines de semana adyacentes o fechas de temporada baja con precios especiales. ¿Te interesaría agendar una llamada rápida para proponerte alternativas?\n\nSaludos cordiales,\n${adminName}\n${adminRole} | Salones San Pedro`
       );
     } else {
       setBody(
-        `Hola,\n\nEspero te encuentres muy bien. Te escribo de Salones San Pedro para dar seguimiento a tu solicitud de cotización del evento de ${eventType.toUpperCase()}.\n\nQuedamos a tus órdenes para resolver cualquier duda sobre los paquetes Platino o Diamante, o para coordinar una visita guiada para verificar espacio.\n\n¿Te gustaría que agendemos una cita para este fin de semana?\n\nSaludos cordiales,\nJuan García\nCoordinador de Eventos | Salones San Pedro`
+        `Hola,\n\nEspero te encuentres muy bien. Te escribo de Salones San Pedro para dar seguimiento a tu solicitud de cotización del evento de ${eventType.toUpperCase()}.\n\nQuedamos a tus órdenes para resolver cualquier duda sobre los paquetes Platino o Diamante, o para coordinar una visita guiada para verificar espacio.\n\n¿Te gustaría que agendemos una cita para este fin de semana?\n\nSaludos cordiales,\n${adminName}\n${adminRole} | Salones San Pedro`
       );
     }
   };

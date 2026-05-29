@@ -24,9 +24,13 @@ interface Lead {
 interface MailboxClientProps {
   initialLeads: Lead[];
   initialMessages: ParsedMessage[];
+  currentUser: {
+    name: string;
+    role: string;
+  };
 }
 
-export default function MailboxClient({ initialLeads, initialMessages }: MailboxClientProps) {
+export default function MailboxClient({ initialLeads, initialMessages, currentUser }: MailboxClientProps) {
   // Navigation & Folders
   const [activeFolder, setActiveFolder] = useState<'inbox' | 'sent' | 'deleted' | 'compose'>('inbox');
   const [messages, setMessages] = useState<ParsedMessage[]>(initialMessages);
@@ -105,17 +109,17 @@ export default function MailboxClient({ initialLeads, initialMessages }: Mailbox
     if (type === 'disponible') {
       setSubject(`Confirmación de Disponibilidad - Salones San Pedro`);
       setBody(
-        `Hola,\n\nMuchas gracias por contactar a Salones San Pedro plus.\n\nHemos recibido tu solicitud de disponibilidad para tu evento de ${eventType} con ${guests} para la fecha ${date}.\n\nCon gusto te confirmamos que tu fecha está pre-reservada en nuestro sistema. Nos gustaría agendar una llamada de 5 minutos o una cita en nuestras instalaciones para mostrarte los salones Diamante (Primer Piso) y Platino (Planta Baja), así como nuestros paquetes y degustaciones de menú.\n\n¿Qué horario te queda mejor para ponernos en contacto?\n\nSaludos cordiales,\nJuan García\nCoordinador de Eventos | Salones San Pedro`
+        `Hola,\n\nMuchas gracias por contactar a Salones San Pedro plus.\n\nHemos recibido tu solicitud de disponibilidad para tu evento de ${eventType} con ${guests} para la fecha ${date}.\n\nCon gusto te confirmamos que tu fecha está pre-reservada en nuestro sistema. Nos gustaría agendar una llamada de 5 minutos o una cita en nuestras instalaciones para mostrarte los salones Diamante (Primer Piso) y Platino (Planta Baja), así como nuestros paquetes y degustaciones de menú.\n\n¿Qué horario te queda mejor para ponernos en contacto?\n\nSaludos cordiales,\n${currentUser.name}\n${currentUser.role} | Salones San Pedro`
       );
     } else if (type === 'no_disponible') {
       setSubject(`Información sobre Disponibilidad - Salones San Pedro`);
       setBody(
-        `Hola,\n\nMuchas gracias por tu interés en Salones San Pedro plus.\n\nReferente a tu consulta para tu evento de ${eventType} para el día ${date}, lamentablemente esa fecha ya se encuentra reservada en su totalidad.\n\nSin embargo, contamos con disponibilidad en los fines de semana adyacentes o fechas de temporada baja con precios especiales. ¿Te interesaría agendar una llamada rápida para proponerte alternativas?\n\nSaludos cordiales,\nJuan García\nCoordinador de Eventos | Salones San Pedro`
+        `Hola,\n\nMuchas gracias por tu interés en Salones San Pedro plus.\n\nReferente a tu consulta para tu evento de ${eventType} para el día ${date}, lamentablemente esa fecha ya se encuentra reservada en su totalidad.\n\nSin embargo, contamos con disponibilidad en los fines de semana adyacentes o fechas de temporada baja con precios especiales. ¿Te interesaría agendar una llamada rápida para proponerte alternativas?\n\nSaludos cordiales,\n${currentUser.name}\n${currentUser.role} | Salones San Pedro`
       );
     } else {
       setSubject(`Seguimiento a tu cotización - Salones San Pedro`);
       setBody(
-        `Hola,\n\nEspero te encuentres muy bien. Te escribo de Salones San Pedro para dar seguimiento a tu solicitud de cotización del evento de ${eventType}.\n\nQuedamos a tus órdenes para resolver cualquier duda sobre los paquetes Platino o Diamante, o para coordinar una visita guiada para verificar espacio.\n\n¿Te gustaría que agendemos una cita para este fin de semana?\n\nSaludos cordiales,\nJuan García\nCoordinador de Eventos | Salones San Pedro`
+        `Hola,\n\nEspero te encuentres muy bien. Te escribo de Salones San Pedro para dar seguimiento a tu solicitud de cotización del evento de ${eventType}.\n\nQuedamos a tus órdenes para resolver cualquier duda sobre los paquetes Platino o Diamante, o para coordinar una visita guiada para verificar espacio.\n\n¿Te gustaría que agendemos una cita para este fin de semana?\n\nSaludos cordiales,\n${currentUser.name}\n${currentUser.role} | Salones San Pedro`
       );
     }
   };
