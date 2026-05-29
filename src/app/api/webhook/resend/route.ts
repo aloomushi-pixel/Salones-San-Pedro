@@ -1,11 +1,39 @@
 import { Resend } from 'resend';
 import { createClient } from '@supabase/supabase-js';
 import { NextRequest, NextResponse } from 'next/server';
+import { Webhook } from 'svix';
 
 export async function POST(request: NextRequest) {
   try {
-    const payload = await request.json();
-    console.log('Webhook de Resend recibido:', JSON.stringify(payload));
+    const rawBody = await request.text();
+    
+    // Verificar la firma de Resend Webhook (Svix) si está configurado
+    const webhookSecret = process.env.RESEND_WEBHOOK_SECRET;
+    if (webhookSecret) {
+      const svix_id = request.headers.get("svix-id");
+      const svix_timestamp = request.headers.get("svix-timestamp");
+      const svix_signature = request.headers.get("svix-signature");
+
+      if (!svix_id || !svix_timestamp || !svix_signature) {
+        console.error('Faltan encabezados de firma de Svix.');
+        return NextResponse.json({ success: false, error: 'Faltan encabezados de firma de Svix' }, { status: 401 });
+      }
+
+      const wh = new Webhook(webhookSecret);
+      try {
+        wh.verify(rawBody, {
+          "svix-id": svix_id,
+          "svix-timestamp": svix_timestamp,
+          "svix-signature": svix_signature,
+        });
+      } catch (err: any) {
+        console.error('Firma de webhook inválida:', err.message);
+        return NextResponse.json({ success: false, error: 'Firma inválida' }, { status: 401 });
+      }
+    }
+
+    const payload = JSON.parse(rawBody);
+    console.log('Webhook de Resend recibido y verificado:', JSON.stringify(payload));
 
     const eventType = payload.type;
     
@@ -68,7 +96,7 @@ export async function POST(request: NextRequest) {
       bodyText = '[No se pudo recuperar el contenido del cuerpo del correo electrónico desde Resend]';
     }
 
-    // Inicializar cliente de Supabase usando la clave de rol de servicio para saltar RLS si es necesario
+    // Inicializar cliente de Supabase usando la clave de rol de servicio para saltar RLS
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -120,7 +148,7 @@ export async function POST(request: NextRequest) {
             event_type: 'Consulta General (Email)',
             guests_count: 0,
             event_date: today,
-            phone_number: '',
+            phone_number: 'N/A',
             email: cleanEmail,
             location: 'Email Inbound',
             status: 'Nuevo'
@@ -141,13 +169,22 @@ export async function POST(request: NextRequest) {
 
     // Registrar el mensaje en la base de datos
     if (leadId) {
+      // Estructuramos el cuerpo como JSON para que sea consumido correctamente por el MailboxClient
+      const structuredBody = JSON.stringify({
+        body: bodyText,
+        to_email: 'ventas@sanpedro.com.mx',
+        cc: '',
+        direction: 'inbound',
+        is_deleted: false
+      });
+
       const { error: messageError } = await supabase
         .from('messages')
         .insert([
           {
             lead_id: leadId,
             subject: subject,
-            body: bodyText,
+            body: structuredBody,
             sender: from // Guardamos el remitente completo (ej: Nombre <email>)
           }
         ]);
