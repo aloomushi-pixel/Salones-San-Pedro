@@ -155,7 +155,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Servicios Plus",
-    imageUrl: "https://images.unsplash.com/photo-1572945236204-094fa95b9c7a?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/inflable.jpg"
   },
   {
     slug: "show-de-saxofon-en-vivo-para-recepciones",
@@ -164,7 +164,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Música",
-    imageUrl: "https://images.unsplash.com/photo-1528143358888-6d3c7f67bd5d?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/saxofon.jpg"
   },
   {
     slug: "show-de-violin-en-vivo-para-bodas",
@@ -173,7 +173,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Música",
-    imageUrl: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/violin.jpg"
   },
   {
     slug: "decoracion-con-globos-moderna-para-fiestas",
@@ -182,7 +182,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Decoración",
-    imageUrl: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/globos.jpg"
   },
   {
     slug: "servicio-de-reposteria-y-postres-extra-para-eventos",
@@ -200,7 +200,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Show",
-    imageUrl: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/carrito-shots.jpg"
   },
   {
     slug: "renta-de-salones-con-limosina-incluida",
@@ -568,7 +568,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Servicios Plus",
-    imageUrl: "https://images.unsplash.com/photo-1572945236204-094fa95b9c7a?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/inflable.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>En las bodas, bautizos y graduaciones, el entretenimiento de los niños es fundamental para permitir que los papás disfruten plenamente de la celebración. Un inflable dentro de las instalaciones amplias de nuestro salón ofrece diversión segura, activa y contenida para los pequeños.</p>
@@ -587,7 +587,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Música",
-    imageUrl: "https://images.unsplash.com/photo-1528143358888-6d3c7f67bd5d?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/saxofon.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>El sonido cálido y envolvente de un saxofón es el complemento musical ideal para crear una atmósfera distinguida durante el cóctel de bienvenida de tu boda o el banquete de un evento empresarial. Añade clase y permite a tus invitados conversar cómodamente.</p>
@@ -606,7 +606,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Música",
-    imageUrl: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/violin.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>Pocos instrumentos musicales evocan tantas emociones y romanticismo como el violín. Su interpretación en vivo durante la ceremonia civil o religiosa, el brindis de honor de la boda o la recepción de invitados añade una distinción inolvidable al evento.</p>
@@ -625,7 +625,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Decoración",
-    imageUrl: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/globos.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>La decoración con globos ha dado un giro espectacular, convirtiéndose en una tendencia de interiorismo de alta gama. Los globos modernos se utilizan en diseños asimétricos y orgánicos mezclados con follaje y flores artificiales, ideales para mamparas de fotos en bodas y XV años.</p>
@@ -668,7 +668,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Show",
-    imageUrl: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/carrito-shots.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>El Carrito de Shots es una de las dinámicas de animación más solicitadas en la actualidad. Durante el baile, un carrito temático e iluminado ingresa a la pista repartiendo caballitos de shots coloridos y con combinaciones deliciosas (con y sin alcohol) que animan la fiesta.</p>
