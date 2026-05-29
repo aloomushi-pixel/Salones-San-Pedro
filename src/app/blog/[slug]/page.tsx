@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "../../../components/Header";
 import { BLOG_POSTS_DETAILS } from "@/utils/blogData";
+import Image from "next/image";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -57,10 +58,13 @@ export default async function BlogPostPage({ params }: PageProps) {
 
           {/* Cover Image */}
           <div className="relative h-64 md:h-[480px] rounded-2xl overflow-hidden shadow-xl mb-12">
-            <img
+            <Image
               src={post.imageUrl}
               alt={post.title}
-              className="w-full h-full object-cover"
+              className="object-cover"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 896px"
             />
           </div>
 
@@ -109,10 +113,12 @@ export default async function BlogPostPage({ params }: PageProps) {
       <footer className="w-full py-section-gap px-margin-mobile md:px-margin-desktop flex flex-col items-center gap-8 bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant">
         <div className="flex flex-col items-center gap-4">
           <Link href="/">
-            <img
+            <Image
               alt="SALONES SAN PEDRO"
               className="h-16 w-auto cursor-pointer object-contain"
               src="/logo.svg"
+              width={200}
+              height={64}
             />
           </Link>
           <div className="text-center font-body-md text-secondary mt-1">

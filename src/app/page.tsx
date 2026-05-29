@@ -14,10 +14,13 @@ export default function Home() {
         {/* Hero Section */}
         <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0">
-            <img
-              className="w-full h-full object-cover"
+            <Image
+              className="object-cover"
               alt="Instalación de gala en Salón Diamante"
               src="/hero_bg.jpg"
+              fill
+              priority
+              sizes="100vw"
             />
             <div className="absolute inset-0 hero-gradient"></div>
           </div>
@@ -58,10 +61,12 @@ export default function Home() {
                 <div className="space-y-6">
                   <h3 className="font-display-lg text-xl text-primary font-bold tracking-wider uppercase">Primer Tiempo</h3>
                   <div className="relative h-60 rounded-xl overflow-hidden shadow-md">
-                    <img
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 saturate-[1.15] contrast-[1.05] brightness-[1.02]"
+                    <Image
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 saturate-[1.15] contrast-[1.05] brightness-[1.02]"
                       alt="Primer Tiempo - Ensalada Gourmet"
                       src="/gastronomia/primer_tiempo.jpg"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </div>
                   <h4 className="font-body-md font-bold text-on-surface text-base leading-snug">
@@ -86,10 +91,12 @@ export default function Home() {
                 <div className="space-y-6">
                   <h3 className="font-display-lg text-xl text-primary font-bold tracking-wider uppercase">Segundo Tiempo</h3>
                   <div className="relative h-60 rounded-xl overflow-hidden shadow-md">
-                    <img
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 saturate-[1.15] contrast-[1.05] brightness-[1.02]"
+                    <Image
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 saturate-[1.15] contrast-[1.05] brightness-[1.02]"
                       alt="Segundo Tiempo - Fetuccini al pesto"
                       src="/gastronomia/segundo_tiempo.jpg"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </div>
                   <h4 className="font-body-md font-bold text-on-surface text-base leading-snug">
@@ -114,10 +121,12 @@ export default function Home() {
                 <div className="space-y-6">
                   <h3 className="font-display-lg text-xl text-primary font-bold tracking-wider uppercase">Tercer Tiempo</h3>
                   <div className="relative h-60 rounded-xl overflow-hidden shadow-md">
-                    <img
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 saturate-[1.15] contrast-[1.05] brightness-[1.02]"
+                    <Image
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 saturate-[1.15] contrast-[1.05] brightness-[1.02]"
                       alt="Tercer Tiempo - Lomo al ciruelo"
                       src="/gastronomia/tercer_tiempo.jpg"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </div>
                   <h4 className="font-body-md font-bold text-on-surface text-base leading-snug">
@@ -452,10 +461,12 @@ export default function Home() {
       {/* Footer */}
       <footer className="w-full py-section-gap px-margin-mobile md:px-margin-desktop flex flex-col items-center gap-8 bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant">
         <div className="flex flex-col items-center gap-4">
-          <img
+          <Image
             alt="SALONES SAN PEDRO"
             className="h-16 w-auto object-contain"
             src="/logo.svg"
+            width={200}
+            height={64}
           />
           <div className="text-center font-body-md text-secondary mt-1">
             <a href="tel:5557516268" className="hover:text-primary transition-colors flex items-center gap-2 justify-center">

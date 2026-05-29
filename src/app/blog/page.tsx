@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Header from "../../components/Header";
 import { BLOG_POSTS } from "@/utils/blogData";
+import Image from "next/image";
 
 export default function BlogPage() {
   return (
@@ -22,10 +23,13 @@ export default function BlogPage() {
           <div className="mb-16">
             <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl overflow-hidden shadow-lg grid grid-cols-1 lg:grid-cols-12 gap-0 group">
               <div className="lg:col-span-7 relative h-72 lg:h-[450px] overflow-hidden">
-                <img
+                <Image
                   src={BLOG_POSTS[0].imageUrl}
                   alt={BLOG_POSTS[0].title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 60vw"
                 />
                 <div className="absolute top-4 left-4 bg-primary text-on-primary font-label-sm text-xs px-3 py-1 rounded">
                   {BLOG_POSTS[0].category}
@@ -60,10 +64,12 @@ export default function BlogPage() {
             {BLOG_POSTS.slice(1).map((post) => (
               <div key={post.slug} className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl overflow-hidden shadow-md flex flex-col justify-between group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                 <div className="relative h-56 overflow-hidden">
-                  <img
+                  <Image
                     src={post.imageUrl}
                     alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div className="absolute top-4 left-4 bg-primary text-on-primary font-label-sm text-xs px-3 py-1 rounded">
                     {post.category}
@@ -114,10 +120,12 @@ export default function BlogPage() {
       <footer className="w-full py-section-gap px-margin-mobile md:px-margin-desktop flex flex-col items-center gap-8 bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant">
         <div className="flex flex-col items-center gap-4">
           <Link href="/">
-            <img
+            <Image
               alt="SALONES SAN PEDRO"
               className="h-16 w-auto cursor-pointer object-contain"
               src="/logo.svg"
+              width={200}
+              height={64}
             />
           </Link>
           <div className="text-center font-body-md text-secondary mt-1">

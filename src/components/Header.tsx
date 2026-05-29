@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,10 +42,13 @@ export default function Header() {
         {/* Logo */}
         <div className="flex items-center">
           <Link href="/">
-            <img
+            <Image
               alt="SALONES SAN PEDRO"
               className="h-12 w-auto cursor-pointer object-contain"
               src="/logo.svg"
+              width={150}
+              height={48}
+              priority
             />
           </Link>
         </div>

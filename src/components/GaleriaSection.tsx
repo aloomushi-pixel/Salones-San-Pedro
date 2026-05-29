@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface Photo {
   src: string;
@@ -192,10 +193,12 @@ export default function GaleriaSection() {
         
         {/* Large Image Frame */}
         <div className="relative aspect-[16/10] md:aspect-[16/9] w-full rounded-xl overflow-hidden bg-black group/frame">
-          <img
+          <Image
             src={photos[activeIndex].src}
             alt={photos[activeIndex].alt}
-            className="w-full h-full object-cover transition-transform duration-1000 group-hover/frame:scale-105"
+            className="object-cover transition-transform duration-1000 group-hover/frame:scale-105"
+            fill
+            sizes="(max-width: 1024px) 100vw, 1024px"
           />
           
           {/* Overlay Gradient and Caption */}
@@ -236,10 +239,12 @@ export default function GaleriaSection() {
                   : 'border-transparent opacity-60 hover:opacity-100'
               }`}
             >
-              <img
+              <Image
                 src={photo.src}
                 alt={`Miniatura ${idx + 1}`}
-                className="w-full h-full object-cover"
+                className="object-cover"
+                fill
+                sizes="112px"
               />
             </button>
           ))}

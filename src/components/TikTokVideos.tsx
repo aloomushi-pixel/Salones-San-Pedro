@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface VideoData {
   id: number;
@@ -139,10 +140,12 @@ export default function TikTokVideos() {
           <div className="space-y-6">
             <div className="flex items-center gap-3 border-b border-outline-variant/40 pb-4">
               <div className="w-12 h-12 bg-primary-container rounded-full overflow-hidden flex items-center justify-center border border-primary/20">
-                <img
+                <Image
                   src="/logo.svg"
                   alt="Logo Salones San Pedro"
-                  className="w-8 h-8 object-contain"
+                  className="object-contain"
+                  width={32}
+                  height={32}
                 />
               </div>
               <div>
@@ -198,10 +201,12 @@ export default function TikTokVideos() {
 
                     {/* Mini Thumbnail */}
                     <div className="relative w-12 h-16 rounded-lg overflow-hidden bg-black flex-shrink-0">
-                      <img
+                      <Image
                         src={vid.coverUrl}
                         alt={vid.title}
-                        className="w-full h-full object-cover"
+                        className="object-cover"
+                        fill
+                        sizes="48px"
                       />
                       {isActive && (
                         <div className="absolute inset-0 bg-primary/20 backdrop-blur-[1px] flex items-center justify-center">
