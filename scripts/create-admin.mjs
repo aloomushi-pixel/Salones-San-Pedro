@@ -17,14 +17,14 @@ const usersToCreate = [
     user_metadata: { role: 'admin', name: 'Juan García' }
   },
   {
-    email: 'ventas@sanpedro.com.mx',
-    password: 'E4ae5d6c0c.',
-    user_metadata: { role: 'admin', name: 'Samantha' }
+    email: 'ventas@sanpedro.aionia.com.mx',
+    password: 'Sanpedro2026',
+    user_metadata: { role: 'admin', name: 'Samantha Flores' }
   },
   {
-    email: 'admin@sanpedro.com.mx',
-    password: 'E4ae5d6c0c.',
-    user_metadata: { role: 'admin', name: 'José' }
+    email: 'admin@sanpedro.aionia.com.mx',
+    password: 'Sanpedro2026',
+    user_metadata: { role: 'admin', name: 'José Martinez' }
   }
 ];
 
