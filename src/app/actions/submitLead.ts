@@ -42,7 +42,7 @@ export async function submitLead(formData: FormData) {
       
       const initialMessageBody = JSON.stringify({
         body: `Hola,\n\nMe gustaría solicitar información y verificar disponibilidad para mi evento.\n\nDetalles del evento:\n- Tipo de evento: ${event_type.toUpperCase()}\n- Cantidad de invitados: ${guests_count} personas\n- Fecha estimada: ${event_date}\n- Teléfono de contacto: ${phone_number}\n- Ubicación: ${location || 'No especificada'}\n\nQuedo a la espera de su amable respuesta.\n\nSaludos,\n${email}`,
-        to_email: 'ventas@sanpedro.com.mx',
+        to_email: 'ventas@sanpedro.aionia.com.mx',
         cc: '',
         direction: 'inbound',
         is_deleted: false

@@ -29,13 +29,14 @@ export interface ParsedMessage {
   is_deleted: boolean;
 }
 
-// Función auxiliar para parsear el cuerpo del mensaje
 function parseMessageBody(msg: MessageRecord, leadEmail: string = ''): ParsedMessage {
   const isOutbound = msg.sender.includes('ventas@sanpedro.com.mx') || 
                      msg.sender.includes('admin@sanpedro.com.mx') || 
+                     msg.sender.includes('ventas@sanpedro.aionia.com.mx') || 
+                     msg.sender.includes('admin@sanpedro.aionia.com.mx') || 
                      msg.sender.includes('onboarding@resend.dev');
 
-  const defaultTo = isOutbound ? leadEmail : 'ventas@sanpedro.com.mx';
+  const defaultTo = isOutbound ? leadEmail : 'ventas@sanpedro.aionia.com.mx';
   const defaultDirection = isOutbound ? 'outbound' : 'inbound';
 
   try {
@@ -158,10 +159,12 @@ export async function toggleMessageDeleted(messageId: string, isDeleted: boolean
       // Si era texto plano, lo convertimos a la estructura JSON
       const isOutbound = msg.sender.includes('ventas@sanpedro.com.mx') || 
                          msg.sender.includes('admin@sanpedro.com.mx') || 
+                         msg.sender.includes('ventas@sanpedro.aionia.com.mx') || 
+                         msg.sender.includes('admin@sanpedro.aionia.com.mx') || 
                          msg.sender.includes('onboarding@resend.dev');
       parsedBody = {
         body: msg.body,
-        to_email: isOutbound ? '' : 'ventas@sanpedro.com.mx',
+        to_email: isOutbound ? '' : 'ventas@sanpedro.aionia.com.mx',
         cc: '',
         direction: isOutbound ? 'outbound' : 'inbound',
       };
@@ -223,26 +226,26 @@ export async function sendEmailResponse(
   const userEmail = user?.email || '';
   
   let senderName = 'Salones San Pedro';
-  let senderEmail = 'ventas@sanpedro.com.mx';
-  let replyToEmail = 'ventas@sanpedro.com.mx';
+  let senderEmail = 'ventas@sanpedro.aionia.com.mx';
+  let replyToEmail = 'ventas@sanpedro.aionia.com.mx';
   
-  if (userEmail === 'ventas@sanpedro.com.mx') {
+  if (userEmail === 'ventas@sanpedro.com.mx' || userEmail === 'ventas@sanpedro.aionia.com.mx') {
     senderName = 'Samantha Flores';
-    senderEmail = 'ventas@sanpedro.com.mx';
-    replyToEmail = 'ventas@sanpedro.com.mx';
-  } else if (userEmail === 'admin@sanpedro.com.mx') {
+    senderEmail = 'ventas@sanpedro.aionia.com.mx';
+    replyToEmail = 'ventas@sanpedro.aionia.com.mx';
+  } else if (userEmail === 'admin@sanpedro.com.mx' || userEmail === 'admin@sanpedro.aionia.com.mx') {
     senderName = 'José Martinez';
-    senderEmail = 'admin@sanpedro.com.mx';
-    replyToEmail = 'admin@sanpedro.com.mx';
+    senderEmail = 'admin@sanpedro.aionia.com.mx';
+    replyToEmail = 'admin@sanpedro.aionia.com.mx';
   } else if (userEmail === 'juangarcia@ccurity.com.mx') {
     senderName = 'Juan García';
-    // Se usa un email bajo el dominio verificado sanpedro.com.mx para pasar la autorización de Resend
-    senderEmail = 'admin@sanpedro.com.mx';
+    // Se usa un email bajo el dominio verificado sanpedro.aionia.com.mx para pasar la autorización de Resend
+    senderEmail = 'admin@sanpedro.aionia.com.mx';
     replyToEmail = 'juangarcia@ccurity.com.mx';
   } else if (userEmail) {
     const namePart = userEmail.split('@')[0];
     senderName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
-    senderEmail = `${namePart}@sanpedro.com.mx`;
+    senderEmail = `${namePart}@sanpedro.aionia.com.mx`;
     replyToEmail = userEmail;
   }
 
@@ -289,7 +292,7 @@ export async function sendEmailResponse(
             fbMsg.includes('restrict') ||
             fbMsg.includes('authorized')
           ) {
-            throw new Error('No se pudo enviar el correo porque el dominio "sanpedro.com.mx" no está verificado en Resend. Además, el correo de prueba (onboarding@resend.dev) solo permite enviar correos a la dirección registrada del propietario de la cuenta de Resend. Por favor, verifica tu dominio en el panel de Resend.');
+            throw new Error('No se pudo enviar el correo porque el dominio "sanpedro.aionia.com.mx" no está verificado en Resend. Además, el correo de prueba (onboarding@resend.dev) solo permite enviar correos a la dirección registrada del propietario de la cuenta de Resend. Por favor, verifica tu dominio en el panel de Resend.');
           }
           throw response.error;
         }

@@ -172,7 +172,7 @@ export async function POST(request: NextRequest) {
       // Estructuramos el cuerpo como JSON para que sea consumido correctamente por el MailboxClient
       const structuredBody = JSON.stringify({
         body: bodyText,
-        to_email: 'ventas@sanpedro.com.mx',
+        to_email: 'ventas@sanpedro.aionia.com.mx',
         cc: '',
         direction: 'inbound',
         is_deleted: false

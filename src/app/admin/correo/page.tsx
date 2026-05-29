@@ -14,10 +14,10 @@ export default async function AdminCorreoPage() {
   let adminName = 'Juan García';
   let adminRole = 'Coordinador de Eventos';
 
-  if (userEmail === 'ventas@sanpedro.com.mx') {
+  if (userEmail === 'ventas@sanpedro.com.mx' || userEmail === 'ventas@sanpedro.aionia.com.mx') {
     adminName = 'Samantha Flores';
     adminRole = 'Coordinadora de Ventas';
-  } else if (userEmail === 'admin@sanpedro.com.mx') {
+  } else if (userEmail === 'admin@sanpedro.com.mx' || userEmail === 'admin@sanpedro.aionia.com.mx') {
     adminName = 'José Martinez';
     adminRole = 'Administrador de Eventos';
   }

@@ -72,9 +72,9 @@ export default async function AdminDashboard() {
   const { data: { user } } = await supabase.auth.getUser();
   const userEmail = user?.email || '';
   let adminName = 'Juan García';
-  if (userEmail === 'ventas@sanpedro.com.mx') {
+  if (userEmail === 'ventas@sanpedro.com.mx' || userEmail === 'ventas@sanpedro.aionia.com.mx') {
     adminName = 'Samantha Flores';
-  } else if (userEmail === 'admin@sanpedro.com.mx') {
+  } else if (userEmail === 'admin@sanpedro.com.mx' || userEmail === 'admin@sanpedro.aionia.com.mx') {
     adminName = 'José Martinez';
   }
 

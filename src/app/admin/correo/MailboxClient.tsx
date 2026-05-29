@@ -38,16 +38,16 @@ export default function MailboxClient({ initialLeads, initialMessages, currentUs
   const [selectedMessage, setSelectedMessage] = useState<ParsedMessage | null>(null);
 
   // Determinar remitente dinámico según el usuario actual
-  let senderDisplay = 'Salones San Pedro <ventas@sanpedro.com.mx>';
-  if (currentUser.email === 'ventas@sanpedro.com.mx') {
-    senderDisplay = 'Samantha Flores <ventas@sanpedro.com.mx>';
-  } else if (currentUser.email === 'admin@sanpedro.com.mx') {
-    senderDisplay = 'José Martinez <admin@sanpedro.com.mx>';
+  let senderDisplay = 'Salones San Pedro <ventas@sanpedro.aionia.com.mx>';
+  if (currentUser.email === 'ventas@sanpedro.com.mx' || currentUser.email === 'ventas@sanpedro.aionia.com.mx') {
+    senderDisplay = 'Samantha Flores <ventas@sanpedro.aionia.com.mx>';
+  } else if (currentUser.email === 'admin@sanpedro.com.mx' || currentUser.email === 'admin@sanpedro.aionia.com.mx') {
+    senderDisplay = 'José Martinez <admin@sanpedro.aionia.com.mx>';
   } else if (currentUser.email === 'juangarcia@ccurity.com.mx') {
-    senderDisplay = 'Juan García <admin@sanpedro.com.mx>';
+    senderDisplay = 'Juan García <admin@sanpedro.aionia.com.mx>';
   } else if (currentUser.email) {
     const namePart = currentUser.email.split('@')[0];
-    senderDisplay = `${currentUser.name} <${namePart}@sanpedro.com.mx>`;
+    senderDisplay = `${currentUser.name} <${namePart}@sanpedro.aionia.com.mx>`;
   }
   
   // Search & Filter
