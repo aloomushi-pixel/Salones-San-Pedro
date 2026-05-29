@@ -56,7 +56,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Servicios Plus",
-    imageUrl: "https://images.unsplash.com/photo-1534080391025-177995a37f2b?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/mesa-dulces.jpg"
   },
   {
     slug: "servicios-de-cocteleria-para-eventos-sociales",
@@ -65,7 +65,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Bebidas",
-    imageUrl: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/cocteleria.jpg"
   },
   {
     slug: "salones-con-banquete-de-arrachera",
@@ -74,7 +74,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "4 min de lectura",
     category: "Gastronomía",
-    imageUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/arrachera.jpg"
   },
   {
     slug: "batucada-con-robot-led-para-eventos",
@@ -83,7 +83,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Show",
-    imageUrl: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/robot.jpg"
   },
   {
     slug: "renta-de-cabina-360-para-eventos",
@@ -92,7 +92,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Servicios Plus",
-    imageUrl: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "/servicios/cabina-360.jpg"
   },
   {
     slug: "paquetes-de-fotografia-profesional-para-eventos",
@@ -311,7 +311,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Servicios Plus",
-    imageUrl: "https://images.unsplash.com/photo-1534080391025-177995a37f2b?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/mesa-dulces.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>La mesa de dulces se ha convertido en un elemento esencial y de alto impacto visual en bodas, graduaciones y XV años. No es solo un buffet de golosinas; es una declaración de diseño que complementa la temática de tu evento y deleita a invitados de todas las edades.</p>
@@ -338,7 +338,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Bebidas",
-    imageUrl: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/cocteleria.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>Ofrecer una barra de bebidas sofisticada y divertida desde la llegada de tus invitados marca el tono de la fiesta. La coctelería para eventos ha evolucionado más allá del clásico refresco y vino, incorporando cocteles clásicos y mezclas de autor con una presentación impecable.</p>
@@ -363,7 +363,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "4 min de lectura",
     category: "Gastronomía",
-    imageUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/arrachera.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>La selección del plato fuerte es la decisión gastronómica más importante de tu banquete. Para quienes buscan garantizar que cada invitado disfrute una experiencia deliciosa, tierna y con mucho sabor, el menú con arrachera marinada al punto es la opción ganadora en la Ciudad de México y Estado de México.</p>
@@ -389,7 +389,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Show",
-    imageUrl: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/robot.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>La batucada es el punto culminante de la fiesta, el momento en que se reparte la animación y la pista se llena al máximo. Para hacer de este momento algo verdaderamente espectacular y memorable, nuestro show con el Robot Iron-Man gigante iluminado es ideal.</p>
@@ -408,7 +408,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     date: "28 de Mayo, 2026",
     readTime: "3 min de lectura",
     category: "Servicios Plus",
-    imageUrl: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/servicios/cabina-360.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
         <p>La cabina 360° se ha convertido en la atracción indispensable de los eventos modernos. Permite a tus invitados grabar videos dinámicos y divertidos en cámara lenta que están listos para subirse instantáneamente a TikTok o Instagram, generando un gran recuerdo digital de tu fiesta.</p>
