@@ -15,8 +15,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "SALONES SAN PEDRO | Eventos de Alta Gama en CDMX y EDOMEX",
-  description: "Salón de eventos exclusivos en CDMX y Zona Metropolitana del Estado de México. Creamos experiencias de alta gama y banquetes de lujo con elegancia contemporánea.",
+  title: "SALONES SAN PEDRO | Eventos de Alta Gama en Gustavo A. Madero, CDMX",
+  description: "Salón de eventos exclusivos en la alcaldía Gustavo A. Madero, CDMX. Creamos experiencias de alta gama y banquetes de lujo con elegancia contemporánea.",
   icons: {
     icon: "/logo.svg",
     shortcut: "/logo.svg",

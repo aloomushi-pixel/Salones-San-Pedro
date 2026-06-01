@@ -25,7 +25,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "como-elegir-el-menu-de-bodas-perfecto",
     title: "Cómo elegir el menú de bodas perfecto: 5 consejos gourmet",
-    excerpt: "Descubre los secretos de nuestro chef ejecutivo para crear una experiencia gastronómica inolvidable que deleite a todos tus invitados con toques poblanos contemporáneos.",
+    excerpt: "Descubre los secretos de nuestro chef ejecutivo para crear una experiencia gastronómica inolvidable que deleite a todos tus invitados con toques contemporáneos.",
     date: "24 de Mayo, 2026",
     readTime: "5 min de lectura",
     category: "Gastronomía",
@@ -226,7 +226,7 @@ const renderCTA = (serviceName: string) => (
   <div className="bg-primary/5 border border-primary/20 rounded-xl p-6 text-center my-8">
     <h3 className="font-display-lg text-xl text-primary font-bold mb-2">¿Quieres incluir {serviceName} en tu paquete?</h3>
     <p className="text-secondary mb-4 text-sm font-body-md">
-      En Salones San Pedro Plus personalizamos cada elemento para adaptarlo a tus necesidades y hacer realidad el evento de tus sueños en la Ciudad de México y Estado de México.
+      En Salones San Pedro Plus personalizamos cada elemento para adaptarlo a tus necesidades y hacer realidad el evento de tus sueños en la alcaldía Gustavo A. Madero, Ciudad de México.
     </p>
     <a href="/#disponibilidad" className="inline-block bg-primary text-on-primary font-label-sm uppercase tracking-wider px-6 py-3 rounded hover:bg-primary/95 transition-all text-sm font-semibold shadow-md">
       COTIZAR EVENTO
@@ -238,7 +238,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
   "como-elegir-el-menu-de-bodas-perfecto": {
     slug: "como-elegir-el-menu-de-bodas-perfecto",
     title: "Cómo elegir el menú de bodas perfecto: 5 consejos gourmet",
-    excerpt: "Descubre los secretos de nuestro chef ejecutivo para crear una experiencia gastronómica inolvidable que deleite a todos tus invitados con toques poblanos contemporáneos.",
+    excerpt: "Descubre los secretos de nuestro chef ejecutivo para crear una experiencia gastronómica inolvidable que deleite a todos tus invitados con toques contemporáneos.",
     date: "24 de Mayo, 2026",
     readTime: "5 min de lectura",
     category: "Gastronomía",
@@ -366,7 +366,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     imageUrl: "/servicios/arrachera.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
-        <p>La selección del plato fuerte es la decisión gastronómica más importante de tu banquete. Para quienes buscan garantizar que cada invitado disfrute una experiencia deliciosa, tierna y con mucho sabor, el menú con arrachera marinada al punto es la opción ganadora en la Ciudad de México y Estado de México.</p>
+        <p>La selección del plato fuerte es la decisión gastronómica más importante de tu banquete. Para quienes buscan garantizar que cada invitado disfrute una experiencia deliciosa, tierna y con mucho sabor, el menú con arrachera marinada al punto es la opción ganadora en la alcaldía Gustavo A. Madero, Ciudad de México.</p>
         
         <h2 className="font-display-lg text-2xl text-on-surface font-bold mt-8">¿Por qué elegir Arrachera para tu banquete?</h2>
         <p>La arrachera es un corte sumamente popular por su textura suave y sabor intenso. Nuestro equipo de cocina la prepara utilizando un marinado especial de la casa y la sirve asada al punto exacto, acompañada de guarniciones gourmet como papas al horno rellenas de queso y tocino, o espárragos envueltos en tocino con mantequilla de ajo.</p>

@@ -15,7 +15,7 @@ export default function BlogPage() {
             <span className="font-label-sm text-primary tracking-widest uppercase">Artículos &amp; Consejos</span>
             <h1 className="font-display-lg text-4xl md:text-5xl lg:text-6xl text-on-surface">Blog San Pedro</h1>
             <p className="font-body-lg text-secondary">
-              Todo lo que necesitas saber para la planeación, gastronomía y tendencias para que tu evento en CDMX y el Estado de México sea inolvidable.
+              Todo lo que necesitas saber para la planeación, gastronomía y tendencias para que tu evento en la alcaldía Gustavo A. Madero, CDMX sea inolvidable.
             </p>
           </div>
 
