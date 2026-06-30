@@ -1,4 +1,5 @@
 import React from 'react';
+import { SEO_BLOG_POSTS, SEO_BLOG_POSTS_DETAILS } from './blogDataSEO';
 
 export interface BlogPost {
   slug: string;
@@ -22,6 +23,7 @@ export interface BlogPostDetail {
 }
 
 export const BLOG_POSTS: BlogPost[] = [
+  ...SEO_BLOG_POSTS,
   {
     slug: "como-elegir-el-menu-de-bodas-perfecto",
     title: "Cómo elegir el menú de bodas perfecto: 5 consejos gourmet",
@@ -235,6 +237,7 @@ const renderCTA = (serviceName: string) => (
 );
 
 export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
+  ...SEO_BLOG_POSTS_DETAILS,
   "como-elegir-el-menu-de-bodas-perfecto": {
     slug: "como-elegir-el-menu-de-bodas-perfecto",
     title: "Cómo elegir el menú de bodas perfecto: 5 consejos gourmet",

@@ -7,7 +7,7 @@ const passwords = [
 ];
 
 async function run() {
-  const host = 'db.jxhrbihietcnlqwobwrx.supabase.co';
+  const host = 'db.zogvdrfswyyfnwxeyrtn.supabase.co';
   const database = 'postgres';
   const user = 'postgres';
   const port = 5432;

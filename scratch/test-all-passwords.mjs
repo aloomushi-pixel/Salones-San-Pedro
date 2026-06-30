@@ -12,7 +12,7 @@ const passwords = [
   'E4ae5d6c0c..'
 ];
 
-const host = 'db.jxhrbihietcnlqwobwrx.supabase.co';
+const host = 'db.zogvdrfswyyfnwxeyrtn.supabase.co';
 const port = 6543;
 const user = 'postgres';
 

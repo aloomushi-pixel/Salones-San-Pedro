@@ -9,7 +9,7 @@ const passwords = [
 async function run() {
   const host = 'aws-0-us-east-1.pooler.supabase.com';
   const database = 'postgres';
-  const user = 'postgres.jxhrbihietcnlqwobwrx';
+  const user = 'postgres.zogvdrfswyyfnwxeyrtn';
   const port = 6543;
 
   for (const password of passwords) {
