@@ -45,6 +45,14 @@ const TIKTOK_VIDEOS: VideoData[] = [
     tiktokId: "7501856695526739207",
     coverUrl: "/galeria/diamante/diamante_4.jpg",
   },
+  {
+    id: 5,
+    title: "Nuestro Nuevo Video ✨",
+    views: "Nuevo",
+    caption: "Descubre más de la magia de Salones San Pedro Plus en nuestro nuevo video de TikTok. ¡Síguenos!",
+    tiktokId: "7644667860891028756",
+    coverUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+  },
 ];
 
 export default function TikTokVideos() {
