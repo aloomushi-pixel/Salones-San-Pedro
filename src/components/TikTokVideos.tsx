@@ -15,6 +15,14 @@ interface VideoData {
 const TIKTOK_VIDEOS: VideoData[] = [
   {
     id: 1,
+    title: "Nuestro Nuevo Video ✨",
+    views: "Nuevo",
+    caption: "Descubre más de la magia de Salones San Pedro Plus en nuestro nuevo video de TikTok. ¡Síguenos!",
+    tiktokId: "7644667860891028756",
+    coverUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    id: 2,
     title: "Montaje de Gala Especial ✨",
     views: "18.4K",
     caption: "La magia de un montaje de gala diseñado a la perfección en Salones San Pedro Plus. Cuidamos cada detalle para hacer tu día inolvidable.",
@@ -22,7 +30,7 @@ const TIKTOK_VIDEOS: VideoData[] = [
     coverUrl: "/galeria/diamante/diamante_1.jpg",
   },
   {
-    id: 2,
+    id: 3,
     title: "Fiesta y Pista de Baile LED 💃",
     views: "12.2K",
     caption: "¡Luces, robótica y la pista LED encendida! Así se vive la máxima diversión en nuestros recintos. #XVAños #BodasDeGala #Party",
@@ -30,7 +38,7 @@ const TIKTOK_VIDEOS: VideoData[] = [
     coverUrl: "/galeria/platino/platino_10.jpg",
   },
   {
-    id: 3,
+    id: 4,
     title: "Experiencia de Gala Boutique 🕯️",
     views: "5.7K",
     caption: "Elegancia contemporánea y un servicio boutique excepcional para tus momentos más especiales. Vive la experiencia San Pedro.",
@@ -38,20 +46,12 @@ const TIKTOK_VIDEOS: VideoData[] = [
     coverUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
   },
   {
-    id: 4,
+    id: 5,
     title: "Entrada de Honor 👰🤵",
     views: "3.1K",
     caption: "Un momento de ensueño: la entrada triunfal rodeada de luces y el cariño de tus seres queridos. Creamos recuerdos eternos.",
     tiktokId: "7501856695526739207",
     coverUrl: "/galeria/diamante/diamante_4.jpg",
-  },
-  {
-    id: 5,
-    title: "Nuestro Nuevo Video ✨",
-    views: "Nuevo",
-    caption: "Descubre más de la magia de Salones San Pedro Plus en nuestro nuevo video de TikTok. ¡Síguenos!",
-    tiktokId: "7644667860891028756",
-    coverUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
   },
 ];
 
