@@ -300,6 +300,8 @@ export default async function AdminDashboard() {
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Registro</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Prospecto</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Evento</th>
+                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Salón</th>
+                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Servicio</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold text-center">Invitados</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Fecha Evento</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Estimado / Extras</th>
@@ -310,7 +312,7 @@ export default async function AdminDashboard() {
               <tbody className="divide-y divide-outline-variant/25">
                 {leads?.length === 0 ? (
                   <tr>
-                    <td colSpan={9} className="p-12 text-center text-secondary font-body-md">
+                    <td colSpan={10} className="p-12 text-center text-secondary font-body-md">
                       Aún no hay registros de disponibilidad.
                     </td>
                   </tr>
@@ -331,8 +333,12 @@ export default async function AdminDashboard() {
                       </td>
                       <td className="p-4 font-body-md text-on-surface">
                         <div className="font-bold capitalize">{lead.event_type}</div>
-                        {lead.salon && <div className="text-xs text-secondary mt-1">Salón: <span className="font-semibold">{lead.salon}</span></div>}
-                        {lead.package_type && <div className="text-xs text-secondary">Pqte: <span className="font-semibold">{lead.package_type}</span></div>}
+                      </td>
+                      <td className="p-4 font-body-md text-on-surface">
+                        {lead.salon ? <span className="font-semibold">{lead.salon}</span> : <span className="text-secondary/60 text-xs italic">-</span>}
+                      </td>
+                      <td className="p-4 font-body-md text-on-surface">
+                        {lead.package_type ? <span className="font-semibold">{lead.package_type}</span> : <span className="text-secondary/60 text-xs italic">-</span>}
                       </td>
                       <td className="p-4 font-body-md text-on-surface text-center font-bold">
                         {lead.guests_count}
