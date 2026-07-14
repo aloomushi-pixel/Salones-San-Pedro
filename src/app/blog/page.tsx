@@ -4,6 +4,12 @@ import { BLOG_POSTS } from "@/utils/blogData";
 import Image from "next/image";
 
 export default function BlogPage() {
+  const SERVICIOS_EXTRAS = ["Servicios Plus", "Bebidas", "Show", "Música"];
+  const isExtra = (post: any) => SERVICIOS_EXTRAS.includes(post.category);
+  
+  const eventosPosts = BLOG_POSTS.filter(p => !isExtra(p));
+  const extrasPosts = BLOG_POSTS.filter(isExtra);
+
   return (
     <>
       <Header />
@@ -20,48 +26,104 @@ export default function BlogPage() {
           </div>
 
           {/* Featured Post (First) */}
-          <div className="mb-16">
-            <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl overflow-hidden shadow-lg grid grid-cols-1 lg:grid-cols-12 gap-0 group">
-              <div className="lg:col-span-7 relative h-72 lg:h-[450px] overflow-hidden">
-                <Image
-                  src={BLOG_POSTS[0].imageUrl}
-                  alt={BLOG_POSTS[0].title}
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 60vw"
-                />
-                <div className="absolute top-4 left-4 bg-primary text-on-primary font-label-sm text-xs px-3 py-1 rounded">
-                  {BLOG_POSTS[0].category}
-                </div>
-              </div>
-              <div className="lg:col-span-5 p-8 md:p-12 flex flex-col justify-between space-y-6 bg-surface-container-lowest">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4 text-xs text-secondary/70">
-                    <span>{BLOG_POSTS[0].date}</span>
-                    <span>•</span>
-                    <span>{BLOG_POSTS[0].readTime}</span>
+          {eventosPosts.length > 0 && (
+            <div className="mb-16">
+              <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl overflow-hidden shadow-lg grid grid-cols-1 lg:grid-cols-12 gap-0 group">
+                <div className="lg:col-span-7 relative h-72 lg:h-[450px] overflow-hidden">
+                  <Image
+                    src={eventosPosts[0].imageUrl}
+                    alt={eventosPosts[0].title}
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 60vw"
+                  />
+                  <div className="absolute top-4 left-4 bg-primary text-on-primary font-label-sm text-xs px-3 py-1 rounded">
+                    {eventosPosts[0].category}
                   </div>
-                  <h2 className="font-display-lg text-2xl md:text-3xl text-on-surface hover:text-primary transition-colors leading-tight">
-                    <Link href={`/blog/${BLOG_POSTS[0].slug}`}>
-                      {BLOG_POSTS[0].title}
-                    </Link>
-                  </h2>
-                  <p className="font-body-md text-secondary text-sm md:text-base leading-relaxed">
-                    {BLOG_POSTS[0].excerpt}
-                  </p>
                 </div>
-                <Link href={`/blog/${BLOG_POSTS[0].slug}`} className="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all self-start text-sm md:text-base uppercase tracking-wider">
+                <div className="lg:col-span-5 p-8 md:p-12 flex flex-col justify-between space-y-6 bg-surface-container-lowest">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4 text-xs text-secondary/70">
+                      <span>{eventosPosts[0].date}</span>
+                      <span>•</span>
+                      <span>{eventosPosts[0].readTime}</span>
+                    </div>
+                    <h2 className="font-display-lg text-2xl md:text-3xl text-on-surface hover:text-primary transition-colors leading-tight">
+                      <Link href={`/blog/${eventosPosts[0].slug}`}>
+                        {eventosPosts[0].title}
+                      </Link>
+                    </h2>
+                    <p className="font-body-md text-secondary text-sm md:text-base leading-relaxed">
+                      {eventosPosts[0].excerpt}
+                    </p>
+                </div>
+                <Link href={`/blog/${eventosPosts[0].slug}`} className="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all self-start text-sm md:text-base uppercase tracking-wider">
                   Leer artículo
                   <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </Link>
               </div>
             </div>
           </div>
+          )}
 
           {/* Grid of Other Posts */}
+          <div className="mb-10">
+            <h2 className="font-display-lg text-3xl md:text-4xl text-on-surface pb-4 border-b border-outline-variant/30">
+              Artículos y Consejos para Eventos
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+            {eventosPosts.slice(1).map((post) => (
+              <div key={post.slug} className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl overflow-hidden shadow-md flex flex-col justify-between group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div className="relative h-56 overflow-hidden">
+                  <Image
+                    src={post.imageUrl}
+                    alt={post.title}
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                  <div className="absolute top-4 left-4 bg-primary text-on-primary font-label-sm text-xs px-3 py-1 rounded">
+                    {post.category}
+                  </div>
+                </div>
+                <div className="p-6 flex-grow flex flex-col justify-between space-y-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3 text-xs text-secondary/70">
+                      <span>{post.date}</span>
+                      <span>•</span>
+                      <span>{post.readTime}</span>
+                    </div>
+                    <h3 className="font-display-lg text-xl text-on-surface group-hover:text-primary transition-colors leading-snug">
+                      <Link href={`/blog/${post.slug}`}>
+                        {post.title}
+                      </Link>
+                    </h3>
+                    <p className="font-body-md text-secondary text-sm leading-relaxed">
+                      {post.excerpt}
+                    </p>
+                  </div>
+                  <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all self-start text-xs uppercase tracking-wider pt-2">
+                    Leer artículo
+                    <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Grid of Extras Posts */}
+          <div className="mb-10 mt-16 pt-16 border-t border-outline-variant/30">
+            <h2 className="font-display-lg text-3xl md:text-4xl text-on-surface mb-4">
+              Servicios Extras y Entretenimiento
+            </h2>
+            <p className="text-secondary font-body-md max-w-3xl">
+              Descubre todas las opciones de personalización, shows, barras de bebidas y detalles exclusivos que puedes agregar a tu paquete para hacer tu evento único.
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {BLOG_POSTS.slice(1).map((post) => (
+            {extrasPosts.map((post) => (
               <div key={post.slug} className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl overflow-hidden shadow-md flex flex-col justify-between group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                 <div className="relative h-56 overflow-hidden">
                   <Image
