@@ -297,13 +297,12 @@ export default async function AdminDashboard() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-surface-container-low text-on-surface border-b border-outline-variant/35">
-                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Fecha de Registro (CDMX)</th>
+                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Registro</th>
+                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Prospecto</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Evento</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold text-center">Invitados</th>
-                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Fecha del Evento</th>
-                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Teléfono</th>
-                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Correo electrónico</th>
-                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Ubicación</th>
+                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Fecha Evento</th>
+                  <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold">Estimado / Extras</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold text-center">Estado</th>
                   <th className="p-4 font-label-sm text-xs uppercase tracking-wider font-bold text-right">Acción</th>
                 </tr>
@@ -321,8 +320,19 @@ export default async function AdminDashboard() {
                       <td className="p-4 font-body-sm text-on-surface font-semibold text-sm">
                         {formatMXTimestamp(lead.created_at)}
                       </td>
-                      <td className="p-4 font-body-md text-on-surface capitalize">
-                        {lead.event_type}
+                      <td className="p-4 font-body-md text-on-surface">
+                        <div className="font-bold">{lead.name || <span className="text-secondary/60 italic text-xs">Sin nombre</span>}</div>
+                        {lead.email && <div className="text-xs text-secondary mt-1"><a href={`mailto:${lead.email}`} className="hover:text-primary transition-colors">{lead.email}</a></div>}
+                        <div className="text-xs text-secondary mt-0.5">
+                          <a href={`https://wa.me/${lead.phone_number?.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors flex items-center gap-1">
+                            <span className="material-symbols-outlined text-[14px]">call</span> {lead.phone_number}
+                          </a>
+                        </div>
+                      </td>
+                      <td className="p-4 font-body-md text-on-surface">
+                        <div className="font-bold capitalize">{lead.event_type}</div>
+                        {lead.salon && <div className="text-xs text-secondary mt-1">Salón: <span className="font-semibold">{lead.salon}</span></div>}
+                        {lead.package_type && <div className="text-xs text-secondary">Pqte: <span className="font-semibold">{lead.package_type}</span></div>}
                       </td>
                       <td className="p-4 font-body-md text-on-surface text-center font-bold">
                         {lead.guests_count}
@@ -330,29 +340,13 @@ export default async function AdminDashboard() {
                       <td className="p-4 font-body-md text-secondary text-sm">
                         {formatEventDate(lead.event_date)}
                       </td>
-                      <td className="p-4 font-body-md">
-                        <a 
-                          href={`https://wa.me/${lead.phone_number.replace(/\D/g, '')}`} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="text-primary hover:text-primary-container font-semibold transition-colors flex items-center gap-1.5 w-fit"
-                        >
-                          <span className="material-symbols-outlined text-[18px]">call</span>
-                          {lead.phone_number}
-                          <span className="material-symbols-outlined text-[14px] opacity-70">open_in_new</span>
-                        </a>
-                      </td>
-                      <td className="p-4 font-body-md text-sm text-on-surface break-all max-w-[200px]">
-                        {lead.email ? (
-                          <a href={`mailto:${lead.email}`} className="text-secondary hover:text-primary transition-colors">
-                            {lead.email}
-                          </a>
+                      <td className="p-4 font-body-md text-on-surface">
+                        {lead.estimated_total ? (
+                          <div className="font-bold text-primary">${lead.estimated_total.toLocaleString('es-MX')}</div>
                         ) : (
-                          <span className="text-secondary/60 italic text-xs">Sin correo</span>
+                          <div className="text-xs text-secondary/60 italic truncate max-w-[120px]" title={lead.location}>Antiguo: {lead.location}</div>
                         )}
-                      </td>
-                      <td className="p-4 font-body-md text-sm text-on-surface truncate max-w-[150px]" title={lead.location || ''}>
-                        {lead.location || <span className="text-secondary/60 italic text-xs">Sin ubicación</span>}
+                        {lead.extra_service && <div className="text-xs text-secondary mt-1 text-primary-container-dark">Extra: {lead.extra_service}</div>}
                       </td>
                       <td className="p-4 text-center">
                         <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest ${

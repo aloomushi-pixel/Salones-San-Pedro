@@ -19,6 +19,10 @@ export async function submitLead(formData: FormData) {
   const email = formData.get('email') as string;
   const location = formData.get('location') as string;
   const name = (formData.get('name') as string) || '';
+  const salon = formData.get('salon') as string;
+  const package_type = formData.get('package_type') as string;
+  const estimated_total = parseFloat(formData.get('estimated_total') as string) || null;
+  const extra_service = formData.get('extra_service') as string;
 
   try {
     const { data: leadData, error } = await supabase.from('leads').insert([
@@ -29,6 +33,11 @@ export async function submitLead(formData: FormData) {
         phone_number,
         email,
         location,
+        name,
+        salon,
+        package_type,
+        estimated_total,
+        extra_service,
         status: 'Nuevo'
       }
     ]).select();

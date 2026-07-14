@@ -124,6 +124,13 @@ export default function Precotizador() {
     
     let extraInfo = wantsExtraService && extraServiceDetail ? ` | Servicio Extra: ${extraServiceDetail}` : wantsExtraService === false ? ' | Sin servicios extras' : '';
     formData.append('location', `Nombre: ${name} | Salón: ${salon} | Paquete: ${packageType} | Estimado: $${totalEstimado} MXN${extraInfo}`);
+    
+    // Send individual fields to new columns
+    formData.append('name', name);
+    formData.append('salon', salon);
+    formData.append('package_type', packageType);
+    formData.append('estimated_total', totalEstimado.toString());
+    formData.append('extra_service', wantsExtraService && extraServiceDetail ? extraServiceDetail : '');
 
     const res = await submitLead(formData);
     
