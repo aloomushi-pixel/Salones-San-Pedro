@@ -18,6 +18,7 @@ export async function submitLead(formData: FormData) {
   const phone_number = formData.get('phoneNumber') as string;
   const email = formData.get('email') as string;
   const location = formData.get('location') as string;
+  const name = (formData.get('name') as string) || '';
 
   try {
     const { data: leadData, error } = await supabase.from('leads').insert([
@@ -41,7 +42,7 @@ export async function submitLead(formData: FormData) {
       const leadId = leadData[0].id;
       
       const initialMessageBody = JSON.stringify({
-        body: `Hola,\n\nMe gustaría solicitar información y verificar disponibilidad para mi evento.\n\nDetalles del evento:\n- Tipo de evento: ${event_type.toUpperCase()}\n- Cantidad de invitados: ${guests_count} personas\n- Fecha estimada: ${event_date}\n- Teléfono de contacto: ${phone_number}\n- Ubicación: ${location || 'No especificada'}\n\nQuedo a la espera de su amable respuesta.\n\nSaludos,\n${email}`,
+        body: `Hola,\n\nMe gustaría solicitar información y verificar disponibilidad para mi evento.\n\nDetalles del prospecto:\n- Nombre: ${name}\n- Tipo de evento: ${event_type.toUpperCase()}\n- Cantidad de invitados: ${guests_count} personas\n- Fecha estimada: ${event_date}\n- Teléfono de contacto: ${phone_number}\n- Correo: ${email}\n- Información de Cotización:\n  ${location}\n\nQuedo a la espera de su amable respuesta.\n\nSaludos,\n${name || email}`,
         to_email: 'ventas@sanpedro.aionia.com.mx',
         cc: '',
         direction: 'inbound',

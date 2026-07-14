@@ -1,5 +1,5 @@
 import Image from "next/image";
-import LeadForm from "../components/LeadForm";
+import Precotizador from "../components/Precotizador";
 import TestimoniosCarousel from "../components/TestimoniosCarousel";
 import GaleriaSection from "../components/GaleriaSection";
 import TikTokVideos from "../components/TikTokVideos";
@@ -366,17 +366,16 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Sección Disponibilidad */}
         <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-low" id="disponibilidad">
           <div className="max-w-container-max mx-auto text-center">
             <div className="mb-12">
-              <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mb-6">Verificador de Disponibilidad</h2>
+              <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mb-6">Precotizador y Disponibilidad</h2>
               <p className="font-body-lg text-secondary max-w-2xl mx-auto">
-                Asegura tu fecha en el escenario más exclusivo de la CDMX. Elige tu evento y descubre si aún tenemos espacio para ti.
+                Asegura tu fecha en el escenario más exclusivo de la CDMX. Descubre el paquete ideal para ti y obtén una cotización aproximada al instante.
               </p>
             </div>
             <div className="max-w-4xl mx-auto bg-surface-container-lowest p-8 md:p-12 rounded-xl shadow-2xl border border-outline-variant/30">
-              <LeadForm />
+              <Precotizador />
             </div>
           </div>
         </section>
