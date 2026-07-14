@@ -155,12 +155,14 @@ export default function Precotizador() {
         <p className="text-sm opacity-80 mb-6 max-w-md mx-auto">
           Este es un cálculo preliminar. ¡Un asesor te contactará por WhatsApp en breve para confirmar la disponibilidad de tu fecha y personalizar tu paquete!
         </p>
-        <button 
-          onClick={() => { setSuccess(false); setStep(1); }}
-          className="mt-2 border border-on-primary-container px-6 py-2 rounded font-semibold hover:bg-on-primary-container hover:text-primary-container transition-colors"
+        <a 
+          href="https://wa.me/message/U7UANPSABGW4K1"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-2 inline-flex items-center justify-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold text-lg hover:bg-[#20b858] transition-all shadow-lg shadow-[#25D366]/30 hover:scale-105 active:scale-95"
         >
-          Hacer nueva cotización
-        </button>
+          Verificar fechas disponibles con un asesor
+        </a>
       </div>
     );
   }
