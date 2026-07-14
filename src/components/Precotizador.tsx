@@ -78,6 +78,8 @@ export default function Precotizador() {
   const [eventDate, setEventDate] = useState('');
   const [guestsCount, setGuestsCount] = useState('');
   const [packageType, setPackageType] = useState('');
+  const [wantsExtraService, setWantsExtraService] = useState<boolean | null>(null);
+  const [extraServiceDetail, setExtraServiceDetail] = useState('');
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
@@ -119,7 +121,9 @@ export default function Precotizador() {
     formData.append('phoneNumber', phoneNumber);
     formData.append('email', email);
     // Overload location to store name + salon + package + estimate to not break existing db constraints
-    formData.append('location', `Nombre: ${name} | Salón: ${salon} | Paquete: ${packageType} | Estimado: $${totalEstimado} MXN`);
+    
+    let extraInfo = wantsExtraService && extraServiceDetail ? ` | Servicio Extra: ${extraServiceDetail}` : wantsExtraService === false ? ' | Sin servicios extras' : '';
+    formData.append('location', `Nombre: ${name} | Salón: ${salon} | Paquete: ${packageType} | Estimado: $${totalEstimado} MXN${extraInfo}`);
 
     const res = await submitLead(formData);
     
@@ -157,7 +161,7 @@ export default function Precotizador() {
   return (
     <div className="w-full relative">
       <div className="flex gap-2 mb-8">
-        {[1,2,3,4,5,6].map(i => (
+        {[1,2,3,4,5,6,7].map(i => (
           <div key={i} className={`h-2 flex-1 rounded-full transition-colors ${i <= step ? 'bg-primary' : 'bg-surface-variant'}`} />
         ))}
       </div>
@@ -277,6 +281,54 @@ export default function Precotizador() {
 
         {step === 6 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
+            <h3 className="font-display-lg text-2xl text-on-surface">¿Estás interesado en contratar un servicio extra?</h3>
+            <p className="text-sm text-secondary mb-4">
+              <Link href="/blog" target="_blank" className="text-primary underline font-semibold">Ver servicios extras</Link>
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              <button
+                type="button"
+                onClick={() => setWantsExtraService(true)}
+                className={`p-6 rounded-xl border-2 font-bold text-lg transition-all ${wantsExtraService === true ? 'border-primary bg-primary/10 text-primary' : 'border-outline-variant/30 hover:border-primary/50 text-on-surface'}`}
+              >
+                SÍ
+              </button>
+              <button
+                type="button"
+                onClick={() => { setWantsExtraService(false); handleNext(); }}
+                className={`p-6 rounded-xl border-2 font-bold text-lg transition-all ${wantsExtraService === false ? 'border-primary bg-primary/10 text-primary' : 'border-outline-variant/30 hover:border-primary/50 text-on-surface'}`}
+              >
+                NO
+              </button>
+            </div>
+            
+            {wantsExtraService && (
+              <div className="mt-6 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
+                <p className="text-on-surface font-semibold">¿Qué servicio extra te gustaría incluir?</p>
+                <input 
+                  value={extraServiceDetail} 
+                  onChange={e => setExtraServiceDetail(e.target.value)} 
+                  className="w-full border-2 border-outline-variant/30 rounded-xl bg-transparent p-4 focus:ring-0 focus:border-primary transition-all text-on-surface font-body-md" 
+                  placeholder="Ej. Fotografía, Mesa de dulces, etc." 
+                  type="text" 
+                />
+                <div className="pt-2">
+                  <button 
+                    type="button" 
+                    disabled={!extraServiceDetail}
+                    onClick={handleNext}
+                    className="w-full py-4 bg-primary text-on-primary rounded-lg font-bold disabled:opacity-50"
+                  >
+                    Continuar
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {step === 7 && (
+          <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
             <h3 className="font-display-lg text-2xl text-on-surface">Último paso</h3>
             <p className="text-secondary text-sm">Para mostrarte tu cotización estimada y verificar disponibilidad, compártenos tus datos:</p>
             
@@ -301,7 +353,7 @@ export default function Precotizador() {
           </div>
         )}
 
-        {step > 1 && step <= 6 && !loading && (
+        {step > 1 && step <= 7 && !loading && (
           <div className="mt-6 pt-4 border-t border-outline-variant/20">
             <button type="button" onClick={handlePrev} className="text-secondary hover:text-primary font-semibold text-sm flex items-center gap-1 transition-colors">
               <span className="material-symbols-outlined text-sm">arrow_back</span>
