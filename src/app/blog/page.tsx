@@ -5,7 +5,15 @@ import Image from "next/image";
 
 export default function BlogPage() {
   const SERVICIOS_EXTRAS = ["Servicios Plus", "Bebidas", "Show", "Música"];
-  const isExtra = (post: any) => SERVICIOS_EXTRAS.includes(post.category);
+  const EXTRA_SLUGS = [
+    "salones-con-banquete-de-arrachera",
+    "paquetes-de-fotografia-profesional-para-eventos",
+    "video-profesional-para-bodas-y-xv-anos",
+    "renta-de-letras-gigantes-iluminadas",
+    "decoracion-con-globos-moderna-para-fiestas",
+    "servicio-de-reposteria-y-postres-extra-para-eventos"
+  ];
+  const isExtra = (post: any) => SERVICIOS_EXTRAS.includes(post.category) || EXTRA_SLUGS.includes(post.slug);
   
   const eventosPosts = BLOG_POSTS.filter(p => !isExtra(p));
   const extrasPosts = BLOG_POSTS.filter(isExtra);
