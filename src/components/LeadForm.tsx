@@ -30,12 +30,14 @@ export default function LeadForm() {
       <div className="bg-primary-container text-on-primary-container p-8 rounded-xl text-center shadow-lg">
         <h3 className="text-2xl font-bold mb-4">¡Gracias por tu interés!</h3>
         <p className="text-lg">Hemos recibido tu solicitud. Nos pondremos en contacto contigo pronto.</p>
-        <button 
-          onClick={() => setSuccess(false)}
-          className="mt-6 border border-on-primary-container px-6 py-2 rounded font-semibold hover:bg-on-primary-container hover:text-primary-container transition-colors"
+        <a 
+          href="https://wa.me/message/U7UANPSABGW4K1"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 inline-flex items-center justify-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold text-lg hover:bg-[#20b858] transition-all shadow-lg shadow-[#25D366]/30 hover:scale-105 active:scale-95"
         >
-          Enviar otra consulta
-        </button>
+          Verificar fechas disponibles con un asesor
+        </a>
       </div>
     );
   }
