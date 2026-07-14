@@ -258,7 +258,12 @@ export default function Precotizador() {
 
         {step === 5 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
-            <h3 className="font-display-lg text-2xl text-on-surface">¿Qué nivel de servicio buscas?</h3>
+            <div className="flex flex-col gap-1">
+              <h3 className="font-display-lg text-2xl text-on-surface">¿Qué nivel de servicio buscas?</h3>
+              <a href="/#paquetes" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-primary underline hover:text-primary-container transition-colors w-fit">
+                (Ver nuestros paquetes)
+              </a>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {packageOptions.map(pkg => {
                 const availablePkgs = getAvailablePackages();
