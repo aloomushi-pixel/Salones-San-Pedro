@@ -365,6 +365,8 @@ export default async function AdminDashboard() {
                           phoneNumber={lead.phone_number}
                           status={lead.status}
                           adminName={adminName}
+                          salon={lead.salon}
+                          packageType={lead.package_type}
                         />
                       </td>
                     </tr>
