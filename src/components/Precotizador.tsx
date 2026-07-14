@@ -297,7 +297,7 @@ export default function Precotizador() {
           <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
             <h3 className="font-display-lg text-2xl text-on-surface">¿Estás interesado en contratar un servicio extra?</h3>
             <p className="text-sm text-secondary mb-4">
-              <Link href="/blog" target="_blank" className="text-primary underline font-semibold">Ver servicios extras</Link>
+              <Link href="/blog#servicios-extras" target="_blank" className="text-primary underline font-semibold">Ver servicios extras</Link>
             </p>
             <div className="grid grid-cols-2 gap-4">
               <button

@@ -114,7 +114,7 @@ export default function BlogPage() {
           </div>
 
           {/* Grid of Extras Posts */}
-          <div className="mb-10 mt-16 pt-16 border-t border-outline-variant/30">
+          <div id="servicios-extras" className="mb-10 mt-16 pt-16 border-t border-outline-variant/30 scroll-mt-24">
             <h2 className="font-display-lg text-3xl md:text-4xl text-on-surface mb-4">
               Servicios Extras y Entretenimiento
             </h2>
