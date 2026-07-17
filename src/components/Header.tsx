@@ -76,10 +76,12 @@ export default function Header() {
         {/* Desktop CTA Button */}
         <div className="hidden md:block">
           <Link
-            href="/#disponibilidad"
+            href="https://api.whatsapp.com/message/U7UANPSABGW4K1?autoload=1&app_absent=0"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-primary-container text-on-primary-container px-6 py-3 font-label-sm rounded-lg hover:opacity-80 transition-all scale-95 active:scale-90 uppercase tracking-wider text-center block text-sm"
           >
-            COTIZAR EVENTO
+            COTIZAR
           </Link>
         </div>
 
@@ -114,11 +116,13 @@ export default function Header() {
             );
           })}
           <Link
-            href="/#disponibilidad"
+            href="https://api.whatsapp.com/message/U7UANPSABGW4K1?autoload=1&app_absent=0"
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={closeMenu}
             className="bg-primary-container text-on-primary-container px-6 py-4 font-label-sm rounded-lg hover:opacity-80 transition-all text-center uppercase tracking-wider block mt-3 font-bold"
           >
-            COTIZAR EVENTO
+            COTIZAR
           </Link>
         </div>
       )}

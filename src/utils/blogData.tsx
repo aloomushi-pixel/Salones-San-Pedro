@@ -230,8 +230,8 @@ const renderCTA = (serviceName: string) => (
     <p className="text-secondary mb-4 text-sm font-body-md">
       En Salones San Pedro Plus personalizamos cada elemento para adaptarlo a tus necesidades y hacer realidad el evento de tus sueños en la alcaldía Gustavo A. Madero, Ciudad de México.
     </p>
-    <a href="/#disponibilidad" className="inline-block bg-primary text-on-primary font-label-sm uppercase tracking-wider px-6 py-3 rounded hover:bg-primary/95 transition-all text-sm font-semibold shadow-md">
-      COTIZAR EVENTO
+    <a href="https://api.whatsapp.com/message/U7UANPSABGW4K1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer" className="inline-block bg-primary text-on-primary font-label-sm uppercase tracking-wider px-6 py-3 rounded hover:bg-primary/95 transition-all text-sm font-semibold shadow-md">
+      COTIZAR
     </a>
   </div>
 );

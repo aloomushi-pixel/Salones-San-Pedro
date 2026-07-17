@@ -26,14 +26,14 @@ export default function Home() {
           </div>
           <div className="relative z-10 text-center px-margin-mobile max-w-4xl">
             <h1 className="font-display-lg text-display-lg-mobile md:text-display-lg text-surface-container-lowest mb-6">
-              Momentos Extraordinarios, Sabores de Tradición
+              El Salón Ideal para tu Evento en CDMX a un Presupuesto Increíble
             </h1>
             <p className="font-body-lg text-body-lg text-surface-variant mb-10 max-w-2xl mx-auto">
               Exclusividad y prestigio en CDMX. Creamos experiencias que fusionan la elegancia contemporánea.
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <a className="bg-primary-container text-on-primary-container px-10 py-4 font-label-sm rounded-lg hover:opacity-90 transition-all uppercase" href="#disponibilidad">
-                COTIZAR EVENTO
+              <a className="bg-primary-container text-on-primary-container px-10 py-4 font-label-sm rounded-lg hover:opacity-90 transition-all uppercase" href="https://api.whatsapp.com/message/U7UANPSABGW4K1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer">
+                COTIZAR
               </a>
               <a className="border border-surface-container-lowest text-surface-container-lowest px-10 py-4 font-label-sm rounded-lg hover:bg-surface-container-lowest hover:text-primary transition-all uppercase" href="#galeria">
                 VER GALERÍA
