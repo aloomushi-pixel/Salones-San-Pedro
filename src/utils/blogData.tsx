@@ -230,7 +230,7 @@ const renderCTA = (serviceName: string) => (
     <p className="text-secondary mb-4 text-sm font-body-md">
       En Salones San Pedro Plus personalizamos cada elemento para adaptarlo a tus necesidades y hacer realidad el evento de tus sueños en la alcaldía Gustavo A. Madero, Ciudad de México.
     </p>
-    <a href="https://api.whatsapp.com/send?phone=525557516268&text=%C2%A1Hola!%20Visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20agendar%20mi%20evento.%20%C2%BFMe%20podr%C3%ADan%20dar%20m%C3%A1s%20detalles%3F" target="_blank" rel="noopener noreferrer" className="inline-block bg-primary text-on-primary font-label-sm uppercase tracking-wider px-6 py-3 rounded hover:bg-primary/95 transition-all text-sm font-semibold shadow-md">
+    <a href="https://wa.me/message/U7UANPSABGW4K1" target="_blank" rel="noopener noreferrer" className="inline-block bg-primary text-on-primary font-label-sm uppercase tracking-wider px-6 py-3 rounded hover:bg-primary/95 transition-all text-sm font-semibold shadow-md">
       COTIZAR
     </a>
   </div>
