@@ -76,7 +76,7 @@ export default function Header() {
         {/* Desktop CTA Button */}
         <div className="hidden md:block">
           <Link
-            href="https://api.whatsapp.com/send?phone=525557516268&text=Hola,%20vengo%20de%20la%20landing%20page%20y%20me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n."
+            href="https://api.whatsapp.com/send?phone=525557516268&text=%C2%A1Hola!%20Visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20agendar%20mi%20evento.%20%C2%BFMe%20podr%C3%ADan%20dar%20m%C3%A1s%20detalles%3F"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-primary-container text-on-primary-container px-6 py-3 font-label-sm rounded-lg hover:opacity-80 transition-all scale-95 active:scale-90 uppercase tracking-wider text-center block text-sm"
@@ -116,7 +116,7 @@ export default function Header() {
             );
           })}
           <Link
-            href="https://api.whatsapp.com/send?phone=525557516268&text=Hola,%20vengo%20de%20la%20landing%20page%20y%20me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n."
+            href="https://api.whatsapp.com/send?phone=525557516268&text=%C2%A1Hola!%20Visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20agendar%20mi%20evento.%20%C2%BFMe%20podr%C3%ADan%20dar%20m%C3%A1s%20detalles%3F"
             target="_blank"
             rel="noopener noreferrer"
             onClick={closeMenu}
