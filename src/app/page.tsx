@@ -42,6 +42,420 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Sección Paquetes */}
+        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface text-on-surface" id="paquetes">
+          <div className="max-w-container-max mx-auto">
+            
+            {/* Encabezado de la Sección */}
+            <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+              <span className="font-label-sm text-primary tracking-widest uppercase">Nuestros Paquetes</span>
+              <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface">
+                Paquetes Exclusivos
+              </h2>
+              <p className="font-body-lg text-secondary max-w-2xl mx-auto">
+                Es un honor para Salones San Pedro Plus ser considerados para la planeación de tu evento. Te ayudaremos a que sea un día inolvidable.
+              </p>
+            </div>
+
+            {/* Capacidades de los Salones */}
+            <div className="flex flex-col md:flex-row justify-center gap-8 mb-16">
+              <div className="bg-surface-container-lowest border border-outline-variant/40 p-6 rounded-xl text-center w-full md:w-1/3 shadow-sm">
+                <h3 className="font-display-lg text-2xl text-primary mb-2">Salón Platino</h3>
+                <p className="font-body-md text-secondary">Capacidad de 50 hasta 180 personas</p>
+              </div>
+              <div className="bg-surface-container-lowest border border-outline-variant/40 p-6 rounded-xl text-center w-full md:w-1/3 shadow-sm">
+                <h3 className="font-display-lg text-2xl text-primary mb-2">Salón Diamante</h3>
+                <p className="font-body-md text-secondary">Capacidad de 100 hasta 200 personas</p>
+              </div>
+            </div>
+
+            {/* Tarjetas de Precios */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+              
+              {/* Paquete Premier */}
+              <div className="bg-surface-container-lowest text-on-surface rounded-2xl shadow-xl overflow-hidden flex flex-col justify-between border border-outline-variant/30 transition-transform hover:-translate-y-2 duration-300">
+                <div>
+                  <div className="p-8 text-center bg-surface-container-low border-b border-outline-variant/30">
+                    <h3 className="font-display-lg text-3xl text-on-surface font-bold mb-2">Premier</h3>
+                    <p className="text-secondary text-sm">Base 100 personas</p>
+                    <div className="mt-4 space-y-1 text-on-surface/80 text-sm">
+                      <p>Viernes (Platino): <span className="font-bold text-lg text-primary">$530 p/p</span></p>
+                      <p>Sábado (Diamante): <span className="font-bold text-lg text-primary">$590 p/p</span></p>
+                    </div>
+                  </div>
+                  <div className="p-8">
+                    <ul className="space-y-4 text-sm text-secondary">
+                      <li className="flex items-start"><span className="text-primary-container font-bold mr-2">✓</span> 6 horas de servicio + 1/2 hr recepción</li>
+                      <li className="flex items-start"><span className="text-primary-container font-bold mr-2">✓</span> Menú formal a 3 tiempos y tornafiesta</li>
+                      <li className="flex items-start"><span className="text-primary-container font-bold mr-2">✓</span> Barra libre de mezcladores (descorche libre)</li>
+                      <li className="flex items-start"><span className="text-primary-container font-bold mr-2">✓</span> DJ, iluminación y batucada clásica</li>
+                      <li className="flex items-start"><span className="text-primary-container font-bold mr-2">✓</span> Montaje imperial con mesa de cristal</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="p-8 pt-0">
+                  <a
+                    href="#disponibilidad"
+                    className="block w-full py-3 border border-primary text-primary hover:bg-primary hover:text-on-primary rounded-lg font-label-sm transition-all uppercase tracking-wider text-center text-xs font-bold"
+                  >
+                    Verificar Disponibilidad
+                  </a>
+                </div>
+              </div>
+
+              {/* Paquete Plus (Destacado) */}
+              <div className="bg-surface-container-lowest text-on-surface rounded-2xl shadow-2xl transform md:-translate-y-4 overflow-hidden border-2 border-primary-container flex flex-col justify-between relative transition-all duration-300">
+                <div className="absolute top-0 inset-x-0 bg-primary-container text-on-primary-container text-xs font-bold text-center py-1.5 uppercase tracking-wider">
+                  El Más Elegido
+                </div>
+                <div>
+                  <div className="p-8 text-center bg-primary-container/10 border-b border-outline-variant/30 mt-6">
+                    <h3 className="font-display-lg text-3xl text-primary font-bold mb-2">Plus</h3>
+                    <p className="text-secondary text-sm">Base 100 personas</p>
+                    <div className="mt-4 space-y-1 text-on-surface/80 text-sm">
+                      <p>Platino: <span className="font-bold text-lg text-primary">$710 p/p</span></p>
+                      <p>Diamante: <span className="font-bold text-lg text-primary">$730 p/p</span></p>
+                    </div>
+                  </div>
+                  <div className="p-8">
+                    <p className="text-xs font-bold text-primary uppercase mb-3">Incluye Premier, más:</p>
+                    <ul className="space-y-4 text-sm text-secondary">
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> 7 horas de servicio</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Menú formal a 4 tiempos</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Batucada espectacular y servicio de robot</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Mesa de dulces y cabina fotográfica</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Letras gigantes y carrito de shots</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Pre-fiesta para 30 personas (L a J, 4 hrs)</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="p-8 pt-0">
+                  <a
+                    href="#disponibilidad"
+                    className="block w-full py-3.5 bg-primary text-on-primary hover:opacity-90 rounded-lg font-label-sm shadow-md transition-all uppercase tracking-wider text-center text-xs font-bold"
+                  >
+                    Verificar Disponibilidad
+                  </a>
+                </div>
+              </div>
+
+              {/* Paquete All Inclusive */}
+              <div className="bg-surface-container-lowest text-on-surface rounded-2xl shadow-xl overflow-hidden flex flex-col justify-between border border-outline-variant/30 transition-transform hover:-translate-y-2 duration-300">
+                <div>
+                  <div className="p-8 text-center bg-surface-container-low border-b border-outline-variant/30">
+                    <h3 className="font-display-lg text-3xl text-on-surface font-bold mb-2">All Inclusive</h3>
+                    <p className="text-secondary text-sm">Base 100 personas</p>
+                    <div className="mt-4 space-y-1 text-on-surface/80 text-sm">
+                      <p>Platino: <span className="font-bold text-lg text-primary">$1,010 p/p</span></p>
+                      <p>Diamante: <span className="font-bold text-lg text-primary">$1,030 p/p</span></p>
+                    </div>
+                  </div>
+                  <div className="p-8">
+                    <p className="text-xs font-bold text-primary uppercase mb-3">Incluye Plus, más:</p>
+                    <ul className="space-y-4 text-sm text-secondary">
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Batucada con Robot Iron Man</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> 1 hora de Mariachi</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Servicio de Limusina</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Video filmación y fotos con álbum</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Vino espumoso y 1 botella de licor por mesa</li>
+                      <li className="flex items-start"><span className="text-primary font-bold mr-2">✓</span> Cabina 360 (1.30 hrs)</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="p-8 pt-0">
+                  <a
+                    href="#disponibilidad"
+                    className="block w-full py-3 border border-primary text-primary hover:bg-primary hover:text-on-primary rounded-lg font-label-sm transition-all uppercase tracking-wider text-center text-xs font-bold"
+                  >
+                    Verificar Disponibilidad
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Condiciones de Pago */}
+            <div className="mt-20 bg-surface-container-low border border-outline-variant/30 rounded-2xl p-8 max-w-4xl mx-auto shadow-md">
+              <h4 className="font-display-lg text-2xl font-bold text-primary text-center mb-8">Condiciones de Pago</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-secondary text-center">
+                <div className="space-y-3">
+                  <span className="block text-4xl font-bold text-primary">1</span>
+                  <p className="font-body-md leading-relaxed">Reserva tu fecha con $3,000.00 MXN a la firma del contrato.</p>
+                </div>
+                <div className="space-y-3">
+                  <span className="block text-4xl font-bold text-primary">2</span>
+                  <p className="font-body-md leading-relaxed">Liquida el 25% del total a los 30 días posteriores a la firma.</p>
+                </div>
+                <div className="space-y-3">
+                  <span className="block text-4xl font-bold text-primary">3</span>
+                  <p className="font-body-md leading-relaxed">El monto total deberá ser liquidado 15 días previos al evento.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* Sección Galería */}
+        <section className="py-section-gap bg-surface-container-lowest" id="galeria">
+          <GaleriaSection />
+        </section>
+
+        {/* Sección TikTok Videos */}
+        <section className="py-section-gap bg-surface-container-low border-t border-b border-outline-variant/30" id="tiktok-videos">
+          <TikTokVideos />
+        </section>
+
+        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-low" id="disponibilidad">
+          <div className="max-w-container-max mx-auto text-center">
+            <div className="mb-12">
+              <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mb-6">Precotizador y Disponibilidad</h2>
+              <p className="font-body-lg text-secondary max-w-2xl mx-auto">
+                Asegura tu fecha en el escenario más exclusivo de la CDMX. Descubre el paquete ideal para ti y obtén una cotización aproximada al instante.
+              </p>
+            </div>
+            <div className="max-w-4xl mx-auto bg-surface-container-lowest p-8 md:p-12 rounded-xl shadow-2xl border border-outline-variant/30">
+              <Precotizador />
+            </div>
+          </div>
+        </section>
+
+        {/* Sección Gastronomía */}
+        <section className="py-section-gap bg-surface-container-lowest" id="banquetes">
+          <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+            <span className="font-label-sm text-primary tracking-widest uppercase">Gastronomía de Autor</span>
+            <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-2">
+              EXPERIENCIA GASTRONÓMICA: MENÚ DE 3 TIEMPOS
+            </h2>
+            <div className="w-24 h-0.5 bg-primary-container mx-auto my-4"></div>
+            <p className="font-body-lg text-secondary max-w-2xl mx-auto mb-12">
+              Descubra nuestra selección exclusiva para eventos inolvidables.
+            </p>
+
+            {/* Menú de 3 Tiempos Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mb-16">
+              {/* Primer Tiempo */}
+              <div className="group bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="space-y-6">
+                  <h3 className="font-display-lg text-xl text-primary font-bold tracking-wider uppercase">Primer Tiempo</h3>
+                  <div className="relative h-60 rounded-xl overflow-hidden shadow-md">
+                    <Image
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 saturate-[1.15] contrast-[1.05] brightness-[1.02]"
+                      alt="Primer Tiempo - Ensalada Gourmet"
+                      src="/gastronomia/primer_tiempo.jpg"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <h4 className="font-body-md font-bold text-on-surface text-base leading-snug">
+                    Entradas ligeras y sofisticadas para abrir el apetito.
+                  </h4>
+                  <p className="font-body-md text-secondary text-sm leading-relaxed">
+                    Ensalada gourmet de frutos rojos, zarzamoras frescas y queso de cabra.
+                  </p>
+                </div>
+                <a
+                  href="https://wa.me/message/U7UANPSABGW4K1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 bg-inverse-surface hover:bg-primary text-on-primary hover:text-on-primary text-xs uppercase px-6 py-3 rounded-full transition-all duration-300 font-semibold tracking-wider self-center shadow-sm text-center"
+                >
+                  Ver Opciones
+                </a>
+              </div>
+
+              {/* Segundo Tiempo */}
+              <div className="group bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="space-y-6">
+                  <h3 className="font-display-lg text-xl text-primary font-bold tracking-wider uppercase">Segundo Tiempo</h3>
+                  <div className="relative h-60 rounded-xl overflow-hidden shadow-md">
+                    <Image
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 saturate-[1.15] contrast-[1.05] brightness-[1.02]"
+                      alt="Segundo Tiempo - Fetuccini al pesto"
+                      src="/gastronomia/segundo_tiempo.jpg"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <h4 className="font-body-md font-bold text-on-surface text-base leading-snug">
+                    Pastas artesanales preparadas con salsas clásicas.
+                  </h4>
+                  <p className="font-body-md text-secondary text-sm leading-relaxed">
+                    Fetuccini al pesto.
+                  </p>
+                </div>
+                <a
+                  href="https://wa.me/message/U7UANPSABGW4K1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 bg-inverse-surface hover:bg-primary text-on-primary hover:text-on-primary text-xs uppercase px-6 py-3 rounded-full transition-all duration-300 font-semibold tracking-wider self-center shadow-sm text-center"
+                >
+                  Ver Opciones
+                </a>
+              </div>
+
+              {/* Tercer Tiempo */}
+              <div className="group bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="space-y-6">
+                  <h3 className="font-display-lg text-xl text-primary font-bold tracking-wider uppercase">Tercer Tiempo</h3>
+                  <div className="relative h-60 rounded-xl overflow-hidden shadow-md">
+                    <Image
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 saturate-[1.15] contrast-[1.05] brightness-[1.02]"
+                      alt="Tercer Tiempo - Lomo al ciruelo"
+                      src="/gastronomia/tercer_tiempo.jpg"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <h4 className="font-body-md font-bold text-on-surface text-base leading-snug">
+                    Especialidades principales preparadas al punto ideal.
+                  </h4>
+                  <p className="font-body-md text-secondary text-sm leading-relaxed">
+                    Lomo al ciruelo.
+                  </p>
+                </div>
+                <a
+                  href="https://wa.me/message/U7UANPSABGW4K1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 bg-inverse-surface hover:bg-primary text-on-primary hover:text-on-primary text-xs uppercase px-6 py-3 rounded-full transition-all duration-300 font-semibold tracking-wider self-center shadow-sm text-center"
+                >
+                  Ver Opciones
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Banner inferior de personalización */}
+          <div className="w-full bg-inverse-surface py-12 text-center text-inverse-on-surface">
+            <div className="max-w-4xl mx-auto px-margin-mobile flex flex-col md:flex-row items-center justify-between gap-6">
+              <p className="font-display-lg text-xl md:text-2xl text-surface-container-lowest font-medium">
+                ¿Desea personalizar su menú para su evento?
+              </p>
+              <a
+                href="#disponibilidad"
+                className="bg-primary-container text-on-primary-container hover:bg-primary-container/90 px-8 py-3.5 rounded-full font-label-sm text-sm uppercase tracking-wider font-bold transition-all shadow-md active:scale-95"
+              >
+                Solicitar Cotización
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Sección Animación */}
+        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-high" id="animacion">
+          <div className="max-w-container-max mx-auto text-center mb-16">
+            <span className="font-label-sm text-primary tracking-widest uppercase">Entretenimiento Elite</span>
+            <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-4">Experiencias Multi-sensoriales</h2>
+          </div>
+          <div className="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-surface-container-lowest p-10 rounded-lg shadow-sm hover:shadow-lg transition-all border border-outline-variant/30 text-center">
+              <span className="material-symbols-outlined text-primary text-5xl mb-6">speaker_group</span>
+              <h3 className="font-display-lg text-headline-md mb-4 text-on-surface">Curaduría Sonora</h3>
+              <p className="text-secondary">Sistemas de audio de alta fidelidad y DJ sets personalizados que crean la atmósfera perfecta para cada etapa de tu evento.</p>
+            </div>
+            <div className="bg-surface-container-lowest p-10 rounded-lg shadow-sm hover:shadow-lg transition-all border border-outline-variant/30 text-center">
+              <span className="material-symbols-outlined text-primary text-5xl mb-6">lightbulb_circle</span>
+              <h3 className="font-display-lg text-headline-md mb-4 text-on-surface">Iluminación LED</h3>
+              <p className="text-secondary">Diseño lumínico arquitectónico y dinámico que transforma el salón según el ritmo y la emoción del momento.</p>
+            </div>
+            <div className="bg-surface-container-lowest p-10 rounded-lg shadow-sm hover:shadow-lg transition-all border border-outline-variant/30 text-center">
+              <span className="material-symbols-outlined text-primary text-5xl mb-6">photo_camera_front</span>
+              <h3 className="font-display-lg text-headline-md mb-4 text-on-surface">Plataforma 360</h3>
+              <p className="text-secondary">Captura recuerdos inmersivos con nuestra tecnología de última generación para videos en alta definición de tus invitados.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Sección Testimonios */}
+        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface" id="testimonios">
+          <div className="max-w-container-max mx-auto">
+            <div className="text-center mb-12">
+              <span className="font-label-sm text-primary tracking-widest uppercase">Opiniones de Nuestros Clientes</span>
+              <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-2">Testimonios</h2>
+              <p className="text-secondary mt-4 max-w-2xl mx-auto">
+                Lo que dicen nuestros clientes tras vivir su gran día en Salones San Pedro.
+              </p>
+            </div>
+            <TestimoniosCarousel />
+          </div>
+        </section>
+
+        {/* Sección Ubicación */}
+        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface text-on-surface border-t border-outline-variant/30" id="ubicacion">
+          <div className="max-w-container-max mx-auto">
+            <div className="text-center mb-12">
+              <span className="font-label-sm text-primary tracking-widest uppercase">Ubicación Estratégica</span>
+              <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-2">Nuestros Salones</h2>
+              <div className="w-24 h-0.5 bg-primary-container mx-auto my-4"></div>
+              <p className="font-body-lg text-secondary max-w-2xl mx-auto">
+                Visítanos y conoce de cerca la elegancia y el equipamiento que harán único tu gran día.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto">
+              {/* Info Panel */}
+              <div className="lg:col-span-5 flex flex-col justify-between bg-surface-container-low border border-outline-variant/30 rounded-2xl p-8 shadow-md">
+                <div className="space-y-8">
+                  <div className="flex items-start gap-4">
+                    <span className="material-symbols-outlined text-primary text-3xl">pin_drop</span>
+                    <div>
+                      <h4 className="font-display-lg text-lg font-bold text-on-surface mb-2">Dirección</h4>
+                      <p className="font-body-md text-secondary leading-relaxed">
+                        Calle Nte 84 No. 6507, Gustavo A. Madero,<br />
+                        07800 Ciudad de México, CDMX
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <span className="material-symbols-outlined text-primary text-3xl">call</span>
+                    <div>
+                      <h4 className="font-display-lg text-lg font-bold text-on-surface mb-2">Teléfono de Informes</h4>
+                      <a href="tel:5557516268" className="font-body-md text-secondary hover:text-primary transition-colors font-semibold">
+                        55 5751 6268
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <span className="material-symbols-outlined text-primary text-3xl">schedule</span>
+                    <div>
+                      <h4 className="font-display-lg text-lg font-bold text-on-surface mb-2">Horario de Atención</h4>
+                      <p className="font-body-md text-secondary">
+                        Lunes a Sábado: 10:00 AM - 7:00 PM
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-8 border-t border-outline-variant/40 mt-8">
+                  <a
+                    href="https://www.google.com/maps/place/Salones+San+Pedro+plus/@19.469571,-99.2513163,12z/data=!4m10!1m2!2m1!1ssalones+san+pedro!3m6!1s0x85d1fbd833cddd65:0x59fb21f0e39a618a!8m2!3d19.469571!4d-99.098881!15sChFzYWxvbmVzIHNhbiBwZWRyb1oTIhFzYWxvbmVzIHNhbiBwZWRyb5IBFmZ1bmN0aW9uX3Jvb21fZmFjaWxpdHmaASRDaGREU1VoTk1HOW5TMFZKUTBGblNVTnFYMDl5Ym5wblJSQULgAQD6AQQIABA5!16s%2Fg%2F1pzs7jq25?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-primary text-on-primary rounded-xl font-label-sm text-sm hover:opacity-90 transition-opacity uppercase tracking-wider font-bold shadow-md"
+                  >
+                    <span className="material-symbols-outlined text-lg">map</span>
+                    Abrir en Google Maps
+                  </a>
+                </div>
+              </div>
+
+              {/* Map Panel */}
+              <div className="lg:col-span-7 h-[450px] lg:h-auto min-h-[400px] bg-black rounded-2xl overflow-hidden shadow-2xl border border-outline-variant/30">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.5471415170364!2d-99.098881!3d19.469571!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fbd833cddd65%3A0x59fb21f0e39a618a!2sSalones%20San%20Pedro%20plus!5e0!3m2!1ses!2smx!4v1716800000000!5m2!1ses!2smx"
+                  className="w-full h-full"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Sección Gastronomía */}
         <section className="py-section-gap bg-surface-container-lowest" id="banquetes">
           <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
