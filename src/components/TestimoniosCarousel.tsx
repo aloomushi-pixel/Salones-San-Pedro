@@ -94,7 +94,7 @@ export default function TestimoniosCarousel() {
       {/* Infinite Carousel - Row 1 (Left to Right) */}
       <div className="relative w-full flex overflow-hidden group mb-6">
         <div className="flex animate-marquee min-w-max gap-6 px-3" style={{ animationDuration: '40s' }}>
-          {[...reviews, ...reviews, ...reviews].slice(0, 12).map((review, index) => {
+          {[...reviews, ...reviews].map((review, index) => {
             const widthClass = index % 3 === 0 ? "w-[300px] md:w-[380px]" : index % 3 === 1 ? "w-[340px] md:w-[440px]" : "w-[320px] md:w-[400px]";
             const bgClass = index % 2 === 0 ? "bg-surface-container-lowest" : "bg-surface-container-low";
             return (
@@ -123,7 +123,8 @@ export default function TestimoniosCarousel() {
       {/* Infinite Carousel - Row 2 (Right to Left) */}
       <div className="relative w-full flex overflow-hidden group">
         <div className="flex animate-marquee min-w-max gap-6 px-3" style={{ animationDirection: 'reverse', animationDuration: '45s' }}>
-          {[...reviews, ...reviews, ...reviews].slice(4, 16).map((review, index) => {
+          {/* Reverse the array for row 2 so it doesn't look identical to row 1, then duplicate it */}
+          {[...[...reviews].reverse(), ...[...reviews].reverse()].map((review, index) => {
             const widthClass = index % 3 === 0 ? "w-[340px] md:w-[440px]" : index % 3 === 1 ? "w-[320px] md:w-[400px]" : "w-[300px] md:w-[380px]";
             const bgClass = index % 2 === 0 ? "bg-surface-container-low" : "bg-surface-container-lowest";
             return (

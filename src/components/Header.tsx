@@ -5,10 +5,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { BLOG_POSTS } from '@/utils/blogData';
+import Precotizador from '@/components/Precotizador';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [blogMenuOpen, setBlogMenuOpen] = useState(false);
+  const [isPrecotizadorOpen, setIsPrecotizadorOpen] = useState(false);
   const pathname = usePathname();
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -84,14 +86,12 @@ export default function Header() {
 
         {/* Desktop CTA Button */}
         <div className="hidden md:block">
-          <Link
-            href="https://wa.me/526633670431?text=%C2%A1Hola!%20Visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20agendar%20mi%20evento.%20%C2%BFMe%20podr%C3%ADan%20dar%20m%C3%A1s%20detalles%3F"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-primary-container text-on-primary-container px-6 py-3 font-label-sm rounded-lg hover:opacity-80 transition-all scale-95 active:scale-90 uppercase tracking-wider text-center block text-sm"
+          <button
+            onClick={() => setIsPrecotizadorOpen(true)}
+            className="bg-primary-container text-on-primary-container px-6 py-3 font-label-sm rounded-lg hover:opacity-80 transition-all scale-95 active:scale-90 uppercase tracking-wider text-center block text-sm cursor-pointer"
           >
             COTIZAR
-          </Link>
+          </button>
         </div>
 
         {/* Mobile Menu Toggle Button */}
@@ -143,15 +143,32 @@ export default function Header() {
             </div>
           )}
 
-          <Link
-            href="https://wa.me/526633670431?text=%C2%A1Hola!%20Visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20agendar%20mi%20evento.%20%C2%BFMe%20podr%C3%ADan%20dar%20m%C3%A1s%20detalles%3F"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={closeMenu}
-            className="bg-primary-container text-on-primary-container px-6 py-4 font-label-sm rounded-lg hover:opacity-80 transition-all text-center uppercase tracking-wider block mt-3 font-bold"
+          <button
+            onClick={() => {
+              closeMenu();
+              setIsPrecotizadorOpen(true);
+            }}
+            className="bg-primary-container text-on-primary-container px-6 py-4 font-label-sm rounded-lg hover:opacity-80 transition-all text-center uppercase tracking-wider block mt-3 font-bold w-full cursor-pointer"
           >
             COTIZAR
-          </Link>
+          </button>
+        </div>
+      )}
+
+      {/* Modal Precotizador */}
+      {isPrecotizadorOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fade-in">
+          <div className="relative w-full md:w-[400px] h-[450px] bg-surface rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+            <button 
+              onClick={() => setIsPrecotizadorOpen(false)}
+              className="absolute top-2 right-2 z-10 w-8 h-8 flex items-center justify-center bg-surface-container hover:bg-surface-variant text-on-surface rounded-full transition-colors"
+            >
+              <span className="material-symbols-outlined text-lg">close</span>
+            </button>
+            <div className="h-full w-full">
+              <Precotizador />
+            </div>
+          </div>
         </div>
       )}
     </header>
