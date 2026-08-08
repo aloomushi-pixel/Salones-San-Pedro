@@ -2,7 +2,7 @@ import { BLOG_POSTS } from '@/utils/blogData';
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://sanpedro.aionia.com.mx';
+  const baseUrl = 'https://salonesanpedro.com.mx';
 
   // Base routes
   const routes: MetadataRoute.Sitemap = [
