@@ -5,7 +5,7 @@ import GaleriaSection from "../components/GaleriaSection";
 import TikTokVideos from "../components/TikTokVideos";
 import Header from "../components/Header";
 import MenuTinderCards from "../components/MenuTinderCards";
-
+import ExperienciasCarousel from "../components/ExperienciasCarousel";
 export default function Home() {
   return (
     <>
@@ -210,35 +210,7 @@ export default function Home() {
           <div className="max-w-container-max mx-auto text-center mb-12">
             <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-4">Experiencias Multi-sensoriales</h2>
           </div>
-          <div className="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
-            <article className="group bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-lg transition-all overflow-hidden border border-outline-variant/30 text-center flex flex-col">
-              <div className="relative h-48 w-full overflow-hidden">
-                <Image src="/animacion/sonido.jpg" alt="Curaduría Sonora" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
-              </div>
-              <div className="p-6 flex-1 flex flex-col justify-center">
-                <h3 className="font-display-lg text-headline-md mb-2 text-on-surface">Curaduría Sonora</h3>
-                <p className="text-secondary text-sm">Audio Hi-Fi y DJ sets personalizados.</p>
-              </div>
-            </article>
-            <article className="group bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-lg transition-all overflow-hidden border border-outline-variant/30 text-center flex flex-col">
-              <div className="relative h-48 w-full overflow-hidden">
-                <Image src="/animacion/iluminacion.jpg" alt="Iluminación LED" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
-              </div>
-              <div className="p-6 flex-1 flex flex-col justify-center">
-                <h3 className="font-display-lg text-headline-md mb-2 text-on-surface">Iluminación LED</h3>
-                <p className="text-secondary text-sm">Diseño arquitectónico y dinámico.</p>
-              </div>
-            </article>
-            <article className="group bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-lg transition-all overflow-hidden border border-outline-variant/30 text-center flex flex-col">
-              <div className="relative h-48 w-full overflow-hidden">
-                <Image src="/animacion/360.jpg" alt="Plataforma 360" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
-              </div>
-              <div className="p-6 flex-1 flex flex-col justify-center">
-                <h3 className="font-display-lg text-headline-md mb-2 text-on-surface">Plataforma 360</h3>
-                <p className="text-secondary text-sm">Recuerdos inmersivos en alta definición.</p>
-              </div>
-            </article>
-          </div>
+          <ExperienciasCarousel />
         </section>
 
         {/* Sección Testimonios */}
