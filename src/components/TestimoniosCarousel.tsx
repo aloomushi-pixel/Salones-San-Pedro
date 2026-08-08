@@ -55,12 +55,24 @@ const reviews: Review[] = [
     rating: 5,
     text: "Quedamos muy satisfechos con la contratación. La mantelería, vajilla y los arreglos lucieron hermosos y de excelente calidad. El menú de tres tiempos riquísimo y el DJ mantuvo la pista encendida toda la noche. Un servicio de primer nivel de principio a fin.",
     date: "Hace 1 mes"
+  },
+  {
+    name: "Carmen L.",
+    rating: 5,
+    text: "Un lugar mágico para celebrar los XV años de mi hija. La decoración, el montaje y la iluminación crearon un ambiente de cuento de hadas. El trato del personal fue cálido y siempre dispuesto a ayudar en cada detalle. Lo recomiendo a ojos cerrados.",
+    date: "Hace 2 meses"
+  },
+  {
+    name: "Javier Monroy",
+    rating: 4,
+    text: "Todo salió conforme a lo planeado. Las instalaciones son de primer nivel y los baños siempre estuvieron impecables durante todo el evento, lo cual es muy importante. La comida tuvo buen sabor, aunque el postre tardó un poco. En general, excelente servicio.",
+    date: "Hace 3 semanas"
   }
 ];
 
 export default function TestimoniosCarousel() {
-  // Duplicate the array to create a seamless infinite loop
-  const duplicatedReviews = [...reviews, ...reviews];
+  const row1 = reviews.slice(0, 5);
+  const row2 = reviews.slice(5, 10);
 
   return (
     <div className="w-full py-8 overflow-hidden">
@@ -94,7 +106,7 @@ export default function TestimoniosCarousel() {
       {/* Infinite Carousel - Row 1 (Left to Right) */}
       <div className="relative w-full flex overflow-hidden group mb-6 py-4">
         <div className="flex animate-marquee group-hover:[animation-play-state:paused] min-w-max gap-6 px-3" style={{ animationDuration: '40s' }}>
-          {[...reviews, ...reviews].map((review, index) => {
+          {[...row1, ...row1].map((review, index) => {
             const widthClass = index % 3 === 0 ? "w-[300px] md:w-[380px]" : index % 3 === 1 ? "w-[340px] md:w-[440px]" : "w-[320px] md:w-[400px]";
             const bgClass = index % 2 === 0 ? "bg-surface-container-lowest" : "bg-surface-container-low";
             return (
@@ -123,8 +135,7 @@ export default function TestimoniosCarousel() {
       {/* Infinite Carousel - Row 2 (Right to Left) */}
       <div className="relative w-full flex overflow-hidden group py-4">
         <div className="flex animate-marquee group-hover:[animation-play-state:paused] min-w-max gap-6 px-3" style={{ animationDirection: 'reverse', animationDuration: '45s' }}>
-          {/* Reverse the array for row 2 so it doesn't look identical to row 1, then duplicate it */}
-          {[...[...reviews].reverse(), ...[...reviews].reverse()].map((review, index) => {
+          {[...row2, ...row2].map((review, index) => {
             const widthClass = index % 3 === 0 ? "w-[340px] md:w-[440px]" : index % 3 === 1 ? "w-[320px] md:w-[400px]" : "w-[300px] md:w-[380px]";
             const bgClass = index % 2 === 0 ? "bg-surface-container-low" : "bg-surface-container-lowest";
             return (

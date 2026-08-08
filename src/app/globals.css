@@ -87,12 +87,17 @@
   --text-display-lg-mobile: 40px;
   --text-display-lg-mobile--line-height: 48px;
   --text-display-lg-mobile--font-weight: 700;
+}
 
-  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
-  @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+@layer utilities {
+  .animate-marquee {
+    animation: marquee var(--marquee-duration, 40s) linear infinite;
   }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 @layer base {
