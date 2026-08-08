@@ -125,7 +125,7 @@ export default function Precotizador() {
               <h3 className="font-display-lg text-2xl text-on-surface">Nivel de Servicio</h3>
             </div>
             
-            <div className="space-y-4 mb-6">
+            <div className="space-y-4 mb-6 overflow-y-auto max-h-[300px] pr-2 custom-scrollbar">
               {PACKAGES.map((pkg) => (
                 <div 
                   key={pkg.id} 
