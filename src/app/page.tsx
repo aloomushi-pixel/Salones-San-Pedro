@@ -244,13 +244,7 @@ export default function Home() {
         {/* Sección Testimonios */}
         <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface" id="testimonios">
           <div className="max-w-container-max mx-auto">
-            <div className="text-center mb-12">
-              <span className="font-label-sm text-primary tracking-widest uppercase">Opiniones de Nuestros Clientes</span>
-              <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-2">Testimonios</h2>
-              <p className="text-secondary mt-4 max-w-2xl mx-auto">
-                Lo que dicen nuestros clientes tras vivir su gran día en Salones San Pedro.
-              </p>
-            </div>
+
             <TestimoniosCarousel />
           </div>
         </section>
