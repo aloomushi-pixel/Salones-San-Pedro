@@ -142,10 +142,10 @@ export default function GaleriaSection() {
   // Auto-scroll every 6 seconds
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveIndex((prev: number) => (prev + 1) % photos.length);
+      setActiveIndex((activeIndex + 1) % photos.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, [photos.length, activeTab, setActiveIndex]);
+  }, [photos.length, activeTab, activeIndex]);
 
   return (
     <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">

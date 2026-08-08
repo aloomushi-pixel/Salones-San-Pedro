@@ -130,7 +130,7 @@ export default function Header() {
               >
                 Ver todos los artículos
               </Link>
-              {blogPosts.map((post) => (
+              {BLOG_POSTS.map((post: { slug: string; title: string }) => (
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}

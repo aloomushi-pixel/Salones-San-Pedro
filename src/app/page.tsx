@@ -219,7 +219,10 @@ export default function Home() {
 
             <TestimoniosCarousel />
           </div>
-           {/* Premium Footer */}
+        </section>
+      </main>
+
+      {/* Premium Footer */}
       <footer className="w-full bg-[#111111] text-white border-t border-[#333333]" id="ubicacion">
         <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           
