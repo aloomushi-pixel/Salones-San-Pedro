@@ -80,7 +80,7 @@ export default function Precotizador() {
         ))}
       </div>
 
-      <div className="relative z-10 min-h-[350px] flex flex-col">
+      <div className="relative z-10 h-[450px] flex flex-col">
         {/* Step 1: Guests */}
         {step === 1 && (
           <div className="animate-fade-in flex-1 flex flex-col justify-center text-center">

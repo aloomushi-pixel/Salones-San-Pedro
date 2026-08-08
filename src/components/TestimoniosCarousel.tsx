@@ -91,12 +91,38 @@ export default function TestimoniosCarousel() {
         <span className="text-secondary text-sm bg-surface-container-high px-2 py-0.5 rounded-full">4.8 / 5</span>
       </div>
 
-      {/* Infinite Carousel */}
-      <div className="relative w-full flex overflow-hidden group">
-        <div className="flex animate-marquee min-w-max gap-6 px-3">
-          {duplicatedReviews.map((review, index) => (
+      {/* Infinite Carousel - Row 1 (Left to Right) */}
+      <div className="relative w-full flex overflow-hidden group mb-6">
+        <div className="flex animate-marquee min-w-max gap-6 px-3" style={{ animationDuration: '40s' }}>
+          {[...reviews, ...reviews, ...reviews].slice(0, 12).map((review, index) => (
             <div 
-              key={index} 
+              key={`row1-${index}`} 
+              className="w-[320px] md:w-[400px] shrink-0 bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 shadow-md relative"
+            >
+              <span className="material-symbols-outlined absolute right-4 top-4 text-primary/10 text-6xl font-bold select-none pointer-events-none">format_quote</span>
+              
+              <div className="flex text-[#C5A059] mb-3 text-sm">
+                {"★".repeat(review.rating)}
+              </div>
+              <p className="font-body-md text-on-surface/80 text-sm md:text-base leading-relaxed mb-6 italic min-h-[120px]">
+                &quot;{review.text}&quot;
+              </p>
+              
+              <div className="flex items-center justify-between border-t border-outline-variant/30 pt-4">
+                <span className="font-bold text-on-surface text-sm uppercase tracking-wider">{review.name}</span>
+                <span className="text-xs text-secondary font-medium">{review.date}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Infinite Carousel - Row 2 (Right to Left) */}
+      <div className="relative w-full flex overflow-hidden group">
+        <div className="flex animate-marquee min-w-max gap-6 px-3" style={{ animationDirection: 'reverse', animationDuration: '45s' }}>
+          {[...reviews, ...reviews, ...reviews].slice(4, 16).map((review, index) => (
+            <div 
+              key={`row2-${index}`} 
               className="w-[320px] md:w-[400px] shrink-0 bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 shadow-md relative"
             >
               <span className="material-symbols-outlined absolute right-4 top-4 text-primary/10 text-6xl font-bold select-none pointer-events-none">format_quote</span>

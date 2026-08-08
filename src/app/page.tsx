@@ -219,27 +219,21 @@ export default function Home() {
 
             <TestimoniosCarousel />
           </div>
-        </section>
-
-        {/* Sección Ubicación */}
-      </main>
-
-      {/* Footer Combinado con Ubicación */}
-      <footer className="w-full bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant text-sm" id="ubicacion">
-        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+           {/* Premium Footer */}
+      <footer className="w-full bg-[#111111] text-white border-t border-[#333333]" id="ubicacion">
+        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           
-          {/* Logo y Redes */}
-          <div className="flex flex-col items-center md:items-start gap-4">
-            <Image alt="SALONES SAN PEDRO" className="h-12 w-auto object-contain" src="/logo.svg" width={140} height={48} />
-            <p className="text-secondary text-center md:text-left mt-2">Experiencias inolvidables con la máxima elegancia y distinción.</p>
+          {/* Brand & Social */}
+          <div className="flex flex-col items-center md:items-start gap-6">
+            <Image alt="SALONES SAN PEDRO" className="h-16 w-auto object-contain brightness-0 invert" src="/logo.svg" width={160} height={64} />
+            <p className="text-[#a0a0a0] text-center md:text-left font-body-md leading-relaxed">
+              Experiencias inolvidables con la máxima elegancia y distinción para tu gran día.
+            </p>
             <div className="flex gap-4 mt-2">
-              <a aria-label="Facebook" className="text-primary hover:scale-110 transition-transform" href="https://www.facebook.com/salonsanpedroplus/" target="_blank" rel="noopener noreferrer">
+              <a aria-label="Facebook" className="w-10 h-10 rounded-full bg-[#222222] flex items-center justify-center hover:bg-primary hover:text-white transition-colors" href="https://www.facebook.com/salonsanpedroplus/" target="_blank" rel="noopener noreferrer">
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
               </a>
-              <a aria-label="Instagram" className="text-primary hover:scale-110 transition-transform" href="https://www.instagram.com/salones_sanpedroplus/?hl=es" target="_blank" rel="noopener noreferrer">
-                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.012 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.884 8.74 24 12 24s3.667-.012 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"></path></svg>
-              </a>
-              <a aria-label="TikTok" className="text-primary hover:scale-110 transition-transform" href="https://www.tiktok.com/@salones_sanpedroplus" target="_blank" rel="noopener noreferrer">
+              <a aria-label="TikTok" className="w-10 h-10 rounded-full bg-[#222222] flex items-center justify-center hover:bg-primary hover:text-white transition-colors" href="https://www.tiktok.com/@salones_sanpedroplus" target="_blank" rel="noopener noreferrer">
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .8.11V9.4a6.27 6.27 0 0 0-3.66 1 6.33 6.33 0 0 0-3 5.37 6.34 6.34 0 0 0 10.86 4.5 6.3 6.3 0 0 0 2.25-4.81V7.26a9.68 9.68 0 0 0 4.7-2.13 9.77 9.77 0 0 0 2.83-4.13V2h-3.46a4.84 4.84 0 0 1-3.42 4.69z"></path>
                 </svg>
@@ -248,39 +242,39 @@ export default function Home() {
           </div>
 
           {/* Contacto & Ubicacion */}
-          <div className="flex flex-col items-center md:items-start gap-3">
-            <h4 className="font-bold text-on-surface uppercase tracking-wider text-xs">Ubicación</h4>
-            <div className="flex items-start gap-2 text-secondary">
-              <span className="material-symbols-outlined text-[1.2rem] text-primary shrink-0">pin_drop</span>
-              <span>Calle Nte 84 No. 6507, Gustavo A. Madero,<br/>07800 Ciudad de México, CDMX</span>
+          <div className="flex flex-col items-center md:items-start gap-6">
+            <h4 className="font-display-lg text-lg text-[#d4af37] uppercase tracking-widest border-b border-[#333333] pb-2 w-full text-center md:text-left">Ubicación</h4>
+            <div className="flex items-start gap-3 text-[#a0a0a0]">
+              <span className="material-symbols-outlined text-xl text-[#d4af37] shrink-0 mt-0.5">pin_drop</span>
+              <span className="leading-relaxed">Calle Nte 84 No. 6507, Gustavo A. Madero,<br/>07800 Ciudad de México, CDMX</span>
             </div>
             <a
               href="https://www.google.com/maps/place/Salones+San+Pedro+plus/@19.469571,-99.2513163,12z"
               target="_blank" rel="noopener noreferrer"
-              className="text-primary hover:underline mt-1 font-semibold flex items-center gap-1"
+              className="text-[#d4af37] hover:text-white transition-colors mt-2 font-semibold flex items-center gap-2 group"
             >
-              Abrir en Google Maps <span className="material-symbols-outlined text-sm">open_in_new</span>
+              Abrir en Google Maps <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">open_in_new</span>
             </a>
           </div>
 
           {/* Horarios & Teléfono */}
-          <div className="flex flex-col items-center md:items-start gap-3">
-            <h4 className="font-bold text-on-surface uppercase tracking-wider text-xs">Contacto</h4>
-            <div className="flex items-center gap-2 text-secondary">
-              <span className="material-symbols-outlined text-[1.2rem] text-primary">call</span>
-              <a href="tel:5557516268" className="hover:text-primary transition-colors">55 5751 6268</a>
+          <div className="flex flex-col items-center md:items-start gap-6">
+            <h4 className="font-display-lg text-lg text-[#d4af37] uppercase tracking-widest border-b border-[#333333] pb-2 w-full text-center md:text-left">Contacto</h4>
+            <div className="flex items-center gap-3 text-[#a0a0a0]">
+              <span className="material-symbols-outlined text-xl text-[#d4af37]">call</span>
+              <a href="tel:5557516268" className="hover:text-white transition-colors font-semibold tracking-wider">55 5751 6268</a>
             </div>
-            <div className="flex items-center gap-2 text-secondary">
-              <span className="material-symbols-outlined text-[1.2rem] text-primary">schedule</span>
-              <span>Lun a Sáb: 10:00 AM - 7:00 PM</span>
+            <div className="flex items-start gap-3 text-[#a0a0a0]">
+              <span className="material-symbols-outlined text-xl text-[#d4af37] mt-0.5">schedule</span>
+              <span className="leading-relaxed">Lunes a Sábado<br/>10:00 AM - 7:00 PM</span>
             </div>
           </div>
 
           {/* Mapa Pequeño */}
-          <div className="w-full h-40 bg-black rounded-lg overflow-hidden border border-outline-variant/30 hidden md:block">
+          <div className="w-full h-full min-h-[200px] bg-[#222222] rounded-xl overflow-hidden border border-[#333333] shadow-lg hidden md:block relative">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.5471415170364!2d-99.098881!3d19.469571!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fbd833cddd65%3A0x59fb21f0e39a618a!2sSalones%20San%20Pedro%20plus!5e0!3m2!1ses!2smx!4v1716800000000!5m2!1ses!2smx"
-              className="w-full h-full"
+              className="absolute inset-0 w-full h-full opacity-80 hover:opacity-100 transition-opacity"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
@@ -290,15 +284,16 @@ export default function Home() {
         </div>
 
         {/* Legal & Copyright */}
-        <div className="border-t border-outline-variant/30 py-4 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-secondary max-w-7xl mx-auto">
-          <p>© 2026 Salones San Pedro Eventos. Todos los derechos reservados.</p>
-          <div className="flex gap-4">
-            <a className="hover:text-primary transition-colors" href="#">Aviso de Privacidad</a>
-            <a className="hover:text-primary transition-colors" href="#">Términos de Servicio</a>
+        <div className="bg-[#0a0a0a] border-t border-[#222222] py-6">
+          <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#666666] tracking-wide">
+            <p>© {new Date().getFullYear()} Salones San Pedro Eventos. Todos los derechos reservados.</p>
+            <div className="flex gap-6">
+              <a className="hover:text-[#d4af37] transition-colors uppercase" href="#">Aviso de Privacidad</a>
+              <a className="hover:text-[#d4af37] transition-colors uppercase" href="#">Términos de Servicio</a>
+            </div>
           </div>
         </div>
       </footer>
-
       {/* WhatsApp Floating Button */}
       <a aria-label="Chat on WhatsApp" className="fixed bottom-8 right-8 z-[100] flex items-center justify-center w-16 h-16 bg-[#25D366] text-white rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 group" href="https://wa.me/526633670431?text=%C2%A1Hola!%20Visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20agendar%20mi%20evento.%20%C2%BFMe%20podr%C3%ADan%20dar%20m%C3%A1s%20detalles%3F" target="_blank">
         <svg className="w-10 h-10 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
