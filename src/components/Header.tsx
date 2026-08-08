@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { BLOG_POSTS } from '@/utils/blogData';
 import Precotizador from '@/components/Precotizador';
+import { trackEvent } from '@/utils/trackEvent';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -87,7 +88,10 @@ export default function Header() {
         {/* Desktop CTA Button */}
         <div className="hidden md:block">
           <button
-            onClick={() => setIsPrecotizadorOpen(true)}
+            onClick={() => {
+              trackEvent('cotizar_click', 'header_desktop');
+              setIsPrecotizadorOpen(true);
+            }}
             className="bg-primary-container text-on-primary-container px-6 py-3 font-label-sm rounded-lg hover:opacity-80 transition-all scale-95 active:scale-90 uppercase tracking-wider text-center block text-sm cursor-pointer"
           >
             COTIZAR
@@ -145,6 +149,7 @@ export default function Header() {
 
           <button
             onClick={() => {
+              trackEvent('cotizar_click', 'header_mobile');
               closeMenu();
               setIsPrecotizadorOpen(true);
             }}

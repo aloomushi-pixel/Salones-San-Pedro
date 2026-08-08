@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { trackEvent } from '@/utils/trackEvent';
 
 const PACKAGES = [
   {
@@ -60,6 +61,8 @@ export default function Precotizador() {
 
     const message = `¡Hola! Usé su herramienta rápida en la página y me interesa un evento para ${guests} personas con el paquete ${packageType}. Extras de interés: ${extrasText}. Mi presupuesto base aproximado arrojó $${budget.toLocaleString('es-MX')}. ¿Podrían darme más detalles?`;
     
+    trackEvent('whatsapp_click', 'precotizador');
+    
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/526633670431?text=${encodedMessage}`, '_blank');
   };
@@ -71,16 +74,20 @@ export default function Precotizador() {
       <div className="absolute -top-32 -right-32 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
       
       {/* Title */}
-      <h2 className="text-center font-display-lg text-2xl md:text-3xl font-bold text-on-surface mb-6">Precotizador de Evento</h2>
+      {step !== 4 && (
+        <h2 className="text-center font-display-lg text-2xl md:text-3xl font-bold text-on-surface mb-6">Precotizador de Evento</h2>
+      )}
 
       {/* Progress Bar */}
-      <div className="flex gap-2 mb-8 relative z-10">
-        {[1, 2, 3, 4].map((i) => (
-          <div key={i} className={`h-1.5 flex-1 rounded-full transition-all duration-500 ${i <= step ? 'bg-primary' : 'bg-outline-variant/30'}`}></div>
-        ))}
-      </div>
+      {step !== 4 && (
+        <div className="flex gap-2 mb-8 relative z-10">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className={`h-1.5 flex-1 rounded-full transition-all duration-500 ${i <= step ? 'bg-primary' : 'bg-outline-variant/30'}`}></div>
+          ))}
+        </div>
+      )}
 
-      <div className="relative z-10 h-[450px] flex flex-col">
+      <div className="relative z-10 h-[450px] flex flex-col overflow-y-auto custom-scrollbar pr-1 pb-1">
         {/* Step 1: Guests */}
         {step === 1 && (
           <div className="animate-fade-in flex-1 flex flex-col justify-center text-center">
@@ -170,7 +177,7 @@ export default function Precotizador() {
             </div>
             <p className="text-sm text-secondary mb-6">Selecciona los servicios adicionales que te gustaría considerar para personalizar tu evento.</p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
               {EXTRAS.map((extra) => {
                 const isSelected = selectedExtras.includes(extra.id);
                 return (
@@ -226,13 +233,13 @@ export default function Precotizador() {
 
             <button 
               onClick={handleWhatsApp}
-              className="mt-auto w-full bg-[#25D366] text-white font-bold py-4 rounded-xl hover:bg-[#1EBE5D] active:scale-95 transition-all uppercase tracking-wider text-sm shadow-lg flex items-center justify-center gap-2"
+              className="mt-4 w-full bg-[#25D366] text-white font-bold py-4 rounded-xl hover:bg-[#1EBE5D] active:scale-95 transition-all uppercase tracking-wider text-sm shadow-lg flex items-center justify-center gap-2 flex-shrink-0"
             >
               <span className="material-symbols-outlined text-xl">forum</span>
               <span>Solicitar Cotización por WhatsApp</span>
             </button>
             
-            <button onClick={() => setStep(1)} className="text-xs font-bold text-secondary hover:text-primary transition-colors uppercase tracking-widest mt-6">
+            <button onClick={() => setStep(1)} className="text-xs font-bold text-secondary hover:text-primary transition-colors uppercase tracking-widest mt-6 mb-4 flex-shrink-0">
               Volver a calcular
             </button>
           </div>
