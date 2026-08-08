@@ -72,7 +72,7 @@ export default function Home() {
             </div>
 
             {/* Tarjetas de Precios */}
-            <div className="flex flex-col md:flex-row justify-center items-center md:items-stretch max-w-6xl mx-auto -space-y-4 md:space-y-0 md:-space-x-4">
+            <div className="flex flex-col md:flex-row justify-center items-center md:items-stretch max-w-6xl mx-auto px-4 md:px-8 -space-y-4 md:space-y-0 md:-space-x-4">
               
               {/* Paquete Premier */}
               <div className="bg-surface-container-lowest text-on-surface rounded-2xl shadow-xl overflow-hidden flex flex-col justify-between border border-outline-variant/30 transition-all hover:scale-105 hover:z-30 duration-300 relative z-10 w-full md:w-[360px] flex-shrink-0 cursor-pointer">
@@ -209,6 +209,9 @@ export default function Home() {
         <section className="py-12 md:py-16 px-margin-mobile md:px-margin-desktop bg-surface-container-high" id="animacion">
           <div className="max-w-container-max mx-auto text-center mb-12">
             <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-4">Experiencias Multi-sensoriales</h2>
+            <p className="font-body-md text-secondary max-w-3xl mx-auto mt-4 px-4">
+              Ofrecemos estos servicios adicionales para personalizar al máximo tu celebración y hacer de tu evento algo verdaderamente inolvidable.
+            </p>
           </div>
           <ExperienciasCarousel />
         </section>

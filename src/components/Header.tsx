@@ -157,8 +157,8 @@ export default function Header() {
 
       {/* Modal Precotizador */}
       {isPrecotizadorOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fade-in">
-          <div className="relative w-full md:w-[400px] h-[450px] bg-surface rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 backdrop-blur-sm p-[11px] md:p-4 animate-fade-in">
+          <div className="relative w-full md:w-[480px] h-[480px] max-h-full bg-surface rounded-3xl shadow-[0_0_50px_rgba(212,175,55,0.15),0_0_20px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden border border-outline-variant/30 transform transition-all">
             <button 
               onClick={() => setIsPrecotizadorOpen(false)}
               className="absolute top-2 right-2 z-10 w-8 h-8 flex items-center justify-center bg-surface-container hover:bg-surface-variant text-on-surface rounded-full transition-colors"
