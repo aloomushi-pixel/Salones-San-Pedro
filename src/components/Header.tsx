@@ -4,39 +4,23 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
+import { blogPosts } from '@/utils/blogData';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [blogMenuOpen, setBlogMenuOpen] = useState(false);
   const pathname = usePathname();
 
   const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
-
-  const menuItems = [
-    { name: 'Paquetes', href: '/#paquetes' },
-    { name: 'Galería', href: '/#galeria' },
-    { name: 'Gastronomía', href: '/#banquetes' },
-    { name: 'Verificar espacio', href: '/#disponibilidad' },
-    { name: 'Ubicación', href: '/#ubicacion' },
-    { name: 'Testimonios', href: '/#testimonios' },
-    { name: 'Blog', href: '/blog' },
-  ];
-
-  const isActive = (href: string) => {
-    if (href === '/blog') {
-      return pathname.startsWith('/blog');
-    }
-    // Anchor links on main page are only active if we are on root and the hash matches (approx)
-    return false;
+  const closeMenu = () => {
+    setIsOpen(false);
+    setBlogMenuOpen(false);
   };
+
+  const isBlogActive = pathname.startsWith('/blog');
 
   return (
     <header className="w-full sticky top-0 z-50">
-      {/* Announcement Bar */}
-      <div className="w-full bg-error text-on-error py-3 px-4 text-center font-label-sm shadow-md">
-        🚨 Fechas de temporada alta agotándose rápido. ¡Aparta tu fecha con precio especial este mes!
-      </div>
-
       {/* Navigation Bar */}
       <nav className="w-full flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 bg-surface/90 dark:bg-surface/90 backdrop-blur-md shadow-sm border-b border-outline-variant/10">
         {/* Logo */}
@@ -55,22 +39,47 @@ export default function Header() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8 font-body-md text-body-md">
-          {menuItems.map((item) => {
-            const active = isActive(item.href);
-            return (
-              <Link
-                key={item.name}
-                className={`transition-colors duration-300 ${
-                  active
-                    ? 'text-primary font-bold border-b-2 border-primary pb-1'
-                    : 'text-secondary hover:text-primary'
-                }`}
-                href={item.href}
-              >
-                {item.name}
-              </Link>
-            );
-          })}
+          <div className="relative group">
+            <button
+              onClick={() => setBlogMenuOpen(!blogMenuOpen)}
+              className={`flex items-center gap-1 transition-colors duration-300 ${
+                isBlogActive
+                  ? 'text-primary font-bold border-b-2 border-primary pb-1'
+                  : 'text-secondary hover:text-primary'
+              }`}
+            >
+              Blog
+              <span className="material-symbols-outlined text-xl">
+                {blogMenuOpen ? 'expand_less' : 'expand_more'}
+              </span>
+            </button>
+            
+            {/* Desktop Dropdown */}
+            {blogMenuOpen && (
+              <div className="absolute top-full left-0 mt-2 w-72 bg-surface shadow-lg border border-outline-variant/30 rounded-md overflow-hidden z-50 flex flex-col max-h-[400px]">
+                <Link
+                  href="/blog"
+                  onClick={closeMenu}
+                  className="px-4 py-3 border-b border-outline-variant/30 text-primary font-bold hover:bg-surface-container-lowest transition-colors"
+                >
+                  Ver todos los artículos
+                </Link>
+                <div className="overflow-y-auto overflow-x-hidden flex-1 py-2 custom-scrollbar">
+                  {blogPosts.map((post) => (
+                    <Link
+                      key={post.slug}
+                      href={`/blog/${post.slug}`}
+                      onClick={closeMenu}
+                      className="block px-4 py-2 text-sm text-secondary hover:text-primary hover:bg-surface-container-lowest transition-colors truncate"
+                      title={post.title}
+                    >
+                      {post.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Desktop CTA Button */}
@@ -99,22 +108,41 @@ export default function Header() {
 
       {/* Mobile Menu Panel */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-surface border-b border-outline-variant/30 py-6 px-margin-mobile flex flex-col gap-5 shadow-2xl animate-fade-in z-50">
-          {menuItems.map((item) => {
-            const active = isActive(item.href);
-            return (
+        <div className="md:hidden absolute top-full left-0 w-full bg-surface border-b border-outline-variant/30 py-6 px-margin-mobile flex flex-col gap-5 shadow-2xl animate-fade-in z-50 max-h-[80vh] overflow-y-auto">
+          
+          <button
+            onClick={() => setBlogMenuOpen(!blogMenuOpen)}
+            className="flex items-center justify-between py-2 text-lg border-b border-outline-variant/10 transition-colors duration-300 text-secondary hover:text-primary"
+          >
+            <span className={isBlogActive ? 'text-primary font-bold' : ''}>Blog</span>
+            <span className="material-symbols-outlined">
+              {blogMenuOpen ? 'expand_less' : 'expand_more'}
+            </span>
+          </button>
+          
+          {/* Mobile Accordion */}
+          {blogMenuOpen && (
+            <div className="flex flex-col gap-2 pl-4 border-l-2 border-outline-variant/20 -mt-2">
               <Link
-                key={item.name}
-                className={`py-2 text-lg border-b border-outline-variant/10 transition-colors duration-300 ${
-                  active ? 'text-primary font-bold' : 'text-secondary hover:text-primary'
-                }`}
-                href={item.href}
+                href="/blog"
                 onClick={closeMenu}
+                className="py-2 text-primary font-bold"
               >
-                {item.name}
+                Ver todos los artículos
               </Link>
-            );
-          })}
+              {blogPosts.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  onClick={closeMenu}
+                  className="py-2 text-sm text-secondary hover:text-primary truncate"
+                >
+                  {post.title}
+                </Link>
+              ))}
+            </div>
+          )}
+
           <Link
             href="https://wa.me/526633670431?text=%C2%A1Hola!%20Visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20agendar%20mi%20evento.%20%C2%BFMe%20podr%C3%ADan%20dar%20m%C3%A1s%20detalles%3F"
             target="_blank"

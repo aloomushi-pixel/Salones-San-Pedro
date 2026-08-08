@@ -468,7 +468,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     imageUrl: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
-        <p>La fotografía captura un instante, pero el video captura el sonido del 'sí, acepto', los discursos emotivos de los padres, las risas de los amigos y el ambiente festivo de la pista de baile. El video cinemático profesional te permite revivir tu gran día una y otra vez con la máxima calidad.</p>
+        <p>La fotografía captura un instante, pero el video captura el sonido del &apos;sí, acepto&apos;, los discursos emotivos de los padres, las risas de los amigos y el ambiente festivo de la pista de baile. El video cinemático profesional te permite revivir tu gran día una y otra vez con la máxima calidad.</p>
         
         <h2 className="font-display-lg text-2xl text-on-surface font-bold mt-8">Edición cinematográfica y calidad digital</h2>
         <p>Utilizamos cámaras de alta definición con estabilizadores para lograr tomas fluidas y elegantes. El video final se edita incorporando música de fondo seleccionada por los novios y se entrega en formato digital de alta resolución en una USB personalizada, listo para compartir y ver con toda la familia.</p>
@@ -492,8 +492,8 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
         <h2 className="font-display-lg text-2xl text-on-surface font-bold mt-8">Nuestros modelos disponibles para renta</h2>
         <p>Ofrecemos letras de 1.20 metros de altura en color blanco mate con iluminación cálida:</p>
         <ul className="list-disc pl-5 space-y-2">
-          <li><strong>Letrero 'X.V':</strong> Ideal para quinceañeras, colocado a los costados de la mesa de honor o en el acceso principal.</li>
-          <li><strong>Letrero 'Corazón':</strong> Un elemento romántico e iluminado perfecto para bodas y aniversarios en el salón Diamante.</li>
+          <li><strong>Letrero &apos;X.V&apos;:</strong> Ideal para quinceañeras, colocado a los costados de la mesa de honor o en el acceso principal.</li>
+          <li><strong>Letrero &apos;Corazón&apos;:</strong> Un elemento romántico e iluminado perfecto para bodas y aniversarios en el salón Diamante.</li>
         </ul>
 
         {renderCTA("las Letras Gigantes Iluminadas")}
@@ -555,7 +555,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     imageUrl: "/servicios/mariachi.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
-        <p>El mariachi es sinónimo de fiesta mexicana. El sonido de las trompetas y los violines al entonar 'El Son de la Negra' o 'Sabes una cosa' crea un momento mágico y emotivo que toca las fibras de todos los asistentes. Es el cierre perfecto para el banquete o la apertura ideal de la tornaboda.</p>
+        <p>El mariachi es sinónimo de fiesta mexicana. El sonido de las trompetas y los violines al entonar &apos;El Son de la Negra&apos; o &apos;Sabes una cosa&apos; crea un momento mágico y emotivo que toca las fibras de todos los asistentes. Es el cierre perfecto para el banquete o la apertura ideal de la tornaboda.</p>
         
         <h2 className="font-display-lg text-2xl text-on-surface font-bold mt-8">Show profesional de Mariachi en Salones San Pedro Plus</h2>
         <p>Ofrecemos la presentación de un mariachi profesional compuesto por músicos uniformados y con instrumentos de gala. El show incluye una hora completa de canciones tradicionales, complacencias para los festejados y dinámicas de canto grupal para animar la fiesta.</p>

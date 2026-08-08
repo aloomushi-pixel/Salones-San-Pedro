@@ -141,50 +141,45 @@ export default function GaleriaSection() {
 
   // Auto-scroll every 6 seconds
   useEffect(() => {
-    const timer = setInterval(handleNext, 6000);
+    const timer = setInterval(() => {
+      setActiveIndex(prev => (prev + 1) % photos.length);
+    }, 6000);
     return () => clearInterval(timer);
-  }, [activeIndex, activeTab]);
+  }, [photos.length, activeTab, setActiveIndex]);
 
   return (
     <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
       {/* Encabezado */}
       <div className="text-center mb-10">
-        <span className="font-label-sm text-primary tracking-widest uppercase">Galería de Espacios</span>
         <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-2">
           Nuestros Salones
         </h2>
         <p className="font-body-lg text-secondary max-w-2xl mx-auto mt-4">
-          Espacios diseñados con el máximo refinamiento y sofisticación para hacer de su evento un momento inolvidable.
+          Te presentamos la galería de fotos.
         </p>
       </div>
 
       {/* Tabs Selector */}
-      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+      <div className="flex justify-center items-center gap-2 mb-8 border-b border-outline-variant/30 pb-px">
         <button
           onClick={() => setActiveTab('diamante')}
-          className={`w-full sm:w-auto px-8 py-3.5 rounded-2xl transition-all duration-300 border flex flex-col items-center text-center ${
+          className={`px-6 py-2 transition-all duration-300 font-bold uppercase tracking-wider text-sm border-b-2 ${
             activeTab === 'diamante'
-              ? 'bg-primary text-on-primary border-primary shadow-md'
-              : 'bg-surface-container-low text-secondary border-outline-variant/30 hover:bg-surface-container-high'
+              ? 'text-primary border-primary'
+              : 'text-secondary border-transparent hover:text-on-surface'
           }`}
         >
-          <span className="text-xs font-bold tracking-wider uppercase">Salón Diamante (100 - 200 pers.)</span>
-          <span className={`text-[10px] mt-1 font-medium ${activeTab === 'diamante' ? 'text-on-primary/90' : 'text-secondary/80'}`}>
-            Primer Piso
-          </span>
+          Salón Diamante
         </button>
         <button
           onClick={() => setActiveTab('platino')}
-          className={`w-full sm:w-auto px-8 py-3.5 rounded-2xl transition-all duration-300 border flex flex-col items-center text-center ${
+          className={`px-6 py-2 transition-all duration-300 font-bold uppercase tracking-wider text-sm border-b-2 ${
             activeTab === 'platino'
-              ? 'bg-primary text-on-primary border-primary shadow-md'
-              : 'bg-surface-container-low text-secondary border-outline-variant/30 hover:bg-surface-container-high'
+              ? 'text-primary border-primary'
+              : 'text-secondary border-transparent hover:text-on-surface'
           }`}
         >
-          <span className="text-xs font-bold tracking-wider uppercase">Salón Platino (50 - 180 pers.)</span>
-          <span className={`text-[10px] mt-1 font-medium ${activeTab === 'platino' ? 'text-on-primary/90' : 'text-secondary/80'}`}>
-            Planta Baja
-          </span>
+          Salón Platino
         </button>
       </div>
 
@@ -252,21 +247,7 @@ export default function GaleriaSection() {
 
       </div>
 
-      {/* Booking CTA */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12 max-w-xl mx-auto px-margin-mobile">
-        <a
-          href="#disponibilidad"
-          className="flex-1 bg-primary text-on-primary hover:opacity-90 font-label-sm text-xs md:text-sm px-6 py-3.5 rounded-lg shadow-md transition-all uppercase tracking-wider font-semibold active:scale-95 text-center"
-        >
-          Cotizar Salón Diamante
-        </a>
-        <a
-          href="#disponibilidad"
-          className="flex-1 border border-primary text-primary hover:bg-primary hover:text-on-primary font-label-sm text-xs md:text-sm px-6 py-3.5 rounded-lg shadow-md transition-all uppercase tracking-wider font-semibold active:scale-95 text-center"
-        >
-          Cotizar Salón Platino
-        </a>
-      </div>
+
     </div>
   );
 }

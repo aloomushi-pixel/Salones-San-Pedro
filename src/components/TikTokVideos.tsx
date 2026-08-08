@@ -98,14 +98,10 @@ export default function TikTokVideos() {
     <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
       {/* Title Section */}
       <div className="text-center mb-12">
-        <span className="font-label-sm text-primary tracking-widest uppercase">Momentos Reales</span>
         <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-2">
-          Así se vive la experiencia San Pedro Plus
+          Últimos videos de San Pedro Plus
         </h2>
         <div className="w-24 h-0.5 bg-primary-container mx-auto my-4"></div>
-        <p className="font-body-lg text-secondary max-w-2xl mx-auto">
-          Descubre el ambiente único de nuestras celebraciones a través de nuestra lista de reproducción viral (+2K vistas).
-        </p>
       </div>
 
       {/* Playlist Player Container */}

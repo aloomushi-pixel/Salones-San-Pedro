@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export default function LoginForm() {
-  const [state, formAction, isPending] = useActionState(async (prevState: any, formData: FormData) => {
+  const [state, formAction, isPending] = useActionState(async (prevState: typeof initialState, formData: FormData) => {
     const result = await login(formData);
     if (result?.error) {
       return { error: result.error };

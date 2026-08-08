@@ -13,7 +13,7 @@ export default function BlogPage() {
     "decoracion-con-globos-moderna-para-fiestas",
     "servicio-de-reposteria-y-postres-extra-para-eventos"
   ];
-  const isExtra = (post: any) => SERVICIOS_EXTRAS.includes(post.category) || EXTRA_SLUGS.includes(post.slug);
+  const isExtra = (post: { category: string, slug: string }) => SERVICIOS_EXTRAS.includes(post.category) || EXTRA_SLUGS.includes(post.slug);
   
   const eventosPosts = BLOG_POSTS.filter(p => !isExtra(p));
   const extrasPosts = BLOG_POSTS.filter(isExtra);

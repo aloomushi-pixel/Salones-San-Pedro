@@ -23,7 +23,6 @@ export default function LeadActionsClient({
   guestsCount,
   eventDate,
   email,
-  phoneNumber,
   status,
   adminName,
   salon,
@@ -111,8 +110,8 @@ export default function LeadActionsClient({
       } else {
         setErrorMsg(res.error || 'Ocurrió un error al enviar el correo.');
       }
-    } catch (err: any) {
-      setErrorMsg(err.message || 'Error al conectar con el servidor.');
+    } catch (err: unknown) {
+      setErrorMsg(err instanceof Error ? err.message : 'Error al conectar con el servidor.');
     } finally {
       setSending(false);
     }

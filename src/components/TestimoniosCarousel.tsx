@@ -1,7 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
 interface Review {
   name: string;
   rating: number;
@@ -61,25 +59,23 @@ const reviews: Review[] = [
 ];
 
 export default function TestimoniosCarousel() {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % reviews.length);
-  };
-
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
-  };
-
-  useEffect(() => {
-    const timer = setInterval(handleNext, 6000);
-    return () => clearInterval(timer);
-  }, []);
+  // Duplicate the array to create a seamless infinite loop
+  const duplicatedReviews = [...reviews, ...reviews];
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto px-4 md:px-12 py-8">
+    <div className="w-full py-8 overflow-hidden">
+      {/* Title */}
+      <div className="text-center mb-12">
+        <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface">
+          Testimonios
+        </h2>
+        <p className="font-body-lg text-secondary max-w-2xl mx-auto mt-4">
+          Descubre por qué cientos de clientes confían en Salones San Pedro Plus para sus eventos más importantes.
+        </p>
+      </div>
+
       {/* Google badge info */}
-      <div className="flex flex-wrap justify-center items-center gap-3 mb-8">
+      <div className="flex flex-wrap justify-center items-center gap-3 mb-12">
         <div className="flex items-center gap-2">
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -95,64 +91,30 @@ export default function TestimoniosCarousel() {
         <span className="text-secondary text-sm bg-surface-container-high px-2 py-0.5 rounded-full">4.8 / 5</span>
       </div>
 
-      {/* Review Box */}
-      <div className="min-h-[220px] bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 md:p-10 shadow-xl relative overflow-hidden transition-all duration-500">
-        <span className="material-symbols-outlined absolute right-6 md:right-8 top-6 md:top-8 text-primary/10 text-8xl font-bold select-none pointer-events-none">format_quote</span>
-        
-        <div className="flex flex-col h-full justify-between gap-6">
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-lg uppercase">
-                {reviews[activeIndex].name[0]}
+      {/* Infinite Carousel */}
+      <div className="relative w-full flex overflow-hidden group">
+        <div className="flex animate-marquee min-w-max gap-6 px-3">
+          {duplicatedReviews.map((review, index) => (
+            <div 
+              key={index} 
+              className="w-[320px] md:w-[400px] shrink-0 bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 shadow-md relative"
+            >
+              <span className="material-symbols-outlined absolute right-4 top-4 text-primary/10 text-6xl font-bold select-none pointer-events-none">format_quote</span>
+              
+              <div className="flex text-[#C5A059] mb-3 text-sm">
+                {"★".repeat(review.rating)}
               </div>
-              <div>
-                <h4 className="font-semibold text-on-surface text-lg leading-snug">{reviews[activeIndex].name}</h4>
-                <div className="flex text-[#C5A059] text-sm mt-0.5">
-                  {"★".repeat(reviews[activeIndex].rating)}
-                  {"☆".repeat(5 - reviews[activeIndex].rating)}
-                </div>
+              <p className="font-body-md text-on-surface/80 text-sm md:text-base leading-relaxed mb-6 italic min-h-[120px]">
+                &quot;{review.text}&quot;
+              </p>
+              
+              <div className="flex items-center justify-between border-t border-outline-variant/30 pt-4">
+                <span className="font-bold text-on-surface text-sm uppercase tracking-wider">{review.name}</span>
+                <span className="text-xs text-secondary font-medium">{review.date}</span>
               </div>
             </div>
-            
-            <p className="text-secondary italic text-lg leading-relaxed pt-2 pr-6">
-              "{reviews[activeIndex].text}"
-            </p>
-          </div>
-
-          <span className="text-secondary/60 text-xs self-start">{reviews[activeIndex].date}</span>
+          ))}
         </div>
-      </div>
-
-      {/* Navigation Arrows */}
-      <button 
-        onClick={handlePrev}
-        className="absolute left-[-8px] md:left-0 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-surface-container-highest/80 hover:bg-primary hover:text-on-primary shadow-lg flex items-center justify-center transition-all cursor-pointer z-10"
-        aria-label="Anterior"
-      >
-        <span className="material-symbols-outlined">chevron_left</span>
-      </button>
-      <button 
-        onClick={handleNext}
-        className="absolute right-[-8px] md:right-0 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-surface-container-highest/80 hover:bg-primary hover:text-on-primary shadow-lg flex items-center justify-center transition-all cursor-pointer z-10"
-        aria-label="Siguiente"
-      >
-        <span className="material-symbols-outlined">chevron_right</span>
-      </button>
-
-      {/* Indicator Bullets */}
-      <div className="flex justify-center gap-2 mt-6">
-        {reviews.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setActiveIndex(idx)}
-            className={`w-2.5 h-2.5 rounded-full transition-all ${
-              idx === activeIndex 
-                ? 'bg-primary w-5' 
-                : 'bg-outline-variant hover:bg-primary/50'
-            }`}
-            aria-label={`Ir a reseña ${idx + 1}`}
-          />
-        ))}
       </div>
     </div>
   );

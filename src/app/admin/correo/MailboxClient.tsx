@@ -2,12 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { 
-  ParsedMessage, 
-  sendEmailResponse, 
-  sendNewEmail, 
-  toggleMessageDeleted, 
-  deleteMessagePermanent 
+  ParsedMessage
 } from '../emailActions';
+import { toggleMessageDeleted, deleteMessagePermanent, sendNewEmail } from '../emailActions';
 
 interface Lead {
   id: string;
@@ -97,12 +94,15 @@ export default function MailboxClient({ initialLeads, initialMessages, currentUs
   // Set first filtered message as selected on folder change
   useEffect(() => {
     if (filteredMessages.length > 0 && activeFolder !== 'compose') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedMessage(filteredMessages[0]);
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedMessage(null);
     }
     setSuccessMsg('');
     setErrorMsg('');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeFolder]);
 
   // Lead email suggestions for "Para" field
@@ -163,8 +163,8 @@ export default function MailboxClient({ initialLeads, initialMessages, currentUs
       } else {
         setErrorMsg(res.error || 'Ocurrió un error al procesar el mensaje.');
       }
-    } catch (err: any) {
-      setErrorMsg(err.message || 'Error al conectar con el servidor.');
+    } catch (err: unknown) {
+      setErrorMsg(err instanceof Error ? err.message : 'Error al conectar con el servidor.');
     } finally {
       setActionLoading(false);
     }
@@ -186,8 +186,8 @@ export default function MailboxClient({ initialLeads, initialMessages, currentUs
       } else {
         setErrorMsg(res.error || 'Ocurrió un error al eliminar el mensaje.');
       }
-    } catch (err: any) {
-      setErrorMsg(err.message || 'Error al conectar con el servidor.');
+    } catch (err: unknown) {
+      setErrorMsg(err instanceof Error ? err.message : 'Error al conectar con el servidor.');
     } finally {
       setActionLoading(false);
     }
@@ -232,8 +232,8 @@ export default function MailboxClient({ initialLeads, initialMessages, currentUs
       } else {
         setErrorMsg(res.error || 'Ocurrió un error al enviar el correo.');
       }
-    } catch (err: any) {
-      setErrorMsg(err.message || 'Error al conectar con el servidor.');
+    } catch (err: unknown) {
+      setErrorMsg(err instanceof Error ? err.message : 'Error al conectar con el servidor.');
     } finally {
       setSending(false);
     }

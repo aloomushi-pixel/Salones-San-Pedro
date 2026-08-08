@@ -26,8 +26,9 @@ export async function POST(request: NextRequest) {
           "svix-timestamp": svix_timestamp,
           "svix-signature": svix_signature,
         });
-      } catch (err: any) {
-        console.error('Firma de webhook inválida:', err.message);
+      } catch (err: unknown) {
+        const errMsg = err instanceof Error ? err.message : 'Unknown error';
+        console.error('Firma de webhook inválida:', errMsg);
         return NextResponse.json({ success: false, error: 'Firma inválida' }, { status: 401 });
       }
     }
@@ -196,8 +197,9 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ success: true, message: 'Correo procesado y registrado correctamente' });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Error general en webhook de Resend:', err);
-    return NextResponse.json({ success: false, error: err.message || 'Error interno del servidor' }, { status: 500 });
+    const errMsg = err instanceof Error ? err.message : 'Error interno del servidor';
+    return NextResponse.json({ success: false, error: errMsg }, { status: 500 });
   }
 }

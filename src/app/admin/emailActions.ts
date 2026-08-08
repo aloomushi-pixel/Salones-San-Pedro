@@ -58,7 +58,7 @@ function parseMessageBody(msg: MessageRecord, leadEmail: string = ''): ParsedMes
         };
       }
     }
-  } catch (e) {
+  } catch {
     // Si falla el parseo, se trata como texto plano (retrocompatibilidad)
   }
 
@@ -153,7 +153,7 @@ export async function toggleMessageDeleted(messageId: string, isDeleted: boolean
       if (rawBody.startsWith('{') && rawBody.endsWith('}')) {
         parsedBody = JSON.parse(rawBody);
       }
-    } catch (e) {}
+    } catch {}
 
     if (!parsedBody || typeof parsedBody.body !== 'string') {
       // Si era texto plano, lo convertimos a la estructura JSON
@@ -181,9 +181,9 @@ export async function toggleMessageDeleted(messageId: string, isDeleted: boolean
 
     revalidatePath('/admin/correo');
     return { success: true };
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Error toggling message deleted:', err);
-    return { success: false, error: err.message || 'Error al actualizar el estado del mensaje.' };
+    return { success: false, error: err instanceof Error ? err.message : 'Error al actualizar el estado del mensaje.' };
   }
 }
 
@@ -200,9 +200,9 @@ export async function deleteMessagePermanent(messageId: string): Promise<{ succe
 
     revalidatePath('/admin/correo');
     return { success: true };
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Error deleting message permanently:', err);
-    return { success: false, error: err.message || 'Error al borrar el correo.' };
+    return { success: false, error: err instanceof Error ? err.message : 'Error al borrar el correo.' };
   }
 }
 
@@ -255,6 +255,7 @@ export async function sendEmailResponse(
 
   try {
     // Preparar opciones de Resend
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const sendOptions: any = {
       from: sender,
       to: toEmail,
@@ -335,9 +336,9 @@ export async function sendEmailResponse(
     revalidatePath('/admin');
     revalidatePath('/admin/correo');
     return { success: true };
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Error sending email response:', err);
-    return { success: false, error: err.message || 'Error desconocido al enviar correo.' };
+    return { success: false, error: err instanceof Error ? err.message : 'Error desconocido al enviar correo.' };
   }
 }
 
@@ -352,7 +353,7 @@ export async function sendNewEmail(
   
   try {
     // Buscar si existe un lead con este correo electrónico
-    let { data: lead, error: leadError } = await supabase
+    const { data: lead } = await supabase
       .from('leads')
       .select('id')
       .eq('email', toEmail)
@@ -387,8 +388,8 @@ export async function sendNewEmail(
 
     // Ahora enviamos el correo y guardamos en messages
     return await sendEmailResponse(leadId, toEmail, subject, bodyText, ccEmail);
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Error in sendNewEmail:', err);
-    return { success: false, error: err.message || 'Error al procesar el envío del correo.' };
+    return { success: false, error: err instanceof Error ? err.message : 'Error al procesar el envío del correo.' };
   }
 }
