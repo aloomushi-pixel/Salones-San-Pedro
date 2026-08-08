@@ -248,7 +248,7 @@ export default function Home() {
               <span className="leading-relaxed">Calle Nte 84 No. 6507, Gustavo A. Madero,<br/>07800 Ciudad de México, CDMX</span>
             </div>
             <a
-              href="https://www.google.com/maps/place/Salones+San+Pedro+plus/@19.469571,-99.2513163,12z"
+              href="https://maps.app.goo.gl/oarkXjctGWr5d4J96?g_st=ac"
               target="_blank" rel="noopener noreferrer"
               className="text-[#d4af37] hover:text-white transition-colors mt-2 font-semibold flex items-center gap-2 group"
             >
