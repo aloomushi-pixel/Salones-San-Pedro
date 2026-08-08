@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import { blogPosts } from '@/utils/blogData';
+import { BLOG_POSTS } from '@/utils/blogData';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,7 +65,7 @@ export default function Header() {
                   Ver todos los artículos
                 </Link>
                 <div className="overflow-y-auto overflow-x-hidden flex-1 py-2 custom-scrollbar">
-                  {blogPosts.map((post) => (
+                  {BLOG_POSTS.map((post) => (
                     <Link
                       key={post.slug}
                       href={`/blog/${post.slug}`}
