@@ -29,7 +29,7 @@ export default function Home() {
           
           <div className="relative z-10 w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pt-16">
             <h1 className="font-display-lg text-display-lg-mobile md:text-5xl lg:text-6xl text-surface-container-lowest mb-10 text-center lg:text-left drop-shadow-xl font-bold">
-              Salón de eventos en CDMX San Pedro Plus
+              Salón de eventos en Gustavo A. Madero - CDMX San Pedro Plus
             </h1>
             
             <div className="flex flex-col lg:flex-row gap-12 items-center lg:items-start justify-between">
