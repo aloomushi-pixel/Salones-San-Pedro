@@ -8,18 +8,21 @@ const PACKAGES = [
     id: 'Premier',
     name: 'Premier',
     price: 530,
+    minGuests: 50,
     features: ['6 horas de servicio', 'Menú a 3 tiempos', 'Barra libre de mezcladores']
   },
   {
     id: 'Plus',
     name: 'Plus',
     price: 710,
+    minGuests: 100,
     features: ['7 horas de servicio', 'Batucada con Robot LED', 'Mesa de dulces']
   },
   {
     id: 'All Inclusive',
     name: 'All Inclusive',
     price: 1010,
+    minGuests: 100,
     features: ['Mariachi (1 hr)', 'Cabina 360 y Video', 'Servicio de Limusina']
   }
 ];
@@ -40,6 +43,20 @@ export default function Precotizador() {
   const [guests, setGuests] = useState(100);
   const [packageType, setPackageType] = useState('Premier');
   const [selectedExtras, setSelectedExtras] = useState<string[]>([]);
+
+  const handleGuestsChange = (value: number) => {
+    setGuests(value);
+    if (value < 100 && packageType !== 'Premier') {
+      setPackageType('Premier');
+    }
+  };
+
+  const handleContinueToStep2 = () => {
+    if (guests < 100 && packageType !== 'Premier') {
+      setPackageType('Premier');
+    }
+    setStep(2);
+  };
 
   const handleExtraToggle = (id: string) => {
     setSelectedExtras(prev => 
@@ -95,16 +112,29 @@ export default function Precotizador() {
             <p className="text-secondary mb-8">Desliza para seleccionar la cantidad aproximada</p>
             
             <div className="pt-4 pb-8">
-              <div className="text-5xl font-bold text-primary mb-8 font-display-lg">
+              <div className="text-5xl font-bold text-primary mb-4 font-display-lg">
                 {guests} <span className="text-xl text-secondary font-normal">personas</span>
               </div>
+
+              {guests < 100 ? (
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-6">
+                  <span className="material-symbols-outlined text-sm">info</span>
+                  Paquete disponible para este aforo: Premier
+                </div>
+              ) : (
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-500/10 text-green-700 text-xs font-semibold rounded-full mb-6">
+                  <span className="material-symbols-outlined text-sm">check_circle</span>
+                  Todos los paquetes disponibles
+                </div>
+              )}
+
               <input 
                 type="range" 
                 min="50" 
                 max="200" 
                 step="10" 
                 value={guests} 
-                onChange={(e) => setGuests(Number(e.target.value))}
+                onChange={(e) => handleGuestsChange(Number(e.target.value))}
                 className="w-full h-2 bg-outline-variant/40 rounded-lg appearance-none cursor-pointer accent-primary"
               />
               <div className="flex justify-between mt-3 text-xs text-secondary font-bold">
@@ -114,7 +144,7 @@ export default function Precotizador() {
             </div>
 
             <button 
-              onClick={() => setStep(2)}
+              onClick={handleContinueToStep2}
               className="mt-auto w-full bg-primary text-on-primary font-bold py-4 rounded-xl hover:opacity-90 active:scale-95 transition-all uppercase tracking-wider text-sm shadow-md"
             >
               Continuar
@@ -125,36 +155,74 @@ export default function Precotizador() {
         {/* Step 2: Package */}
         {step === 2 && (
           <div className="animate-fade-in flex-1 flex flex-col justify-center">
-            <div className="flex items-center gap-4 mb-6">
+            <div className="flex items-center gap-4 mb-4">
               <button onClick={() => setStep(1)} className="text-secondary hover:text-primary transition-colors">
                 <span className="material-symbols-outlined">arrow_back</span>
               </button>
               <h3 className="font-display-lg text-2xl text-on-surface">Nivel de Servicio</h3>
             </div>
+
+            {guests < 100 && (
+              <div className="mb-4 p-3 bg-primary/10 border border-primary/20 rounded-xl text-xs text-primary flex items-start gap-2">
+                <span className="material-symbols-outlined text-base shrink-0 mt-0.5">info</span>
+                <span>Para tu evento de <strong>{guests} personas</strong>, el paquete disponible es <strong>Premier</strong>. Los paquetes Plus y All Inclusive están disponibles a partir de 100 personas.</span>
+              </div>
+            )}
             
             <div className="space-y-4 mb-6 overflow-y-auto max-h-[300px] pr-2 custom-scrollbar">
-              {PACKAGES.map((pkg) => (
-                <div 
-                  key={pkg.id} 
-                  onClick={() => setPackageType(pkg.id)}
-                  className={`p-5 rounded-2xl border-2 cursor-pointer transition-all ${packageType === pkg.id ? 'border-primary bg-primary/5 shadow-md' : 'border-outline-variant/30 hover:border-primary/50'}`}
-                >
-                  <div className="flex justify-between items-center mb-2">
-                    <h4 className="font-bold text-lg text-on-surface">{pkg.name}</h4>
-                    <span className="text-sm font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">
-                      desde ${pkg.price} <span className="text-xs font-normal">p/p</span>
-                    </span>
+              {PACKAGES.map((pkg) => {
+                const isAvailable = guests >= pkg.minGuests;
+                const isSelected = packageType === pkg.id;
+
+                return (
+                  <div 
+                    key={pkg.id} 
+                    onClick={() => {
+                      if (isAvailable) {
+                        setPackageType(pkg.id);
+                      }
+                    }}
+                    className={`p-5 rounded-2xl border-2 transition-all relative ${
+                      !isAvailable
+                        ? 'opacity-40 bg-surface-container-low/60 border-outline-variant/20 cursor-not-allowed select-none'
+                        : isSelected 
+                          ? 'border-primary bg-primary/5 shadow-md cursor-pointer' 
+                          : 'border-outline-variant/30 hover:border-primary/50 cursor-pointer'
+                    }`}
+                  >
+                    <div className="flex justify-between items-center mb-2">
+                      <div className="flex items-center gap-2">
+                        <h4 className={`font-bold text-lg ${isAvailable ? 'text-on-surface' : 'text-secondary'}`}>
+                          {pkg.name}
+                        </h4>
+                        {!isAvailable && (
+                          <span className="text-[11px] font-semibold text-secondary bg-surface-container-high px-2 py-0.5 rounded-full flex items-center gap-1 border border-outline-variant/30">
+                            <span className="material-symbols-outlined text-[13px]">lock</span>
+                            Mínimo 100 personas
+                          </span>
+                        )}
+                      </div>
+                      <span className={`text-sm font-bold px-3 py-1 rounded-full ${
+                        isAvailable 
+                          ? 'text-primary bg-primary/10' 
+                          : 'text-secondary bg-surface-container-high'
+                      }`}>
+                        desde ${pkg.price} <span className="text-xs font-normal">p/p</span>
+                      </span>
+                    </div>
+                    <ul className="text-sm text-secondary space-y-1 mt-3">
+                      {pkg.features.map((feat, i) => (
+                        <li key={i} className="flex items-center gap-2">
+                          <span className={`material-symbols-outlined text-[1rem] ${isAvailable ? 'text-primary' : 'text-secondary/50'}`}>
+                            check_circle
+                          </span>
+                          {feat}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul className="text-sm text-secondary space-y-1 mt-3">
-                    {pkg.features.map((feat, i) => (
-                      <li key={i} className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-[1rem] text-primary">check_circle</span>
-                        {feat}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <button 

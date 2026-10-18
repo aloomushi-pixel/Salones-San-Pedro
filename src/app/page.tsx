@@ -80,7 +80,7 @@ export default function Home() {
                 <div>
                   <div className="p-8 text-center bg-surface-container-low border-b border-outline-variant/30">
                     <h3 className="font-display-lg text-3xl text-on-surface font-bold mb-2">Premier</h3>
-                    <p className="text-secondary text-sm">Base 100 personas</p>
+                    <p className="text-primary text-sm font-semibold">Disponible desde 50 personas</p>
                     <div className="mt-4 space-y-1 text-on-surface/80 text-sm">
                       <p>Viernes Platino desde <span className="font-bold text-lg text-primary">$530 p/p</span></p>
                     </div>
@@ -108,7 +108,7 @@ export default function Home() {
                 <div>
                   <div className="p-8 text-center bg-primary-container/10 border-b border-outline-variant/30 mt-6">
                     <h3 className="font-display-lg text-3xl text-primary font-bold mb-2">Plus</h3>
-                    <p className="text-secondary text-sm">Base 100 personas</p>
+                    <p className="text-secondary text-sm">A partir de 100 personas</p>
                     <div className="mt-4 space-y-1 text-on-surface/80 text-sm">
                       <p>Platino desde <span className="font-bold text-lg text-primary">$710 p/p</span></p>
                     </div>
@@ -142,7 +142,7 @@ export default function Home() {
                 <div>
                   <div className="p-8 text-center bg-surface-container-low border-b border-outline-variant/30">
                     <h3 className="font-display-lg text-3xl text-on-surface font-bold mb-2">All Inclusive</h3>
-                    <p className="text-secondary text-sm">Base 100 personas</p>
+                    <p className="text-secondary text-sm">A partir de 100 personas</p>
                     <div className="mt-4 space-y-1 text-on-surface/80 text-sm">
                       <p>Platino desde <span className="font-bold text-lg text-primary">$1,010 p/p</span></p>
                     </div>
