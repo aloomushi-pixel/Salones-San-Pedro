@@ -7,6 +7,8 @@ import Header from "../components/Header";
 import MenuTinderCards from "../components/MenuTinderCards";
 import ExperienciasCarousel from "../components/ExperienciasCarousel";
 import TrackedLink from "../components/TrackedLink";
+import LegalModals from "../components/LegalModals";
+
 export default function Home() {
   return (
     <>
@@ -14,7 +16,7 @@ export default function Home() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative min-h-screen pt-24 pb-16 w-full flex items-center justify-center overflow-hidden">
+        <section id="inicio" data-ux-section="inicio" className="relative min-h-screen pt-24 pb-16 w-full flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0">
             <Image
               className="object-cover"
@@ -39,12 +41,12 @@ export default function Home() {
                   Salón de eventos en Ciudad de México para bodas, XV años, bautizos, graduaciones y eventos corporativos con precio económico.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                  <a className="bg-primary-container text-on-primary-container px-8 py-4 font-bold tracking-wider rounded-xl hover:scale-105 transition-transform uppercase text-center shadow-lg" href="#paquetes">
+                  <TrackedLink eventType="hero_click" source="ver_precios" className="bg-primary-container text-on-primary-container px-8 py-4 font-bold tracking-wider rounded-xl hover:scale-105 transition-transform uppercase text-center shadow-lg" href="#paquetes">
                     VER PRECIOS
-                  </a>
-                  <a className="border-2 border-surface-container-lowest text-surface-container-lowest px-8 py-4 font-bold tracking-wider rounded-xl hover:bg-surface-container-lowest hover:text-primary transition-all uppercase text-center backdrop-blur-sm shadow-lg" href="#galeria">
+                  </TrackedLink>
+                  <TrackedLink eventType="hero_click" source="ver_galeria" className="border-2 border-surface-container-lowest text-surface-container-lowest px-8 py-4 font-bold tracking-wider rounded-xl hover:bg-surface-container-lowest hover:text-primary transition-all uppercase text-center backdrop-blur-sm shadow-lg" href="#galeria">
                     VER GALERÍA
-                  </a>
+                  </TrackedLink>
                 </div>
               </div>
 
@@ -59,7 +61,7 @@ export default function Home() {
         </section>
 
         {/* Sección Paquetes */}
-        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface text-on-surface" id="paquetes">
+        <section data-ux-section="paquetes" className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface text-on-surface" id="paquetes">
           <div className="max-w-container-max mx-auto">
             
             {/* Encabezado de la Sección */}
@@ -96,7 +98,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="p-8 pt-0">
-                  <TrackedLink eventType="cotizar_click" source="paquete_CTA" href="https://wa.me/526633670431?text=%C2%A1Hola!%20Visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20agendar%20mi%20evento.%20%C2%BFMe%20podr%C3%ADan%20dar%20m%C3%A1s%20detalles%3F" target="_blank" rel="noopener noreferrer" className="block w-full py-3 border border-primary text-primary hover:bg-primary hover:text-on-primary rounded-lg font-label-sm transition-all uppercase tracking-wider text-center text-xs font-bold">Verificar Disponibilidad</TrackedLink>
+                  <TrackedLink eventType="cotizar_click" source="paquete_premier" href="https://wa.me/526633670431?text=%C2%A1Hola!%20Visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20el%20Paquete%20Premier.%20%C2%BFMe%20podr%C3%ADan%20dar%20m%C3%A1s%20detalles%3F" target="_blank" rel="noopener noreferrer" className="block w-full py-3 border border-primary text-primary hover:bg-primary hover:text-on-primary rounded-lg font-label-sm transition-all uppercase tracking-wider text-center text-xs font-bold">Verificar Disponibilidad</TrackedLink>
                 </div>
               </div>
 
@@ -160,7 +162,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="p-8 pt-0">
-                  <TrackedLink eventType="cotizar_click" source="paquete_CTA" href="https://wa.me/526633670431?text=%C2%A1Hola!%20Visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20agendar%20mi%20evento.%20%C2%BFMe%20podr%C3%ADan%20dar%20m%C3%A1s%20detalles%3F" target="_blank" rel="noopener noreferrer" className="block w-full py-3 border border-primary text-primary hover:bg-primary hover:text-on-primary rounded-lg font-label-sm transition-all uppercase tracking-wider text-center text-xs font-bold">Verificar Disponibilidad</TrackedLink>
+                  <TrackedLink eventType="cotizar_click" source="paquete_all_inclusive" href="https://wa.me/526633670431?text=%C2%A1Hola!%20Visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20el%20Paquete%20All%20Inclusive.%20%C2%BFMe%20podr%C3%ADan%20dar%20m%C3%A1s%20detalles%3F" target="_blank" rel="noopener noreferrer" className="block w-full py-3 border border-primary text-primary hover:bg-primary hover:text-on-primary rounded-lg font-label-sm transition-all uppercase tracking-wider text-center text-xs font-bold">Verificar Disponibilidad</TrackedLink>
                 </div>
               </div>
             </div>
@@ -170,19 +172,19 @@ export default function Home() {
         </section>
 
         {/* Sección Galería */}
-        <section className="py-section-gap bg-surface-container-lowest" id="galeria">
+        <section data-ux-section="galeria" className="py-section-gap bg-surface-container-lowest" id="galeria">
           <GaleriaSection />
         </section>
 
         {/* Sección TikTok Videos */}
-        <section className="py-section-gap bg-surface-container-low border-t border-b border-outline-variant/30" id="tiktok-videos">
+        <section data-ux-section="tiktok-videos" className="py-section-gap bg-surface-container-low border-t border-b border-outline-variant/30" id="tiktok-videos">
           <TikTokVideos />
         </section>
 
 
 
         {/* Sección Gastronomía */}
-        <section className="py-12 md:py-16 bg-surface-container-lowest" id="banquetes">
+        <section data-ux-section="banquetes" className="py-12 md:py-16 bg-surface-container-lowest" id="banquetes">
           <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
             <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-2">
               EXPERIENCIA GASTRONÓMICA
@@ -199,7 +201,7 @@ export default function Home() {
         </section>
 
         {/* Sección Animación */}
-        <section className="py-12 md:py-16 px-margin-mobile md:px-margin-desktop bg-surface-container-high" id="animacion">
+        <section data-ux-section="animacion" className="py-12 md:py-16 px-margin-mobile md:px-margin-desktop bg-surface-container-high" id="animacion">
           <div className="max-w-container-max mx-auto text-center mb-12">
             <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-4">Experiencias Multi-sensoriales</h2>
             <p className="font-body-md text-secondary max-w-3xl mx-auto mt-4 px-4">
@@ -210,7 +212,7 @@ export default function Home() {
         </section>
 
         {/* Sección Testimonios */}
-        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface" id="testimonios">
+        <section data-ux-section="testimonios" className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface" id="testimonios">
           <div className="max-w-container-max mx-auto">
 
             <TestimoniosCarousel />
@@ -219,7 +221,7 @@ export default function Home() {
       </main>
 
       {/* Premium Footer */}
-      <footer className="w-full bg-[#111111] text-white border-t border-[#333333]" id="ubicacion">
+      <footer data-ux-section="ubicacion" className="w-full bg-[#111111] text-white border-t border-[#333333]" id="ubicacion">
         <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           
           {/* Brand & Social */}
@@ -229,14 +231,14 @@ export default function Home() {
               Experiencias inolvidables con la máxima elegancia y distinción para tu gran día.
             </p>
             <div className="flex gap-4 mt-2">
-              <a aria-label="Facebook" className="w-10 h-10 rounded-full bg-[#222222] flex items-center justify-center hover:bg-primary hover:text-white transition-colors" href="https://www.facebook.com/salonsanpedroplus/" target="_blank" rel="noopener noreferrer">
+              <TrackedLink eventType="footer_click" source="facebook_footer" aria-label="Facebook" className="w-10 h-10 rounded-full bg-[#222222] flex items-center justify-center hover:bg-primary hover:text-white transition-colors" href="https://www.facebook.com/salonsanpedroplus/" target="_blank" rel="noopener noreferrer">
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
-              </a>
-              <a aria-label="TikTok" className="w-10 h-10 rounded-full bg-[#222222] flex items-center justify-center hover:bg-primary hover:text-white transition-colors" href="https://www.tiktok.com/@salones_sanpedroplus" target="_blank" rel="noopener noreferrer">
+              </TrackedLink>
+              <TrackedLink eventType="footer_click" source="tiktok_footer" aria-label="TikTok" className="w-10 h-10 rounded-full bg-[#222222] flex items-center justify-center hover:bg-primary hover:text-white transition-colors" href="https://www.tiktok.com/@salones_sanpedroplus" target="_blank" rel="noopener noreferrer">
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .8.11V9.4a6.27 6.27 0 0 0-3.66 1 6.33 6.33 0 0 0-3 5.37 6.34 6.34 0 0 0 10.86 4.5 6.3 6.3 0 0 0 2.25-4.81V7.26a9.68 9.68 0 0 0 4.7-2.13 9.77 9.77 0 0 0 2.83-4.13V2h-3.46a4.84 4.84 0 0 1-3.42 4.69z"></path>
                 </svg>
-              </a>
+              </TrackedLink>
             </div>
           </div>
 
@@ -247,13 +249,15 @@ export default function Home() {
               <span className="material-symbols-outlined text-xl text-[#d4af37] shrink-0 mt-0.5">pin_drop</span>
               <span className="leading-relaxed">Calle Nte 84 No. 6507, Gustavo A. Madero,<br/>07800 Ciudad de México, CDMX</span>
             </div>
-            <a
+            <TrackedLink
+              eventType="footer_click"
+              source="google_maps"
               href="https://maps.app.goo.gl/oarkXjctGWr5d4J96?g_st=ac"
               target="_blank" rel="noopener noreferrer"
               className="text-[#d4af37] hover:text-white transition-colors mt-2 font-semibold flex items-center gap-2 group"
             >
               Abrir en Google Maps <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">open_in_new</span>
-            </a>
+            </TrackedLink>
           </div>
 
           {/* Horarios & Teléfono */}
@@ -261,7 +265,7 @@ export default function Home() {
             <h4 className="font-display-lg text-lg text-[#d4af37] uppercase tracking-widest border-b border-[#333333] pb-2 w-full text-center md:text-left">Contacto</h4>
             <div className="flex items-center gap-3 text-[#a0a0a0]">
               <span className="material-symbols-outlined text-xl text-[#d4af37]">call</span>
-              <a href="tel:5557516268" className="hover:text-white transition-colors font-semibold tracking-wider">55 5751 6268</a>
+              <TrackedLink eventType="footer_click" source="telefono_5557516268" href="tel:5557516268" className="hover:text-white transition-colors font-semibold tracking-wider">55 5751 6268</TrackedLink>
             </div>
             <div className="flex items-start gap-3 text-[#a0a0a0]">
               <span className="material-symbols-outlined text-xl text-[#d4af37] mt-0.5">schedule</span>
@@ -286,10 +290,7 @@ export default function Home() {
         <div className="bg-[#0a0a0a] border-t border-[#222222] py-6">
           <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#666666] tracking-wide">
             <p>© {new Date().getFullYear()} Salones San Pedro Eventos. Todos los derechos reservados.</p>
-            <div className="flex gap-6">
-              <a className="hover:text-[#d4af37] transition-colors uppercase" href="#">Aviso de Privacidad</a>
-              <a className="hover:text-[#d4af37] transition-colors uppercase" href="#">Términos de Servicio</a>
-            </div>
+            <LegalModals />
           </div>
         </div>
       </footer>
@@ -302,5 +303,3 @@ export default function Home() {
     </>
   );
 }
-
-

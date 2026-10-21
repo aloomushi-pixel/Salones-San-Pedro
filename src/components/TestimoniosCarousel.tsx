@@ -1,5 +1,8 @@
 'use client';
 
+import { useRef } from 'react';
+import { trackEvent } from '@/utils/trackEvent';
+
 interface Review {
   name: string;
   rating: number;
@@ -73,6 +76,24 @@ const reviews: Review[] = [
 export default function TestimoniosCarousel() {
   const row1 = reviews.slice(0, 5);
   const row2 = reviews.slice(5, 10);
+  const hoverStartRef = useRef<number | null>(null);
+
+  const handleReviewPauseStart = () => {
+    hoverStartRef.current = Date.now();
+  };
+
+  const handleReviewPauseEnd = (author: string) => {
+    if (!hoverStartRef.current) return;
+    const dwell = Date.now() - hoverStartRef.current;
+    hoverStartRef.current = null;
+    if (dwell >= 1500) {
+      trackEvent('testimonial_pause', `read_${author}`, {
+        section: 'testimonios',
+        element_text: author,
+        timers: { section_dwell_ms: dwell },
+      });
+    }
+  };
 
   return (
     <div className="w-full py-8 overflow-hidden">
@@ -112,6 +133,15 @@ export default function TestimoniosCarousel() {
             return (
             <div 
               key={`row1-${index}`} 
+              data-interactive="true"
+              onMouseEnter={handleReviewPauseStart}
+              onMouseLeave={() => handleReviewPauseEnd(review.name)}
+              onClick={() =>
+                trackEvent('testimonial_pause', `click_${review.name}`, {
+                  section: 'testimonios',
+                  element_text: review.name,
+                })
+              }
               className={`${widthClass} ${bgClass} shrink-0 border border-outline-variant/30 rounded-3xl p-7 shadow-lg relative flex flex-col transition-all duration-300 hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl hover:z-10 cursor-pointer`}
             >
               <span className="material-symbols-outlined absolute right-5 top-5 text-primary/10 text-7xl font-bold select-none pointer-events-none">format_quote</span>
@@ -141,6 +171,15 @@ export default function TestimoniosCarousel() {
             return (
             <div 
               key={`row2-${index}`} 
+              data-interactive="true"
+              onMouseEnter={handleReviewPauseStart}
+              onMouseLeave={() => handleReviewPauseEnd(review.name)}
+              onClick={() =>
+                trackEvent('testimonial_pause', `click_${review.name}`, {
+                  section: 'testimonios',
+                  element_text: review.name,
+                })
+              }
               className={`${widthClass} ${bgClass} shrink-0 border border-outline-variant/30 rounded-3xl p-7 shadow-lg relative flex flex-col transition-all duration-300 hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl hover:z-10 cursor-pointer`}
             >
               <span className="material-symbols-outlined absolute right-5 top-5 text-primary/10 text-7xl font-bold select-none pointer-events-none">format_quote</span>

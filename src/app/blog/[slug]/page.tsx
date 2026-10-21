@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Header from "../../../components/Header";
 import { BLOG_POSTS_DETAILS } from "@/utils/blogData";
 import Image from "next/image";
+import TrackedLink from "../../../components/TrackedLink";
+import LegalModals from "../../../components/LegalModals";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -100,9 +102,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <p className="text-sm opacity-90 leading-relaxed">
                   Verifica la disponibilidad para tu evento en Salones San Pedro hoy mismo y recibe atención personalizada de nuestros coordinadores.
                 </p>
-                <Link href="/#disponibilidad" className="block w-full py-3 bg-surface text-primary rounded-lg font-label-sm text-xs font-bold shadow hover:bg-surface-variant transition-all uppercase tracking-wider">
+                <TrackedLink eventType="cotizar_click" source={`blog_post_${slug}`} href="/#paquetes" className="block w-full py-3 bg-surface text-primary rounded-lg font-label-sm text-xs font-bold shadow hover:bg-surface-variant transition-all uppercase tracking-wider">
                   Ver disponibilidad
-                </Link>
+                </TrackedLink>
               </div>
             </div>
           </div>
@@ -142,9 +144,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </div>
         <div className="flex flex-wrap justify-center gap-8 font-body-md text-body-md text-secondary">
-          <a className="hover:text-primary transition-colors" href="#">Aviso de Privacidad</a>
-          <a className="hover:text-primary transition-colors" href="#">Términos de Servicio</a>
-          <a className="hover:text-primary transition-colors" href="#">Preguntas Frecuentes</a>
+          <LegalModals />
         </div>
         <p className="font-body-md text-body-md text-on-surface dark:text-inverse-on-surface mt-4 text-center opacity-70">© 2026 Salones San Pedro Eventos. Todos los derechos reservados.</p>
       </footer>

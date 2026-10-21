@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { trackEvent } from '@/utils/trackEvent';
 
 const experiencias = [
   {
@@ -57,7 +58,14 @@ export default function ExperienciasCarousel() {
         {experiencias.map((exp, index) => (
           <article 
             key={index}
-            className="snap-start shrink-0 w-[280px] md:w-[320px] group bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-lg transition-all overflow-hidden border border-outline-variant/30 text-center flex flex-col"
+            data-interactive="true"
+            onClick={() =>
+              trackEvent('experience_interaction', `card_${exp.title}`, {
+                section: 'experiencias',
+                experience_title: exp.title,
+              })
+            }
+            className="snap-start shrink-0 w-[280px] md:w-[320px] group bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-lg transition-all overflow-hidden border border-outline-variant/30 text-center flex flex-col cursor-pointer"
           >
             <div className="relative h-48 w-full overflow-hidden">
               <Image 

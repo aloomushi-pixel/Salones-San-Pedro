@@ -2,6 +2,8 @@ import Link from "next/link";
 import Header from "../../components/Header";
 import { BLOG_POSTS } from "@/utils/blogData";
 import Image from "next/image";
+import TrackedLink from "../../components/TrackedLink";
+import LegalModals from "../../components/LegalModals";
 
 export default function BlogPage() {
   const SERVICIOS_EXTRAS = ["Servicios Plus", "Bebidas", "Show", "Música"];
@@ -178,9 +180,9 @@ export default function BlogPage() {
                   Permítenos ayudarte a hacer realidad la boda o festejo de tus sueños.
                 </p>
               </div>
-              <Link href="/#disponibilidad" className="w-full py-3 bg-primary text-on-primary rounded-lg font-label-sm text-xs shadow hover:opacity-90 transition-all uppercase tracking-wider">
+              <TrackedLink eventType="cotizar_click" source="blog_index_cta" href="/#paquetes" className="w-full py-3 bg-primary text-on-primary rounded-lg font-label-sm text-xs shadow hover:opacity-90 transition-all uppercase tracking-wider">
                 Verificar Disponibilidad
-              </Link>
+              </TrackedLink>
             </div>
           </div>
         </div>
@@ -219,9 +221,7 @@ export default function BlogPage() {
           </div>
         </div>
         <div className="flex flex-wrap justify-center gap-8 font-body-md text-body-md text-secondary">
-          <a className="hover:text-primary transition-colors" href="#">Aviso de Privacidad</a>
-          <a className="hover:text-primary transition-colors" href="#">Términos de Servicio</a>
-          <a className="hover:text-primary transition-colors" href="#">Preguntas Frecuentes</a>
+          <LegalModals />
         </div>
         <p className="font-body-md text-body-md text-on-surface dark:text-inverse-on-surface mt-4 text-center opacity-70">© 2026 Salones San Pedro Eventos. Todos los derechos reservados.</p>
       </footer>

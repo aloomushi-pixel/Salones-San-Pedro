@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { trackEvent } from "@/utils/trackEvent";
 
 interface VideoData {
   id: number;
@@ -191,7 +192,13 @@ export default function TikTokVideos() {
                 return (
                   <button
                     key={vid.id}
-                    onClick={() => setSelectedVideo(vid)}
+                    onClick={() => {
+                      setSelectedVideo(vid);
+                      trackEvent("tiktok_interaction", `select_video_${vid.id}`, {
+                        section: "experiencias",
+                        experience_title: vid.title,
+                      });
+                    }}
                     className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all text-left border ${
                       isActive
                         ? "bg-primary/5 border-primary/30 shadow-sm"
@@ -247,6 +254,12 @@ export default function TikTokVideos() {
               href="https://wa.me/message/U7UANPSABGW4K1"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                trackEvent("whatsapp_click", "tiktok_section_cta", {
+                  section: "experiencias",
+                  experience_title: selectedVideo.title,
+                })
+              }
               className="flex-1 flex items-center justify-center gap-2 py-3 bg-[#25D366] text-white rounded-xl font-label-sm text-xs hover:opacity-90 transition-opacity uppercase tracking-wider shadow"
             >
               <span className="material-symbols-outlined text-lg">chat</span>
@@ -257,6 +270,11 @@ export default function TikTokVideos() {
               href="https://www.tiktok.com/@salones_sanpedroplus"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                trackEvent("tiktok_interaction", "follow_profile_cta", {
+                  section: "experiencias",
+                })
+              }
               className="flex-1 flex items-center justify-center gap-2 py-3 bg-inverse-surface text-inverse-on-surface rounded-xl font-label-sm text-xs hover:opacity-90 transition-opacity uppercase tracking-wider shadow"
             >
               <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

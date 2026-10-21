@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { trackEvent } from '@/utils/trackEvent';
 
 const initialCards = [
   {
@@ -34,6 +35,10 @@ export default function MenuTinderCards() {
   const handleNext = () => {
     if (animating) return;
     setAnimating('next');
+    trackEvent('menu_card_swipe', `next_${cards[0]?.tiempo || 'platillo'}`, {
+      section: 'servicios',
+      dish_title: `${cards[0]?.tiempo}: ${cards[0]?.desc}`,
+    });
     
     setTimeout(() => {
       setCards((prev) => {
@@ -49,6 +54,10 @@ export default function MenuTinderCards() {
   const handlePrev = () => {
     if (animating) return;
     setAnimating('prev');
+    trackEvent('menu_card_swipe', `prev_${cards[cards.length - 1]?.tiempo || 'platillo'}`, {
+      section: 'servicios',
+      dish_title: `${cards[cards.length - 1]?.tiempo}: ${cards[cards.length - 1]?.desc}`,
+    });
     
     // For prev, we immediately move the back card to the front, then animate it coming in.
     // Actually, it's simpler to just reorder then animate, but CSS transitions make it tricky.

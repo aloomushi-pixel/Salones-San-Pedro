@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
+import UXMonitorProvider from "@/components/UXMonitorProvider";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -83,7 +84,7 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${montserrat.variable} antialiased`}
       >
-        {children}
+        <UXMonitorProvider>{children}</UXMonitorProvider>
       </body>
     </html>
   );

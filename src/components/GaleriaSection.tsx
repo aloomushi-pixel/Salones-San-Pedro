@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { trackEvent } from '@/utils/trackEvent';
 
 interface Photo {
   src: string;
@@ -132,11 +133,23 @@ export default function GaleriaSection() {
   };
 
   const handleNext = () => {
-    setActiveIndex((activeIndex + 1) % photos.length);
+    const nextIdx = (activeIndex + 1) % photos.length;
+    setActiveIndex(nextIdx);
+    trackEvent('gallery_interaction', `next_${activeTab}`, {
+      section: 'galeria',
+      gallery_category: activeTab,
+      photo_title: photos[nextIdx]?.caption,
+    });
   };
 
   const handlePrev = () => {
-    setActiveIndex((activeIndex - 1 + photos.length) % photos.length);
+    const prevIdx = (activeIndex - 1 + photos.length) % photos.length;
+    setActiveIndex(prevIdx);
+    trackEvent('gallery_interaction', `prev_${activeTab}`, {
+      section: 'galeria',
+      gallery_category: activeTab,
+      photo_title: photos[prevIdx]?.caption,
+    });
   };
 
   // Auto-scroll every 6 seconds
@@ -162,7 +175,13 @@ export default function GaleriaSection() {
       {/* Tabs Selector */}
       <div className="flex justify-center items-center gap-2 mb-8 border-b border-outline-variant/30 pb-px">
         <button
-          onClick={() => setActiveTab('diamante')}
+          onClick={() => {
+            setActiveTab('diamante');
+            trackEvent('gallery_interaction', 'tab_diamante', {
+              section: 'galeria',
+              gallery_category: 'Salón Diamante',
+            });
+          }}
           className={`px-6 py-2 transition-all duration-300 font-bold uppercase tracking-wider text-sm border-b-2 ${
             activeTab === 'diamante'
               ? 'text-primary border-primary'
@@ -172,7 +191,13 @@ export default function GaleriaSection() {
           Salón Diamante
         </button>
         <button
-          onClick={() => setActiveTab('platino')}
+          onClick={() => {
+            setActiveTab('platino');
+            trackEvent('gallery_interaction', 'tab_platino', {
+              section: 'galeria',
+              gallery_category: 'Salón Platino',
+            });
+          }}
           className={`px-6 py-2 transition-all duration-300 font-bold uppercase tracking-wider text-sm border-b-2 ${
             activeTab === 'platino'
               ? 'text-primary border-primary'
@@ -227,7 +252,14 @@ export default function GaleriaSection() {
           {photos.map((photo, idx) => (
             <button
               key={idx}
-              onClick={() => setActiveIndex(idx)}
+              onClick={() => {
+                setActiveIndex(idx);
+                trackEvent('gallery_interaction', `thumb_${activeTab}_${idx + 1}`, {
+                  section: 'galeria',
+                  gallery_category: activeTab === 'diamante' ? 'Salón Diamante' : 'Salón Platino',
+                  photo_title: photo.caption,
+                });
+              }}
               className={`relative flex-shrink-0 w-20 md:w-28 aspect-[16/10] rounded-lg overflow-hidden border-2 transition-all duration-300 ${
                 idx === activeIndex
                   ? 'border-primary scale-105 shadow-md'
