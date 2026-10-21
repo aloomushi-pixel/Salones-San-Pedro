@@ -184,6 +184,16 @@ export default function Precotizador() {
   };
 
   const handleExtraToggle = (id: string) => {
+    const extraObj = EXTRAS.find((e) => e.id === id);
+    const willSelect = !selectedExtras.includes(id);
+    if (willSelect && extraObj) {
+      trackEvent('extra_service_interest', `extra_${id}`, {
+        section: 'precotizador',
+        element_text: extraObj.label,
+        guests_range: getGuestsBucket(guests),
+        package_name: packageType,
+      });
+    }
     setSelectedExtras((prev) =>
       prev.includes(id) ? prev.filter((e) => e !== id) : [...prev, id]
     );
@@ -292,6 +302,20 @@ export default function Precotizador() {
                   step="10"
                   value={guests}
                   onChange={(e) => handleGuestsChange(Number(e.target.value))}
+                  onMouseUp={() =>
+                    trackEvent('guests_slider_adjust', `aforo_${guests}`, {
+                      section: 'precotizador',
+                      guests_range: getGuestsBucket(guests),
+                      extra: { exact_guests: guests },
+                    })
+                  }
+                  onTouchEnd={() =>
+                    trackEvent('guests_slider_adjust', `aforo_${guests}`, {
+                      section: 'precotizador',
+                      guests_range: getGuestsBucket(guests),
+                      extra: { exact_guests: guests },
+                    })
+                  }
                   className="w-full h-2 bg-outline-variant/40 rounded-lg appearance-none cursor-pointer accent-primary"
                 />
                 <div className="flex justify-between mt-1.5 text-[11px] text-secondary font-bold">

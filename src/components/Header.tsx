@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
@@ -12,12 +12,35 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [blogMenuOpen, setBlogMenuOpen] = useState(false);
   const [isPrecotizadorOpen, setIsPrecotizadorOpen] = useState(false);
+  const modalOpenTimeRef = useRef<number>(0);
   const pathname = usePathname();
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMenu = () => {
+    const nextState = !isOpen;
+    setIsOpen(nextState);
+    if (nextState) {
+      trackEvent('header_nav', 'mobile_menu_open', { section: 'header' });
+    }
+  };
+
   const closeMenu = () => {
     setIsOpen(false);
     setBlogMenuOpen(false);
+  };
+
+  const handleOpenPrecotizadorModal = (origin: 'header_desktop' | 'header_mobile') => {
+    modalOpenTimeRef.current = Date.now();
+    trackEvent('cotizar_click', origin, { section: 'header' });
+    setIsPrecotizadorOpen(true);
+  };
+
+  const handleClosePrecotizadorModal = () => {
+    const openDurationMs = modalOpenTimeRef.current ? Date.now() - modalOpenTimeRef.current : 0;
+    trackEvent('precotizador_abandon', 'modal_header_close', {
+      section: 'precotizador',
+      timers: { step_duration_ms: openDurationMs },
+    });
+    setIsPrecotizadorOpen(false);
   };
 
   const isBlogActive = pathname.startsWith('/blog');
@@ -28,7 +51,10 @@ export default function Header() {
       <nav className="w-full flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 bg-surface/90 dark:bg-surface/90 backdrop-blur-md shadow-sm border-b border-outline-variant/10">
         {/* Logo */}
         <div className="flex items-center">
-          <Link href="/">
+          <Link
+            href="/"
+            onClick={() => trackEvent('header_nav', 'logo_home_click', { section: 'header' })}
+          >
             <Image
               alt="SALONES SAN PEDRO"
               className="h-12 w-auto cursor-pointer object-contain"
@@ -44,8 +70,14 @@ export default function Header() {
         <div className="hidden md:flex items-center gap-8 font-body-md text-body-md">
           <div className="relative group">
             <button
-              onClick={() => setBlogMenuOpen(!blogMenuOpen)}
-              className={`flex items-center gap-1 transition-colors duration-300 ${
+              onClick={() => {
+                const next = !blogMenuOpen;
+                setBlogMenuOpen(next);
+                if (next) {
+                  trackEvent('header_nav', 'blog_dropdown_desktop', { section: 'header' });
+                }
+              }}
+              className={`flex items-center gap-1 transition-colors duration-300 cursor-pointer ${
                 isBlogActive
                   ? 'text-primary font-bold border-b-2 border-primary pb-1'
                   : 'text-secondary hover:text-primary'
@@ -56,13 +88,16 @@ export default function Header() {
                 {blogMenuOpen ? 'expand_less' : 'expand_more'}
               </span>
             </button>
-            
+
             {/* Desktop Dropdown */}
             {blogMenuOpen && (
               <div className="absolute top-full left-0 mt-2 w-72 bg-surface shadow-lg border border-outline-variant/30 rounded-md overflow-hidden z-50 flex flex-col max-h-[400px]">
                 <Link
                   href="/blog"
-                  onClick={closeMenu}
+                  onClick={() => {
+                    trackEvent('header_nav', 'blog_ver_todos_desktop', { section: 'header' });
+                    closeMenu();
+                  }}
                   className="px-4 py-3 border-b border-outline-variant/30 text-primary font-bold hover:bg-surface-container-lowest transition-colors"
                 >
                   Ver todos los artículos
@@ -72,7 +107,13 @@ export default function Header() {
                     <Link
                       key={post.slug}
                       href={`/blog/${post.slug}`}
-                      onClick={closeMenu}
+                      onClick={() => {
+                        trackEvent('header_nav', `blog_item_${post.slug}`, {
+                          section: 'header',
+                          blog_slug: post.slug,
+                        });
+                        closeMenu();
+                      }}
                       className="block px-4 py-2 text-sm text-secondary hover:text-primary hover:bg-surface-container-lowest transition-colors truncate"
                       title={post.title}
                     >
@@ -88,10 +129,7 @@ export default function Header() {
         {/* Desktop CTA Button */}
         <div className="hidden md:block">
           <button
-            onClick={() => {
-              trackEvent('cotizar_click', 'header_desktop');
-              setIsPrecotizadorOpen(true);
-            }}
+            onClick={() => handleOpenPrecotizadorModal('header_desktop')}
             className="bg-primary-container text-on-primary-container px-6 py-3 font-label-sm rounded-lg hover:opacity-80 transition-all scale-95 active:scale-90 uppercase tracking-wider text-center block text-sm cursor-pointer"
           >
             COTIZAR
@@ -113,9 +151,14 @@ export default function Header() {
       {/* Mobile Menu Panel */}
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-surface border-b border-outline-variant/30 py-6 px-margin-mobile flex flex-col gap-5 shadow-2xl animate-fade-in z-50 max-h-[80vh] overflow-y-auto">
-          
           <button
-            onClick={() => setBlogMenuOpen(!blogMenuOpen)}
+            onClick={() => {
+              const next = !blogMenuOpen;
+              setBlogMenuOpen(next);
+              if (next) {
+                trackEvent('header_nav', 'blog_dropdown_mobile', { section: 'header' });
+              }
+            }}
             className="flex items-center justify-between py-2 text-lg border-b border-outline-variant/10 transition-colors duration-300 text-secondary hover:text-primary"
           >
             <span className={isBlogActive ? 'text-primary font-bold' : ''}>Blog</span>
@@ -123,13 +166,16 @@ export default function Header() {
               {blogMenuOpen ? 'expand_less' : 'expand_more'}
             </span>
           </button>
-          
+
           {/* Mobile Accordion */}
           {blogMenuOpen && (
             <div className="flex flex-col gap-2 pl-4 border-l-2 border-outline-variant/20 -mt-2">
               <Link
                 href="/blog"
-                onClick={closeMenu}
+                onClick={() => {
+                  trackEvent('header_nav', 'blog_ver_todos_mobile', { section: 'header' });
+                  closeMenu();
+                }}
                 className="py-2 text-primary font-bold"
               >
                 Ver todos los artículos
@@ -138,7 +184,13 @@ export default function Header() {
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  onClick={closeMenu}
+                  onClick={() => {
+                    trackEvent('header_nav', `blog_item_mobile_${post.slug}`, {
+                      section: 'header',
+                      blog_slug: post.slug,
+                    });
+                    closeMenu();
+                  }}
                   className="py-2 text-sm text-secondary hover:text-primary truncate"
                 >
                   {post.title}
@@ -149,9 +201,8 @@ export default function Header() {
 
           <button
             onClick={() => {
-              trackEvent('cotizar_click', 'header_mobile');
               closeMenu();
-              setIsPrecotizadorOpen(true);
+              handleOpenPrecotizadorModal('header_mobile');
             }}
             className="bg-primary-container text-on-primary-container px-6 py-4 font-label-sm rounded-lg hover:opacity-80 transition-all text-center uppercase tracking-wider block mt-3 font-bold w-full cursor-pointer"
           >
@@ -164,9 +215,9 @@ export default function Header() {
       {isPrecotizadorOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 backdrop-blur-sm p-[11px] md:p-4 animate-fade-in">
           <div className="relative w-full md:w-[480px] h-auto max-h-[90vh] overflow-y-auto custom-scrollbar bg-surface rounded-3xl shadow-[0_0_50px_rgba(212,175,55,0.15),0_0_20px_rgba(0,0,0,0.5)] flex flex-col border border-outline-variant/30 transform transition-all">
-            <button 
-              onClick={() => setIsPrecotizadorOpen(false)}
-              className="absolute top-2 right-2 z-10 w-8 h-8 flex items-center justify-center bg-surface-container hover:bg-surface-variant text-on-surface rounded-full transition-colors"
+            <button
+              onClick={handleClosePrecotizadorModal}
+              className="absolute top-2 right-2 z-10 w-8 h-8 flex items-center justify-center bg-surface-container hover:bg-surface-variant text-on-surface rounded-full transition-colors cursor-pointer"
             >
               <span className="material-symbols-outlined text-lg">close</span>
             </button>
