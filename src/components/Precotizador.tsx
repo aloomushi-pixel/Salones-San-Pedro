@@ -9,66 +9,78 @@ const PACKAGES = [
     name: 'Premier',
     price: 530,
     minGuests: 50,
-    features: ['6 horas de servicio', 'Menú a 3 tiempos', 'Barra libre de mezcladores'],
+    badge: 'Desde 50 pers.',
+    features: ['6 hrs servicio', 'Menú 3 tiempos', 'Barra mezcladores', 'DJ y luces'],
   },
   {
     id: 'Plus',
     name: 'Plus',
     price: 710,
     minGuests: 100,
-    features: ['7 horas de servicio', 'Batucada con Robot LED', 'Mesa de dulces'],
+    badge: '⭐ El Más Elegido',
+    features: ['7 hrs servicio', 'Menú 4 tiempos', 'Robot LED + Batucada', 'Mesa dulces y Cabina'],
   },
   {
     id: 'All Inclusive',
     name: 'All Inclusive',
     price: 1010,
     minGuests: 100,
-    features: ['Mariachi (1 hr)', 'Cabina 360 y Video', 'Servicio de Limusina'],
+    badge: 'Todo Incluido',
+    features: ['Mariachi (1 hr)', 'Limusina', 'Cabina 360 + Video', 'Botella por mesa'],
   },
 ];
 
+const QUICK_GUEST_PRESETS = [50, 80, 100, 120, 150, 200, 250];
+
 const PREFERRED_DAYS = [
-  { id: 'Sábado', label: 'Sábado', badge: 'Alta Demanda' },
-  { id: 'Viernes', label: 'Viernes', badge: 'Tarifa Preferencial' },
-  { id: 'Domingo', label: 'Domingo', badge: 'Familiar' },
-  { id: 'Entre Semana', label: 'Lun – Jue', badge: 'Especial' },
+  { id: 'Sábado', label: 'Sábado', badge: 'Alta Demanda', icon: 'calendar_month' },
+  { id: 'Viernes', label: 'Viernes', badge: 'Tarifa Preferencial', icon: 'sell' },
+  { id: 'Domingo', label: 'Domingo', badge: 'Ambiente Familiar', icon: 'wb_sunny' },
+  { id: 'Entre Semana', label: 'Lunes a Jueves', badge: 'Tarifa Especial', icon: 'event_available' },
 ];
 
 const SEASONS = [
   { id: 'Próximos 1-3 meses', label: 'Próximos 1–3 meses' },
-  { id: 'Primavera / Graduaciones (Abr-Jun)', label: 'Abr–Jun (Primavera)' },
-  { id: 'Verano (Jul-Sep)', label: 'Jul–Sep (Verano)' },
-  { id: 'Temporada Alta / Fin de Año (Oct-Dic)', label: 'Oct–Dic (Fin de Año)' },
-  { id: 'Invierno (Ene-Mar)', label: 'Ene–Mar (Invierno)' },
-  { id: '2027 / Planeación Anticipada', label: '2027 / Anticipado' },
+  { id: 'Primavera / Graduaciones (Abr-Jun)', label: 'Abr – Jun (Primavera)' },
+  { id: 'Verano (Jul-Sep)', label: 'Jul – Sep (Verano)' },
+  { id: 'Temporada Alta / Fin de Año (Oct-Dic)', label: 'Oct – Dic (Fin de Año)' },
+  { id: 'Invierno (Ene-Mar)', label: 'Ene – Mar (Invierno)' },
+  { id: '2027 / Planeación Anticipada', label: 'Año 2027 / Anticipado' },
 ];
 
 const EVENT_KINDS = [
-  { id: 'XV Años', label: 'XV Años' },
-  { id: 'Boda', label: 'Boda' },
-  { id: 'Graduación', label: 'Graduación' },
-  { id: 'Bautizo / Cumpleaños', label: 'Social / Cumpleaños' },
-  { id: 'Empresarial', label: 'Empresarial' },
+  { id: 'XV Años', label: 'XV Años', icon: 'auto_awesome' },
+  { id: 'Boda', label: 'Boda', icon: 'favorite' },
+  { id: 'Graduación', label: 'Graduación', icon: 'school' },
+  { id: 'Bautizo / Cumpleaños', label: 'Social / Cumple', icon: 'cake' },
+  { id: 'Empresarial', label: 'Empresarial', icon: 'business_center' },
 ];
 
 const EXTRAS = [
   { id: 'mariachi', label: 'Mariachi', icon: 'music_note' },
-  { id: 'robot', label: 'Robot LED / Animador', icon: 'smart_toy' },
-  { id: 'cabina', label: 'Cabina Fotográfica / 360', icon: 'camera' },
-  { id: 'dulces', label: 'Mesa de Dulces', icon: 'cake' },
+  { id: 'robot', label: 'Robot LED', icon: 'smart_toy' },
+  { id: 'cabina', label: 'Cabina 360', icon: 'camera' },
+  { id: 'dulces', label: 'Mesa de Dulces', icon: 'icecream' },
   { id: 'letras', label: 'Letras Gigantes', icon: 'format_size' },
   { id: 'shots', label: 'Carrito de Shots', icon: 'local_bar' },
-  { id: 'limusina', label: 'Servicio de Limusina', icon: 'directions_car' },
+  { id: 'limusina', label: 'Limusina', icon: 'directions_car' },
+];
+
+const STEP_LABELS = [
+  { num: 1, label: 'Aforo' },
+  { num: 2, label: 'Fecha' },
+  { num: 3, label: 'Paquete' },
+  { num: 4, label: 'Cotización' },
 ];
 
 export default function Precotizador() {
   const [step, setStep] = useState(1);
 
   const [guests, setGuests] = useState(100);
+  const [eventKind, setEventKind] = useState('XV Años');
   const [preferredDay, setPreferredDay] = useState('Sábado');
   const [preferredSeason, setPreferredSeason] = useState('Temporada Alta / Fin de Año (Oct-Dic)');
-  const [packageType, setPackageType] = useState('Premier');
-  const [eventKind, setEventKind] = useState('XV Años');
+  const [packageType, setPackageType] = useState('Plus');
   const [selectedExtras, setSelectedExtras] = useState<string[]>([]);
   const [lockedAttemptPkg, setLockedAttemptPkg] = useState<string | null>(null);
 
@@ -86,15 +98,23 @@ export default function Precotizador() {
     return '200+ personas';
   };
 
-  const handleGuestsChange = (value: number) => {
-    setGuests(value);
+  const handleGuestsChange = (value: number, recordTelemetry = false) => {
+    const clamped = Math.min(250, Math.max(50, value));
+    setGuests(clamped);
     setLockedAttemptPkg(null);
-    if (value < 100 && packageType !== 'Premier') {
+    if (clamped < 100 && packageType !== 'Premier') {
       setPackageType('Premier');
+    }
+    if (recordTelemetry) {
+      trackEvent('guests_slider_adjust', `aforo_${clamped}`, {
+        section: 'precotizador',
+        guests_range: getGuestsBucket(clamped),
+        extra: { exact_guests: clamped },
+      });
     }
   };
 
-  const handleContinueToStep2 = () => {
+  const handleStep1Next = () => {
     const duration = Date.now() - stepStartRef.current;
     if (guests < 100 && packageType !== 'Premier') {
       setPackageType('Premier');
@@ -103,21 +123,20 @@ export default function Precotizador() {
       section: 'precotizador',
       step_number: 1,
       guests_range: getGuestsBucket(guests),
-      preferred_day: preferredDay,
-      preferred_season: preferredSeason,
+      event_kind: eventKind,
       timers: { step_duration_ms: duration },
       extra: { exact_guests: guests },
     });
     setStep(2);
   };
 
-  const handleContinueToStep3 = () => {
+  const handleStep2Next = () => {
     const duration = Date.now() - stepStartRef.current;
     trackEvent('precotizador_step', 'step_2_completado', {
       section: 'precotizador',
       step_number: 2,
       guests_range: getGuestsBucket(guests),
-      package_name: packageType,
+      event_kind: eventKind,
       preferred_day: preferredDay,
       preferred_season: preferredSeason,
       timers: { step_duration_ms: duration },
@@ -126,7 +145,7 @@ export default function Precotizador() {
     setStep(3);
   };
 
-  const handleContinueToStep4 = () => {
+  const handleStep3Next = () => {
     const duration = Date.now() - stepStartRef.current;
     trackEvent('precotizador_step', 'step_3_completado', {
       section: 'precotizador',
@@ -146,6 +165,7 @@ export default function Precotizador() {
   };
 
   const handleBackStep = (targetStep: number) => {
+    if (targetStep === step) return;
     const duration = Date.now() - stepStartRef.current;
     trackEvent('precotizador_backtrack', `back_from_${step}_to_${targetStep}`, {
       section: 'precotizador',
@@ -241,198 +261,320 @@ export default function Precotizador() {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-surface-container border border-outline-variant/30 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
-      {/* Decorative Glow */}
-      <div className="absolute -top-32 -right-32 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div className="w-full max-w-xl mx-auto bg-surface-container border border-outline-variant/40 rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl relative overflow-hidden">
+      {/* Resplandor decorativo */}
+      <div className="absolute -top-28 -right-28 w-56 h-56 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
 
-      {/* Title */}
-      {step !== 4 && (
-        <h2 className="text-center font-display-lg text-2xl md:text-3xl font-bold text-on-surface mb-4">
-          Precotizador de Evento
-        </h2>
-      )}
-
-      {/* Progress Bar */}
-      {step !== 4 && (
-        <div className="flex gap-2 mb-6 relative z-10">
-          {[1, 2, 3, 4].map((i) => (
-            <div
-              key={i}
-              className={`h-1.5 flex-1 rounded-full transition-all duration-500 ${
-                i <= step ? 'bg-primary' : 'bg-outline-variant/30'
-              }`}
-            ></div>
-          ))}
+      {/* Encabezado Compacto + Stepper Táctil Interactivo */}
+      <div className="relative z-10 mb-4">
+        <div className="flex items-center justify-between mb-3">
+          <div>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-primary block">
+              Cotización Instantánea en 30 Segundos
+            </span>
+            <h2 className="font-display-lg text-lg sm:text-2xl font-bold text-on-surface leading-tight">
+              Precotizador de Evento
+            </h2>
+          </div>
+          <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-surface-container-high text-secondary border border-outline-variant/30">
+            Paso {step} de 4
+          </span>
         </div>
-      )}
 
-      <div className="relative z-10 h-[480px] flex flex-col overflow-y-auto custom-scrollbar pr-1 pb-1">
-        {/* Step 1: Guests + Day + Season */}
+        {/* Barra de pasos con etiquetas táctiles */}
+        <div className="grid grid-cols-4 gap-1.5">
+          {STEP_LABELS.map((item) => {
+            const isCompleted = item.num < step;
+            const isCurrent = item.num === step;
+            return (
+              <button
+                key={item.num}
+                type="button"
+                disabled={item.num > step}
+                onClick={() => {
+                  if (item.num < step) handleBackStep(item.num);
+                }}
+                className={`flex flex-col items-center py-1.5 px-1 rounded-xl border transition-all ${
+                  isCurrent
+                    ? 'border-primary bg-primary/15 text-primary font-bold shadow-xs'
+                    : isCompleted
+                    ? 'border-primary/40 bg-primary/5 text-on-surface cursor-pointer hover:bg-primary/10'
+                    : 'border-outline-variant/20 bg-surface-container-low/40 text-secondary/50 cursor-default'
+                }`}
+              >
+                <div className="flex items-center gap-1 text-[11px]">
+                  <span
+                    className={`w-4 h-4 rounded-full text-[10px] flex items-center justify-center font-bold ${
+                      isCurrent
+                        ? 'bg-primary text-on-primary'
+                        : isCompleted
+                        ? 'bg-primary/80 text-on-primary'
+                        : 'bg-outline-variant/30 text-secondary'
+                    }`}
+                  >
+                    {isCompleted ? '✓' : item.num}
+                  </span>
+                  <span className="truncate">{item.label}</span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Cuerpo del Paso Actual (Sin Doble Scroll, 100% Fluido en Móvil) */}
+      <div className="relative z-10 flex flex-col justify-between">
+        {/* =================================================================
+            PASO 1: NÚMERO DE INVITADOS + TIPO DE EVENTO
+        ================================================================= */}
         {step === 1 && (
-          <div className="animate-fade-in flex-1 flex flex-col justify-between text-center">
-            <div>
-              <h3 className="font-display-lg text-xl md:text-2xl text-on-surface mb-1">
-                1. Aforo, Día y Temporada
-              </h3>
-              <p className="text-xs md:text-sm text-secondary mb-4">
-                Desliza el número de invitados y elige cuándo planeas tu evento
-              </p>
+          <div className="animate-fade-in space-y-4">
+            {/* Control de Invitados */}
+            <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-4 text-center">
+              <label className="block text-xs font-bold uppercase tracking-wider text-secondary mb-2">
+                1. ¿Cuántos invitados esperas?
+              </label>
 
-              <div className="py-2">
-                <div className="text-4xl md:text-5xl font-bold text-primary mb-2 font-display-lg">
-                  {guests} <span className="text-lg text-secondary font-normal">personas</span>
+              {/* Botones grandes [-10] Número [+10] para el pulgar */}
+              <div className="flex items-center justify-between max-w-xs mx-auto gap-3 my-2">
+                <button
+                  type="button"
+                  onClick={() => handleGuestsChange(guests - 10, true)}
+                  disabled={guests <= 50}
+                  aria-label="Restar 10 invitados"
+                  className="w-12 h-12 rounded-2xl bg-surface-container-high hover:bg-primary hover:text-on-primary active:scale-95 disabled:opacity-30 font-bold text-lg flex items-center justify-center transition-all border border-outline-variant/40 cursor-pointer shrink-0"
+                >
+                  −10
+                </button>
+
+                <div className="flex flex-col items-center">
+                  <span className="text-4xl sm:text-5xl font-bold text-primary font-display-lg leading-none">
+                    {guests}
+                  </span>
+                  <span className="text-xs text-secondary font-medium mt-1">
+                    personas
+                  </span>
                 </div>
 
+                <button
+                  type="button"
+                  onClick={() => handleGuestsChange(guests + 10, true)}
+                  disabled={guests >= 250}
+                  aria-label="Sumar 10 invitados"
+                  className="w-12 h-12 rounded-2xl bg-surface-container-high hover:bg-primary hover:text-on-primary active:scale-95 disabled:opacity-30 font-bold text-lg flex items-center justify-center transition-all border border-outline-variant/40 cursor-pointer shrink-0"
+                >
+                  +10
+                </button>
+              </div>
+
+              {/* Chips de selección rápida en 1 toque */}
+              <div className="flex flex-wrap justify-center gap-1.5 my-3">
+                {QUICK_GUEST_PRESETS.map((preset) => {
+                  const isActive = guests === preset;
+                  return (
+                    <button
+                      key={preset}
+                      type="button"
+                      onClick={() => handleGuestsChange(preset, true)}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                        isActive
+                          ? 'bg-primary text-on-primary border-primary shadow-xs scale-105'
+                          : 'bg-surface-container-high/70 text-on-surface border-outline-variant/30 hover:border-primary/50'
+                      }`}
+                    >
+                      {preset}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Slider táctil grueso */}
+              <input
+                type="range"
+                min="50"
+                max="250"
+                step="10"
+                value={guests}
+                onChange={(e) => handleGuestsChange(Number(e.target.value), false)}
+                onMouseUp={() => handleGuestsChange(guests, true)}
+                onTouchEnd={() => handleGuestsChange(guests, true)}
+                className="w-full h-2.5 bg-outline-variant/40 rounded-lg appearance-none cursor-pointer accent-primary mt-1"
+              />
+
+              {/* Aviso dinámico de paquetes según aforo */}
+              <div className="mt-2.5">
                 {guests < 100 ? (
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-3">
-                    <span className="material-symbols-outlined text-sm">info</span>
-                    Paquete disponible para 50–99 personas: Premier
-                  </div>
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-[11px] font-semibold rounded-full">
+                    <span className="material-symbols-outlined text-xs">info</span>
+                    50 a 99 personas: Aplica Paquete Premier (desde $530 p/p)
+                  </span>
                 ) : (
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-500/10 text-green-700 text-xs font-semibold rounded-full mb-3">
-                    <span className="material-symbols-outlined text-sm">check_circle</span>
-                    Todos los paquetes desbloqueados (Premier, Plus y All Inclusive)
-                  </div>
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-500/10 text-green-600 text-[11px] font-semibold rounded-full">
+                    <span className="material-symbols-outlined text-xs">check_circle</span>
+                    100+ personas: Todos los paquetes disponibles (Premier, Plus y All Inclusive)
+                  </span>
                 )}
-
-                <input
-                  type="range"
-                  min="50"
-                  max="250"
-                  step="10"
-                  value={guests}
-                  onChange={(e) => handleGuestsChange(Number(e.target.value))}
-                  onMouseUp={() =>
-                    trackEvent('guests_slider_adjust', `aforo_${guests}`, {
-                      section: 'precotizador',
-                      guests_range: getGuestsBucket(guests),
-                      extra: { exact_guests: guests },
-                    })
-                  }
-                  onTouchEnd={() =>
-                    trackEvent('guests_slider_adjust', `aforo_${guests}`, {
-                      section: 'precotizador',
-                      guests_range: getGuestsBucket(guests),
-                      extra: { exact_guests: guests },
-                    })
-                  }
-                  className="w-full h-2 bg-outline-variant/40 rounded-lg appearance-none cursor-pointer accent-primary"
-                />
-                <div className="flex justify-between mt-1.5 text-[11px] text-secondary font-bold">
-                  <span>50 mín</span>
-                  <span>100 (Todos los paquetes)</span>
-                  <span>250+ máx</span>
-                </div>
-              </div>
-
-              {/* Selección de Día Preferido */}
-              <div className="mt-4 text-left">
-                <label className="block text-xs font-bold uppercase tracking-wider text-secondary mb-2">
-                  Día de la semana preferido:
-                </label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {PREFERRED_DAYS.map((d) => {
-                    const active = preferredDay === d.id;
-                    return (
-                      <button
-                        key={d.id}
-                        type="button"
-                        onClick={() => setPreferredDay(d.id)}
-                        className={`p-2 rounded-xl border text-center transition-all cursor-pointer ${
-                          active
-                            ? 'border-primary bg-primary/15 text-primary font-bold shadow-sm'
-                            : 'border-outline-variant/30 text-on-surface hover:border-primary/40'
-                        }`}
-                      >
-                        <div className="text-xs font-bold">{d.label}</div>
-                        <div className="text-[10px] text-secondary">{d.badge}</div>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {guests < 100 && preferredDay === 'Sábado' && (
-                  <p className="mt-2 text-[11px] text-amber-500 bg-amber-500/10 border border-amber-500/20 rounded-lg px-3 py-1.5">
-                    Nota: Para eventos de 50 a 99 personas en <strong>Sábado</strong> aplica Paquete Premier en Salón Platino (sujeto a horarios y disponibilidad). En Viernes obtienes tarifa preferencial.
-                  </p>
-                )}
-              </div>
-
-              {/* Selección de Temporada / Mes */}
-              <div className="mt-4 text-left mb-4">
-                <label className="block text-xs font-bold uppercase tracking-wider text-secondary mb-2">
-                  Temporada o fecha aproximada:
-                </label>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {SEASONS.map((s) => {
-                    const active = preferredSeason === s.id;
-                    return (
-                      <button
-                        key={s.id}
-                        type="button"
-                        onClick={() => setPreferredSeason(s.id)}
-                        className={`px-2.5 py-2 rounded-xl border text-xs transition-all cursor-pointer truncate ${
-                          active
-                            ? 'border-primary bg-primary/15 text-primary font-bold shadow-sm'
-                            : 'border-outline-variant/30 text-on-surface hover:border-primary/40'
-                        }`}
-                      >
-                        {s.label}
-                      </button>
-                    );
-                  })}
-                </div>
               </div>
             </div>
 
+            {/* Giro del Evento */}
+            <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-4">
+              <label className="block text-xs font-bold uppercase tracking-wider text-secondary mb-2.5 text-center sm:text-left">
+                2. ¿Qué tipo de evento celebras?
+              </label>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {EVENT_KINDS.map((ev) => {
+                  const active = eventKind === ev.id;
+                  return (
+                    <button
+                      key={ev.id}
+                      type="button"
+                      onClick={() => setEventKind(ev.id)}
+                      className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border text-xs font-bold transition-all cursor-pointer min-h-[44px] ${
+                        active
+                          ? 'border-primary bg-primary text-on-primary shadow-sm'
+                          : 'border-outline-variant/30 bg-surface-container-low text-on-surface hover:border-primary/40'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-base">{ev.icon}</span>
+                      <span>{ev.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Botón Fijo de Avance */}
             <button
-              onClick={handleContinueToStep2}
-              className="mt-auto w-full bg-primary text-on-primary font-bold py-3.5 rounded-xl hover:opacity-90 active:scale-95 transition-all uppercase tracking-wider text-sm shadow-md cursor-pointer"
+              type="button"
+              onClick={handleStep1Next}
+              className="w-full min-h-[50px] bg-primary text-on-primary font-bold py-3.5 px-6 rounded-2xl hover:opacity-95 active:scale-[0.99] transition-all uppercase tracking-wider text-sm shadow-lg flex items-center justify-center gap-2 cursor-pointer"
             >
-              Continuar a Paquetes
+              <span>Siguiente: Elegir Día y Temporada</span>
+              <span className="material-symbols-outlined text-lg">arrow_forward</span>
             </button>
           </div>
         )}
 
-        {/* Step 2: Package */}
+        {/* =================================================================
+            PASO 2: DÍA DE LA SEMANA + TEMPORADA TENTATIVA
+        ================================================================= */}
         {step === 2 && (
-          <div className="animate-fade-in flex-1 flex flex-col justify-between">
-            <div className="flex items-center gap-4 mb-3">
-              <button
-                onClick={() => handleBackStep(1)}
-                className="text-secondary hover:text-primary transition-colors cursor-pointer"
-              >
-                <span className="material-symbols-outlined">arrow_back</span>
-              </button>
-              <h3 className="font-display-lg text-2xl text-on-surface">2. Nivel de Servicio</h3>
+          <div className="animate-fade-in space-y-4">
+            {/* Selección de Día */}
+            <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-4">
+              <label className="block text-xs font-bold uppercase tracking-wider text-secondary mb-2.5">
+                ¿Qué día de la semana prefieres?
+              </label>
+              <div className="grid grid-cols-2 gap-2.5">
+                {PREFERRED_DAYS.map((d) => {
+                  const active = preferredDay === d.id;
+                  return (
+                    <button
+                      key={d.id}
+                      type="button"
+                      onClick={() => setPreferredDay(d.id)}
+                      className={`p-3 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-2.5 min-h-[54px] ${
+                        active
+                          ? 'border-primary bg-primary/15 text-primary shadow-xs'
+                          : 'border-outline-variant/30 bg-surface-container-low text-on-surface hover:border-primary/40'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-xl text-primary shrink-0">
+                        {d.icon}
+                      </span>
+                      <div className="min-w-0">
+                        <div className="text-xs sm:text-sm font-bold leading-tight">{d.label}</div>
+                        <div className="text-[10px] text-secondary leading-tight mt-0.5">
+                          {d.badge}
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {guests < 100 && preferredDay === 'Sábado' && (
+                <div className="mt-3 p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/25 text-[11px] text-amber-400 leading-snug">
+                  <strong>Nota Sábado (50–99 pers.):</strong> Aplica Paquete Premier en Salón Platino sujeto a disponibilidad y horarios. En <strong>Viernes</strong> obtienes tarifa preferencial.
+                </div>
+              )}
             </div>
 
-            {guests < 100 && (
-              <div className="mb-3 p-3 bg-primary/10 border border-primary/20 rounded-xl text-xs text-primary flex items-start gap-2">
-                <span className="material-symbols-outlined text-base shrink-0 mt-0.5">info</span>
-                <span>
-                  Para tu evento de <strong>{guests} personas</strong> ({preferredDay}), el paquete disponible es{' '}
-                  <strong>Premier</strong>. Los paquetes Plus y All Inclusive requieren mínimo 100 personas.
-                </span>
+            {/* Selección de Temporada */}
+            <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-4">
+              <label className="block text-xs font-bold uppercase tracking-wider text-secondary mb-2.5">
+                ¿En qué temporada o fecha aproximada planeas tu evento?
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                {SEASONS.map((s) => {
+                  const active = preferredSeason === s.id;
+                  return (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => setPreferredSeason(s.id)}
+                      className={`py-2.5 px-3 rounded-xl border text-xs font-medium text-center transition-all cursor-pointer min-h-[44px] flex items-center justify-center ${
+                        active
+                          ? 'border-primary bg-primary text-on-primary font-bold shadow-xs'
+                          : 'border-outline-variant/30 bg-surface-container-low text-on-surface hover:border-primary/40'
+                      }`}
+                    >
+                      {s.label}
+                    </button>
+                  );
+                })}
               </div>
-            )}
+            </div>
 
+            {/* Navegación Inferior Fija */}
+            <div className="flex gap-2.5">
+              <button
+                type="button"
+                onClick={() => handleBackStep(1)}
+                className="px-4 min-h-[50px] rounded-2xl border border-outline-variant/40 text-secondary hover:text-on-surface font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1 cursor-pointer shrink-0"
+              >
+                <span className="material-symbols-outlined text-base">arrow_back</span>
+                <span>Atrás</span>
+              </button>
+              <button
+                type="button"
+                onClick={handleStep2Next}
+                className="flex-1 min-h-[50px] bg-primary text-on-primary font-bold py-3.5 px-5 rounded-2xl hover:opacity-95 active:scale-[0.99] transition-all uppercase tracking-wider text-sm shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>Siguiente: Elegir Paquete</span>
+                <span className="material-symbols-outlined text-lg">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* =================================================================
+            PASO 3: PAQUETE (COMPACTO SIN SCROLL) + EXTRAS EN CHIPS
+        ================================================================= */}
+        {step === 3 && (
+          <div className="animate-fade-in space-y-3.5">
+            {/* Banner de desbloqueo en 1 toque si intentan tocar Plus o All Inclusive con <100 invitados */}
             {lockedAttemptPkg && guests < 100 && (
-              <div className="mb-3 p-3 bg-amber-500/15 border border-amber-500/40 rounded-xl text-xs text-amber-300 flex flex-col sm:flex-row sm:items-center justify-between gap-2 animate-fade-in">
+              <div className="p-3 bg-amber-500/15 border border-amber-500/40 rounded-2xl text-xs text-amber-300 flex flex-col sm:flex-row sm:items-center justify-between gap-2 animate-fade-in">
                 <span>
-                  ¿Te interesa el paquete <strong>{lockedAttemptPkg}</strong>? Está disponible a partir de 100 invitados.
+                  El paquete <strong>{lockedAttemptPkg}</strong> aplica desde 100 invitados (tienes {guests}).
                 </span>
                 <button
                   type="button"
                   onClick={() => handleUpsellTo100(lockedAttemptPkg)}
-                  className="px-3 py-1.5 rounded-lg bg-amber-500 text-neutral-950 font-bold text-xs shrink-0 hover:bg-amber-400 transition-colors cursor-pointer"
+                  className="px-3.5 py-2 rounded-xl bg-amber-500 text-neutral-950 font-extrabold text-xs shrink-0 hover:bg-amber-400 transition-colors cursor-pointer"
                 >
-                  Cotizar con 100 personas
+                  Cambiar a 100 personas y elegir {lockedAttemptPkg}
                 </button>
               </div>
             )}
 
-            <div className="space-y-3 mb-4 overflow-y-auto max-h-[290px] pr-2 custom-scrollbar">
+            {/* Tarjetas de Paquetes Compactas (Caben las 3 en pantalla móvil) */}
+            <div className="space-y-2">
+              <label className="block text-xs font-bold uppercase tracking-wider text-secondary">
+                1. Selecciona tu Nivel de Paquete:
+              </label>
               {PACKAGES.map((pkg) => {
                 const isAvailable = guests >= pkg.minGuests;
                 const isSelected = packageType === pkg.id;
@@ -448,212 +590,192 @@ export default function Precotizador() {
                         handleLockedPackageClick(pkg.name);
                       }
                     }}
-                    className={`p-4 rounded-2xl border-2 transition-all relative ${
+                    className={`p-3.5 rounded-2xl border-2 transition-all cursor-pointer ${
                       !isAvailable
-                        ? 'opacity-50 bg-surface-container-low/60 border-outline-variant/20 cursor-pointer select-none hover:border-amber-500/40'
+                        ? 'opacity-55 bg-surface-container-low/50 border-outline-variant/20 hover:border-amber-500/40'
                         : isSelected
-                        ? 'border-primary bg-primary/5 shadow-md cursor-pointer'
-                        : 'border-outline-variant/30 hover:border-primary/50 cursor-pointer'
+                        ? 'border-primary bg-primary/10 shadow-md'
+                        : 'border-outline-variant/30 bg-surface-container-lowest hover:border-primary/40'
                     }`}
                   >
-                    <div className="flex justify-between items-center mb-1.5">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <h4 className={`font-bold text-lg ${isAvailable ? 'text-on-surface' : 'text-secondary'}`}>
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div
+                          className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                            isSelected && isAvailable
+                              ? 'border-primary bg-primary text-on-primary'
+                              : 'border-outline-variant'
+                          }`}
+                        >
+                          {isSelected && isAvailable && (
+                            <span className="material-symbols-outlined text-xs font-bold">
+                              check
+                            </span>
+                          )}
+                        </div>
+                        <span className="font-bold text-base text-on-surface truncate">
                           {pkg.name}
-                        </h4>
-                        {!isAvailable && (
-                          <span className="text-[11px] font-semibold text-secondary bg-surface-container-high px-2 py-0.5 rounded-full flex items-center gap-1 border border-outline-variant/30">
-                            <span className="material-symbols-outlined text-[13px]">lock</span>
-                            Mínimo 100 personas
+                        </span>
+                        {!isAvailable ? (
+                          <span className="text-[10px] font-bold text-amber-400 bg-amber-500/15 px-2 py-0.5 rounded-full border border-amber-500/30 shrink-0">
+                            🔒 Mín. 100 pers.
+                          </span>
+                        ) : (
+                          <span className="text-[10px] font-semibold text-secondary bg-surface-container-high px-2 py-0.5 rounded-full shrink-0">
+                            {pkg.badge}
                           </span>
                         )}
                       </div>
-                      <span
-                        className={`text-sm font-bold px-3 py-1 rounded-full ${
-                          isAvailable ? 'text-primary bg-primary/10' : 'text-secondary bg-surface-container-high'
-                        }`}
-                      >
-                        desde ${pkg.price} <span className="text-xs font-normal">p/p</span>
+                      <span className="text-xs sm:text-sm font-extrabold text-primary bg-primary/10 px-2.5 py-1 rounded-full shrink-0">
+                        desde ${pkg.price} p/p
                       </span>
                     </div>
-                    <ul className="text-sm text-secondary space-y-1 mt-2">
-                      {pkg.features.map((feat, i) => (
-                        <li key={i} className="flex items-center gap-2">
-                          <span
-                            className={`material-symbols-outlined text-[1rem] ${
-                              isAvailable ? 'text-primary' : 'text-secondary/50'
-                            }`}
-                          >
-                            check_circle
-                          </span>
-                          {feat}
-                        </li>
+
+                    {/* Pills horizontales compactos con lo que incluye */}
+                    <div className="flex flex-wrap gap-1.5 mt-2 pl-7">
+                      {pkg.features.map((feat, idx) => (
+                        <span
+                          key={idx}
+                          className="text-[11px] text-secondary bg-surface-container-high/60 px-2 py-0.5 rounded-md"
+                        >
+                          ✓ {feat}
+                        </span>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 );
               })}
             </div>
 
-            <button
-              onClick={handleContinueToStep3}
-              className="mt-auto w-full bg-primary text-on-primary font-bold py-3.5 rounded-xl hover:opacity-90 active:scale-95 transition-all uppercase tracking-wider text-sm shadow-md cursor-pointer"
-            >
-              Continuar
-            </button>
-          </div>
-        )}
-
-        {/* Step 3: Event Kind + Extras */}
-        {step === 3 && (
-          <div className="animate-fade-in flex-1 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center gap-4 mb-2">
-                <button
-                  onClick={() => handleBackStep(2)}
-                  className="text-secondary hover:text-primary transition-colors cursor-pointer"
-                >
-                  <span className="material-symbols-outlined">arrow_back</span>
-                </button>
-                <h3 className="font-display-lg text-xl md:text-2xl text-on-surface">
-                  3. Giro del Evento y Extras
-                </h3>
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-xs font-bold uppercase tracking-wider text-secondary mb-2">
-                  ¿Qué tipo de celebración realizas?
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {EVENT_KINDS.map((ev) => {
-                    const active = eventKind === ev.id;
-                    return (
-                      <button
-                        key={ev.id}
-                        type="button"
-                        onClick={() => setEventKind(ev.id)}
-                        className={`px-3 py-1.5 rounded-xl border text-xs transition-all cursor-pointer ${
-                          active
-                            ? 'border-primary bg-primary text-on-primary font-bold shadow-sm'
-                            : 'border-outline-variant/30 text-on-surface hover:border-primary/40'
-                        }`}
-                      >
-                        {ev.label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <p className="text-xs text-secondary mb-2 font-semibold uppercase tracking-wider">
-                Servicios adicionales opcionales:
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4 max-h-[220px] overflow-y-auto pr-1 custom-scrollbar">
+            {/* Selección de Extras en Chips Compactos de 2/3 Columnas */}
+            <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-3.5">
+              <label className="block text-[11px] font-bold uppercase tracking-wider text-secondary mb-2">
+                2. Servicios Extra Opcionales (Toca para agregar):
+              </label>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
                 {EXTRAS.map((extra) => {
                   const isSelected = selectedExtras.includes(extra.id);
                   return (
-                    <div
+                    <button
                       key={extra.id}
+                      type="button"
                       onClick={() => handleExtraToggle(extra.id)}
-                      className={`flex items-center gap-3 p-2.5 rounded-xl border-2 cursor-pointer transition-all ${
+                      className={`flex items-center gap-1.5 px-2.5 py-2 rounded-xl border text-left text-xs transition-all cursor-pointer min-h-[40px] ${
                         isSelected
-                          ? 'border-primary bg-primary/5'
-                          : 'border-outline-variant/30 hover:border-primary/50'
+                          ? 'border-primary bg-primary/15 text-primary font-bold'
+                          : 'border-outline-variant/30 bg-surface-container-low text-on-surface hover:border-primary/40'
                       }`}
                     >
-                      <div
-                        className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 ${
-                          isSelected
-                            ? 'bg-primary text-on-primary'
-                            : 'bg-surface-container-high text-secondary'
-                        }`}
-                      >
-                        <span className="material-symbols-outlined text-base">{extra.icon}</span>
-                      </div>
-                      <span
-                        className={`text-xs sm:text-sm font-medium flex-1 ${
-                          isSelected ? 'text-primary' : 'text-on-surface'
-                        }`}
-                      >
-                        {extra.label}
+                      <span className="material-symbols-outlined text-sm shrink-0">
+                        {isSelected ? 'check_circle' : extra.icon}
                       </span>
-                      {isSelected && (
-                        <span className="material-symbols-outlined text-primary text-sm">
-                          check_circle
-                        </span>
-                      )}
-                    </div>
+                      <span className="truncate">{extra.label}</span>
+                    </button>
                   );
                 })}
               </div>
             </div>
 
-            <button
-              onClick={handleContinueToStep4}
-              className="mt-auto w-full bg-primary text-on-primary font-bold py-3.5 rounded-xl hover:opacity-90 active:scale-95 transition-all uppercase tracking-wider text-sm shadow-md flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <span>Calcular Presupuesto</span>
-              <span className="material-symbols-outlined text-lg">calculate</span>
-            </button>
+            {/* Navegación Inferior Fija */}
+            <div className="flex gap-2.5 pt-1">
+              <button
+                type="button"
+                onClick={() => handleBackStep(2)}
+                className="px-4 min-h-[50px] rounded-2xl border border-outline-variant/40 text-secondary hover:text-on-surface font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1 cursor-pointer shrink-0"
+              >
+                <span className="material-symbols-outlined text-base">arrow_back</span>
+                <span>Atrás</span>
+              </button>
+              <button
+                type="button"
+                onClick={handleStep3Next}
+                className="flex-1 min-h-[50px] bg-primary text-on-primary font-bold py-3.5 px-5 rounded-2xl hover:opacity-95 active:scale-[0.99] transition-all uppercase tracking-wider text-sm shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-lg">calculate</span>
+                <span>Ver Presupuesto Estimado</span>
+              </button>
+            </div>
           </div>
         )}
 
-        {/* Step 4: Result */}
+        {/* =================================================================
+            PASO 4: RESULTADO FINAL Y CONVERSIÓN A WHATSAPP
+        ================================================================= */}
         {step === 4 && (
-          <div className="animate-fade-in flex-1 flex flex-col justify-center text-center">
-            <div className="flex justify-center mb-3">
-              <div className="w-14 h-14 bg-green-500/10 text-green-500 rounded-full flex items-center justify-center shadow-inner border border-green-500/20">
-                <span className="material-symbols-outlined text-3xl">check_circle</span>
+          <div className="animate-fade-in space-y-4 text-center">
+            <div className="bg-surface-container-lowest p-5 rounded-2xl border border-outline-variant/30 shadow-inner">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 text-green-500 text-xs font-bold uppercase tracking-wider mb-2">
+                <span className="material-symbols-outlined text-sm">verified</span>
+                Presupuesto Base Estimado
               </div>
-            </div>
 
-            <h3 className="font-display-lg text-2xl text-on-surface mb-4">¡Presupuesto Generado!</h3>
-
-            <div className="bg-surface-container-lowest p-5 rounded-2xl border border-outline-variant/30 shadow-inner mb-4">
-              <p className="text-xs text-secondary mb-1 uppercase tracking-widest font-bold">
-                Inversión Base Estimada (Tarifa Viernes Platino)
-              </p>
-              <div className="font-display-lg text-4xl md:text-5xl text-primary font-bold mb-3">
+              <div className="font-display-lg text-4xl sm:text-5xl text-primary font-bold my-2">
                 ${budget.toLocaleString('es-MX')}{' '}
-                <span className="text-lg font-normal text-secondary">MXN</span>
+                <span className="text-base font-normal text-secondary">MXN</span>
               </div>
-              <div className="flex flex-wrap justify-center gap-1.5 text-xs text-secondary mb-3">
-                <span className="font-semibold bg-surface-container-high px-2.5 py-1 rounded-md">
+
+              <p className="text-[11px] text-secondary mb-3">
+                Calculado sobre tarifa inicial Viernes en Salón Platino
+              </p>
+
+              {/* Resumen claro de selecciones */}
+              <div className="flex flex-wrap justify-center gap-1.5 text-xs text-on-surface mb-3">
+                <span className="font-bold bg-surface-container-high px-2.5 py-1 rounded-lg">
                   {eventKind}
                 </span>
-                <span className="font-semibold bg-surface-container-high px-2.5 py-1 rounded-md">
+                <span className="font-bold bg-surface-container-high px-2.5 py-1 rounded-lg">
                   {guests} invitados
                 </span>
-                <span className="font-semibold bg-surface-container-high px-2.5 py-1 rounded-md">
+                <span className="font-bold bg-primary/15 text-primary px-2.5 py-1 rounded-lg">
                   Paquete {packageType}
                 </span>
-                <span className="font-semibold bg-surface-container-high px-2.5 py-1 rounded-md">
+                <span className="font-semibold bg-surface-container-high px-2.5 py-1 rounded-lg">
                   Día: {preferredDay}
                 </span>
-                <span className="font-semibold bg-surface-container-high px-2.5 py-1 rounded-md">
+                <span className="font-semibold bg-surface-container-high px-2.5 py-1 rounded-lg">
                   {preferredSeason}
                 </span>
               </div>
-              <p className="text-xs text-secondary/80 leading-relaxed bg-primary/5 p-3 rounded-lg text-left">
-                * Este presupuesto base está calculado sobre tarifa inicial Viernes en Salón Platino. Solicita tu cotización formal por WhatsApp para confirmar disponibilidad exacta en <strong>{preferredDay}</strong> ({preferredSeason}) y costos de servicios extra.
+
+              {selectedExtras.length > 0 && (
+                <p className="text-xs text-primary font-medium mb-3">
+                  + Extras de interés:{' '}
+                  {EXTRAS.filter((e) => selectedExtras.includes(e.id))
+                    .map((e) => e.label)
+                    .join(', ')}
+                </p>
+              )}
+
+              <p className="text-[11px] text-secondary/80 leading-relaxed bg-primary/5 p-3 rounded-xl text-left">
+                * Envía este resumen por WhatsApp con un solo toque para que un coordinador te confirme disponibilidad exacta en <strong>{preferredDay}</strong> ({preferredSeason}) y promociones vigentes.
               </p>
             </div>
 
             <button
+              type="button"
               onClick={handleWhatsApp}
-              className="mt-2 w-full bg-[#25D366] text-white font-bold py-4 rounded-xl hover:bg-[#1EBE5D] active:scale-95 transition-all uppercase tracking-wider text-sm shadow-lg flex items-center justify-center gap-2 flex-shrink-0 cursor-pointer"
+              className="w-full min-h-[54px] bg-[#25D366] text-white font-bold py-4 px-6 rounded-2xl hover:bg-[#1EBE5D] active:scale-[0.99] transition-all uppercase tracking-wider text-sm shadow-xl flex items-center justify-center gap-2.5 cursor-pointer"
             >
               <span className="material-symbols-outlined text-xl">forum</span>
-              <span>Solicitar Cotización por WhatsApp</span>
+              <span>Confirmar Disponibilidad por WhatsApp</span>
             </button>
 
-            <button
-              onClick={() => handleBackStep(1)}
-              className="text-xs font-bold text-secondary hover:text-primary transition-colors uppercase tracking-widest mt-4 mb-2 flex-shrink-0 cursor-pointer"
-            >
-              Volver a calcular
-            </button>
+            <div className="flex items-center justify-center gap-6 pt-1">
+              <button
+                type="button"
+                onClick={() => handleBackStep(3)}
+                className="text-xs font-bold text-secondary hover:text-primary transition-colors uppercase tracking-wider cursor-pointer"
+              >
+                ← Cambiar Paquete / Extras
+              </button>
+              <button
+                type="button"
+                onClick={() => handleBackStep(1)}
+                className="text-xs font-bold text-secondary hover:text-primary transition-colors uppercase tracking-wider cursor-pointer"
+              >
+                Reiniciar Cálculo
+              </button>
+            </div>
           </div>
         )}
       </div>

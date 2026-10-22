@@ -16,7 +16,7 @@ export default function Home() {
 
       <main>
         {/* Hero Section */}
-        <section id="inicio" data-ux-section="inicio" className="relative min-h-screen pt-24 pb-16 w-full flex items-center justify-center overflow-hidden">
+        <section id="inicio" data-ux-section="inicio" className="relative min-h-screen pt-16 pb-12 lg:pt-24 lg:pb-16 w-full flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0">
             <Image
               className="object-cover"
@@ -29,30 +29,30 @@ export default function Home() {
             <div className="absolute inset-0 hero-gradient"></div>
           </div>
           
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pt-16">
-            <h1 className="font-display-lg text-display-lg-mobile md:text-5xl lg:text-6xl text-surface-container-lowest mb-10 text-center lg:text-left drop-shadow-xl font-bold">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pt-6 lg:pt-14">
+            <h1 className="font-display-lg text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-surface-container-lowest mb-5 lg:mb-10 text-center lg:text-left drop-shadow-xl font-bold leading-tight">
               Salón de eventos en Gustavo A. Madero - CDMX San Pedro Plus
             </h1>
             
-            <div className="flex flex-col lg:flex-row gap-12 items-center lg:items-start justify-between">
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-start justify-between">
               {/* Columna Izquierda: Texto y CTA */}
-              <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-10 pt-4">
-                <p className="font-body-lg text-xl md:text-2xl text-surface-variant max-w-xl drop-shadow-md leading-relaxed">
+              <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-5 lg:space-y-10 pt-1 lg:pt-4">
+                <p className="font-body-lg text-base sm:text-xl md:text-2xl text-surface-variant max-w-xl drop-shadow-md leading-relaxed">
                   Salón de eventos en Ciudad de México para bodas, XV años, bautizos, graduaciones y eventos corporativos con precio económico.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                  <TrackedLink eventType="hero_click" source="ver_precios" className="bg-primary-container text-on-primary-container px-8 py-4 font-bold tracking-wider rounded-xl hover:scale-105 transition-transform uppercase text-center shadow-lg" href="#paquetes">
+                <div className="flex flex-row gap-3 w-full sm:w-auto justify-center lg:justify-start">
+                  <TrackedLink eventType="hero_click" source="ver_precios" className="flex-1 sm:flex-initial bg-primary-container text-on-primary-container px-5 sm:px-8 py-3.5 sm:py-4 font-bold tracking-wider rounded-xl hover:scale-105 transition-transform uppercase text-center text-xs sm:text-sm shadow-lg" href="#paquetes">
                     VER PRECIOS
                   </TrackedLink>
-                  <TrackedLink eventType="hero_click" source="ver_galeria" className="border-2 border-surface-container-lowest text-surface-container-lowest px-8 py-4 font-bold tracking-wider rounded-xl hover:bg-surface-container-lowest hover:text-primary transition-all uppercase text-center backdrop-blur-sm shadow-lg" href="#galeria">
+                  <TrackedLink eventType="hero_click" source="ver_galeria" className="flex-1 sm:flex-initial border-2 border-surface-container-lowest text-surface-container-lowest px-5 sm:px-8 py-3.5 sm:py-4 font-bold tracking-wider rounded-xl hover:bg-surface-container-lowest hover:text-primary transition-all uppercase text-center text-xs sm:text-sm backdrop-blur-sm shadow-lg" href="#galeria">
                     VER GALERÍA
                   </TrackedLink>
                 </div>
               </div>
 
               {/* Columna Derecha: Precotizador */}
-              <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-                <div className="w-full max-w-lg transform transition-transform hover:scale-[1.02] duration-300">
+              <div id="precotizador-hero" className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+                <div className="w-full max-w-xl">
                   <Precotizador />
                 </div>
               </div>

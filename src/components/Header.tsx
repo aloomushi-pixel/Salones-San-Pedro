@@ -211,17 +211,28 @@ export default function Header() {
         </div>
       )}
 
-      {/* Modal Precotizador */}
+      {/* Modal Precotizador Optimizado para Móvil */}
       {isPrecotizadorOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 backdrop-blur-sm p-[11px] md:p-4 animate-fade-in">
-          <div className="relative w-full md:w-[480px] h-auto max-h-[90vh] overflow-y-auto custom-scrollbar bg-surface rounded-3xl shadow-[0_0_50px_rgba(212,175,55,0.15),0_0_20px_rgba(0,0,0,0.5)] flex flex-col border border-outline-variant/30 transform transition-all">
-            <button
-              onClick={handleClosePrecotizadorModal}
-              className="absolute top-2 right-2 z-10 w-8 h-8 flex items-center justify-center bg-surface-container hover:bg-surface-variant text-on-surface rounded-full transition-colors cursor-pointer"
-            >
-              <span className="material-symbols-outlined text-lg">close</span>
-            </button>
-            <div className="h-full w-full">
+        <div
+          className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-sm p-2 sm:p-4 animate-fade-in"
+          onClick={handleClosePrecotizadorModal}
+        >
+          <div
+            className="relative w-full max-w-xl max-h-[92dvh] overflow-y-auto custom-scrollbar bg-surface rounded-3xl shadow-[0_0_50px_rgba(212,175,55,0.15),0_0_20px_rgba(0,0,0,0.5)] flex flex-col border border-outline-variant/30 transform transition-all"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-end px-4 pt-3 pb-0">
+              <button
+                type="button"
+                onClick={handleClosePrecotizadorModal}
+                aria-label="Cerrar precotizador"
+                className="inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container-high hover:bg-surface-variant text-secondary hover:text-on-surface rounded-full text-xs font-bold transition-colors cursor-pointer"
+              >
+                <span>Cerrar</span>
+                <span className="material-symbols-outlined text-base">close</span>
+              </button>
+            </div>
+            <div className="w-full">
               <Precotizador />
             </div>
           </div>
