@@ -226,7 +226,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 const renderCTA = (serviceName: string) => (
   <div className="bg-primary/5 border border-primary/20 rounded-xl p-6 text-center my-8">
-    <h3 className="font-display-lg text-xl text-primary font-bold mb-2">¿Quieres incluir {serviceName} en tu paquete?</h3>
+    <h2 className="font-display-lg text-xl text-primary font-bold mb-2">¿Quieres incluir {serviceName} en tu paquete?</h2>
     <p className="text-secondary mb-4 text-sm font-body-md">
       En Salones San Pedro Plus personalizamos cada elemento para adaptarlo a tus necesidades y hacer realidad el evento de tus sueños en la alcaldía Gustavo A. Madero, Ciudad de México.
     </p>
@@ -322,7 +322,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
         <h2 className="font-display-lg text-2xl text-on-surface font-bold mt-8">Diseño a la medida y Golosinas Premium</h2>
         <p>En Salones San Pedro Plus, diseñamos cada mesa de dulces cuidando la paleta de colores de tu evento. Ofrecemos una selección premium que incluye repostería miniatura, chocolates artesanales, gomitas gourmet, postres individuales de vasito y frituras personalizadas con salsas tradicionales.</p>
 
-        <h3 className="font-display-lg text-xl text-on-surface font-semibold mt-6">¿Qué incluye nuestro servicio de Mesa de Dulces?</h3>
+        <h2 className="font-display-lg text-xl text-on-surface font-semibold mt-6">¿Qué incluye nuestro servicio de Mesa de Dulces?</h2>
         <ul className="list-disc pl-5 space-y-2">
           <li>Montaje decorativo temático con bases de cristal, madera o espejos.</li>
           <li>Variedad de 10 a 15 tipos de golosinas (dulces, salados, aciditos y repostería).</li>
@@ -374,7 +374,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
         <h2 className="font-display-lg text-2xl text-on-surface font-bold mt-8">¿Por qué elegir Arrachera para tu banquete?</h2>
         <p>La arrachera es un corte sumamente popular por su textura suave y sabor intenso. Nuestro equipo de cocina la prepara utilizando un marinado especial de la casa y la sirve asada al punto exacto, acompañada de guarniciones gourmet como papas al horno rellenas de queso y tocino, o espárragos envueltos en tocino con mantequilla de ajo.</p>
 
-        <h3 className="font-display-lg text-xl text-on-surface font-semibold mt-6">Propuesta de menú de 3 tiempos con Arrachera:</h3>
+        <h2 className="font-display-lg text-xl text-on-surface font-semibold mt-6">Propuesta de menú de 3 tiempos con Arrachera:</h2>
         <ul className="list-disc pl-5 space-y-2">
           <li><strong>Primer Tiempo:</strong> Crema suave de elote con hojuelas de chile ancho o ensalada tibia de portobello.</li>
           <li><strong>Segundo Tiempo:</strong> Suprema de arrachera marinada a las hierbas con puré rústico y atado de verduras.</li>
@@ -419,7 +419,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
         <h2 className="font-display-lg text-2xl text-on-surface font-bold mt-8">¿Cómo funciona nuestro servicio de Cabina 360°?</h2>
         <p>Instalamos una plataforma giratoria con capacidad para 3 o 4 personas. Una cámara de alta definición gira alrededor de los invitados mientras bailan, saltan y se divierten con accesorios inflables, confeti o pistolas de burbujas. El video se procesa con música de fondo y efectos especiales en menos de un minuto.</p>
 
-        <h3 className="font-display-lg text-xl text-on-surface font-semibold mt-6">Nuestro paquete incluye:</h3>
+        <h2 className="font-display-lg text-xl text-on-surface font-semibold mt-6">Nuestro paquete incluye:</h2>
         <ul className="list-disc pl-5 space-y-2">
           <li>1 hora y media de videos ilimitados.</li>
           <li>Operador profesional a cargo del equipo y la asistencia a invitados.</li>
@@ -446,7 +446,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
         <h2 className="font-display-lg text-2xl text-on-surface font-bold mt-8">Nuestro servicio de cobertura fotográfica</h2>
         <p>Salones San Pedro Plus cuenta con fotógrafos especializados en eventos de gala. Capturamos desde la sesión casual de preparación, la ceremonia, la recepción y todo el desarrollo del banquete y baile de gala.</p>
 
-        <h3 className="font-display-lg text-xl text-on-surface font-semibold mt-6">Contenido de nuestro paquete de Fotografía:</h3>
+        <h2 className="font-display-lg text-xl text-on-surface font-semibold mt-6">Contenido de nuestro paquete de Fotografía:</h2>
         <ul className="list-disc pl-5 space-y-2">
           <li>Cobertura completa del evento por fotógrafos profesionales.</li>
           <li>Entrega de todas las fotos digitales editadas en alta resolución en memoria USB.</li>
@@ -698,7 +698,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
         <h2 className="font-display-lg text-2xl text-on-surface font-bold mt-8">Modelos Exclusivos y Confort Premium</h2>
         <p>Salones San Pedro Plus ofrece paquetes que integran el salón con el transporte de gala. Contamos con una flotilla premium que incluye limusinas Cadillac Escalade, Hummer H2 y H3, Lincoln MKZ y Chrysler 300. Todas las unidades cuentan con interiores de piel, quemacocos, pista de baile iluminada con LED, pantallas, sonido envolvente y bebidas de cortesía.</p>
 
-        <h3 className="font-display-lg text-xl text-on-surface font-semibold mt-6">Detalles del Servicio de Limusina:</h3>
+        <h2 className="font-display-lg text-xl text-on-surface font-semibold mt-6">Detalles del Servicio de Limusina:</h2>
         <ul className="list-disc pl-5 space-y-2">
           <li>4 horas de servicio continuo con chofer calificado.</li>
           <li>Capacidad para 10 personas (para ir con tus damas o padrinos).</li>
@@ -725,7 +725,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
         <h2 className="font-display-lg text-2xl text-on-surface font-bold mt-8">Un Mercedes-Benz Clásico de los años 30 a tu servicio</h2>
         <p>Ofrecemos en renta un elegante auto clásico Mercedes-Benz en color marfil y negro, perfectamente restaurado. Cuenta con interiores de lujo, capacidad para 2 personas (ideal para el traslado exclusivo de la novia y su padre, y posteriormente para los recién casados) y chofer formalmente uniformado.</p>
 
-        <h3 className="font-display-lg text-xl text-on-surface font-semibold mt-6">¿Qué incluye el servicio de Auto Clásico?</h3>
+        <h2 className="font-display-lg text-xl text-on-surface font-semibold mt-6">¿Qué incluye el servicio de Auto Clásico?</h2>
         <ul className="list-disc pl-5 space-y-2">
           <li>3 horas de servicio de traslado para la ceremonia y el salón.</li>
           <li>Chofer uniformado a cargo de la ruta.</li>

@@ -1,7 +1,13 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { ParsedAnalyticsEvent } from '@/utils/telemetryParser';
+import {
+  normalizeEventKind,
+  normalizeExtraService,
+  normalizeGalleryCategory,
+  normalizePackageName,
+  ParsedAnalyticsEvent,
+} from '@/utils/telemetryParser';
 
 export interface LeadRecord {
   id: string;
@@ -57,15 +63,29 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
   const [customFrom, setCustomFrom] = useState<string>('2026-09-01');
   const [customTo, setCustomTo] = useState<string>('2026-12-31');
   const [sectionFilter, setSectionFilter] = useState<SectionFilter>('all');
+  const [excludeBotsAndQA, setExcludeBotsAndQA] = useState<boolean>(true);
   const [copiedPrompt, setCopiedPrompt] = useState(false);
 
-  // Filtrar eventos según el periodo seleccionado
+  // Contabilizar tráfico de bots y QA segregado en todo el conjunto
+  const hygieneSummary = useMemo(() => {
+    const botCount = events.filter((e) => e.is_bot).length;
+    const qaCount = events.filter((e) => e.is_internal_qa).length;
+    const historicalCount = events.filter((e) => e.is_historical && !e.is_non_human_or_qa).length;
+    const activeV2HumanCount = events.filter((e) => !e.is_historical && !e.is_non_human_or_qa).length;
+    return { botCount, qaCount, historicalCount, activeV2HumanCount };
+  }, [events]);
+
+  // Filtrar eventos según el periodo seleccionado y la regla de higiene (excluir bots y QA por defecto)
   const filteredEvents = useMemo(() => {
-    if (period === 'all') return events;
+    const base = excludeBotsAndQA
+      ? events.filter((ev) => !ev.is_non_human_or_qa)
+      : events;
+
+    if (period === 'all') return base;
     const now = new Date();
 
     if (period === 'custom') {
-      return events.filter((ev) => ev.date_cdmx >= customFrom && ev.date_cdmx <= customTo);
+      return base.filter((ev) => ev.date_cdmx >= customFrom && ev.date_cdmx <= customTo);
     }
 
     const daysMap: Record<Exclude<PeriodPreset, 'all' | 'custom'>, number> = {
@@ -78,8 +98,8 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
     const days = daysMap[period];
     const cutoff = new Date(now.getTime() - days * 24 * 60 * 60 * 1000);
 
-    return events.filter((ev) => new Date(ev.created_at) >= cutoff);
-  }, [events, period, customFrom, customTo]);
+    return base.filter((ev) => new Date(ev.created_at) >= cutoff);
+  }, [events, period, customFrom, customTo, excludeBotsAndQA]);
 
   // Cálculo integral de todos los monitores
   const stats = useMemo(() => {
@@ -168,8 +188,19 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
 
     const totalTabSwitches = Object.values(sessionTabSwitches).reduce((a, b) => a + b, 0);
 
+    // Separar eventos activos v2 de eventos históricos para evitar sesgos en tasas de conversión y embudo
+    const activeV2Events = filteredEvents.filter((e) => !e.is_historical);
+    const activeV2UniqueSessions = new Set(activeV2Events.map((e) => e.session_id)).size;
+    const activeV2ConvertedWASessions = new Set(
+      activeV2Events.filter((e) => e.event_type === 'whatsapp_click').map((e) => e.session_id)
+    );
+
     const conversionRateWA =
-      uniqueSessions > 0 ? Number(((sessionConvertedWA.size / uniqueSessions) * 100).toFixed(1)) : 0;
+      activeV2UniqueSessions > 0
+        ? Number(((activeV2ConvertedWASessions.size / activeV2UniqueSessions) * 100).toFixed(1))
+        : uniqueSessions > 0
+        ? Number(((sessionConvertedWA.size / uniqueSessions) * 100).toFixed(1))
+        : 0;
 
     // Tiempos de primera interacción y primer CTA
     const ttfiVals = filteredEvents.map((e) => e.meta.timers?.ttfi_ms || 0).filter((v) => v > 0);
@@ -253,45 +284,39 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
     const exactGuestsDemand = countBy(exactGuestsList);
 
     const eventKindsDemand = countBy([
-      ...filteredEvents.map((e) => e.meta.event_kind || '').filter(Boolean),
-      ...leads.map((l) => l.event_type || '').filter(Boolean),
+      ...filteredEvents.map((e) => normalizeEventKind(e.meta.event_kind)).filter(Boolean),
+      ...leads.map((l) => normalizeEventKind(l.event_type)).filter(Boolean),
     ]);
 
-    // Extras más solicitados
+    // Extras más solicitados (Normalizados canónicamente)
     const extrasList: string[] = [];
     extraServiceEvents.forEach((e) => {
-      if (e.meta.element_text) extrasList.push(e.meta.element_text);
+      if (e.meta.element_text) extrasList.push(normalizeExtraService(e.meta.element_text));
     });
     filteredEvents.forEach((e) => {
       const arr = e.meta.extra?.extras;
       if (Array.isArray(arr)) {
-        arr.forEach((item) => extrasList.push(String(item)));
+        arr.forEach((item) => extrasList.push(normalizeExtraService(String(item))));
       }
     });
-    const extrasDemand = countBy(extrasList);
+    const extrasDemand = countBy(extrasList.filter(Boolean));
 
-    // Paquetes
+    // Paquetes (Normalizados canónicamente)
     const packageSignals: string[] = [];
     filteredEvents.forEach((e) => {
-      if (e.meta.package_name) {
-        packageSignals.push(`Paquete ${e.meta.package_name}`);
-      } else if (e.source === 'paquete_plus') {
-        packageSignals.push('Paquete Plus ($710 p/p)');
-      } else if (e.source === 'paquete_premier') {
-        packageSignals.push('Paquete Premier ($530 p/p)');
-      } else if (e.source === 'paquete_all_inclusive') {
-        packageSignals.push('Paquete All Inclusive ($1,010 p/p)');
-      } else if (e.source === 'paquete_CTA') {
-        packageSignals.push('Paquete Premier / All Inclusive (CTA Home)');
+      const normPkg = normalizePackageName(e.meta.package_name, e.source);
+      if (normPkg) {
+        packageSignals.push(normPkg);
       }
     });
     const packageDemand = countBy(packageSignals);
 
-    // Secciones
+    // Secciones (incluye nueva banda superior de confianza y sección precotizador independiente)
     const sectionOrder = [
       { id: 'inicio', label: 'Hero Principal & Propuesta (#inicio)' },
       { id: 'precotizador', label: 'Precotizador Interactivo (Wizard 4 Pasos)' },
       { id: 'paquetes', label: 'Comparativa de Paquetes y Precios (#paquetes)' },
+      { id: 'confianza_ubicacion', label: 'Banda Superior Reseñas Google y Ubicación (#confianza_ubicacion)' },
       { id: 'galeria', label: 'Galería Salón Diamante y Platino (#galeria)' },
       { id: 'tiktok-videos', label: 'Reproductor de Videos TikTok (#tiktok-videos)' },
       { id: 'banquetes', label: 'Experiencia Gastronómica / Menú 3 Tiempos (#banquetes)' },
@@ -309,6 +334,9 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
       sectionMetrics[s.id] = { views: 0, interactions: 0, dwellMsTotal: 0, dwellCount: 0, friction: 0 };
     });
 
+    const precotizadorExplicitViewSessions = new Set<string>();
+    const precotizadorInteractedSessions = new Set<string>();
+
     filteredEvents.forEach((e) => {
       let sec = e.meta.section || 'inicio';
       if (sec.startsWith('blog')) sec = 'blog';
@@ -318,6 +346,9 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
 
       if (e.event_type === 'section_view' || e.event_type === 'page_view') {
         sectionMetrics[sec].views += 1;
+        if (sec === 'precotizador') {
+          precotizadorExplicitViewSessions.add(e.session_id);
+        }
       } else if (
         e.event_type === 'dead_click' ||
         e.event_type === 'rage_click' ||
@@ -331,6 +362,9 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
         e.event_type !== 'tab_visibility'
       ) {
         sectionMetrics[sec].interactions += 1;
+        if (sec === 'precotizador') {
+          precotizadorInteractedSessions.add(e.session_id);
+        }
       }
 
       const dwellMap = e.meta.extra?.section_dwell_map_ms as Record<string, number> | undefined;
@@ -355,6 +389,24 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
         sectionMetrics[sec].dwellMsTotal += e.meta.timers.section_dwell_ms;
         sectionMetrics[sec].dwellCount += 1;
       }
+
+      // Acreditar duración de pasos del precotizador si la sesión previa no tenía IntersectionObserver propio
+      if (
+        sec === 'precotizador' &&
+        e.meta.timers?.step_duration_ms &&
+        e.meta.timers.step_duration_ms > 0 &&
+        e.meta.timers.step_duration_ms < 600000
+      ) {
+        sectionMetrics.precotizador.dwellMsTotal += e.meta.timers.step_duration_ms;
+        sectionMetrics.precotizador.dwellCount += 1;
+      }
+    });
+
+    // Acreditar vista de sección a sesiones que interactuaron con el precotizador antes del observador dedicado
+    precotizadorInteractedSessions.forEach((sid) => {
+      if (!precotizadorExplicitViewSessions.has(sid)) {
+        sectionMetrics.precotizador.views += 1;
+      }
     });
 
     const sectionTable = sectionOrder.map((s) => {
@@ -369,11 +421,12 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
       };
     });
 
-    // Embudo del Precotizador
+    // Embudo del Precotizador (Separando telemetría activa v2 de cierres históricos previos)
     const step1Events = precotizadorSteps.filter((e) => e.meta.step_number === 1);
     const step2Events = precotizadorSteps.filter((e) => e.meta.step_number === 2);
     const step3Events = precotizadorSteps.filter((e) => e.meta.step_number === 3);
-    const step4WA = whatsappEvents.filter((e) => e.source === 'precotizador');
+    const step4WAActive = whatsappEvents.filter((e) => e.source === 'precotizador' && !e.is_historical);
+    const step4WAHistorical = whatsappEvents.filter((e) => e.source === 'precotizador' && e.is_historical);
     const upsell100Events = precotizadorSteps.filter((e) => e.source === 'upsell_a_100_invitados');
 
     const avgStepMs = (arr: ParsedAnalyticsEvent[]) => {
@@ -388,8 +441,9 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
       step2AvgSec: avgStepMs(step2Events),
       step3Count: step3Events.length,
       step3AvgSec: avgStepMs(step3Events),
-      step4WACount: step4WA.length,
-      totalWizardAvgSec: avgStepMs(step4WA),
+      step4WACount: step4WAActive.length,
+      step4WAHistoricalCount: step4WAHistorical.length,
+      totalWizardAvgSec: avgStepMs(step4WAActive),
       backtracksCount: precotizadorBacktracks.length,
       abandonsCount: precotizadorAbandons.length,
       upsell100Count: upsell100Events.length,
@@ -414,9 +468,9 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
     const topPaths = countBy(filteredEvents.map((e) => e.path || '/'));
     const readingModeBreakdown = countBy(readingModes);
 
-    // Micro-interacciones de contenido
+    // Micro-interacciones de contenido (Normalizadas)
     const galleryBreakdown = countBy(
-      galleryEvents.map((e) => e.meta.gallery_category || e.source)
+      galleryEvents.map((e) => normalizeGalleryCategory(e.meta.gallery_category, e.source))
     );
     const menuBreakdown = countBy(menuSwipes.map((e) => e.meta.dish_title || e.source));
     const expBreakdown = countBy(expEvents.map((e) => e.meta.experience_title || e.source));
@@ -767,9 +821,25 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
               </p>
             </div>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 shrink-0">
+              <button
+                type="button"
+                onClick={() => setExcludeBotsAndQA((prev) => !prev)}
+                className={`px-3.5 py-2.5 rounded-xl border text-left transition-all cursor-pointer ${
+                  excludeBotsAndQA
+                    ? 'bg-emerald-50 border-emerald-300 text-emerald-900'
+                    : 'bg-amber-50 border-amber-300 text-amber-900'
+                }`}
+              >
+                <span className="text-[10px] font-extrabold uppercase block">
+                  {excludeBotsAndQA ? '🛡️ Higiene Activa (Solo Humanos)' : '⚠️ Incluyendo Bots y QA'}
+                </span>
+                <span className="text-xs font-semibold block mt-0.5">
+                  Segregados: {hygieneSummary.botCount} bots / {hygieneSummary.qaCount} QA
+                </span>
+              </button>
               <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-right">
                 <span className="text-[11px] font-bold uppercase text-slate-400 block">
-                  Registros en Periodo
+                  Registros Limpios
                 </span>
                 <span className="text-xl font-black text-slate-900">
                   {stats.totalEvents} eventos

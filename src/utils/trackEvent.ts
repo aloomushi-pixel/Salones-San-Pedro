@@ -63,13 +63,20 @@ function detectTrafficChannel(referrer: string, ua: string, searchParams: URLSea
 
   const lowerUA = ua.toLowerCase();
   const lowerRef = referrer_domain.toLowerCase();
+  const lowerUtmSrc = (utm_source || '').toLowerCase();
   let traffic_channel = 'Tráfico Directo';
 
-  if (gclid || (utm_source && /google/i.test(utm_source) && /cpc|ppc|paid/i.test(utm_medium || ''))) {
+  // 1. Regla explícita GEO: Motores de IA Generativa (ChatGPT, Perplexity, Gemini, Claude, Copilot)
+  if (
+    /chatgpt|openai|perplexity|gemini\.google|claude\.ai|copilot\.microsoft/i.test(lowerUtmSrc) ||
+    /chatgpt|openai|perplexity|gemini\.google|claude\.ai|copilot\.microsoft/i.test(lowerRef)
+  ) {
+    traffic_channel = 'IA Generativa (ChatGPT / GEO)';
+  } else if (gclid || (utm_source && /google/i.test(utm_source) && /cpc|ppc|paid/i.test(utm_medium || ''))) {
     traffic_channel = 'Google Ads (Pagado)';
   } else if (fbclid || lowerUA.includes('fb_iab') || lowerUA.includes('fbav') || /facebook|fb\.com|m\.facebook/i.test(lowerRef) || /facebook|fb|meta/i.test(utm_source || '')) {
     traffic_channel = 'Facebook Ads / App';
-  } else if (lowerUA.includes('instagram') || /instagram/i.test(lowerRef) || /instagram|ig/i.test(utm_source || '')) {
+  } else if (lowerUA.includes('instagram') || /instagram/i.test(lowerRef) || /instagram|^ig$/i.test(utm_source || '')) {
     traffic_channel = 'Instagram';
   } else if (ttclid || lowerUA.includes('tiktok') || lowerUA.includes('musical_ly') || /tiktok/i.test(lowerRef) || /tiktok/i.test(utm_source || '')) {
     traffic_channel = 'TikTok';
@@ -101,8 +108,17 @@ function detectTrafficChannel(referrer: string, ua: string, searchParams: URLSea
 
 export function getOrInitMonitorState(): RuntimeMonitorState | null {
   if (typeof window === 'undefined') return null;
+
+  // Marcar dispositivo si accede a /admin o proviene de /admin para segregar tráfico QA
+  try {
+    if (window.location.pathname.startsWith('/admin') || (document.referrer && document.referrer.includes('/admin'))) {
+      localStorage.setItem('ssp_is_admin_qa', 'true');
+    }
+  } catch {
+    // Ignorar errores de localStorage
+  }
+
   if (runtimeState) {
-    // Actualizar reloj activo antes de leer
     const now = Date.now();
     if (runtimeState.isTabVisible) {
       runtimeState.activeTimeMs += Math.max(0, now - runtimeState.lastActiveTick);
@@ -134,14 +150,15 @@ export function getOrInitMonitorState(): RuntimeMonitorState | null {
     localStorage.setItem('ssp_visit_count', '1');
   }
 
-  // Persistir adquisición inicial de la sesión
+  // Persistir adquisición inicial de la sesión, pero actualizar si entran nuevos parámetros UTM (ej. utm_source=chatgpt.com)
   let acquisition: AcquisitionInfo | undefined;
   try {
+    const params = new URLSearchParams(window.location.search);
+    const hasNewUtm = params.has('utm_source') || params.has('fbclid') || params.has('gclid');
     const cachedAcq = sessionStorage.getItem('ssp_acquisition');
-    if (cachedAcq) {
+    if (cachedAcq && !hasNewUtm) {
       acquisition = JSON.parse(cachedAcq);
     } else {
-      const params = new URLSearchParams(window.location.search);
       acquisition = detectTrafficChannel(document.referrer || '', navigator.userAgent || '', params);
       sessionStorage.setItem('ssp_acquisition', JSON.stringify(acquisition));
     }
@@ -191,7 +208,7 @@ export function updateMonitorVisibility(isVisible: boolean): { tabSwitchCount: n
   } else {
     st.hiddenTimeMs += Math.max(0, now - st.lastActiveTick);
   }
-  st.lastActiveTick = now;
+  runtimeState!.lastActiveTick = now;
   if (st.isTabVisible && !isVisible) {
     st.tabSwitchCount += 1;
   }
@@ -206,7 +223,7 @@ export function updateMonitorVisibility(isVisible: boolean): { tabSwitchCount: n
 export function recordFirstInteraction(): number | null {
   const st = getOrInitMonitorState();
   if (!st) return null;
-  if (typeof st.ttfiMs === 'number') return null; // Ya se registró
+  if (typeof st.ttfiMs === 'number') return null;
   st.ttfiMs = Math.max(10, Date.now() - st.pageStartTime);
   return st.ttfiMs;
 }
@@ -235,13 +252,26 @@ export const trackEvent = async (
 ) => {
   try {
     if (typeof window === 'undefined') return;
-    // No registrar eventos generados dentro del propio panel de administración
     if (window.location.pathname.startsWith('/admin')) return;
+
+    const ua = navigator.userAgent || '';
+    const isBotClient =
+      Boolean((navigator as Navigator & { webdriver?: boolean }).webdriver) ||
+      /googlebot|bingbot|headlesschrome|facebookexternalhit|meta-externalagent|adsbot-google|ahrefsbot|semrushbot|bytespider|petalbot/i.test(
+        ua
+      );
+
+    // Ignorar rastreadores automatizados y navegadores headless en el cliente
+    if (isBotClient) return;
 
     const st = getOrInitMonitorState();
     if (!st) return;
 
-    // Si es un clic de conversión o cotización, medir el tiempo hasta el primer CTA
+    const isAdminDevice =
+      localStorage.getItem('ssp_is_admin_qa') === 'true' ||
+      (document.referrer && document.referrer.includes('/admin')) ||
+      st.visitorId === 'usr_iez6z_e7k92646';
+
     if ((event_type === 'cotizar_click' || event_type === 'whatsapp_click' || event_type === 'precotizador_open') && !st.timeToCtaMs) {
       st.timeToCtaMs = st.activeTimeMs;
     }
@@ -259,6 +289,7 @@ export const trackEvent = async (
       max_scroll_pct: st.maxScrollPct,
       tab_switches: st.tabSwitchCount,
       cookie_consent: consentStatus,
+      is_internal_qa: Boolean(isAdminDevice),
       geo: {
         timezone,
         ...customMeta?.geo,
@@ -276,6 +307,10 @@ export const trackEvent = async (
         ...customMeta?.timers,
       },
       ...customMeta,
+      extra: {
+        ...(customMeta?.extra || {}),
+        ...(isAdminDevice ? { is_admin_device: true } : {}),
+      },
     };
 
     const payload = JSON.stringify({

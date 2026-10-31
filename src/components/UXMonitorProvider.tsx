@@ -29,7 +29,14 @@ export default function UXMonitorProvider({ children }: { children: React.ReactN
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    if (pathname.startsWith('/admin')) return;
+    if (pathname.startsWith('/admin')) {
+      try {
+        localStorage.setItem('ssp_is_admin_qa', 'true');
+      } catch {
+        // Ignorar
+      }
+      return;
+    }
 
     getOrInitMonitorState();
     scrollMilestonesRef.current.clear();
@@ -66,7 +73,6 @@ export default function UXMonitorProvider({ children }: { children: React.ReactN
         const dom_load_ms = nav ? Math.round(nav.domContentLoadedEventEnd - nav.startTime) : undefined;
         const fcp_ms = fcpEntry ? Math.round(fcpEntry.startTime) : undefined;
 
-        // Auditoría SEO On-Page automática de la página actual
         const h1Els = document.querySelectorAll('h1');
         const h2Els = document.querySelectorAll('h2');
         const imgEls = Array.from(document.querySelectorAll('img'));
@@ -98,7 +104,7 @@ export default function UXMonitorProvider({ children }: { children: React.ReactN
       }
     }, 2200);
 
-    // 3. Observar secciones con IntersectionObserver + Cronómetro de permanencia + Detección de Re-lectura de Precios
+    // 3. Observar secciones con IntersectionObserver (incluyendo #precotizador de forma independiente)
     const observedElements = document.querySelectorAll('[data-ux-section], section[id]');
     const visibleRatios = new Map<string, number>();
 
@@ -114,14 +120,19 @@ export default function UXMonitorProvider({ children }: { children: React.ReactN
               trackEvent('section_view', `sec_${secName}`, { section: secName });
             }
 
-            // Detectar si bajó más allá de paquetes y luego regresó a paquetes o precotizador
-            if (secName === 'galeria' || secName === 'banquetes' || secName === 'animacion' || secName === 'testimonios' || secName === 'ubicacion') {
+            if (
+              secName === 'galeria' ||
+              secName === 'banquetes' ||
+              secName === 'animacion' ||
+              secName === 'testimonios' ||
+              secName === 'ubicacion'
+            ) {
               wentBelowPricesRef.current = true;
             }
             if (
               wentBelowPricesRef.current &&
               !returnToPricesTrackedRef.current &&
-              (secName === 'paquetes' || secName === 'inicio')
+              (secName === 'paquetes' || secName === 'precotizador' || secName === 'inicio')
             ) {
               returnToPricesTrackedRef.current = true;
               trackEvent('scroll_return_prices', `regreso_a_${secName}`, {
@@ -137,8 +148,10 @@ export default function UXMonitorProvider({ children }: { children: React.ReactN
         let bestSec = activeSectionRef.current;
         let maxRatio = 0;
         visibleRatios.forEach((ratio, sec) => {
-          if (ratio > maxRatio) {
-            maxRatio = ratio;
+          // Si el precotizador está visible con buena proporción, priorizarlo frente al contenedor padre #inicio
+          const effectiveRatio = sec === 'precotizador' ? ratio + 0.15 : ratio;
+          if (effectiveRatio > maxRatio) {
+            maxRatio = effectiveRatio;
             bestSec = sec;
           }
         });
@@ -149,11 +162,19 @@ export default function UXMonitorProvider({ children }: { children: React.ReactN
 
     observedElements.forEach((el) => observer.observe(el));
 
-    // Reloj cada 1 segundo para acumular tiempo activo por sección
+    // Reloj cada 1 segundo para acumular tiempo activo por sección (incluyendo secciones anidadas visibles como #precotizador)
     const dwellInterval = setInterval(() => {
       if (document.visibilityState === 'visible') {
-        const sec = activeSectionRef.current || defaultSec;
-        sectionDwellRef.current[sec] = (sectionDwellRef.current[sec] || 0) + 1000;
+        if (visibleRatios.size > 0) {
+          visibleRatios.forEach((ratio, sec) => {
+            if (ratio >= 0.25) {
+              sectionDwellRef.current[sec] = (sectionDwellRef.current[sec] || 0) + 1000;
+            }
+          });
+        } else {
+          const sec = activeSectionRef.current || defaultSec;
+          sectionDwellRef.current[sec] = (sectionDwellRef.current[sec] || 0) + 1000;
+        }
       }
     }, 1000);
 
@@ -204,7 +225,7 @@ export default function UXMonitorProvider({ children }: { children: React.ReactN
       }
     };
 
-    // 5. Detector de Rage Clicks, Dead Clicks e Interacción con Tarjetas de Paquetes
+    // 5. Detector de Rage Clicks y Dead Clicks
     const handleGlobalClick = (e: MouseEvent) => {
       const ttfi = recordFirstInteraction();
       if (ttfi !== null) {
@@ -246,18 +267,22 @@ export default function UXMonitorProvider({ children }: { children: React.ReactN
         return;
       }
 
+      // Ignorar iconos decorativos marcados explícitamente
+      if (target.closest('[data-ux-decorative="true"]')) {
+        return;
+      }
+
       const interactiveAncestor = target.closest(
-        'a, button, input, select, textarea, label, [role="button"], [data-interactive="true"], video, iframe'
+        'a, button, input, select, textarea, label, summary, details, [role="button"], [data-interactive="true"], video, iframe'
       );
 
       if (!interactiveAncestor && deadClickCountRef.current < 6) {
         const tag = target.tagName.toLowerCase();
         if (
-          (cleanText.length >= 3 && cleanText.length <= 65) ||
+          (cleanText.length >= 3 && cleanText.length <= 65 && cleanText !== 'check') ||
           tag === 'img' ||
           tag === 'h3' ||
           tag === 'h4' ||
-          tag === 'span' ||
           tag === 'li'
         ) {
           deadClickCountRef.current += 1;

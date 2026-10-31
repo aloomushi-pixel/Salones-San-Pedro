@@ -1,4 +1,4 @@
-// Utilidad central para codificar, decodificar, retro-analizar y exportar la telemetría UX, SEO, Geográfica, Temporal y Comercial
+// Utilidad central para codificar, decodificar, normalizar, filtrar bots/QA, retro-analizar y exportar la telemetría UX, SEO, GEO, Geográfica, Temporal y Comercial
 
 export const UX_META_DELIMITER = ' ||| __UX_META__:';
 
@@ -27,7 +27,7 @@ export interface DeviceInfo {
 }
 
 export interface AcquisitionInfo {
-  traffic_channel?: string; // 'Google Orgánico', 'Google Search App', 'Facebook / Instagram App', 'TikTok', 'Directo', 'Referencia Web'
+  traffic_channel?: string; // 'IA Generativa (ChatGPT / GEO)', 'Google Orgánico (SEO)', 'Facebook Ads / App', 'Instagram', 'TikTok', 'Tráfico Directo', etc.
   referrer?: string;
   referrer_domain?: string;
   landing_path?: string;
@@ -84,6 +84,8 @@ export interface UXTelemetryMeta {
   dish_title?: string;
   experience_title?: string;
   blog_slug?: string;
+  is_bot?: boolean;
+  is_internal_qa?: boolean;
   extra?: Record<string, unknown>;
 }
 
@@ -116,6 +118,11 @@ export interface ParsedAnalyticsEvent {
   session_id: string;
   visitor_id: string;
   is_historical: boolean;
+  // Banderas de higiene de tráfico (Bots, Rastreadores y QA interno)
+  is_bot: boolean;
+  is_internal_qa: boolean;
+  is_non_human_or_qa: boolean;
+  traffic_actor_reason?: string;
   meta: UXTelemetryMeta;
 }
 
@@ -124,6 +131,157 @@ const MONTHS_ES = [
   'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
   'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
 ];
+
+// ============================================================================
+// NORMALIZADORES CANÓNICOS DE DEMANDA COMERCIAL Y SECCIONES
+// ============================================================================
+
+export function normalizeEventKind(raw?: string | null): string {
+  if (!raw) return '';
+  const clean = raw.trim().toLowerCase();
+  if (!clean) return '';
+  if (clean === 'xv' || clean.includes('xv') || clean.includes('quince')) return 'XV Años';
+  if (clean.includes('boda')) return 'Boda';
+  if (clean.includes('empresarial') || clean.includes('corporativo')) return 'Empresarial';
+  if (clean.includes('graduac')) return 'Graduación';
+  if (clean.includes('bautizo') || clean.includes('cumple') || clean.includes('social')) {
+    return 'Bautizo / Cumpleaños';
+  }
+  if (clean === 'otro') return 'Otro Evento Social';
+  return raw.trim();
+}
+
+export function normalizeExtraService(raw?: string | null): string {
+  if (!raw) return '';
+  const clean = raw.trim().toLowerCase();
+  if (!clean) return '';
+  if (clean.includes('combo') || clean.includes('vip')) return 'Combo Fiesta VIP (Limusina + Shots + Letras)';
+  if (clean.includes('shot')) return 'Carrito de Shots';
+  if (clean.includes('limusina') || clean.includes('limo')) return 'Servicio de Limusina';
+  if (clean.includes('letra')) return 'Letras Gigantes';
+  if (clean.includes('dulce')) return 'Mesa de Dulces';
+  if (clean.includes('mariachi')) return 'Mariachi';
+  if (clean.includes('robot') || clean.includes('batucada') || clean.includes('iron')) return 'Robot LED / Batucada';
+  if (clean.includes('cabina') || clean.includes('360')) return 'Cabina 360';
+  return raw.trim();
+}
+
+export function normalizePackageName(rawPkg?: string | null, source?: string | null): string {
+  const cleanPkg = (rawPkg || '').trim().toLowerCase();
+  const cleanSrc = (source || '').trim().toLowerCase();
+
+  if (cleanPkg.includes('all inclusive') || cleanSrc === 'paquete_all_inclusive') {
+    return 'Paquete All Inclusive ($1,010 p/p)';
+  }
+  if (cleanPkg.includes('plus') || cleanSrc === 'paquete_plus') {
+    return 'Paquete Plus ($710 p/p)';
+  }
+  if (cleanPkg.includes('premier') || cleanSrc === 'paquete_premier') {
+    return 'Paquete Premier ($530 p/p)';
+  }
+  if (cleanSrc === 'paquete_cta') {
+    return 'Paquete Premier ($530 p/p)';
+  }
+  if (rawPkg && rawPkg.trim()) {
+    return rawPkg.trim();
+  }
+  return '';
+}
+
+export function normalizeGalleryCategory(raw?: string | null, source?: string | null): string {
+  const combined = `${raw || ''} ${source || ''}`.toLowerCase();
+  if (combined.includes('diamante')) return 'Salón Diamante';
+  if (combined.includes('platino')) return 'Salón Platino';
+  return raw || source || 'Galería General';
+}
+
+// ============================================================================
+// DETECCIÓN FORENSE DE BOTS, CRAWLERS Y TRÁFICO INTERNO DE QA / ADMIN
+// ============================================================================
+
+const KNOWN_QA_VISITOR_IDS = new Set([
+  'usr_iez6z_e7k92646',
+]);
+
+const KNOWN_SMOKE_TEST_SESSIONS = new Set([
+  'ses_3f9ph_px4w2auf',
+  'ses_1dzui_iz9kbcot',
+  'ses_65mrm_m4sas8kk',
+  'ses_zxkds_3ctvwd8t',
+  'ses_kkfj1_9x9hab3a',
+]);
+
+export function detectBotOrInternalQA(
+  rawUA: string,
+  meta: UXTelemetryMeta,
+  sessionId: string,
+  visitorId: string
+): {
+  is_bot: boolean;
+  is_internal_qa: boolean;
+  is_non_human_or_qa: boolean;
+  traffic_actor_reason?: string;
+} {
+  const uaLower = (rawUA || '').toLowerCase();
+  const ispLower = (meta.geo?.isp || '').toLowerCase();
+  const cityLower = (meta.geo?.city || '').toLowerCase();
+  const screen = meta.device?.screen || '';
+  const ref = (meta.acquisition?.referrer || '').toLowerCase();
+
+  // 1. Detección de Bots y Crawlers (Googlebot, Bingbot, Meta Ads Crawler, HeadlessChrome)
+  if (
+    meta.is_bot ||
+    /googlebot|bingbot|headlesschrome|facebookexternalhit|meta-externalagent|adsbot-google|ahrefsbot|semrushbot|bytespider|petalbot|applebot|yandexbot|baiduspider|twitterbot|linkedinbot/i.test(
+      uaLower
+    )
+  ) {
+    return {
+      is_bot: true,
+      is_internal_qa: false,
+      is_non_human_or_qa: true,
+      traffic_actor_reason: 'Bot / Crawler por User-Agent',
+    };
+  }
+
+  if (
+    ispLower.includes('google llc') ||
+    ispLower.includes('microsoft corporation') ||
+    ispLower.includes('facebook, inc') ||
+    ispLower.includes('meta platforms') ||
+    (cityLower === 'mountain view' && ispLower.includes('google')) ||
+    (cityLower === 'clonee' && screen === '2000x2000') ||
+    (cityLower === 'quincy' && screen === '800x600')
+  ) {
+    return {
+      is_bot: true,
+      is_internal_qa: false,
+      is_non_human_or_qa: true,
+      traffic_actor_reason: `Servidor Automatizado (${meta.geo?.isp || meta.geo?.city || 'Crawler'})`,
+    };
+  }
+
+  // 2. Detección de Tráfico Interno de Administración y Pruebas de Humo (QA)
+  if (
+    meta.is_internal_qa ||
+    meta.extra?.is_admin_device === true ||
+    ref.includes('/admin') ||
+    KNOWN_QA_VISITOR_IDS.has(visitorId) ||
+    KNOWN_SMOKE_TEST_SESSIONS.has(sessionId)
+  ) {
+    return {
+      is_bot: false,
+      is_internal_qa: true,
+      is_non_human_or_qa: true,
+      traffic_actor_reason: 'Tráfico Interno / QA Administrativo (/admin)',
+    };
+  }
+
+  return {
+    is_bot: false,
+    is_internal_qa: false,
+    is_non_human_or_qa: false,
+  };
+}
 
 export function encodeUserAgentWithMeta(rawUserAgent: string, meta: UXTelemetryMeta): string {
   try {
@@ -205,7 +363,6 @@ export function getCDMXDateParts(isoString: string) {
     };
   }
 
-  // Convertir a zona horaria America/Mexico_City
   const formatter = new Intl.DateTimeFormat('en-US', {
     timeZone: 'America/Mexico_City',
     year: 'numeric',
@@ -237,7 +394,6 @@ export function getCDMXDateParts(isoString: string) {
   };
   const day_index = weekdayMap[map.weekday || 'Thu'] ?? 4;
   const day_of_week = DAYS_ES[day_index];
-  // En la industria de salones de eventos, Viernes, Sábado y Domingo constituyen el bloque de Fin de Semana
   const is_weekend = day_index === 0 || day_index === 5 || day_index === 6;
 
   let time_slot: 'Madrugada (00-06h)' | 'Mañana (06-12h)' | 'Tarde (12-18h)' | 'Noche (18-24h)' = 'Noche (18-24h)';
@@ -292,14 +448,41 @@ export function parseAnalyticsRow(row: RawAnalyticsRow): ParsedAnalyticsEvent {
     meta.acquisition.traffic_channel = fallback.channelHint || 'Directo / Orgánico';
   }
 
+  // Regla explícita de atribución GEO: reclasificar utm_source=chatgpt.com o referrers de IA Generativa
+  const utmSourceLower = (meta.acquisition.utm_source || '').toLowerCase();
+  const refLower = (meta.acquisition.referrer || meta.acquisition.referrer_domain || '').toLowerCase();
+  if (
+    /chatgpt|openai|perplexity|gemini\.google|claude\.ai|copilot\.microsoft/i.test(utmSourceLower) ||
+    /chatgpt|openai|perplexity|gemini\.google|claude\.ai|copilot\.microsoft/i.test(refLower)
+  ) {
+    meta.acquisition.traffic_channel = 'IA Generativa (ChatGPT / GEO)';
+  } else if (
+    (utmSourceLower === 'ig' || utmSourceLower.includes('instagram')) &&
+    meta.acquisition.traffic_channel === 'Tráfico Directo'
+  ) {
+    meta.acquisition.traffic_channel = 'Instagram Ads / App';
+  }
+
+  // Normalizar campos comerciales dentro de meta para evitar fragmentación estadística
+  if (meta.event_kind) {
+    meta.event_kind = normalizeEventKind(meta.event_kind);
+  }
+  if (meta.gallery_category || row.event_type === 'gallery_interaction') {
+    meta.gallery_category = normalizeGalleryCategory(meta.gallery_category, row.source);
+  }
+  if (row.event_type === 'extra_service_interest' && meta.element_text) {
+    meta.element_text = normalizeExtraService(meta.element_text);
+  }
+  if (meta.extra && Array.isArray(meta.extra.extras)) {
+    meta.extra.extras = meta.extra.extras.map((x) => normalizeExtraService(String(x)));
+  }
+
   const cdmx = getCDMXDateParts(row.created_at);
 
-  // Para eventos históricos sin session_id, agrupamos por fecha + navegador + hora aproximada
   const fallbackSessionId = `hist_${cdmx.date_cdmx}_${cdmx.hour_cdmx}h_${(rawUA || '').slice(-18).replace(/[^a-zA-Z0-9]/g, '')}`;
   const session_id = meta.session_id || fallbackSessionId;
   const visitor_id = meta.visitor_id || session_id;
 
-  // Inferir sección si es un evento histórico
   if (!meta.section) {
     const src = row.source || '';
     if (src.includes('paquete')) meta.section = 'paquetes';
@@ -308,6 +491,8 @@ export function parseAnalyticsRow(row: RawAnalyticsRow): ParsedAnalyticsEvent {
     else if (src.includes('floating')) meta.section = 'floating_whatsapp';
     else if ((row.path || '').startsWith('/blog')) meta.section = 'blog';
   }
+
+  const hygiene = detectBotOrInternalQA(rawUA, meta, session_id, visitor_id);
 
   return {
     id: row.id,
@@ -320,6 +505,7 @@ export function parseAnalyticsRow(row: RawAnalyticsRow): ParsedAnalyticsEvent {
     session_id,
     visitor_id,
     is_historical,
+    ...hygiene,
     meta,
   };
 }

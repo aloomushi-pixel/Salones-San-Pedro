@@ -1,13 +1,17 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
-import { encodeUserAgentWithMeta, GeoInfo, UXTelemetryMeta } from '@/utils/telemetryParser';
+import {
+  detectBotOrInternalQA,
+  encodeUserAgentWithMeta,
+  GeoInfo,
+  UXTelemetryMeta,
+} from '@/utils/telemetryParser';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
 const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
-// Caché en memoria por IP para no repetir consultas de geolocalización en la misma sesión
 const geoCache = new Map<string, GeoInfo>();
 
 function maskIp(ip: string): string {
@@ -57,7 +61,6 @@ async function resolveGeoFromRequest(request: Request, clientGeo?: GeoInfo): Pro
     ip_masked: rawIp ? maskIp(rawIp) : undefined,
   };
 
-  // Revisar cabeceras de proxy / CDN primero
   const cfCountry = request.headers.get('cf-ipcountry') || request.headers.get('x-vercel-ip-country');
   const vercelRegion = request.headers.get('x-vercel-ip-country-region');
   const vercelCity = request.headers.get('x-vercel-ip-city');
@@ -112,7 +115,7 @@ async function resolveGeoFromRequest(request: Request, clientGeo?: GeoInfo): Pro
       }
     }
   } catch {
-    // Silencioso en caso de timeout para no retrasar jamás la telemetría
+    // Silencioso en caso de timeout
   }
 
   return baseGeo;
@@ -135,12 +138,36 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'event_type is required' }, { status: 400 });
     }
 
+    // 1. Filtrado temprano por User-Agent de bots conocidos antes de consultar geo-IP
+    if (
+      /googlebot|bingbot|headlesschrome|facebookexternalhit|meta-externalagent|adsbot-google|ahrefsbot|semrushbot|bytespider|petalbot/i.test(
+        rawUserAgent
+      )
+    ) {
+      return NextResponse.json({ success: true, filtered: 'bot_user_agent' });
+    }
+
     const geo = await resolveGeoFromRequest(request, clientMeta.geo);
     const enrichedMeta: UXTelemetryMeta = {
       v: 2,
       ...clientMeta,
       geo,
     };
+
+    const hygiene = detectBotOrInternalQA(
+      rawUserAgent,
+      enrichedMeta,
+      enrichedMeta.session_id || '',
+      enrichedMeta.visitor_id || ''
+    );
+
+    // 2. Excluir bots de red (Google LLC, Microsoft Corp, Facebook Inc) y sesiones de QA/admin para no contaminar la tabla comercial
+    if (hygiene.is_non_human_or_qa) {
+      return NextResponse.json({
+        success: true,
+        filtered: hygiene.traffic_actor_reason || 'non_human_or_qa',
+      });
+    }
 
     const encodedUA = encodeUserAgentWithMeta(rawUserAgent, enrichedMeta);
 

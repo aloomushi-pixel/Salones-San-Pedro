@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "../../../components/Header";
@@ -16,6 +17,43 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = BLOG_POSTS_DETAILS[slug];
+
+  if (!post) {
+    return {
+      title: "Artículo no encontrado | Salones San Pedro Plus CDMX",
+      description: "Explora nuestra guía de bodas, XV años y eventos en Gustavo A. Madero, CDMX.",
+    };
+  }
+
+  const seoTitle = `${post.title} | Salones San Pedro Plus CDMX`;
+  const seoDescription = `${post.excerpt} Cotiza tu evento en Gustavo A. Madero, CDMX desde $530 MXN p/p en Salones Diamante y Platino.`;
+
+  return {
+    title: seoTitle,
+    description: seoDescription,
+    alternates: {
+      canonical: `https://sanpedro.aionia.com.mx/blog/${slug}`,
+    },
+    openGraph: {
+      title: seoTitle,
+      description: seoDescription,
+      type: "article",
+      url: `https://sanpedro.aionia.com.mx/blog/${slug}`,
+      images: [
+        {
+          url: post.imageUrl.startsWith("http")
+            ? post.imageUrl
+            : `https://sanpedro.aionia.com.mx${post.imageUrl}`,
+          alt: post.title,
+        },
+      ],
+    },
+  };
+}
+
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
   const post = BLOG_POSTS_DETAILS[slug];
@@ -24,14 +62,44 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
 
-  // Generate lists of other posts for the sidebar/recommendations (limit to 4 for clean UI)
   const otherPosts = Object.values(BLOG_POSTS_DETAILS)
     .filter((p) => p.slug !== slug)
     .slice(0, 4);
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: post.imageUrl.startsWith("http")
+      ? post.imageUrl
+      : `https://sanpedro.aionia.com.mx${post.imageUrl}`,
+    author: {
+      "@type": "Organization",
+      name: "Salones San Pedro Plus CDMX",
+      url: "https://sanpedro.aionia.com.mx",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Salones San Pedro Plus",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://sanpedro.aionia.com.mx/logo.svg",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://sanpedro.aionia.com.mx/blog/${slug}`,
+    },
+  };
+
   return (
     <>
       <Header />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
 
       <main className="min-h-screen bg-surface py-12 md:py-16 px-margin-mobile md:px-margin-desktop">
         <div className="max-w-4xl mx-auto">
@@ -80,16 +148,18 @@ export default async function BlogPostPage({ params }: PageProps) {
             {/* Sidebar / Recommended Posts */}
             <div className="lg:col-span-4 space-y-8">
               <div className="bg-surface-container-low border border-outline-variant/30 rounded-xl p-6 space-y-6 shadow-sm">
-                <h4 className="font-display-lg text-lg text-on-surface font-semibold border-b border-outline-variant/30 pb-3">Otros artículos</h4>
+                <h2 className="font-display-lg text-lg text-on-surface font-semibold border-b border-outline-variant/30 pb-3">
+                  Otros artículos recomendados
+                </h2>
                 <div className="space-y-6">
                   {otherPosts.map((otherPost) => (
                     <div key={otherPost.slug} className="space-y-2 group">
                       <span className="text-xs text-primary font-bold uppercase tracking-wider">{otherPost.category}</span>
-                      <h5 className="font-display-lg text-on-surface font-medium group-hover:text-primary transition-colors leading-snug">
+                      <h3 className="font-display-lg text-on-surface font-medium group-hover:text-primary transition-colors leading-snug">
                         <Link href={`/blog/${otherPost.slug}`}>
                           {otherPost.title}
                         </Link>
-                      </h5>
+                      </h3>
                       <p className="text-xs text-secondary line-clamp-2 leading-relaxed">{otherPost.excerpt}</p>
                     </div>
                   ))}
@@ -98,7 +168,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
               {/* Call to action */}
               <div className="bg-primary text-on-primary rounded-xl p-6 space-y-4 text-center shadow-lg">
-                <h4 className="font-display-lg text-xl font-bold">¡Haz realidad tu gran día!</h4>
+                <h2 className="font-display-lg text-xl font-bold">¡Haz realidad tu gran día!</h2>
                 <p className="text-sm opacity-90 leading-relaxed">
                   Verifica la disponibilidad para tu evento en Salones San Pedro hoy mismo y recibe atención personalizada de nuestros coordinadores.
                 </p>
