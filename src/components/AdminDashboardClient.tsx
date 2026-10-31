@@ -8,6 +8,9 @@ import {
   normalizePackageName,
   ParsedAnalyticsEvent,
 } from '@/utils/telemetryParser';
+import SearchConsoleExecutiveChart, {
+  ExecutivePeriodPreset,
+} from '@/components/SearchConsoleExecutiveChart';
 
 export interface LeadRecord {
   id: string;
@@ -27,9 +30,10 @@ interface Props {
   errorMessage?: string | null;
 }
 
-type PeriodPreset = 'today' | '7d' | '15d' | '30d' | '90d' | 'all' | 'custom';
+type PeriodPreset = ExecutivePeriodPreset;
 type SectionFilter =
   | 'all'
+  | 'sec0_search_console'
   | 'sec1_kpis'
   | 'sec2_timers'
   | 'sec3_schedule'
@@ -92,10 +96,11 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
       today: 1,
       '7d': 7,
       '15d': 15,
-      '30d': 30,
-      '90d': 90,
+      '1m': 30,
+      '3m': 90,
+      '6m': 180,
     };
-    const days = daysMap[period];
+    const days = daysMap[period] || 30;
     const cutoff = new Date(now.getTime() - days * 24 * 60 * 60 * 1000);
 
     return base.filter((ev) => new Date(ev.created_at) >= cutoff);
@@ -864,13 +869,14 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
               </label>
               <div className="flex flex-wrap items-center gap-2">
                 {[
-                  { id: 'today', label: 'Hoy' },
-                  { id: '7d', label: '7 días' },
+                  { id: 'all', label: `Todo el Histórico (${events.length})` },
+                  { id: '6m', label: 'Hace 6 meses' },
+                  { id: '3m', label: 'Hace 3 meses' },
+                  { id: '1m', label: 'Hace 1 mes' },
                   { id: '15d', label: '15 días' },
-                  { id: '30d', label: '30 días' },
-                  { id: '90d', label: '90 días' },
-                  { id: 'all', label: `Todo el Historial (${events.length})` },
-                  { id: 'custom', label: 'Por Fechas' },
+                  { id: '7d', label: '7 días' },
+                  { id: 'today', label: 'Hoy' },
+                  { id: 'custom', label: 'Periodo Personalizado' },
                 ].map((p) => (
                   <button
                     key={p.id}
@@ -955,12 +961,13 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
             </div>
           </div>
 
-          {/* 3. Filtro Rápido de Secciones (Por defecto muestra TODAS las 10 secciones) */}
+          {/* 3. Filtro Rápido de Secciones (Por defecto muestra TODAS las secciones) */}
           <div className="mt-5 pt-4 border-t border-slate-100">
             <div className="flex flex-wrap items-center gap-1.5">
               <span className="text-xs font-bold text-slate-500 mr-2">Vista de Secciones:</span>
               {[
-                { id: 'all', label: 'Ver Todas las 10 Secciones (Completo)' },
+                { id: 'all', label: 'Ver Todo (Gráfica Cliente + 10 Secciones)' },
+                { id: 'sec0_search_console', label: '📊 Gráfica Search Console (Cliente)' },
                 { id: 'sec1_kpis', label: '01. KPIs' },
                 { id: 'sec2_timers', label: '02. Tiempos y Lectura' },
                 { id: 'sec3_schedule', label: '03. Horarios y Días' },
@@ -988,6 +995,21 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
             </div>
           </div>
         </div>
+
+        {/* =====================================================================
+            PRIMERA SECCIÓN EJECUTIVA (PARA EL CLIENTE): GRÁFICA Y TABLA ESTILO SEARCH CONSOLE
+        ===================================================================== */}
+        {showSec('sec0_search_console') && (
+          <SearchConsoleExecutiveChart
+            events={filteredEvents}
+            period={period}
+            onPeriodChange={(p) => setPeriod(p)}
+            customFrom={customFrom}
+            customTo={customTo}
+            onCustomFromChange={setCustomFrom}
+            onCustomToChange={setCustomTo}
+          />
+        )}
 
         {/* =====================================================================
             SECCIÓN 01: KPIS PRINCIPALES DE TRÁFICO Y CONVERSIÓN
