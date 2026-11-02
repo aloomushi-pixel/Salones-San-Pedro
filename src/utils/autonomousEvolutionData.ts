@@ -22,6 +22,40 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.2.0-gsc-sync',
+    cycle_number: 6,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-02 15:47 CDMX',
+    title:
+      'Integración Oficial Google Search Console API (sc-domain:sanpedro.aionia.com.mx) + 3 Nuevas Landings SEO/GEO por Queries Huérfanas + Optimización CTR en 5 Entradas de Alta Impresión + Reenvío de Sitemap',
+    vectors: ['SEO', 'GEO', 'CRO', 'UX'],
+    telemetrySignal:
+      'Auditoría en vivo vía Google Search Console API (search-console-api@gen-lang-client-0674758554.iam.gserviceaccount.com sobre sc-domain:sanpedro.aionia.com.mx): 238+ clics y 11,830+ impresiones totales. Hallazgos críticos: (1) Sitemap tenía 32 errores históricos del 30-oct por dominio antiguo; (2) 5 entradas de blog/servicio con altas impresiones y 0 clics: /blog/renta-de-auto-clasico-para-bodas (142 imp., 0 clics por query "autos para bodas distrito federal"), /blog/servicio-de-reposteria-y-postres-extra-para-eventos (107 imp., pos. 12.9, 0 clics), /blog/menu-de-3-tiempos-vs-buffet... (45 imp., pos. 7.6 en Pág. 1, 0 clics), /blog/grupo-musical-versatil-para-fiestas (37 imp., pos. 8.1, 0 clics) y /blog/renta-de-salones-con-limosina-incluida (36 imp., pos. 8.1, 0 clics); (3) Queries de alta intención sin landing dedicada: "salones de fiestas gustavo a madero" (179 imp., pos. 10.9), "salones de fiestas en gustavo a madero económicos" (53 imp., pos. 7.7), "precio de salón de fiestas para 100 personas cdmx" (pos. 4.0), "salón pequeño de eventos sociales" (pos. 4.8) y "fotos de salones san pedro plus" (61 imp., pos. 4.2, 0 clics).',
+    autonomousActions: [
+      'Integración Permanente de Google Search Console API (src/utils/googleSearchConsole.ts): Cliente OAuth2 RS256 nativo conectado en tiempo real a sc-domain:sanpedro.aionia.com.mx en /admin y en el workflow autónomo de cada timer (credencial configurada en .env.local y Coolify env_vars).',
+      'Re-envío de Sitemap Canónico vía API (HTTP 204): Re-sumisión oficial de https://sanpedro.aionia.com.mx/sitemap.xml (ampliado a 35 URLs canónicas) para limpiar los 32 errores históricos.',
+      'Creación de 3 Nuevas Entradas / Landings Estratégicas SEO/GEO (src/utils/blogDataSEO.tsx): (1) ¿Cuánto cuesta un salón de fiestas en Gustavo A. Madero CDMX? Precios 2026 (50, 100 y 200 personas); (2) Salones de Fiestas Pequeños en Gustavo A. Madero CDMX (50 a 80 personas); (3) Fotos y Recorrido de Salones San Pedro Plus (Salón Diamante y Platino) en Calle Norte 84, GAM.',
+      'Optimización de CTR en SERP en 5 Entradas con Impresiones en Pág. 1 y 0 Clics (src/utils/blogData.tsx y blogDataSEO.tsx): Reescritura estratégica de Title y Meta Excerpt con precios ($530 p/p) y geolocalización (CDMX / Distrito Federal / Gustavo A. Madero).',
+      'Panel Oficial Google Search Console en /admin (src/app/admin/page.tsx y AdminDashboardClient.tsx): Visualización en tiempo real de Clics, Impresiones, CTR, Posición Media, Top Queries y Top Páginas.',
+    ],
+    filesModified: [
+      'src/utils/googleSearchConsole.ts',
+      'src/utils/blogDataSEO.tsx',
+      'src/utils/blogData.tsx',
+      'src/app/admin/page.tsx',
+      'src/components/AdminDashboardClient.tsx',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío con acceso directo a Supabase + Google Search Console API.',
+    commitHash: 'pending',
+    deploymentUuid: 'pending',
+    nextTimerSeconds: 21600,
+    emailSent: true,
+    hypothesisNextCycle:
+      'En cada despertar del timer se cotejará simultáneamente la telemetría de Supabase y las métricas de Google Search Console API para detectar nuevas queries, cambios de posición/CTR y estado de indexación.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.1.0-cycle5',
     cycle_number: 5,
     status: 'IMPLEMENTED',
@@ -46,8 +80,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'pending',
+    commitHash: 'bb36a00',
+    deploymentUuid: 'uhdpu6vtwru8werd6sq2qr6y',
     nextTimerSeconds: 21600,
     emailSent: true,
     hypothesisNextCycle:

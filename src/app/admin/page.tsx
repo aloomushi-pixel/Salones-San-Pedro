@@ -2,6 +2,7 @@ import React from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { parseAnalyticsRow, ParsedAnalyticsEvent, RawAnalyticsRow } from '@/utils/telemetryParser';
 import AdminDashboardClient, { LeadRecord } from '@/components/AdminDashboardClient';
+import { fetchGoogleSearchConsoleReport } from '@/utils/googleSearchConsole';
 
 export const revalidate = 0; // Datos en tiempo real en cada recarga
 
@@ -15,6 +16,8 @@ export default async function AdminPage() {
   let parsedEvents: ParsedAnalyticsEvent[] = [];
   let leads: LeadRecord[] = [];
   let errorMessage: string | null = null;
+
+  const gscPromise = fetchGoogleSearchConsoleReport(180);
 
   if (supabase) {
     const [eventsRes, leadsRes] = await Promise.all([
@@ -46,11 +49,14 @@ export default async function AdminPage() {
       'Las credenciales de Supabase no están configuradas en las variables de entorno del servidor.';
   }
 
+  const gscReport = await gscPromise;
+
   return (
     <AdminDashboardClient
       events={parsedEvents}
       leads={leads}
       errorMessage={errorMessage}
+      gscReport={gscReport}
     />
   );
 }

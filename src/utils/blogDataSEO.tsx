@@ -19,6 +19,33 @@ const CTA = () => (
 
 export const SEO_BLOG_POSTS: BlogPost[] = [
   {
+    slug: "cuanto-cuesta-un-salon-de-fiestas-en-gustavo-a-madero-cdmx-precios-2026",
+    title: "¿Cuánto cuesta un salón de fiestas en Gustavo A. Madero CDMX? Precios 2026 (50, 100 y 200 personas)",
+    excerpt: "Guía real de precios 2026 de salones de fiestas en Gustavo A. Madero (CDMX) para XV años, bodas y graduaciones. Paquetes todo incluido desde $530 p/p ($53,000 MXN para 100 invitados).",
+    date: "2 de Noviembre, 2026",
+    readTime: "5 min de lectura",
+    category: "Precios y Paquetes",
+    imageUrl: "/galeria/diamante/diamante_1.jpg"
+  },
+  {
+    slug: "salones-de-fiestas-pequenos-en-cdmx-gustavo-a-madero-50-a-80-personas",
+    title: "Salones de Fiestas Pequeños en Gustavo A. Madero CDMX: Eventos de 50 a 80 Personas Todo Incluido",
+    excerpt: "¿Buscas un salón pequeño de eventos sociales en Gustavo A. Madero o norte de CDMX? Conoce el Paquete Premier desde 50 hasta 80 invitados ($530 p/p) con banquete, DJ, pista LED y descorche libre.",
+    date: "2 de Noviembre, 2026",
+    readTime: "4 min de lectura",
+    category: "Pistas y Espacios",
+    imageUrl: "/galeria/platino/platino_4.jpg"
+  },
+  {
+    slug: "fotos-y-recorrido-salones-san-pedro-plus-diamante-y-platino-norte-84-gam",
+    title: "Fotos de Salones San Pedro Plus (Salón Diamante y Platino) en Calle Norte 84, Gustavo A. Madero",
+    excerpt: "Galería fotográfica oficial y recorrido por Salón Diamante y Salón Platino de Salones San Pedro Plus en Calle Norte 84 No. 6507, Col. San Pedro el Chico, Gustavo A. Madero, CDMX.",
+    date: "2 de Noviembre, 2026",
+    readTime: "4 min de lectura",
+    category: "Pistas y Espacios",
+    imageUrl: "/galeria/diamante/diamante_3.jpg"
+  },
+  {
     slug: "como-elegir-el-menu-perfecto-para-tu-evento-guia-paso-a-paso",
     title: "Cómo elegir el menú perfecto para tu evento: Guía paso a paso",
     excerpt: "Descubre cómo calcular porciones, elegir entre menú formal o buffet, y conoce la variedad de platillos que ofrecemos en CDMX.",
@@ -38,8 +65,8 @@ export const SEO_BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "menu-de-3-tiempos-vs-buffet-cual-es-la-mejor-opcion-para-tu-boda-o-graduacion",
-    title: "Menú de 3 tiempos vs. Buffet: ¿Cuál es la mejor opción para tu boda o graduación?",
-    excerpt: "Comparamos los dos formatos de servicio más populares para ayudarte a decidir cuál se adapta mejor al estilo y energía de tu evento.",
+    title: "Menú de 3 y 4 Tiempos vs. Buffet para Bodas y XV Años en CDMX: Precios 2026 (Desde $530 p/p)",
+    excerpt: "Comparamos menú formal de 3 y 4 tiempos vs buffet para bodas, XV años y graduaciones en CDMX. Conoce costos reales por persona ($530 a $1,010 MXN) con tornafiesta y descorche libre.",
     date: "30 de Junio, 2026",
     readTime: "6 min de lectura",
     category: "Gastronomía",
@@ -93,6 +120,81 @@ export const SEO_BLOG_POSTS: BlogPost[] = [
 ];
 
 export const SEO_BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
+  "cuanto-cuesta-un-salon-de-fiestas-en-gustavo-a-madero-cdmx-precios-2026": {
+    slug: "cuanto-cuesta-un-salon-de-fiestas-en-gustavo-a-madero-cdmx-precios-2026",
+    title: "¿Cuánto cuesta un salón de fiestas en Gustavo A. Madero CDMX? Precios 2026 (50, 100 y 200 personas)",
+    excerpt: "Guía real de precios 2026 de salones de fiestas en Gustavo A. Madero (CDMX) para XV años, bodas y graduaciones. Paquetes todo incluido desde $530 p/p ($53,000 MXN para 100 invitados).",
+    date: "2 de Noviembre, 2026",
+    readTime: "5 min de lectura",
+    category: "Precios y Paquetes",
+    imageUrl: "/galeria/diamante/diamante_1.jpg",
+    content: (
+      <div className="space-y-6">
+        <p>Si estás buscando <strong>salones de fiestas en Gustavo A. Madero económicos y elegantes</strong> o te preguntas <strong>cuánto cuesta un salón de fiestas para 100 personas o para XV años en CDMX</strong>, en esta guía transparente te compartimos las tarifas oficiales 2026 de <strong>Salones San Pedro Plus</strong> (ubicados en Calle Norte 84 No. 6507, Col. San Pedro el Chico, Alcaldía Gustavo A. Madero).</p>
+
+        <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">1. Tabla de Precios por Persona y Totales para 50, 100, 150 y 200 Invitados</h2>
+        <p>En <strong><Link href="/#paquetes" className="text-primary hover:underline">Salones San Pedro Plus</Link></strong> manejamos 3 paquetes todo incluido con descorche libre sin cargo adicional:</p>
+        <ul className="list-disc pl-5 space-y-2">
+          <li><strong>Paquete Premier ($530 MXN por persona):</strong> Disponible desde 50 invitados. Ideal para eventos de 50 personas ($26,500 MXN), 80 personas ($42,400 MXN) o 100 personas ($53,000 MXN). Incluye 6.5 horas totales, menú formal a 3 tiempos + tornafiesta, barra libre de refrescos/mezcladores, DJ con pista LED y montaje imperial con mesa de cristal.</li>
+          <li><strong>Paquete Plus ($710 MXN por persona — ⭐ El más elegido en XV años y Bodas):</strong> A partir de 100 invitados ($71,000 MXN para 100 personas / $106,500 MXN para 150 personas). Suma 7 horas de servicio, menú a 4 tiempos, show de Robot LED gigante, mesa de dulces, cabina fotográfica, letras gigantes, carrito de shots y pre-fiesta de cortesía para 30 personas.</li>
+          <li><strong>Paquete All Inclusive ($1,010 MXN por persona):</strong> A partir de 100 invitados ($101,000 MXN para 100 personas). Incluye todo lo del Paquete Plus más 1 hora de Mariachi en vivo, traslado en Limusina de lujo, Robot Iron Man, foto/video con álbum, vino espumoso, 1 botella de licor por mesa y Cabina 360°.</li>
+        </ul>
+
+        <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">2. ¿Cómo ahorrar al cotizar tu salón en Gustavo A. Madero?</h2>
+        <p>Celebrar tu evento en <strong>Viernes o Domingo</strong> te otorga tarifa preferencial y bonos de cortesía frente al sábado de alta demanda. Además, puedes personalizar cualquier paquete con nuestro <strong>Combo Fiesta VIP (Limusina + Carrito de Shots + Letras Gigantes por $11,500 MXN)</strong> directamente en nuestro <strong><Link href="/#precotizador-hero" className="text-primary hover:underline">Simulador en Línea</Link></strong>.</p>
+
+        <CTA />
+      </div>
+    )
+  },
+  "salones-de-fiestas-pequenos-en-cdmx-gustavo-a-madero-50-a-80-personas": {
+    slug: "salones-de-fiestas-pequenos-en-cdmx-gustavo-a-madero-50-a-80-personas",
+    title: "Salones de Fiestas Pequeños en Gustavo A. Madero CDMX: Eventos de 50 a 80 Personas Todo Incluido",
+    excerpt: "¿Buscas un salón pequeño de eventos sociales en Gustavo A. Madero o norte de CDMX? Conoce el Paquete Premier desde 50 hasta 80 invitados ($530 p/p) con banquete, DJ, pista LED y descorche libre.",
+    date: "2 de Noviembre, 2026",
+    readTime: "4 min de lectura",
+    category: "Pistas y Espacios",
+    imageUrl: "/galeria/platino/platino_4.jpg",
+    content: (
+      <div className="space-y-6">
+        <p>Encontrar <strong>salones de fiestas pequeños en CDMX (50 a 80 personas)</strong> que ofrezcan la misma elegancia, pista iluminada y banquete formal que una gran gala suele ser difícil, ya que muchos recintos exigen mínimos de 150 o 200 personas. En <strong>Salones San Pedro Plus (Gustavo A. Madero)</strong> diseñamos configuraciones íntimas desde <strong>50 invitados</strong>.</p>
+
+        <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">Paquete Todo Incluido desde 50 y 80 Personas ($530 MXN p/p)</h2>
+        <p>Nuestro <strong><Link href="/#paquetes" className="text-primary hover:underline">Paquete Premier</Link></strong> está disponible a partir de 50 personas en nuestros salones climatizados y con distribución modular para que tu evento luzca cálido, lleno y espectacular:</p>
+        <ul className="list-disc pl-5 space-y-2">
+          <li><strong>50 invitados:</strong> Desde <strong>$26,500 MXN</strong> todo incluido.</li>
+          <li><strong>70 invitados:</strong> Desde <strong>$37,100 MXN</strong> todo incluido.</li>
+          <li><strong>80 invitados:</strong> Desde <strong>$42,400 MXN</strong> todo incluido.</li>
+        </ul>
+        <p>Perfecto para bautizos, bodas civiles o íntimas, aniversarios, cumpleaños y reuniones empresariales cerca de Aragón, Lindavista, Eduardo Molina y Circuito Interior.</p>
+
+        <CTA />
+      </div>
+    )
+  },
+  "fotos-y-recorrido-salones-san-pedro-plus-diamante-y-platino-norte-84-gam": {
+    slug: "fotos-y-recorrido-salones-san-pedro-plus-diamante-y-platino-norte-84-gam",
+    title: "Fotos de Salones San Pedro Plus (Salón Diamante y Platino) en Calle Norte 84, Gustavo A. Madero",
+    excerpt: "Galería fotográfica oficial y recorrido por Salón Diamante y Salón Platino de Salones San Pedro Plus en Calle Norte 84 No. 6507, Col. San Pedro el Chico, Gustavo A. Madero, CDMX.",
+    date: "2 de Noviembre, 2026",
+    readTime: "4 min de lectura",
+    category: "Pistas y Espacios",
+    imageUrl: "/galeria/diamante/diamante_3.jpg",
+    content: (
+      <div className="space-y-6">
+        <p>Conoce a detalle las instalaciones de <strong>Salones San Pedro Plus</strong> en <strong>Calle Norte 84 No. 6507, Col. San Pedro el Chico, CP 07800, Alcaldía Gustavo A. Madero, CDMX</strong>. Contamos con dos salones independientes de gala: <strong>Salón Diamante</strong> y <strong>Salón Platino</strong>.</p>
+
+        <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">1. Salón Diamante y Salón Platino: Qué incluyen nuestras instalaciones</h2>
+        <ul className="list-disc pl-5 space-y-2">
+          <li><strong>Montaje Imperial con Mesas de Cristal Iluminadas:</strong> Sillas Tiffany y Versalles vestidas al color de tu evento y centros de mesa florales altos.</li>
+          <li><strong>Pista de Baile LED e Iluminación Robótica:</strong> Escenario con cabina de DJ profesional, pantallas y efectos especiales seguros en interiores.</li>
+          <li><strong>Ubicación y Accesibilidad en Norte 84, GAM:</strong> A solo 5 minutos de Av. Eduardo Molina, Calz. San Juan de Aragón y Circuito Interior. Explora la <strong><Link href="/#galeria" className="text-primary hover:underline">Galería Fotográfica Completa en Pantalla Completa</Link></strong> o agenda tu recorrido presencial sin compromiso.</li>
+        </ul>
+
+        <CTA />
+      </div>
+    )
+  },
   "como-elegir-el-menu-perfecto-para-tu-evento-guia-paso-a-paso": {
     slug: "como-elegir-el-menu-perfecto-para-tu-evento-guia-paso-a-paso",
     title: "Cómo elegir el menú perfecto para tu evento: Guía paso a paso",
@@ -145,8 +247,8 @@ export const SEO_BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
   },
   "menu-de-3-tiempos-vs-buffet-cual-es-la-mejor-opcion-para-tu-boda-o-graduacion": {
     slug: "menu-de-3-tiempos-vs-buffet-cual-es-la-mejor-opcion-para-tu-boda-o-graduacion",
-    title: "Menú de 3 tiempos vs. Buffet: ¿Cuál es la mejor opción para tu boda o graduación?",
-    excerpt: "Comparamos los dos formatos de servicio más populares para ayudarte a decidir cuál se adapta mejor al estilo y energía de tu evento.",
+    title: "Menú de 3 y 4 Tiempos vs. Buffet para Bodas y XV Años en CDMX: Precios 2026 (Desde $530 p/p)",
+    excerpt: "Comparamos menú formal de 3 y 4 tiempos vs buffet para bodas, XV años y graduaciones en CDMX. Conoce costos reales por persona ($530 a $1,010 MXN) con tornafiesta y descorche libre.",
     date: "30 de Junio, 2026",
     readTime: "6 min de lectura",
     category: "Gastronomía",

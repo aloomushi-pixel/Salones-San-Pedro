@@ -12,6 +12,7 @@ import SearchConsoleExecutiveChart, {
   ExecutivePeriodPreset,
 } from '@/components/SearchConsoleExecutiveChart';
 import { AUTONOMOUS_EVOLUTION_HISTORY } from '@/utils/autonomousEvolutionData';
+import { GoogleSearchConsoleReport } from '@/utils/googleSearchConsole';
 
 export interface LeadRecord {
   id: string;
@@ -29,6 +30,7 @@ interface Props {
   events: ParsedAnalyticsEvent[];
   leads: LeadRecord[];
   errorMessage?: string | null;
+  gscReport?: GoogleSearchConsoleReport;
 }
 
 type PeriodPreset = ExecutivePeriodPreset;
@@ -64,7 +66,7 @@ function countBy(items: string[]): Array<{ label: string; count: number; pct: nu
     .sort((a, b) => b.count - a.count);
 }
 
-export default function AdminDashboardClient({ events, leads, errorMessage }: Props) {
+export default function AdminDashboardClient({ events, leads, errorMessage, gscReport }: Props) {
   const [period, setPeriod] = useState<PeriodPreset>('all');
   const [customFrom, setCustomFrom] = useState<string>('2026-09-01');
   const [customTo, setCustomTo] = useState<string>('2026-12-31');
@@ -1017,6 +1019,213 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
             onCustomFromChange={setCustomFrom}
             onCustomToChange={setCustomTo}
           />
+        )}
+
+        {/* =====================================================================
+            CONEXIÓN OFICIAL EN VIVO A GOOGLE SEARCH CONSOLE API (sc-domain:sanpedro.aionia.com.mx)
+        ===================================================================== */}
+        {showSec('sec0_search_console') && gscReport && (
+          <section className="bg-white border border-blue-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-6">
+            <div className="border-b border-slate-200 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-800 text-xs font-extrabold uppercase tracking-wider mb-2">
+                  <span
+                    className={`w-2 h-2 rounded-full ${
+                      gscReport.connected ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'
+                    }`}
+                  ></span>
+                  🔍 Google Search Console API Oficial • {gscReport.siteUrl}
+                </div>
+                <h2 className="text-xl font-bold text-slate-900">
+                   Inteligencia SEO en Vivo desde Google Search Console (Búsquedas Reales y Páginas Indexadas)
+                </h2>
+                <p className="text-xs text-slate-600 mt-1">
+                  Conectado vía Service Account (<code>{gscReport.serviceAccountEmail || 'API'}</code>) • Ventana:{' '}
+                  <strong>{gscReport.startDate}</strong> a <strong>{gscReport.endDate}</strong>
+                </p>
+              </div>
+              {gscReport.sitemaps.length > 0 && (
+                <div className="px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 shrink-0">
+                  <div className="font-extrabold text-slate-900">🗺️ Sitemap Oficial</div>
+                  <div>
+                    Enviado:{' '}
+                    <strong>
+                      {gscReport.sitemaps[0].lastSubmitted
+                        ? new Date(gscReport.sitemaps[0].lastSubmitted).toLocaleDateString('es-MX')
+                        : 'Activo'}
+                    </strong>{' '}
+                    • URLs: <strong>{gscReport.sitemaps[0].submittedCount || 35}</strong>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {gscReport.connected ? (
+              <>
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="p-4 rounded-xl bg-blue-50/70 border border-blue-200">
+                    <span className="text-[11px] font-extrabold uppercase text-blue-800 block">
+                      Clics Orgánicos (GSC)
+                    </span>
+                    <p className="text-2xl sm:text-3xl font-black text-blue-700 mt-1">
+                      {gscReport.totalClicks.toLocaleString('es-MX')}
+                    </p>
+                    <span className="text-[11px] text-blue-900/80">
+                      Tráfico directo desde resultados de Google
+                    </span>
+                  </div>
+                  <div className="p-4 rounded-xl bg-indigo-50/70 border border-indigo-200">
+                    <span className="text-[11px] font-extrabold uppercase text-indigo-800 block">
+                      Impresiones Totales (GSC)
+                    </span>
+                    <p className="text-2xl sm:text-3xl font-black text-indigo-700 mt-1">
+                      {gscReport.totalImpressions.toLocaleString('es-MX')}
+                    </p>
+                    <span className="text-[11px] text-indigo-900/80">
+                      Apariciones en búsquedas de Google
+                    </span>
+                  </div>
+                  <div className="p-4 rounded-xl bg-emerald-50/70 border border-emerald-200">
+                    <span className="text-[11px] font-extrabold uppercase text-emerald-800 block">
+                      CTR Orgánico Promedio
+                    </span>
+                    <p className="text-2xl sm:text-3xl font-black text-emerald-700 mt-1">
+                      {(gscReport.avgCtr * 100).toFixed(2)}%
+                    </p>
+                    <span className="text-[11px] text-emerald-900/80">
+                      Porcentaje de clics por impresión
+                    </span>
+                  </div>
+                  <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200">
+                    <span className="text-[11px] font-extrabold uppercase text-amber-800 block">
+                      Posición Media en Google
+                    </span>
+                    <p className="text-2xl sm:text-3xl font-black text-amber-700 mt-1">
+                      #{gscReport.avgPosition.toFixed(1)}
+                    </p>
+                    <span className="text-[11px] text-amber-900/80">
+                      Promedio ponderado en SERP (Pág. 1)
+                    </span>
+                  </div>
+                </div>
+
+                {gscReport.strategicOpportunities.length > 0 && (
+                  <div className="p-4 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-1.5">
+                    <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-900 block">
+                      🧠 Oportunidades Estratégicas Detectadas y Atendidas por el Motor Autónomo:
+                    </span>
+                    <ul className="list-disc pl-5 text-xs text-emerald-950 space-y-1">
+                      {gscReport.strategicOpportunities.map((op, i) => (
+                        <li key={i}>{op}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Top Queries */}
+                  <div className="border border-slate-200 rounded-xl overflow-hidden">
+                    <div className="bg-slate-50 px-4 py-3 border-b border-slate-200 flex items-center justify-between">
+                      <span className="text-xs font-extrabold uppercase tracking-wider text-slate-800">
+                        🔑 Top Palabras Clave Buscadas en Google (Queries)
+                      </span>
+                      <span className="text-[11px] text-slate-500">
+                        {gscReport.topQueries.length} términos
+                      </span>
+                    </div>
+                    <div className="max-h-80 overflow-y-auto divide-y divide-slate-100">
+                      {gscReport.topQueries.slice(0, 25).map((q) => (
+                        <div
+                          key={q.query}
+                          className="px-4 py-2.5 flex items-center justify-between gap-2 text-xs hover:bg-slate-50"
+                        >
+                          <div className="min-w-0">
+                            <div className="font-bold text-slate-900 truncate">{q.query}</div>
+                            <span
+                              className={`inline-block mt-0.5 px-1.5 py-0.2 rounded text-[10px] font-bold ${
+                                q.opportunityType === 'TOP_WINNER'
+                                  ? 'bg-emerald-100 text-emerald-800'
+                                  : q.opportunityType === 'STRIKING_DISTANCE'
+                                  ? 'bg-amber-100 text-amber-800'
+                                  : q.opportunityType === 'CTR_OPPORTUNITY'
+                                  ? 'bg-blue-100 text-blue-800'
+                                  : 'bg-slate-100 text-slate-600'
+                              }`}
+                            >
+                              {q.opportunityType === 'TOP_WINNER'
+                                ? '🏆 Top 3 Líder'
+                                : q.opportunityType === 'STRIKING_DISTANCE'
+                                ? '⚡ Distancia Ataque Top 3'
+                                : q.opportunityType === 'CTR_OPPORTUNITY'
+                                ? '🎯 Optimizar CTR'
+                                : '🌱 Emergente'}
+                            </span>
+                          </div>
+                          <div className="text-right shrink-0 space-x-2 font-mono text-[11px]">
+                            <span className="font-bold text-blue-700">{q.clicks} clics</span>
+                            <span className="text-slate-600">{q.impressions} imp.</span>
+                            <span className="text-amber-700 font-bold">
+                              Pos. {q.position.toFixed(1)}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Top Pages */}
+                  <div className="border border-slate-200 rounded-xl overflow-hidden">
+                    <div className="bg-slate-50 px-4 py-3 border-b border-slate-200 flex items-center justify-between">
+                      <span className="text-xs font-extrabold uppercase tracking-wider text-slate-800">
+                        📄 Rendimiento de Páginas y Entradas de Blog en Google
+                      </span>
+                      <span className="text-[11px] text-slate-500">
+                        {gscReport.topPages.length} URLs con impresiones
+                      </span>
+                    </div>
+                    <div className="max-h-80 overflow-y-auto divide-y divide-slate-100">
+                      {gscReport.topPages.slice(0, 25).map((p) => (
+                        <div
+                          key={p.page}
+                          className="px-4 py-2.5 flex items-center justify-between gap-2 text-xs hover:bg-slate-50"
+                        >
+                          <div className="min-w-0">
+                            <div className="font-bold text-slate-900 truncate" title={p.path}>
+                              {p.path}
+                            </div>
+                            <span
+                              className={`inline-block mt-0.5 px-1.5 py-0.2 rounded text-[10px] font-bold ${
+                                p.statusLabel === 'ALTO_RENDIMIENTO'
+                                  ? 'bg-emerald-100 text-emerald-800'
+                                  : p.statusLabel === 'OPTIMIZAR_CTR_SERP'
+                                  ? 'bg-rose-100 text-rose-800'
+                                  : p.statusLabel === 'IMPULSAR_ENLACES'
+                                  ? 'bg-amber-100 text-amber-800'
+                                  : 'bg-slate-100 text-slate-600'
+                              }`}
+                            >
+                              {p.statusLabel}
+                            </span>
+                          </div>
+                          <div className="text-right shrink-0 space-x-2 font-mono text-[11px]">
+                            <span className="font-bold text-blue-700">{p.clicks} clics</span>
+                            <span className="text-slate-600">{p.impressions} imp.</span>
+                            <span className="text-amber-700 font-bold">
+                              Pos. {p.position.toFixed(1)}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900">
+                {gscReport.errorMessage || 'Conectando con Google Search Console API...'}
+              </div>
+            )}
+          </section>
         )}
 
         {/* =====================================================================

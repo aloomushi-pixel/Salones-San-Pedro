@@ -4,6 +4,31 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Integración Google Search Console API + Evolución SEO/GEO (`v2.2.0-gsc-sync`) — `2026-11-02 15:47 CDMX`
+
+### 1. Conexión Oficial a Google Search Console API (`sc-domain:sanpedro.aionia.com.mx`)
+- **Service Account conectada**: `search-console-api@gen-lang-client-0674758554.iam.gserviceaccount.com` (`permissionLevel: siteOwner`).
+- **Configuración segura**: Almacenada en `.env.local` y en las variables de entorno de producción de Coolify (`GOOGLE_SEARCH_CONSOLE_CREDENTIALS_B64`, UUID `ntawypnditnnuahxbtpfqygf`).
+- **Métricas históricas extraídas en vivo**:
+  - **Home (`https://sanpedro.aionia.com.mx/`)**: `224` clics, `11,144` impresiones, posición media `8.64`.
+  - **Sitemaps**: Se detectó que el sitemap tenía `32` errores del `2026-10-30` (previos a la corrección de dominio). Se ejecutó `PUT /sitemaps` vía API (`HTTP 204`) re-enviando `https://sanpedro.aionia.com.mx/sitemap.xml` con las nuevas URLs canónicas.
+
+### 2. Acciones Estratégicas Ejecutadas con Datos Reales de Search Console
+1. **Creación de 3 Nuevas Landings / Entradas SEO/GEO para Queries de Alta Intención (`src/utils/blogDataSEO.tsx`)**:
+   - `/blog/cuanto-cuesta-un-salon-de-fiestas-en-gustavo-a-madero-cdmx-precios-2026` $\rightarrow$ Ataca `"salones de fiestas gustavo a madero"` (`179 imp., pos. 10.9`), `"salones de fiestas en gustavo a madero económicos"` (`53 imp., pos. 7.7`), `"precio de salón de fiestas para 100 personas cdmx"` (`pos. 4.0`) y `"cuanto cuesta un salón de fiesta para 15"` (`pos. 8.0`).
+   - `/blog/salones-de-fiestas-pequenos-en-cdmx-gustavo-a-madero-50-a-80-personas` $\rightarrow$ Ataca `"salón pequeño de eventos sociales"` (`pos. 4.8`), `"salones de fiestas pequeños cdmx"` (`pos. 9.0`) y `"pequeños salones para fiestas"` (`pos. 7.3`).
+   - `/blog/fotos-y-recorrido-salones-san-pedro-plus-diamante-y-platino-norte-84-gam` $\rightarrow$ Ataca `"fotos de salones san pedro plus"` (`61 imp., 0 clics, pos. 4.26`) y `"norte 84 san pedro el chico"` (`14 imp., pos. 1.07`).
+2. **Optimización de CTR en 5 Entradas con Impresiones en Google y 0 Clics (`src/utils/blogData.tsx` y `blogDataSEO.tsx`)**:
+   - `/blog/renta-de-auto-clasico-para-bodas` (`142 imp., 0 clics`)
+   - `/blog/servicio-de-reposteria-y-postres-extra-para-eventos` (`107 imp., pos. 12.9, 0 clics`)
+   - `/blog/menu-de-3-tiempos-vs-buffet-cual-es-la-mejor-opcion-para-tu-boda-o-graduacion` (`45 imp., pos. 7.6, 0 clics`)
+   - `/blog/grupo-musical-versatil-para-fiestas` (`37 imp., pos. 8.1, 0 clics`)
+   - `/blog/renta-de-salones-con-limosina-incluida` (`36 imp., pos. 8.1, 0 clics`)
+3. **Panel en Vivo de Google Search Console en `/admin` (`src/utils/googleSearchConsole.ts`, `src/app/admin/page.tsx`, `src/components/AdminDashboardClient.tsx`)**:
+   - Muestra en tiempo real Clics, Impresiones, CTR, Posición Media, Estado del Sitemap, Top Queries y Top Páginas con clasificación automática de oportunidades.
+
+---
+
 ## Ciclo Autónomo #5 — `2026-11-02 14:12 CDMX` (`v2.1.0-cycle5` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico Telemétrico Post-Ciclo #4 (`>= 2026-11-02T14:06:42Z` a `2026-11-02T20:08:09Z`)
