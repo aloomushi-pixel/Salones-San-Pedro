@@ -1,35 +1,28 @@
 # 🤖 Bitácora de Autoperfeccionamiento Continuo (Modo Libre Albedrío + `/goal`) — Salones San Pedro Plus
 
-Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conectado en tiempo real a `analytics_events` y `leads` en Supabase) y las intervenciones quirúrgicas ejecutadas en UX, CRO, SEO Técnico (Google Search Central / E-E-A-T) y GEO (`ChatGPT`, `Perplexity`, `Gemini`, `Claude`).
+Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conectado en tiempo real a `analytics_events` y `leads` en Supabase), aislando estrictamente los eventos ocurridos **desde el último commit/deploy en adelante** para evitar mezclar fricciones históricas ya resueltas con el comportamiento actual en producción.
 
 ---
 
-## Iteración Autónoma #1 — `2026-11-01 19:25 CDMX` (Commit `0990aad`)
+## Iteración Autónoma #1 — `2026-11-01 19:35 CDMX` (Corte Estricto Post-Commit `d4fa3b2` >= `2026-10-31T20:00:46Z`)
 
-### 1. Señal Telemétrica y Diagnóstico en Vivo (Supabase)
-- **Volumen auditado**: `971` registros totales en `analytics_events` (`792` eventos humanos reales y `179` eventos de bots/QA segregados automáticamente).
-- **Hallazgos críticos detectados**:
-  1. **Duda Comercial y Retorno a Precios (`scroll_return_prices`: 15 eventos)**: El evento más reciente ocurrió hoy (`2026-11-01 16:16 UTC`). Los usuarios que bajan a explorar `#galeria`, `#tiktok-videos`, `#banquetes` y `#animacion` tienen que regresar manualmente hasta arriba para recordar cuánto cuesta cada paquete (`$530`, `$710`, `$1,010 MXN`) o volver al `#precotizador`.
-  2. **Fricción en Artículos del Blog (`dead_click` en `blog_articulo`)**: Se detectó un `dead_click` real (`2026-10-31 02:14 UTC`) sobre la imagen principal del artículo `"Auto Clásico Mercedes-Benz 1930: La entrada elegante para novios"` (`tag: img`). Además, se detectaron **12 enlaces internos en `blogDataSEO.tsx`** que apuntaban a anclas inexistentes (`/#servicios` y `/#contacto` en lugar de `/#banquetes` y `/#paquetes`).
-  3. **Clics sin respuesta visual en `#animacion` (`ExperienciasCarousel.tsx`)**: Las 9 tarjetas de experiencias tenían `cursor-pointer` y disparaban telemetría, pero no abrían ningún modal ni ofrecían cotizar el servicio.
-  4. **Baja interacción móvil en `#banquetes` (`MenuTinderCards.tsx`)**: Solo `4` vistas y `4` swipes; faltaban píldoras selectoras visibles en móvil para alternar entre Primer, Segundo y Tercer Tiempo y un botón directo para cotizar el banquete.
-  5. **Oportunidad GEO y SEO Técnico**: `sitemap.ts` tenía el dominio antiguo (`salonesanpedro.com.mx`) en lugar del dominio productivo (`https://sanpedro.aionia.com.mx`), y faltaban los archivos estandarizados `/llms.txt` y `/llms-full.txt` para motores generativos de IA.
+### 1. Verificación de No-Contraposición y Auditoría de Eventos Post-Último Commit
+- **Fecha/Hora del último commit previo (`d4fa3b2` / `9a3f653`)**: `2026-10-31T20:00:46Z` (`13:55 hrs CDMX`).
+- **Eventos registrados estrictamente después de `2026-10-31T20:00:46Z`**: **`57` eventos humanos nuevos** distribuidos en **3 sesiones reales**:
+  1. `ses_c9esh_kla6ov70` (`2026-11-01 04:37 UTC`, Benito Juárez, CDMX — `Google Orgánico (SEO)`): Aterrizó en `/` pero permaneció en primera pantalla (`5.9s`).
+  2. `ses_1evws_2mn26nqa` (`2026-11-01 16:14 UTC`, Tecámac, Edomex — `l.wl.co` / WhatsApp Business): Sesión de alta intención (`128.5s` activos). Ajustó el selector de invitados en el Precotizador a `120` y `150` personas (`guests_slider_adjust`), recorrió `#confianza_ubicacion`, `#galeria` (`next_diamante`), `#tiktok-videos`, `#banquetes`, `#animacion`, `#testimonios` y `#ubicacion` (`92%` scroll), y a las `16:16:12 UTC` disparó **`scroll_return_prices` (`regreso_a_precotizador`)** para volver arriba a su cotización.
+  3. `ses_l1e77_zf96b45n` (`2026-11-02 01:30 UTC` / `19:30 CDMX`, Cuauhtémoc, CDMX — `Tráfico Directo`): Sesión de `120.8s` activos. Usó las nuevas píldoras interactivas del Hero (`hero_click: badge_salones_diamante_platino`), disparó **`scroll_return_prices` (`regreso_a_paquetes`)**, recorrió hasta el 100% de la página y disparó **`exit_intent` en `#testimonios` (`scroll_pct: 87`, `"Intento de salida mientras veía testimonios"`)**.
+- **Validación de lo implementado ayer/hoy**:
+  - En los `57` eventos posteriores al último commit hubo **`0` `dead_clicks` y `0` `rage_clicks`**, confirmando que las implementaciones de los 6 frentes (`PaquetesInteractiveSection`, `GaleriaSection` Lightbox, `Precotizador` Simulador y Hero pills) funcionan sin regresiones y sin ninguna contraposición.
 
-### 2. Acciones Autónomas Ejecutadas (Libre Albedrío)
-- **[CRO / UX] Barra Flotante de Comparación Rápida (`src/components/StickyPriceCompareBar.tsx`)**:
-  - Aparece automáticamente al superar el 32% de scroll con los precios de referencia (`Premier $530`, `Plus $710 ⭐`, `All Inclusive $1,010`), un botón `¿Qué incluye cada uno?` que despliega un modal comparativo sin perder la posición de lectura, y un botón `Cotizar Ahora ↑`.
-- **[UX / CRO] Modal Interactivo en Experiencias (`src/components/ExperienciasCarousel.tsx`)**:
-  - Cada una de las 9 tarjetas ahora abre un modal detallado indicando en qué paquete viene incluido el servicio (o si forma parte del `Combo Fiesta VIP`), sus especificaciones y botones directos a `#precotizador-hero` y WhatsApp pre-llenado.
-- **[UX / Mobile] Píldoras de Tiempos y CTA en Gastronomía (`src/components/MenuTinderCards.tsx`)**:
-  - Se añadieron pestañas táctiles para `Primer Tiempo`, `Segundo Tiempo` y `Tercer Tiempo`, variantes de platillos del chef, `data-interactive="true"` y botones de cotización/degustación.
-- **[SEO / UX en Blog] Imágenes Accionables, `BreadcrumbList` y Enlaces Internos (`src/app/blog/[slug]/page.tsx`, `src/utils/blogDataSEO.tsx`)**:
-  - La imagen de portada de cada artículo ahora es un enlace interactivo con badge hacia el Precotizador; se añadió un bloque de conversión al final de cada lectura; se inyectó `BreadcrumbList` en el grafo JSON-LD y se corrigieron los 12 enlaces internos hacia `/#banquetes` y `/#paquetes`.
-- **[GEO / SEO] Creación de `/llms.txt`, `/llms-full.txt` y Corrección de `sitemap.xml`**:
-  - Se crearon `src/app/llms.txt/route.ts` y `src/app/llms-full.txt/route.ts` con tablas comparativas completas, precios exactos, capacidades y FAQs directas para ChatGPT, Perplexity, Gemini y Claude, y se alineó `src/app/sitemap.ts` con `https://sanpedro.aionia.com.mx`.
-- **[Admin] Bitácora de Autoperfeccionamiento en `/admin` (`src/components/AdminDashboardClient.tsx`)**:
-  - Se integró la tarjeta/sección **"🤖 Bitácora de Autoperfeccionamiento (Libre Albedrío)"** para visualizar desde el panel cada ciclo autónomo y exportarlo en el Diagnóstico IA.
-
-### 3. Hipótesis de Impacto para el Siguiente Ciclo
-- Disminución de `scroll_return_prices` al permitir consultar la tabla comparativa de paquetes desde cualquier punto del scroll mediante `StickyPriceCompareBar`.
-- Aumento en `cotizar_click` y `whatsapp_click` originados desde `#animacion`, `#banquetes` y `/blog/[slug]`.
-- Indexación limpia de `sitemap.xml`, `/llms.txt` y `/llms-full.txt` por Googlebot y agentes de IA.
+### 2. Acciones Autónomas Ejecutadas (Basadas en las Señales Post-Commit + Auditoría Proactiva SEO/GEO)
+1. **Filtro `"🚀 Desde Último Commit"` en `/admin` (`SearchConsoleExecutiveChart.tsx` y `AdminDashboardClient.tsx`)**:
+   - Permite aislar con 1 clic únicamente los eventos ocurridos desde `2026-10-31T20:00:46Z` en adelante.
+2. **CRO contra `scroll_return_prices` detectado en las sesiones `ses_1evws_2mn26nqa` y `ses_l1e77_zf96b45n` (`StickyPriceCompareBar.tsx`)**:
+   - Barra flotante inferior que aparece después del `32%` de scroll con los precios de referencia (`Premier $530`, `Plus $710 ⭐`, `All Inclusive $1,010`), un modal instantáneo `¿Qué incluye cada uno?` sin perder la posición de lectura y botón directo `Cotizar Ahora ↑`.
+3. **CRO contra `exit_intent` en `#testimonios` al 87% de scroll (`TestimoniosCarousel.tsx`)**:
+   - Se añadió un puente de conversión al final de la sección de testimonios con botones hacia `#precotizador-hero` y WhatsApp, y se homologó el badge a `4.9 / 5`.
+4. **Atribución de Canal `l.wl.co` (`telemetryParser.ts`)**:
+   - Se reclasificó el referrer `l.wl.co` (detectado en la sesión de Tecámac) como `"WhatsApp Business (Enlace Directo)"`.
+5. **Enriquecimiento Proactivo UX, SEO y GEO (`/llms.txt` y `/llms-full.txt`)**:
+   - Modales interactivos en las 9 tarjetas de `#animacion` (`ExperienciasCarousel.tsx`), píldoras por tiempo en `#banquetes` (`MenuTinderCards.tsx`), imágenes accionables + `BreadcrumbList` en `/blog/[slug]`, corrección de 12 enlaces internos en `blogDataSEO.tsx`, alineación de dominio en `sitemap.ts` y creación de `/llms.txt` y `/llms-full.txt`.

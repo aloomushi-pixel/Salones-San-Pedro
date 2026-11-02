@@ -88,13 +88,17 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
       : events;
 
     if (period === 'all') return base;
+    if (period === 'post_deploy') {
+      // Corte exacto desde el despliegue de los 6 frentes y Search Console (2026-10-31T20:00:46Z) en adelante
+      return base.filter((ev) => ev.created_at >= '2026-10-31T20:00:46Z');
+    }
     const now = new Date();
 
     if (period === 'custom') {
       return base.filter((ev) => ev.date_cdmx >= customFrom && ev.date_cdmx <= customTo);
     }
 
-    const daysMap: Record<Exclude<PeriodPreset, 'all' | 'custom'>, number> = {
+    const daysMap: Record<Exclude<PeriodPreset, 'all' | 'post_deploy' | 'custom'>, number> = {
       today: 1,
       '7d': 7,
       '15d': 15,
@@ -871,6 +875,7 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
               </label>
               <div className="flex flex-wrap items-center gap-2">
                 {[
+                  { id: 'post_deploy', label: '🚀 Desde Último Commit' },
                   { id: 'all', label: `Todo el Histórico (${events.length})` },
                   { id: '6m', label: 'Hace 6 meses' },
                   { id: '3m', label: 'Hace 3 meses' },

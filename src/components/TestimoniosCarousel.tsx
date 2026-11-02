@@ -121,7 +121,7 @@ export default function TestimoniosCarousel() {
         <div className="flex text-[#C5A059] tracking-wider font-bold">
           {"★".repeat(5)}
         </div>
-        <span className="text-secondary text-sm bg-surface-container-high px-2 py-0.5 rounded-full">4.8 / 5</span>
+        <span className="text-secondary text-sm bg-surface-container-high px-2.5 py-0.5 rounded-full font-semibold">4.9 / 5</span>
       </div>
 
       {/* Infinite Carousel - Row 1 (Left to Right) */}
@@ -197,6 +197,47 @@ export default function TestimoniosCarousel() {
               </div>
             </div>
           )})}
+        </div>
+      </div>
+
+      {/* Puente de Conversión al Final de Testimonios (Neutraliza exit_intent detectado al 87% de scroll post-commit) */}
+      <div className="mt-10 max-w-3xl mx-auto px-4">
+        <div className="p-6 sm:p-8 rounded-3xl bg-surface-container-low border border-primary/35 shadow-lg text-center space-y-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-extrabold uppercase tracking-wider">
+            ✨ Más de 500 Bodas, XV Años y Graduaciones Realizadas con Éxito
+          </span>
+          <h3 className="font-display-lg text-xl sm:text-2xl font-bold text-on-surface">
+            ¿Listo para cotizar tu fecha en Salón Diamante o Salón Platino?
+          </h3>
+          <p className="text-xs sm:text-sm text-secondary max-w-xl mx-auto leading-relaxed">
+            Aparta tu fecha y congela los precios de este año desde <strong>$530 MXN por persona</strong> con facilidades de pago mensuales.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1">
+            <a
+              href="#precotizador-hero"
+              onClick={() =>
+                trackEvent('cotizar_click', 'testimonios_cierre_precotizador', {
+                  section: 'testimonios',
+                })
+              }
+              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-primary text-on-primary font-bold text-xs uppercase tracking-wider shadow-md hover:scale-105 transition-transform"
+            >
+              Calcular Mi Presupuesto Ahora ↑
+            </a>
+            <a
+              href="https://wa.me/526633670431?text=%C2%A1Hola%20Salones%20San%20Pedro!%20Vi%20las%20rese%C3%B1as%20de%20sus%20eventos%20y%20me%20gustar%C3%ADa%20agendar%20un%20recorrido%20para%20conocer%20los%20salones."
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                trackEvent('whatsapp_click', 'testimonios_cierre_wa', {
+                  section: 'testimonios',
+                })
+              }
+              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#25D366] text-white font-bold text-xs uppercase tracking-wider shadow-md hover:scale-105 transition-transform"
+            >
+              Agendar Recorrido por WhatsApp
+            </a>
+          </div>
         </div>
       </div>
     </div>

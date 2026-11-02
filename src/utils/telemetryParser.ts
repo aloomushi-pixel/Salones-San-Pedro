@@ -456,6 +456,8 @@ export function parseAnalyticsRow(row: RawAnalyticsRow): ParsedAnalyticsEvent {
     /chatgpt|openai|perplexity|gemini\.google|claude\.ai|copilot\.microsoft/i.test(refLower)
   ) {
     meta.acquisition.traffic_channel = 'IA Generativa (ChatGPT / GEO)';
+  } else if (refLower.includes('l.wl.co') || (meta.acquisition.traffic_channel || '').includes('l.wl.co')) {
+    meta.acquisition.traffic_channel = 'WhatsApp Business (Enlace Directo)';
   } else if (
     (utmSourceLower === 'ig' || utmSourceLower.includes('instagram')) &&
     meta.acquisition.traffic_channel === 'Tráfico Directo'

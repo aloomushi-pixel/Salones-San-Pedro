@@ -3,7 +3,16 @@
 import React, { useMemo, useState } from 'react';
 import { ParsedAnalyticsEvent } from '@/utils/telemetryParser';
 
-export type ExecutivePeriodPreset = 'all' | '6m' | '3m' | '1m' | 'custom' | 'today' | '7d' | '15d';
+export type ExecutivePeriodPreset =
+  | 'post_deploy'
+  | 'all'
+  | '6m'
+  | '3m'
+  | '1m'
+  | 'custom'
+  | 'today'
+  | '7d'
+  | '15d';
 
 export type ChartMetricKey =
   | 'total_clients'
@@ -651,6 +660,7 @@ export default function SearchConsoleExecutiveChart({
           </span>
           <div className="flex flex-wrap items-center gap-1.5 bg-slate-100 p-1.5 rounded-xl border border-slate-200">
             {[
+              { id: 'post_deploy', label: '🚀 Desde último commit' },
               { id: 'all', label: 'Todo el histórico' },
               { id: '6m', label: 'Hace 6 meses' },
               { id: '3m', label: 'Hace 3 meses' },
