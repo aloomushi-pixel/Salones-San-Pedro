@@ -1,4 +1,8 @@
 import crypto from 'crypto';
+import fs from 'fs';
+import path from 'path';
+
+export type GovernanceMagnitude = 'NIVEL_1_MENOR' | 'NIVEL_2_MEDIANA' | 'NIVEL_3_MAYOR';
 
 export interface GSCQueryRow {
   query: string;
@@ -7,6 +11,7 @@ export interface GSCQueryRow {
   ctr: number;
   position: number;
   opportunityType: 'TOP_WINNER' | 'STRIKING_DISTANCE' | 'CTR_OPPORTUNITY' | 'EMERGING';
+  magnitude: GovernanceMagnitude;
   recommendation: string;
 }
 
@@ -18,6 +23,7 @@ export interface GSCPageRow {
   ctr: number;
   position: number;
   statusLabel: 'ALTO_RENDIMIENTO' | 'OPTIMIZAR_CTR_SERP' | 'IMPULSAR_ENLACES' | 'EN_INDEXACION';
+  magnitude: GovernanceMagnitude;
 }
 
 export interface GSCSitemapInfo {
@@ -65,17 +71,44 @@ function base64url(input: string | Buffer): string {
 
 function getServiceAccountFromEnv(): ServiceAccountCredentials | null {
   const b64 = process.env.GOOGLE_SEARCH_CONSOLE_CREDENTIALS_B64;
-  if (!b64) return null;
-  try {
-    const jsonStr = Buffer.from(b64, 'base64').toString('utf8');
-    const parsed = JSON.parse(jsonStr);
-    if (parsed.client_email && parsed.private_key) {
-      return parsed as ServiceAccountCredentials;
+  if (b64) {
+    try {
+      const jsonStr = Buffer.from(b64, 'base64').toString('utf8');
+      const parsed = JSON.parse(jsonStr);
+      if (parsed.client_email && parsed.private_key) {
+        return parsed as ServiceAccountCredentials;
+      }
+    } catch {
+      // Fallback to file check below
     }
-    return null;
+  }
+
+  const rawJson = process.env.GOOGLE_SEARCH_CONSOLE_CREDENTIALS_JSON;
+  if (rawJson) {
+    try {
+      const parsed = JSON.parse(rawJson);
+      if (parsed.client_email && parsed.private_key) {
+        return parsed as ServiceAccountCredentials;
+      }
+    } catch {
+      // Fallback to file check below
+    }
+  }
+
+  try {
+    const filePath = path.join(process.cwd(), '.gsc-credentials.json');
+    if (fs.existsSync(filePath)) {
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+      const parsed = JSON.parse(fileContent);
+      if (parsed.client_email && parsed.private_key) {
+        return parsed as ServiceAccountCredentials;
+      }
+    }
   } catch {
     return null;
   }
+
+  return null;
 }
 
 async function getGSCAccessToken(sa: ServiceAccountCredentials): Promise<string> {
@@ -242,21 +275,31 @@ export async function fetchGoogleSearchConsoleReport(
       const position = Number(r.position || 0);
 
       let opportunityType: GSCQueryRow['opportunityType'] = 'EMERGING';
-      let recommendation = 'Mantener cobertura semántica y enlaces internos.';
+      let magnitude: GovernanceMagnitude = 'NIVEL_1_MENOR';
+      let recommendation = ' [Nivel 1 Menor] Mantener cobertura semántica y enlaces internos.';
 
-      if (position <= 3.5 && clicks >= 2) {
+      if (position <= 3.9 && clicks >= 2 && ctr >= 0.03) {
         opportunityType = 'TOP_WINNER';
-        recommendation = 'Posición líder Top 3; proteger autoridad y conversión directa.';
-      } else if (impressions >= 20 && ctr < 0.025) {
+        magnitude = 'NIVEL_1_MENOR';
+        recommendation = '[Nivel 1 Menor] Posición líder Top 3; proteger autoridad y conversión directa.';
+      } else if (position <= 10.5 && impressions >= 15 && ctr < 0.03) {
         opportunityType = 'CTR_OPPORTUNITY';
-        recommendation = `Alta visibilidad (${impressions} imp.) con CTR bajo (${(ctr * 100).toFixed(
+        magnitude = 'NIVEL_1_MENOR';
+        recommendation = `[Nivel 1 Menor] Página 1 (${impressions} imp.) con CTR bajo (${(ctr * 100).toFixed(
           1
-        )}%): reforzar Title, precios ($530-$1,010) y rich snippets.`;
-      } else if (position > 3.5 && position <= 14 && impressions >= 8) {
+        )}% < 3%): optimizar <title>, <meta description>, precios ($530-$1,010) y FAQ Schema.`;
+      } else if (position >= 4.0 && position <= 15.0 && impressions >= 5) {
         opportunityType = 'STRIKING_DISTANCE';
-        recommendation = `Distancia de ataque (Pos. ${position.toFixed(
+        magnitude = 'NIVEL_1_MENOR';
+        recommendation = `[Nivel 1 Menor] Striking Distance (Pos. ${position.toFixed(
           1
-        )}): reforzar H2/FAQ y enlaces internos para subir al Top 3.`;
+        )} entre 4.0-15.0): reforzar H2/FAQ, JSON-LD y enlaces internos para subir al Top 3.`;
+      } else if (impressions >= 30 && position > 15.0) {
+        opportunityType = 'CTR_OPPORTUNITY';
+        magnitude = 'NIVEL_2_MEDIANA';
+        recommendation = `[Nivel 2 Mediana] Intención con ${impressions} imp. en Pos. ${position.toFixed(
+          1
+        )}: ampliar sección comparativa o artículo SEO dedicado.`;
       }
 
       return {
@@ -266,6 +309,7 @@ export async function fetchGoogleSearchConsoleReport(
         ctr,
         position,
         opportunityType,
+        magnitude,
         recommendation,
       };
     });
@@ -274,11 +318,11 @@ export async function fetchGoogleSearchConsoleReport(
     const topPages: GSCPageRow[] = rawPages.map((r) => {
       const keys = Array.isArray(r.keys) ? r.keys : [];
       const page = String(keys[0] || '');
-      let path = '/';
+      let pagePath = '/';
       try {
-        path = new URL(page).pathname || '/';
+        pagePath = new URL(page).pathname || '/';
       } catch {
-        path = page;
+        pagePath = page;
       }
       const clicks = Number(r.clicks || 0);
       const impressions = Number(r.impressions || 0);
@@ -286,22 +330,24 @@ export async function fetchGoogleSearchConsoleReport(
       const position = Number(r.position || 0);
 
       let statusLabel: GSCPageRow['statusLabel'] = 'EN_INDEXACION';
-      if (clicks >= 5 || (clicks >= 1 && ctr >= 0.04)) {
+      let magnitude: GovernanceMagnitude = 'NIVEL_1_MENOR';
+      if (clicks >= 5 || (clicks >= 1 && ctr >= 0.03)) {
         statusLabel = 'ALTO_RENDIMIENTO';
-      } else if (impressions >= 30 && clicks === 0) {
+      } else if ((impressions >= 10 && clicks === 0) || (position <= 10.5 && impressions >= 20 && ctr < 0.03)) {
         statusLabel = 'OPTIMIZAR_CTR_SERP';
-      } else if (position > 7 && position <= 20 && impressions >= 10) {
+      } else if (position >= 4.0 && position <= 15.0 && impressions >= 5) {
         statusLabel = 'IMPULSAR_ENLACES';
       }
 
       return {
         page,
-        path,
+        path: pagePath,
         clicks,
         impressions,
         ctr,
         position,
         statusLabel,
+        magnitude,
       };
     });
 

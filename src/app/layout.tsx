@@ -16,9 +16,32 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "SALONES SAN PEDRO | Eventos de Alta Gama en Gustavo A. Madero, CDMX",
+  metadataBase: new URL("https://sanpedro.aionia.com.mx"),
+  title:
+    "Salones San Pedro Plus CDMX | Salones de Fiestas y Eventos Todo Incluido en Gustavo A. Madero (Desde $530 p/p)",
   description:
-    "Salón de eventos exclusivos en la alcaldía Gustavo A. Madero, CDMX. Creamos experiencias de alta gama y banquetes de lujo con elegancia contemporánea.",
+    "Salones de fiestas y eventos en Gustavo A. Madero, CDMX (Salón Diamante y Platino en Norte 84 #6507, San Pedro el Chico). Paquetes Todo Incluido 2026 desde $530 MXN p/p para 50 a 300 personas con Banquete, DJ, Pista LED, Robot LED, Limusina y Mariachi. Cotiza en línea al instante.",
+  alternates: {
+    canonical: "https://sanpedro.aionia.com.mx",
+  },
+  openGraph: {
+    title:
+      "Salones San Pedro Plus CDMX | Eventos Todo Incluido en Gustavo A. Madero (Desde $530 p/p)",
+    description:
+      "Conoce Salón Diamante y Salón Platino en Gustavo A. Madero, CDMX. Paquetes Todo Incluido para Bodas, XV Años y Graduaciones de 50 a 300 invitados desde $530 MXN por persona.",
+    url: "https://sanpedro.aionia.com.mx",
+    siteName: "Salones San Pedro Plus",
+    locale: "es_MX",
+    type: "website",
+    images: [
+      {
+        url: "https://sanpedro.aionia.com.mx/galeria/diamante/diamante_1.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Salones San Pedro Plus - Salón Diamante y Platino en Gustavo A. Madero, CDMX",
+      },
+    ],
+  },
   icons: {
     icon: "/logo.svg",
     shortcut: "/logo.svg",
@@ -179,8 +202,35 @@ export default function RootLayout({
               "@type": "Answer",
               "text": "Estamos ubicados en Calle Norte 84 No. 6507, Col. San Pedro el Chico, Alcaldía Gustavo A. Madero, CP 07800, Ciudad de México (a 5 minutos de Eduardo Molina y Circuito Interior), con fácil acceso desde Miguel Hidalgo, Cuauhtémoc, Venustiano Carranza, Tlalnepantla y Tecámac."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Dónde puedo ver fotos reales de Salones San Pedro Plus y agendar una visita?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Puedes explorar la galería oficial de fotos en alta definición del Salón Diamante y Salón Platino directamente en https://sanpedro.aionia.com.mx/#galeria o en nuestro recorrido fotográfico en https://sanpedro.aionia.com.mx/blog/fotos-y-recorrido-salones-san-pedro-plus-diamante-y-platino-norte-84-gam, y agendar tu visita presencial de Lunes a Sábado de 10:00 a 19:00 hrs."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Incluyen renta de auto clásico o limusina para bodas y XV años en CDMX?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí, nuestro Paquete All Inclusive ($1,010 MXN p/p) incluye sin costo adicional el traslado en Limusina Lincoln de lujo o Auto Clásico (Cadillac / Ford antiguo) con chofer uniformado en CDMX, o bien puedes agregarlo mediante nuestro Combo Fiesta VIP."
+            }
           }
         ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://sanpedro.aionia.com.mx/#website",
+        "url": "https://sanpedro.aionia.com.mx",
+        "name": "Salones San Pedro Plus CDMX",
+        "alternateName": ["Salón San Pedro Plus", "Salones San Pedro Gustavo A. Madero"],
+        "publisher": {
+          "@id": "https://sanpedro.aionia.com.mx/#venue"
+        },
+        "inLanguage": "es-MX"
       }
     ]
   };

@@ -98,8 +98,8 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "paquetes-de-fotografia-profesional-para-eventos",
-    title: "Fotografía Profesional: Captura los momentos más emotivos de tu boda",
-    excerpt: "Paquetes fotográficos con fotos digitales en USB, ampliaciones e impresiones en álbum. Asegura que los mejores recuerdos de tu gran día perduren.",
+    title: "Paquetes de Fotografía, Video y Cabina 360° para Bodas y XV Años en CDMX (Todo Incluido)",
+    excerpt: "Paquetes de fotografía profesional con álbum de lujo, ampliación, memoria USB y Cabina 360° incluidos en Salones San Pedro Plus (Gustavo A. Madero, CDMX). Cotiza desde $530 p/p.",
     date: "28 de Mayo, 2026",
     readTime: "4 min de lectura",
     category: "Producción",
@@ -433,8 +433,8 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
   },
   "paquetes-de-fotografia-profesional-para-eventos": {
     slug: "paquetes-de-fotografia-profesional-para-eventos",
-    title: "Fotografía Profesional: Captura los momentos más emotivos de tu boda",
-    excerpt: "Paquetes fotográficos con fotos digitales en USB, ampliaciones e impresiones en álbum. Asegura que los mejores recuerdos de tu gran día perduren.",
+    title: "Paquetes de Fotografía, Video y Cabina 360° para Bodas y XV Años en CDMX (Todo Incluido)",
+    excerpt: "Paquetes de fotografía profesional con álbum de lujo, ampliación, memoria USB y Cabina 360° incluidos en Salones San Pedro Plus (Gustavo A. Madero, CDMX). Cotiza desde $530 p/p.",
     date: "28 de Mayo, 2026",
     readTime: "4 min de lectura",
     category: "Producción",
