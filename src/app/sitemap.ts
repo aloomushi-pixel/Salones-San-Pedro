@@ -2,7 +2,7 @@ import { BLOG_POSTS } from '@/utils/blogData';
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://salonesanpedro.com.mx';
+  const baseUrl = 'https://sanpedro.aionia.com.mx';
 
   // Base routes
   const routes: MetadataRoute.Sitemap = [
@@ -16,7 +16,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/blog`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.8,
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/llms.txt`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/llms-full.txt`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
     },
   ];
 
@@ -25,7 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly',
-    priority: 0.6,
+    priority: 0.75,
   }));
 
   return [...routes, ...blogRoutes];

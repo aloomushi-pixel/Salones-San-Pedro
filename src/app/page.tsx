@@ -9,6 +9,7 @@ import ExperienciasCarousel from "../components/ExperienciasCarousel";
 import TrackedLink from "../components/TrackedLink";
 import LegalModals from "../components/LegalModals";
 import PaquetesInteractiveSection from "../components/PaquetesInteractiveSection";
+import StickyPriceCompareBar from "../components/StickyPriceCompareBar";
 
 export default function Home() {
   return (
@@ -215,6 +216,9 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Barra Flotante de Comparación Rápida (Neutraliza scroll_return_prices y exit_intent) */}
+      <StickyPriceCompareBar />
 
       {/* WhatsApp Floating Button */}
       <TrackedLink eventType="whatsapp_click" source="floating_button" aria-label="Chat on WhatsApp" className="fixed bottom-8 right-8 z-[100] flex items-center justify-center w-16 h-16 bg-[#25D366] text-white rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 group" href="https://wa.me/526633670431?text=%C2%A1Hola!%20Visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20agendar%20mi%20evento.%20%C2%BFMe%20podr%C3%ADan%20dar%20m%C3%A1s%20detalles%3F" target="_blank">

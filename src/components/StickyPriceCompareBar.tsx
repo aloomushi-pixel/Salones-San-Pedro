@@ -1,0 +1,200 @@
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { trackEvent } from '@/utils/trackEvent';
+
+export default function StickyPriceCompareBar() {
+  const [visible, setVisible] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (dismissed) return;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight =
+        document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      setVisible(pct >= 32 && pct <= 94);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [dismissed]);
+
+  if (!visible && !openModal) return null;
+
+  return (
+    <>
+      {visible && (
+        <div
+          data-interactive="true"
+          className="fixed bottom-4 left-3 right-24 sm:left-6 sm:right-28 z-[90] max-w-3xl mx-auto bg-[#121212]/95 text-white border border-primary/40 rounded-2xl px-3.5 py-2.5 shadow-2xl backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 animate-in fade-in slide-in-from-bottom-4 duration-300"
+        >
+          <div className="flex items-center justify-between sm:justify-start gap-2 text-xs">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2.5">
+              <span className="hidden md:inline-block text-[10px] font-extrabold uppercase tracking-wider text-primary">
+                Referencia Rápida:
+              </span>
+              <span className="px-2 py-0.5 rounded-md bg-white/10 font-semibold text-[11px]">
+                Premier <strong className="text-primary">$530</strong>
+              </span>
+              <span className="px-2 py-0.5 rounded-md bg-primary/20 border border-primary/40 font-semibold text-[11px]">
+                Plus <strong className="text-primary">$710 ⭐</strong>
+              </span>
+              <span className="px-2 py-0.5 rounded-md bg-white/10 font-semibold text-[11px]">
+                All Inclusive <strong className="text-primary">$1,010</strong>
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setDismissed(true)}
+              aria-label="Ocultar barra de precios"
+              className="sm:hidden text-white/60 hover:text-white text-xs px-1.5 cursor-pointer"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={() => {
+                setOpenModal(true);
+                trackEvent('cotizar_click', 'sticky_bar_comparar_paquetes', {
+                  section: 'sticky_price_bar',
+                });
+              }}
+              className="flex-1 sm:flex-initial px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-[11px] font-bold transition-colors cursor-pointer"
+            >
+              ¿Qué incluye cada uno?
+            </button>
+            <a
+              href="#precotizador-hero"
+              onClick={() =>
+                trackEvent('cotizar_click', 'sticky_bar_ir_precotizador', {
+                  section: 'sticky_price_bar',
+                })
+              }
+              className="flex-1 sm:flex-initial px-3.5 py-1.5 rounded-xl bg-primary text-on-primary text-[11px] font-extrabold uppercase tracking-wider text-center hover:opacity-95 transition-opacity"
+            >
+              Cotizar Ahora ↑
+            </a>
+            <button
+              type="button"
+              onClick={() => setDismissed(true)}
+              aria-label="Cerrar barra de referencia"
+              className="hidden sm:inline-flex text-white/50 hover:text-white text-xs px-1 cursor-pointer"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL DE COMPARACIÓN RÁPIDA SIN PERDER POSICIÓN DE SCROLL (NEUTRALIZA SCROLL_RETURN_PRICES) */}
+      {openModal && (
+        <div
+          className="fixed inset-0 z-[130] bg-black/80 backdrop-blur-xs flex items-center justify-center p-4"
+          onClick={() => setOpenModal(false)}
+        >
+          <div
+            className="bg-surface-container-lowest text-on-surface border border-outline-variant/40 rounded-3xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-4 border-b border-outline-variant/30 pb-4">
+              <div>
+                <span className="text-xs font-extrabold uppercase tracking-wider text-primary block">
+                  Comparativa Instantánea • Sin Perder tu Lugar
+                </span>
+                <h3 className="font-display-lg text-xl sm:text-2xl font-bold mt-0.5">
+                  Resumen de Paquetes Salones San Pedro Plus
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setOpenModal(false)}
+                className="w-9 h-9 rounded-full bg-surface-container-high hover:bg-surface-container-highest flex items-center justify-center font-bold cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+              <div className="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/30 space-y-2.5">
+                <div className="flex items-baseline justify-between">
+                  <span className="font-display-lg text-base font-bold text-primary">Premier</span>
+                  <span className="text-lg font-black">$530 p/p</span>
+                </div>
+                <p className="text-[11px] text-secondary">Disponible desde 50 hasta 400 invitados.</p>
+                <ul className="space-y-1.5 text-on-surface pt-1">
+                  <li>✓ 5.5 hrs de evento + Recepción</li>
+                  <li>✓ Menú Gourmet de 3 tiempos</li>
+                  <li>✓ Refresco y hielo ilimitado</li>
+                  <li>✓ DJ, Luz y Sonido profesional</li>
+                  <li>✓ Pastel simbólico + Meseros y Capitán</li>
+                </ul>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-primary/10 border-2 border-primary space-y-2.5">
+                <div className="flex items-baseline justify-between">
+                  <span className="font-display-lg text-base font-bold text-primary">
+                    Plus ⭐ Más Elegido
+                  </span>
+                  <span className="text-lg font-black">$710 p/p</span>
+                </div>
+                <p className="text-[11px] text-secondary">Para eventos a partir de 100 invitados.</p>
+                <ul className="space-y-1.5 text-on-surface pt-1 font-medium">
+                  <li>✓ Todo lo del Paquete Premier</li>
+                  <li>✓ <strong>Servicio de Limusina</strong> de lujo</li>
+                  <li>✓ <strong>Centros de mesa florales</strong> naturales</li>
+                  <li>✓ <strong>Coordinador de evento</strong> dedicado</li>
+                  <li>✓ Descorche libre sin costo extra</li>
+                </ul>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/30 space-y-2.5">
+                <div className="flex items-baseline justify-between">
+                  <span className="font-display-lg text-base font-bold text-primary">
+                    All Inclusive
+                  </span>
+                  <span className="text-lg font-black">$1,010 p/p</span>
+                </div>
+                <p className="text-[11px] text-secondary">Para galas de 100+ invitados todo incluido.</p>
+                <ul className="space-y-1.5 text-on-surface pt-1">
+                  <li>✓ Todo lo del Paquete Plus + <strong>Menú 4 tiempos</strong></li>
+                  <li>✓ <strong>Mariachi en vivo</strong> (1 hora)</li>
+                  <li>✓ <strong>Robot LED Iron Man</strong> + Batucada</li>
+                  <li>✓ <strong>Cabina 360° o Foto</strong> + Letras Gigantes</li>
+                  <li>✓ <strong>Capilla Consagrada / Ceremonia Civil</strong></li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <strong className="text-primary">🔥 Tip Intermedio:</strong> ¿Quieres el Paquete{' '}
+                <strong>Premier ($530)</strong> o <strong>Plus ($710)</strong> con{' '}
+                <strong>Limusina + Carrito de Shots + Letras Gigantes</strong>? Agrégalos en el Paso 3 con el{' '}
+                <strong>Combo Fiesta VIP (+$11,500 MXN, 20% de descuento)</strong>.
+              </div>
+              <a
+                href="#precotizador-hero"
+                onClick={() => {
+                  setOpenModal(false);
+                  trackEvent('cotizar_click', 'modal_comparador_ir_precotizador', {
+                    section: 'sticky_price_bar',
+                  });
+                }}
+                className="shrink-0 px-5 py-2.5 rounded-xl bg-primary text-on-primary font-bold uppercase tracking-wider text-center"
+              >
+                Armar mi Cotización
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

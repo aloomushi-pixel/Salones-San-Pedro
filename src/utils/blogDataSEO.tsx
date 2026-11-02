@@ -5,10 +5,15 @@ import Link from 'next/link';
 const CTA = () => (
   <div className="bg-primary/10 border-l-4 border-primary p-6 rounded-r-lg my-8 shadow-sm">
     <h2 className="font-display-lg text-xl font-bold text-on-surface mb-2">¿Listo para empezar a planear tu evento en CDMX?</h2>
-    <p className="text-secondary mb-4">En Salones San Pedro nos encargamos de que tu celebración sea perfecta de principio a fin. Contáctanos hoy mismo y agenda un recorrido por nuestras instalaciones.</p>
-    <a href="https://wa.me/message/U7UANPSABGW4K1" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-full font-bold hover:scale-105 transition-transform shadow-md">
-      Contactar por WhatsApp
-    </a>
+    <p className="text-secondary mb-4">En Salones San Pedro nos encargamos de que tu celebración sea perfecta de principio a fin. Calcula tu presupuesto en línea o agenda un recorrido por nuestras instalaciones.</p>
+    <div className="flex flex-wrap gap-3">
+      <Link href="/#precotizador-hero" className="inline-flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-full font-bold hover:scale-105 transition-transform shadow-md text-xs uppercase tracking-wider">
+        Calcular Cotización en Línea
+      </Link>
+      <a href="https://wa.me/526633670431?text=%C2%A1Hola%20Salones%20San%20Pedro!%20Le%C3%AD%20su%20gu%C3%ADa%20de%20eventos%20en%20el%20blog%20y%20me%20interesa%20cotizar%20mi%20evento." target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-full font-bold hover:scale-105 transition-transform shadow-md text-xs uppercase tracking-wider">
+        Contactar por WhatsApp
+      </a>
+    </div>
   </div>
 );
 
@@ -98,13 +103,13 @@ export const SEO_BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     imageUrl: "/blog/banquet_table_setup_1782782321503.png",
     content: (
       <div className="space-y-6">
-        <p>La comida es sin duda uno de los elementos más recordados de cualquier fiesta. Ya sea una boda elegante o una gran celebración de XV años en la CDMX, servir los mejores <strong><Link href="/#servicios" className="text-primary hover:underline">platillos</Link></strong> garantizará que tus invitados se vayan con un excelente sabor de boca.</p>
+        <p>La comida es sin duda uno de los elementos más recordados de cualquier fiesta. Ya sea una boda elegante o una gran celebración de XV años en la CDMX, servir los mejores <strong><Link href="/#banquetes" className="text-primary hover:underline">platillos</Link></strong> garantizará que tus invitados se vayan con un excelente sabor de boca.</p>
         
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">1. Calcula las porciones correctamente</h2>
         <p>Es preferible que sobre comida a que falte. Un cálculo estándar en la industria de banquetes es sumar un 10% adicional al número total de confirmados. Esto cubre imprevistos y asegura que nadie se quede sin su platillo favorito.</p>
         
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">2. ¿Menú Formal o Buffet?</h2>
-        <p>El menú servido a la mesa (2 o 3 tiempos) aporta un toque de máxima elegancia y permite controlar los tiempos del evento a la perfección. Por otro lado, un buffet bien ejecutado ofrece dinamismo y una mayor variedad de <strong><Link href="/#servicios" className="text-primary hover:underline">platillos</Link></strong> para los diferentes paladares de tus asistentes.</p>
+        <p>El menú servido a la mesa (2 o 3 tiempos) aporta un toque de máxima elegancia y permite controlar los tiempos del evento a la perfección. Por otro lado, un buffet bien ejecutado ofrece dinamismo y una mayor variedad de <strong><Link href="/#banquetes" className="text-primary hover:underline">platillos</Link></strong> para los diferentes paladares de tus asistentes.</p>
         
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">3. Variedad de Platillos en Salones San Pedro</h2>
         <p>En Salones San Pedro, nuestra cocina internacional y nacional se adapta a tu visión. Ofrecemos degustaciones previas para que los novios o quinceañeras elijan exactamente lo que desean servir. ¡Desde jugosas carnes hasta opciones vegetarianas excepcionales!</p>
@@ -123,7 +128,7 @@ export const SEO_BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     imageUrl: "/blog/innovative_catering_dishes_1782782329531.png",
     content: (
       <div className="space-y-6">
-        <p>El 2026 viene marcado por la sofisticación y la experiencia visual en la gastronomía para eventos. Los asistentes ya no solo buscan comer, buscan vivir una experiencia a través de los <strong><Link href="/#servicios" className="text-primary hover:underline">platillos</Link></strong>.</p>
+        <p>El 2026 viene marcado por la sofisticación y la experiencia visual en la gastronomía para eventos. Los asistentes ya no solo buscan comer, buscan vivir una experiencia a través de los <strong><Link href="/#banquetes" className="text-primary hover:underline">platillos</Link></strong>.</p>
         
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">Estaciones Interactivas</h2>
         <p>Las mesas de quesos han evolucionado hacia estaciones donde el chef prepara ceviches, pastas o cortes de carne al momento frente a los invitados. Esta es una tendencia obligada en CDMX.</p>
@@ -132,7 +137,7 @@ export const SEO_BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
         <p>El emplatado es más importante que nunca. Colores vibrantes, flores comestibles y salsas en texturas vanguardistas aseguran que tu banquete sea el centro de todas las fotos de la noche.</p>
         
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">Coctelería de Autor para Acompañar</h2>
-        <p>Nuestros <strong><Link href="/#servicios" className="text-primary hover:underline">platillos</Link></strong> se complementan perfectamente con mixología moderna. Olvida los licores tradicionales y atrévete con infusiones herbales y humo aromático.</p>
+        <p>Nuestros <strong><Link href="/#banquetes" className="text-primary hover:underline">platillos</Link></strong> se complementan perfectamente con mixología moderna. Olvida los licores tradicionales y atrévete con infusiones herbales y humo aromático.</p>
         
         <CTA />
       </div>
@@ -151,7 +156,7 @@ export const SEO_BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
         <p>Una de las preguntas más frecuentes de nuestras parejas y comités de graduación en CDMX es si deben optar por un servicio emplatado o un generoso buffet. Aquí desglosamos ambas opciones.</p>
         
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">Menú de 3 Tiempos: Elegancia y Control</h2>
-        <p>El servicio emplatado es el rey de los eventos formales. Permite que tus invitados no tengan que levantarse, mantiene un protocolo ordenado y asegura una presentación impecable. En Salones San Pedro dominamos este formato entregando los <strong><Link href="/#servicios" className="text-primary hover:underline">platillos</Link></strong> a la temperatura perfecta.</p>
+        <p>El servicio emplatado es el rey de los eventos formales. Permite que tus invitados no tengan que levantarse, mantiene un protocolo ordenado y asegura una presentación impecable. En Salones San Pedro dominamos este formato entregando los <strong><Link href="/#banquetes" className="text-primary hover:underline">platillos</Link></strong> a la temperatura perfecta.</p>
         
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">Buffet: Dinamismo y Abundancia</h2>
         <p>Si tu fiesta tiene una vibra más relajada y festiva, el buffet es ideal. Ofrece mayor variedad, permitiendo que los invitados exigentes elijan exactamente lo que desean comer de nuestra vasta oferta gastronómica.</p>
@@ -235,7 +240,7 @@ export const SEO_BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">A 3 Meses del Evento</h2>
         <ul className="list-disc pl-5 space-y-2">
           <li>Elige las invitaciones.</li>
-          <li>Haz la degustación de <strong><Link href="/#servicios" className="text-primary hover:underline">platillos</Link></strong> y define el menú.</li>
+          <li>Haz la degustación de <strong><Link href="/#banquetes" className="text-primary hover:underline">platillos</Link></strong> y define el menú.</li>
           <li>Define la decoración floral.</li>
         </ul>
         
@@ -243,10 +248,10 @@ export const SEO_BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
         <ul className="list-disc pl-5 space-y-2">
           <li>Confirma asistencia final de invitados.</li>
           <li>Arma el croquis de mesas.</li>
-          <li>Define el programa de la noche con tu <strong><Link href="/#contacto" className="text-primary hover:underline">coordinación</Link></strong> de eventos.</li>
+          <li>Define el programa de la noche con tu <strong><Link href="/#paquetes" className="text-primary hover:underline">coordinación</Link></strong> de eventos.</li>
         </ul>
         
-        <p>Si quieres olvidarte del estrés por completo y disfrutar de tu fiesta como un invitado más, conoce nuestro servicio de <strong><Link href="/#contacto" className="text-primary hover:underline">coordinación</Link></strong> de eventos. ¡Nosotros nos encargamos del trabajo pesado!</p>
+        <p>Si quieres olvidarte del estrés por completo y disfrutar de tu fiesta como un invitado más, conoce nuestro servicio de <strong><Link href="/#paquetes" className="text-primary hover:underline">coordinación</Link></strong> de eventos. ¡Nosotros nos encargamos del trabajo pesado!</p>
         
         <CTA />
       </div>
@@ -262,7 +267,7 @@ export const SEO_BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     imageUrl: "/blog/event_coordinator_professional_1782782383705.png",
     content: (
       <div className="space-y-6">
-        <p>Tener un salón hermoso y <strong><Link href="/#servicios" className="text-primary hover:underline">platillos</Link></strong> deliciosos es clave, pero sin alguien que dirija la orquesta, el ritmo puede perderse.</p>
+        <p>Tener un salón hermoso y <strong><Link href="/#banquetes" className="text-primary hover:underline">platillos</Link></strong> deliciosos es clave, pero sin alguien que dirija la orquesta, el ritmo puede perderse.</p>
         
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">1. Solución Invisible de Imprevistos</h2>
         <p>Los imprevistos siempre suceden, pero un profesional los resuelve sin que tú o tus invitados se den cuenta.</p>
@@ -271,7 +276,7 @@ export const SEO_BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
         <p>Desde la entrada triunfal hasta el corte de pastel, garantizamos que todo ocurra en el tiempo pactado para no enfriar el ambiente.</p>
         
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">3. Trato con Proveedores</h2>
-        <p>Olvídate de estar llamando al fotógrafo o al florista el día de tu evento. Nuestra <strong><Link href="/#contacto" className="text-primary hover:underline">coordinación</Link></strong> lo hace por ti.</p>
+        <p>Olvídate de estar llamando al fotógrafo o al florista el día de tu evento. Nuestra <strong><Link href="/#paquetes" className="text-primary hover:underline">coordinación</Link></strong> lo hace por ti.</p>
         
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">4. Asesoría Basada en Experiencia</h2>
         <p>Sugerimos dinámicas probadas que funcionan y evitamos aquellas que suelen fallar.</p>
@@ -296,13 +301,13 @@ export const SEO_BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
         <p>La experiencia es la mejor maestra. A través de nuestros años en Salones San Pedro, hemos identificado las fallas más recurrentes de quienes organizan su propio evento por primera vez.</p>
         
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">Asumir Asistencias Perfectas</h2>
-        <p>Nunca pagues <strong><Link href="/#servicios" className="text-primary hover:underline">platillos</Link></strong> asumiendo que el 100% de tus invitados asistirá. Suele haber una merma del 10% al 15%. Pide confirmaciones reales.</p>
+        <p>Nunca pagues <strong><Link href="/#banquetes" className="text-primary hover:underline">platillos</Link></strong> asumiendo que el 100% de tus invitados asistirá. Suele haber una merma del 10% al 15%. Pide confirmaciones reales.</p>
         
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">Ignorar el Factor Clima y Tráfico en CDMX</h2>
         <p>Poner citas muy estrictas en días de alto tráfico en la zona de Gustavo A. Madero puede arruinar tu cronograma. Siempre da un margen de 30 minutos de tolerancia.</p>
         
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">Hacerlo Todo Solo</h2>
-        <p>Delegar es necesario. Querer supervisar la música, los alimentos y la decoración tú mismo provocará que no disfrutes tu propio evento. Para eso existe nuestro servicio integral de <strong><Link href="/#contacto" className="text-primary hover:underline">coordinación</Link></strong>.</p>
+        <p>Delegar es necesario. Querer supervisar la música, los alimentos y la decoración tú mismo provocará que no disfrutes tu propio evento. Para eso existe nuestro servicio integral de <strong><Link href="/#paquetes" className="text-primary hover:underline">coordinación</Link></strong>.</p>
         
         <CTA />
       </div>

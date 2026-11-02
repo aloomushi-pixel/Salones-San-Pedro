@@ -68,29 +68,56 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const articleJsonLd = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.excerpt,
-    image: post.imageUrl.startsWith("http")
-      ? post.imageUrl
-      : `https://sanpedro.aionia.com.mx${post.imageUrl}`,
-    author: {
-      "@type": "Organization",
-      name: "Salones San Pedro Plus CDMX",
-      url: "https://sanpedro.aionia.com.mx",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Salones San Pedro Plus",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://sanpedro.aionia.com.mx/logo.svg",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: post.excerpt,
+        image: post.imageUrl.startsWith("http")
+          ? post.imageUrl
+          : `https://sanpedro.aionia.com.mx${post.imageUrl}`,
+        author: {
+          "@type": "Organization",
+          name: "Salones San Pedro Plus CDMX",
+          url: "https://sanpedro.aionia.com.mx",
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Salones San Pedro Plus",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://sanpedro.aionia.com.mx/logo.svg",
+          },
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": `https://sanpedro.aionia.com.mx/blog/${slug}`,
+        },
       },
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `https://sanpedro.aionia.com.mx/blog/${slug}`,
-    },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Salones San Pedro Plus CDMX",
+            item: "https://sanpedro.aionia.com.mx",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Guía y Blog de Eventos",
+            item: "https://sanpedro.aionia.com.mx/blog",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: post.title,
+            item: `https://sanpedro.aionia.com.mx/blog/${slug}`,
+          },
+        ],
+      },
+    ],
   };
 
   return (
@@ -126,23 +153,72 @@ export default async function BlogPostPage({ params }: PageProps) {
             </p>
           </div>
 
-          {/* Cover Image */}
-          <div className="relative h-64 md:h-[480px] rounded-2xl overflow-hidden shadow-xl mb-12">
+          {/* Cover Image Accionable (Convierte dead_clicks en imágenes de blog en tráfico al Precotizador) */}
+          <TrackedLink
+            eventType="cotizar_click"
+            source={`blog_cover_img_${slug}`}
+            href="/#precotizador-hero"
+            className="group block relative h-64 md:h-[480px] rounded-2xl overflow-hidden shadow-xl mb-12 border border-outline-variant/30"
+          >
             <Image
               src={post.imageUrl}
               alt={post.title}
-              className="object-cover"
+              className="object-cover group-hover:scale-105 transition-transform duration-500 pointer-events-none"
               fill
               priority
               sizes="(max-width: 768px) 100vw, 896px"
             />
-          </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute bottom-4 left-4 right-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 pointer-events-none">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/75 text-white text-xs font-semibold backdrop-blur-xs border border-white/20">
+                ✨ Disponible en nuestros Salones Diamante y Platino (GAM, CDMX)
+              </span>
+              <span className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-primary text-on-primary text-xs font-extrabold uppercase tracking-wider shadow-lg group-hover:scale-105 transition-transform">
+                Cotizar mi Evento desde $530 p/p →
+              </span>
+            </div>
+          </TrackedLink>
 
           {/* Post Content & Sidebar */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div data-ux-section="blog_articulo" className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Main Content */}
-            <div className="lg:col-span-8 font-body-md text-secondary leading-relaxed text-base md:text-lg">
+            <div className="lg:col-span-8 font-body-md text-secondary leading-relaxed text-base md:text-lg space-y-6">
               {post.content}
+
+              {/* Bloque de Conversión Contextual al Final de la Lectura */}
+              <div className="mt-10 p-6 sm:p-8 rounded-2xl bg-surface-container-low border-2 border-primary/40 shadow-md space-y-4">
+                <span className="text-xs font-extrabold uppercase tracking-widest text-primary block">
+                  Cotización Instantánea en Línea • Salones San Pedro Plus
+                </span>
+                <h2 className="font-display-lg text-2xl font-bold text-on-surface">
+                  ¿Te gustaría incluir esto en tu Boda, XV Años o Graduación?
+                </h2>
+                <p className="text-sm text-secondary leading-relaxed">
+                  Calcula en menos de 1 minuto el presupuesto exacto para tu evento de 50 a 400 invitados en Gustavo A. Madero, CDMX, o escríbenos por WhatsApp para agendar un recorrido presencial.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 pt-1">
+                  <TrackedLink
+                    eventType="cotizar_click"
+                    source={`blog_footer_precotizador_${slug}`}
+                    href="/#precotizador-hero"
+                    className="flex-1 py-3.5 px-5 rounded-xl bg-primary text-on-primary font-bold text-xs uppercase tracking-wider text-center shadow-md hover:opacity-95 transition-opacity"
+                  >
+                    Calcular Presupuesto en Línea
+                  </TrackedLink>
+                  <TrackedLink
+                    eventType="whatsapp_click"
+                    source={`blog_footer_wa_${slug}`}
+                    href={`https://wa.me/526633670431?text=${encodeURIComponent(
+                      `¡Hola Salones San Pedro! Leí su artículo "${post.title}" y me gustaría cotizar mi evento y conocer los paquetes.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-3.5 px-5 rounded-xl bg-[#25D366] text-white font-bold text-xs uppercase tracking-wider text-center shadow-md hover:opacity-95 transition-opacity"
+                  >
+                    Cotizar por WhatsApp 24/7
+                  </TrackedLink>
+                </div>
+              </div>
             </div>
 
             {/* Sidebar / Recommended Posts */}
