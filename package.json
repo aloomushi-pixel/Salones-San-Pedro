@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "NODE_OPTIONS='--experimental-require-module' next build",
     "start": "next start",
     "lint": "eslint",
     "create-admin": "node scripts/create-admin.mjs"
+  },
+  "overrides": {
+    "magic-string": "0.30.19"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",
