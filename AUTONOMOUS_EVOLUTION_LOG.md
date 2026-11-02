@@ -4,7 +4,7 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
-## Iteración Autónoma #1 — `2026-11-01 19:25 CDMX`
+## Iteración Autónoma #1 — `2026-11-01 19:25 CDMX` (Commit `0990aad`)
 
 ### 1. Señal Telemétrica y Diagnóstico en Vivo (Supabase)
 - **Volumen auditado**: `971` registros totales en `analytics_events` (`792` eventos humanos reales y `179` eventos de bots/QA segregados automáticamente).

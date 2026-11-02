@@ -39,7 +39,7 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
       'src/components/AdminDashboardClient.tsx',
       'AUTONOMOUS_EVOLUTION_LOG.md',
     ],
-    commitHash: 'En despliegue continuo (Coolify)',
+    commitHash: '0990aad',
     hypothesisNextCycle:
       'Con la barra flotante de comparación rápida (>32% scroll) y los modales accionables en #animacion y #blog, esperamos reducir al menos un 45% los eventos scroll_return_prices e incrementar los clics a cotizar_click y whatsapp_click desde secciones medias e inferiores.',
   },
