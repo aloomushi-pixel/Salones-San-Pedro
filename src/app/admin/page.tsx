@@ -33,7 +33,9 @@ export default async function AdminPage() {
     if (eventsRes.error) {
       errorMessage = eventsRes.error.message;
     } else if (eventsRes.data) {
-      parsedEvents = (eventsRes.data as RawAnalyticsRow[]).map((row) => parseAnalyticsRow(row));
+      parsedEvents = (eventsRes.data as RawAnalyticsRow[])
+        .filter((row) => row.event_type !== 'autonomous_evolution_log')
+        .map((row) => parseAnalyticsRow(row));
     }
 
     if (!leadsRes.error && leadsRes.data) {

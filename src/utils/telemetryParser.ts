@@ -260,10 +260,11 @@ export function detectBotOrInternalQA(
     };
   }
 
-  // 2. Detección de Tráfico Interno de Administración y Pruebas de Humo (QA)
+  // 2. Detección de Tráfico Interno de Administración, Ciclos Autónomos y Pruebas de Humo (QA)
   if (
     meta.is_internal_qa ||
     meta.extra?.is_admin_device === true ||
+    uaLower.includes('autonomousagent') ||
     ref.includes('/admin') ||
     KNOWN_QA_VISITOR_IDS.has(visitorId) ||
     KNOWN_SMOKE_TEST_SESSIONS.has(sessionId)

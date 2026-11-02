@@ -1060,13 +1060,24 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
             <div className="space-y-4">
               {AUTONOMOUS_EVOLUTION_HISTORY.map((item) => (
                 <div
-                  key={item.iteration}
+                  key={item.version_tag}
                   className="p-5 rounded-xl bg-slate-50/80 border border-slate-200 space-y-3"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="px-2.5 py-0.5 rounded-full bg-emerald-600 text-white text-xs font-black">
-                        Iteración #{item.iteration}
+                      <span className="px-2.5 py-0.5 rounded-full bg-slate-900 text-white text-xs font-black">
+                        {item.version_tag} (Ciclo #{item.cycle_number})
+                      </span>
+                      <span
+                        className={`px-2.5 py-0.5 rounded-full text-[11px] font-extrabold uppercase ${
+                          item.status === 'IMPLEMENTED' || item.status === 'TEST_SYNC'
+                            ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                            : item.status === 'POSTPONED'
+                            ? 'bg-amber-100 text-amber-800 border border-amber-300'
+                            : 'bg-rose-100 text-rose-800 border border-rose-300'
+                        }`}
+                      >
+                        {item.status}
                       </span>
                       <span className="text-xs font-bold text-slate-500">{item.date_cdmx}</span>
                       {item.vectors.map((v) => (
@@ -1079,7 +1090,7 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
                       ))}
                     </div>
                     <span className="text-[11px] font-mono text-slate-500">
-                      Commit: {item.commitHash}
+                      Commit: {item.commitHash} • Email: {item.emailSent ? 'Enviado ✓' : 'Pendiente'}
                     </span>
                   </div>
 
@@ -1106,6 +1117,10 @@ export default function AdminDashboardClient({ events, leads, errorMessage }: Pr
                   </div>
 
                   <div className="pt-2 border-t border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-600">
+                    <div>
+                      <strong className="text-slate-800">🙋‍♂️ Acción Requerida del Humano:</strong>{' '}
+                      {item.humanActionRequired || 'Ninguna — el agente continúa operando en libre albedrío'}
+                    </div>
                     <div>
                       <strong className="text-slate-800">🎯 Hipótesis Siguiente Ciclo:</strong>{' '}
                       {item.hypothesisNextCycle}
