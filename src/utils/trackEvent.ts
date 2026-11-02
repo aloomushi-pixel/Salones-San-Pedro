@@ -86,6 +86,8 @@ function detectTrafficChannel(referrer: string, ua: string, searchParams: URLSea
     traffic_channel = 'Google Orgánico (SEO)';
   } else if (/bing\.|yahoo\.|duckduckgo\./i.test(lowerRef)) {
     traffic_channel = 'Buscadores Orgánicos (Bing/Yahoo)';
+  } else if (/l\.wl\.co/i.test(lowerRef)) {
+    traffic_channel = 'WhatsApp Business (Enlace Directo)';
   } else if (/wa\.me|whatsapp/i.test(lowerRef) || lowerUA.includes('whatsapp')) {
     traffic_channel = 'WhatsApp Compartido';
   } else if (referrer_domain && !referrer_domain.includes(window.location.hostname)) {
@@ -158,6 +160,14 @@ export function getOrInitMonitorState(): RuntimeMonitorState | null {
     const cachedAcq = sessionStorage.getItem('ssp_acquisition');
     if (cachedAcq && !hasNewUtm) {
       acquisition = JSON.parse(cachedAcq);
+      if (
+        acquisition &&
+        (acquisition.referrer_domain === 'l.wl.co' ||
+          acquisition.traffic_channel === 'Referencia Web (l.wl.co)')
+      ) {
+        acquisition.traffic_channel = 'WhatsApp Business (Enlace Directo)';
+        sessionStorage.setItem('ssp_acquisition', JSON.stringify(acquisition));
+      }
     } else {
       acquisition = detectTrafficChannel(document.referrer || '', navigator.userAgent || '', params);
       sessionStorage.setItem('ssp_acquisition', JSON.stringify(acquisition));

@@ -15,7 +15,7 @@ export default function StickyPriceCompareBar() {
       const docHeight =
         document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      setVisible(pct >= 32 && pct <= 94);
+      setVisible(pct >= 22 && pct <= 94);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -127,13 +127,13 @@ export default function StickyPriceCompareBar() {
                   <span className="font-display-lg text-base font-bold text-primary">Premier</span>
                   <span className="text-lg font-black">$530 p/p</span>
                 </div>
-                <p className="text-[11px] text-secondary">Disponible desde 50 hasta 400 invitados.</p>
+                <p className="text-[11px] text-secondary">Disponible desde 50 hasta 250+ invitados.</p>
                 <ul className="space-y-1.5 text-on-surface pt-1">
-                  <li>✓ 5.5 hrs de evento + Recepción</li>
-                  <li>✓ Menú Gourmet de 3 tiempos</li>
-                  <li>✓ Refresco y hielo ilimitado</li>
-                  <li>✓ DJ, Luz y Sonido profesional</li>
-                  <li>✓ Pastel simbólico + Meseros y Capitán</li>
+                  <li>✓ 6 hrs de servicio + 1/2 hr recepción</li>
+                  <li>✓ Menú formal a 3 tiempos + Tornafiesta</li>
+                  <li>✓ Barra libre de mezcladores (descorche libre)</li>
+                  <li>✓ DJ, iluminación LED y batucada clásica</li>
+                  <li>✓ Montaje imperial con mesa de cristal</li>
                 </ul>
               </div>
 
@@ -146,11 +146,12 @@ export default function StickyPriceCompareBar() {
                 </div>
                 <p className="text-[11px] text-secondary">Para eventos a partir de 100 invitados.</p>
                 <ul className="space-y-1.5 text-on-surface pt-1 font-medium">
-                  <li>✓ Todo lo del Paquete Premier</li>
-                  <li>✓ <strong>Servicio de Limusina</strong> de lujo</li>
-                  <li>✓ <strong>Centros de mesa florales</strong> naturales</li>
-                  <li>✓ <strong>Coordinador de evento</strong> dedicado</li>
-                  <li>✓ Descorche libre sin costo extra</li>
+                  <li>✓ Todo lo de Premier + <strong>7 hrs de servicio</strong></li>
+                  <li>✓ <strong>Menú formal a 4 tiempos</strong></li>
+                  <li>✓ <strong>Robot LED</strong> y batucada espectacular</li>
+                  <li>✓ <strong>Mesa de dulces + Cabina fotográfica</strong></li>
+                  <li>✓ <strong>Letras gigantes + Carrito de shots</strong></li>
+                  <li>✓ <strong>Pre-fiesta para 30 personas</strong> (L a J, 4 hrs)</li>
                 </ul>
               </div>
 
@@ -163,11 +164,12 @@ export default function StickyPriceCompareBar() {
                 </div>
                 <p className="text-[11px] text-secondary">Para galas de 100+ invitados todo incluido.</p>
                 <ul className="space-y-1.5 text-on-surface pt-1">
-                  <li>✓ Todo lo del Paquete Plus + <strong>Menú 4 tiempos</strong></li>
-                  <li>✓ <strong>Mariachi en vivo</strong> (1 hora)</li>
-                  <li>✓ <strong>Robot LED Iron Man</strong> + Batucada</li>
-                  <li>✓ <strong>Cabina 360° o Foto</strong> + Letras Gigantes</li>
-                  <li>✓ <strong>Capilla Consagrada / Ceremonia Civil</strong></li>
+                  <li>✓ Todo lo del Paquete Plus incluido</li>
+                  <li>✓ <strong>1 hora de Mariachi</strong> en vivo</li>
+                  <li>✓ <strong>Servicio de Limusina</strong> de lujo</li>
+                  <li>✓ <strong>Robot Iron Man</strong> en batucada</li>
+                  <li>✓ <strong>Video filmación y fotos con álbum</strong></li>
+                  <li>✓ <strong>Vino espumoso + 1 botella/mesa + Cabina 360</strong></li>
                 </ul>
               </div>
             </div>

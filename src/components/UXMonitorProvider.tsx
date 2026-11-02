@@ -113,8 +113,13 @@ export default function UXMonitorProvider({ children }: { children: React.ReactN
         entries.forEach((entry) => {
           const el = entry.target as HTMLElement;
           const secName = el.getAttribute('data-ux-section') || el.id || defaultSec;
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
-            visibleRatios.set(secName, entry.intersectionRatio);
+          const isTallSectionVisible =
+            entry.isIntersecting &&
+            entry.intersectionRatio >= 0.08 &&
+            entry.boundingClientRect.height > window.innerHeight * 0.75;
+          if ((entry.isIntersecting && entry.intersectionRatio >= 0.15) || isTallSectionVisible) {
+            const normalizedRatio = Math.max(entry.intersectionRatio, isTallSectionVisible ? 0.28 : 0);
+            visibleRatios.set(secName, normalizedRatio);
             if (!seenSectionsRef.current.has(secName)) {
               seenSectionsRef.current.add(secName);
               trackEvent('section_view', `sec_${secName}`, { section: secName });
@@ -157,7 +162,7 @@ export default function UXMonitorProvider({ children }: { children: React.ReactN
         });
         activeSectionRef.current = bestSec;
       },
-      { threshold: [0.25, 0.5, 0.75] }
+      { threshold: [0.08, 0.15, 0.25, 0.5, 0.75] }
     );
 
     observedElements.forEach((el) => observer.observe(el));

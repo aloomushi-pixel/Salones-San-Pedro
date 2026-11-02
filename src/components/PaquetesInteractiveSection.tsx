@@ -258,6 +258,43 @@ const INCLUSION_CATALOG: Record<string, InclusionDetail> = {
 
 export default function PaquetesInteractiveSection() {
   const [selectedInclusion, setSelectedInclusion] = useState<InclusionDetail | null>(null);
+  const [simGuests, setSimGuests] = useState<number>(100);
+  const [simDayMode, setSimDayMode] = useState<'viernes_domingo' | 'sabado'>('viernes_domingo');
+
+  const formatMXN = (amount: number) =>
+    new Intl.NumberFormat('es-MX', {
+      style: 'currency',
+      currency: 'MXN',
+      maximumFractionDigits: 0,
+    }).format(amount);
+
+  const getPackageUnitPrice = (basePrice: number) =>
+    simDayMode === 'sabado' ? basePrice + 35 : basePrice;
+
+  const getPackageTotal = (basePrice: number, minGuests: number) => {
+    const effectiveGuests = Math.max(minGuests, simGuests);
+    return effectiveGuests * getPackageUnitPrice(basePrice);
+  };
+
+  const handlePreselectInCalculator = (packageId: 'Premier' | 'Plus' | 'All Inclusive') => {
+    trackEvent('cotizar_click', `paquete_preseleccionar_${packageId.toLowerCase().replace(/\s+/g, '_')}`, {
+      section: 'paquetes',
+      package_name: `Paquete ${packageId}`,
+      guests_range: `${simGuests} personas`,
+      extra: { sim_guests: simGuests, sim_day_mode: simDayMode },
+    });
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('ssp:select-package', {
+          detail: { packageId, guests: simGuests, dayMode: simDayMode },
+        })
+      );
+      const heroEl = document.getElementById('precotizador-hero');
+      if (heroEl) {
+        heroEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  };
 
   const handleOpenInclusion = (key: string) => {
     const item = INCLUSION_CATALOG[key];
@@ -311,12 +348,12 @@ export default function PaquetesInteractiveSection() {
       ===================================================================== */}
       <section
         data-ux-section="paquetes"
-        className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface text-on-surface"
+        className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface text-on-surface scroll-mt-20"
         id="paquetes"
       >
         <div className="max-w-container-max mx-auto">
           {/* Encabezado de la Sección */}
-          <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
+          <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
               <span data-ux-decorative="true" className="material-symbols-outlined text-sm">
                 touch_app
@@ -327,8 +364,74 @@ export default function PaquetesInteractiveSection() {
               Nuestros Paquetes Todo Incluido
             </h2>
             <p className="font-body-lg text-secondary max-w-2xl mx-auto">
-              Conoce nuestras tarifas transparentes y toca cada beneficio incluido para descubrir cómo hacemos brillar tu evento en CDMX.
+              Conoce nuestras tarifas transparentes, simula al instante la inversión total según tu número de invitados y toca cada beneficio incluido para ver fotos reales.
             </p>
+          </div>
+
+          {/* SIMULADOR INSTANTÁNEO DE AFORO Y DÍA EN #PAQUETES (Evita scroll_return_prices) */}
+          <div
+            data-interactive="true"
+            className="max-w-4xl mx-auto mb-10 bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-4 sm:p-5 shadow-md flex flex-col md:flex-row items-center justify-between gap-4"
+          >
+            <div className="flex flex-col sm:flex-row items-center gap-2.5 w-full md:w-auto">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-primary shrink-0">
+                👥 Calcular total para:
+              </span>
+              <div className="flex flex-wrap justify-center gap-1.5">
+                {[80, 100, 150, 200, 250].map((g) => (
+                  <button
+                    key={g}
+                    type="button"
+                    onClick={() => {
+                      setSimGuests(g);
+                      trackEvent('guests_slider_adjust', `paquetes_sim_${g}`, {
+                        section: 'paquetes',
+                        guests_range: `${g} personas`,
+                        extra: { exact_guests: g, source_widget: 'paquetes_quick_bar' },
+                      });
+                    }}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                      simGuests === g
+                        ? 'bg-primary text-on-primary shadow-sm scale-105'
+                        : 'bg-surface-container-low text-secondary hover:text-on-surface border border-outline-variant/30'
+                    }`}
+                  >
+                    {g} pers.
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1.5 bg-surface-container-low p-1 rounded-xl border border-outline-variant/30 w-full sm:w-auto justify-center">
+              <button
+                type="button"
+                onClick={() => {
+                  setSimDayMode('viernes_domingo');
+                  trackEvent('package_select', 'sim_dia_viernes_domingo', { section: 'paquetes' });
+                }}
+                className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${
+                  simDayMode === 'viernes_domingo'
+                    ? 'bg-primary text-on-primary shadow-xs'
+                    : 'text-secondary hover:text-on-surface'
+                }`}
+              >
+                🎁 Viernes / Dom (Preferencial)
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setSimDayMode('sabado');
+                  trackEvent('package_select', 'sim_dia_sabado', { section: 'paquetes' });
+                }}
+                className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${
+                  simDayMode === 'sabado'
+                    ? 'bg-primary text-on-primary shadow-xs'
+                    : 'text-secondary hover:text-on-surface'
+                }`}
+              >
+                📅 Sábado Estelar
+              </button>
+            </div>
           </div>
 
           {/* Tarjetas de Precios */}
@@ -343,11 +446,19 @@ export default function PaquetesInteractiveSection() {
                   <p className="text-primary text-sm font-semibold">
                     Disponible desde 50 personas
                   </p>
-                  <div className="mt-3 space-y-1 text-on-surface/80 text-sm">
+                  <div className="mt-3 space-y-1.5 text-on-surface/80 text-sm">
                     <p>
-                      Viernes Platino desde{' '}
-                      <span className="font-bold text-xl text-primary">$530 p/p</span>
+                      {simDayMode === 'viernes_domingo' ? 'Viernes / Dom desde' : 'Sábado Platino'}{' '}
+                      <span className="font-bold text-xl text-primary">
+                        ${getPackageUnitPrice(530)} p/p
+                      </span>
                     </p>
+                    <div className="inline-block px-3 py-1 rounded-lg bg-primary/10 border border-primary/25 text-xs font-bold text-on-surface">
+                      Total {simGuests} pers.:{' '}
+                      <span className="text-primary font-extrabold">
+                        {formatMXN(getPackageTotal(530, 50))} MXN
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div className="p-7">
@@ -364,11 +475,22 @@ export default function PaquetesInteractiveSection() {
                   </ul>
                 </div>
               </div>
-              <div className="p-7 pt-0">
+              <div className="p-7 pt-0 space-y-2.5">
+                <button
+                  type="button"
+                  onClick={() => handlePreselectInCalculator('Premier')}
+                  className="block w-full py-3 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 rounded-xl transition-all uppercase tracking-wider text-center text-xs font-bold cursor-pointer"
+                >
+                  Personalizar en Cotizador ({simGuests} pers.) ↑
+                </button>
                 <TrackedLink
                   eventType="cotizar_click"
                   source="paquete_premier"
-                  href="https://wa.me/526633670431?text=%C2%A1Hola!%20Visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20el%20Paquete%20Premier%20(%24530%20p%2Fp).%20%C2%BFMe%20podr%C3%ADan%20dar%20m%C3%A1s%20detalles%20y%20fechas%20disponibles%3F"
+                  href={`https://wa.me/526633670431?text=${encodeURIComponent(
+                    `¡Hola! Visité su sitio web y me interesa el Paquete Premier para ${simGuests} personas (aprox. ${formatMXN(
+                      getPackageTotal(530, 50)
+                    )} MXN). ¿Me podrían dar más detalles y fechas disponibles?`
+                  )}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-3.5 border-2 border-primary text-primary hover:bg-primary hover:text-on-primary rounded-xl font-label-sm transition-all uppercase tracking-wider text-center text-xs font-bold"
@@ -387,11 +509,19 @@ export default function PaquetesInteractiveSection() {
                 <div className="p-7 text-center bg-primary-container/10 border-b border-outline-variant/30 mt-6">
                   <h3 className="font-display-lg text-3xl text-primary font-bold mb-1">Plus</h3>
                   <p className="text-secondary text-sm">A partir de 100 personas</p>
-                  <div className="mt-3 space-y-1 text-on-surface/80 text-sm">
+                  <div className="mt-3 space-y-1.5 text-on-surface/80 text-sm">
                     <p>
-                      Platino desde{' '}
-                      <span className="font-bold text-xl text-primary">$710 p/p</span>
+                      {simDayMode === 'viernes_domingo' ? 'Platino desde' : 'Sábado Platino'}{' '}
+                      <span className="font-bold text-xl text-primary">
+                        ${getPackageUnitPrice(710)} p/p
+                      </span>
                     </p>
+                    <div className="inline-block px-3 py-1 rounded-lg bg-primary/15 border border-primary/40 text-xs font-bold text-on-surface">
+                      Total {Math.max(100, simGuests)} pers.:{' '}
+                      <span className="text-primary font-extrabold">
+                        {formatMXN(getPackageTotal(710, 100))} MXN
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div className="p-7">
@@ -409,11 +539,25 @@ export default function PaquetesInteractiveSection() {
                   </ul>
                 </div>
               </div>
-              <div className="p-7 pt-0">
+              <div className="p-7 pt-0 space-y-2.5">
+                <button
+                  type="button"
+                  onClick={() => handlePreselectInCalculator('Plus')}
+                  className="block w-full py-3 bg-primary/15 hover:bg-primary/25 text-primary border border-primary/40 rounded-xl transition-all uppercase tracking-wider text-center text-xs font-bold cursor-pointer"
+                >
+                  Personalizar Plus en Cotizador ({Math.max(100, simGuests)} pers.) ↑
+                </button>
                 <TrackedLink
                   eventType="cotizar_click"
                   source="paquete_plus"
-                  href="https://wa.me/526633670431?text=%C2%A1Hola!%20Visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20el%20Paquete%20Plus%20(%24710%20p%2Fp).%20%C2%BFMe%20podr%C3%ADan%20confirmar%20disponibilidad%3F"
+                  href={`https://wa.me/526633670431?text=${encodeURIComponent(
+                    `¡Hola! Visité su sitio web y me interesa el Paquete Plus para ${Math.max(
+                      100,
+                      simGuests
+                    )} personas (aprox. ${formatMXN(
+                      getPackageTotal(710, 100)
+                    )} MXN). ¿Me podrían confirmar disponibilidad?`
+                  )}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-3.5 bg-primary text-on-primary hover:opacity-90 rounded-xl font-label-sm shadow-md transition-all uppercase tracking-wider text-center text-xs font-bold"
@@ -431,11 +575,19 @@ export default function PaquetesInteractiveSection() {
                     All Inclusive
                   </h3>
                   <p className="text-secondary text-sm">A partir de 100 personas</p>
-                  <div className="mt-3 space-y-1 text-on-surface/80 text-sm">
+                  <div className="mt-3 space-y-1.5 text-on-surface/80 text-sm">
                     <p>
-                      Platino desde{' '}
-                      <span className="font-bold text-xl text-primary">$1,010 p/p</span>
+                      {simDayMode === 'viernes_domingo' ? 'Platino desde' : 'Sábado Platino'}{' '}
+                      <span className="font-bold text-xl text-primary">
+                        ${getPackageUnitPrice(1010).toLocaleString('es-MX')} p/p
+                      </span>
                     </p>
+                    <div className="inline-block px-3 py-1 rounded-lg bg-primary/10 border border-primary/25 text-xs font-bold text-on-surface">
+                      Total {Math.max(100, simGuests)} pers.:{' '}
+                      <span className="text-primary font-extrabold">
+                        {formatMXN(getPackageTotal(1010, 100))} MXN
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div className="p-7">
@@ -453,11 +605,25 @@ export default function PaquetesInteractiveSection() {
                   </ul>
                 </div>
               </div>
-              <div className="p-7 pt-0">
+              <div className="p-7 pt-0 space-y-2.5">
+                <button
+                  type="button"
+                  onClick={() => handlePreselectInCalculator('All Inclusive')}
+                  className="block w-full py-3 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 rounded-xl transition-all uppercase tracking-wider text-center text-xs font-bold cursor-pointer"
+                >
+                  Personalizar All Inclusive ({Math.max(100, simGuests)} pers.) ↑
+                </button>
                 <TrackedLink
                   eventType="cotizar_click"
                   source="paquete_all_inclusive"
-                  href="https://wa.me/526633670431?text=%C2%A1Hola!%20Visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20el%20Paquete%20All%20Inclusive%20(%241%2C010%20p%2Fp).%20%C2%BFMe%20podr%C3%ADan%20dar%20m%C3%A1s%20detalles%3F"
+                  href={`https://wa.me/526633670431?text=${encodeURIComponent(
+                    `¡Hola! Visité su sitio web y me interesa el Paquete All Inclusive para ${Math.max(
+                      100,
+                      simGuests
+                    )} personas (aprox. ${formatMXN(
+                      getPackageTotal(1010, 100)
+                    )} MXN). ¿Me podrían dar más detalles?`
+                  )}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-3.5 border-2 border-primary text-primary hover:bg-primary hover:text-on-primary rounded-xl font-label-sm transition-all uppercase tracking-wider text-center text-xs font-bold"

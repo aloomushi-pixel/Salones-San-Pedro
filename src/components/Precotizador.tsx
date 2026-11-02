@@ -135,6 +135,33 @@ export default function Precotizador() {
     stepStartRef.current = Date.now();
   }, [step]);
 
+  useEffect(() => {
+    const handlePreselectPackage = (e: Event) => {
+      const customEvent = e as CustomEvent<{
+        packageId?: string;
+        guests?: number;
+        dayMode?: 'viernes_domingo' | 'sabado';
+      }>;
+      const pkg = customEvent.detail?.packageId || 'Plus';
+      const rawGuests = customEvent.detail?.guests || 100;
+      const effectiveGuests = pkg !== 'Premier' && rawGuests < 100 ? 100 : rawGuests;
+
+      setGuests(effectiveGuests);
+      setHasTouchedGuests(true);
+      setPackageType(pkg);
+      if (customEvent.detail?.dayMode === 'viernes_domingo') {
+        setPreferredDay('Viernes');
+      } else if (customEvent.detail?.dayMode === 'sabado') {
+        setPreferredDay('Sábado');
+      }
+      setLockedAttemptPkg(null);
+      setStep(3);
+    };
+
+    window.addEventListener('ssp:select-package', handlePreselectPackage);
+    return () => window.removeEventListener('ssp:select-package', handlePreselectPackage);
+  }, []);
+
   const getGuestsBucket = (val: number) => {
     if (val < 100) return '50 a 99 personas';
     if (val < 150) return '100 a 149 personas';

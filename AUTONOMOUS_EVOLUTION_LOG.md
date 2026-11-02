@@ -4,7 +4,48 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
-## Iteración Autónoma #1 — `2026-11-01 19:35 CDMX` (Corte Estricto Post-Commit `d4fa3b2` >= `2026-10-31T20:00:46Z`)
+## Ciclo Autónomo #5 — `2026-11-02 14:12 CDMX` (`v2.1.0-cycle5` — `IMPLEMENTED`)
+
+### 1. Diagnóstico Telemétrico Post-Ciclo #4 (`>= 2026-11-02T14:06:42Z` a `2026-11-02T20:08:09Z`)
+- **Eventos humanos nuevos registrados en la franja dominical (`08:06` a `14:08 hrs CDMX`)**: **`33` eventos** en **3 sesiones reales**:
+  1. `ses_1evws_2mn26nqa` (`09:20 hrs CDMX`, Tecámac, Edomex — Android `360x712` — `l.wl.co` / WhatsApp Business): Reapertura breve de pestaña (`624ms`). Detectó que `sessionStorage` en el cliente conservaba `"Referencia Web (l.wl.co)"`.
+  2. `ses_io43s_jqd1i0sf` (`11:12 hrs CDMX`, CDMX CP `06740` — iPhone `390x665` — `Google Orgánico (SEO)`): Web Vitals sobresalientes (`TTFB: 84ms`, `FCP: 468ms`). Exploró `#precotizador` (`16s`), hizo clic en **`hero_click: ver_precios` (`#paquetes`)** y permaneció `34.7s` activos (`max_scroll_pct: 19%`), pero `sec_paquetes` no se disparó en iPhone porque la altura total de `#paquetes` en móvil (~2,850px) hacía que `intersectionRatio` fuera `~0.23` (`< 0.25`).
+  3. `ses_n8qfi_2fj14wp7` (`13:20 hrs CDMX`, **Gustavo A. Madero CP `07510`** — Desktop `1536x730` — `Google Orgánico (SEO)`): Prospecto local en GAM con `44.1s` activos y `100%` de scroll. Recorrió `#inicio` (`11s`), `#precotizador` (`11s`), `#paquetes` (`7s`), `#confianza_ubicacion` (`5s`), `#galeria`, disparó **`scroll_return_prices` (`regreso_a_paquetes`) en `scroll_pct: 29%` (`max_scroll_pct: 36%`)** — justo antes del umbral previo de `32%` de `StickyPriceCompareBar` — y al final regresó nuevamente a `#precotizador`.
+- **Fricción UX (`dead_clicks` / `rage_clicks`)**: `0` `dead_clicks` y `0` `rage_clicks` en las 3 sesiones.
+
+### 2. Mejoras Implementadas (`IMPLEMENTED`)
+1. **Simulador Instantáneo de Aforo y Día dentro de `#paquetes` (`PaquetesInteractiveSection.tsx`)**:
+   - Barra interactiva (`80`, `100`, `150`, `200`, `250` personas + `Viernes/Dom Preferencial` vs `Sábado Estelar`) que calcula en tiempo real la **Inversión Total en MXN** directamente en cada tarjeta (`Premier`, `Plus`, `All Inclusive`), más botón **`Personalizar en Cotizador ↑`** que pre-selecciona el paquete y aforo en el Paso 3 de `Precotizador.tsx`.
+2. **Conexión Directa `#paquetes` $\rightarrow$ Paso 3 del `Precotizador.tsx`**:
+   - Listener del evento `ssp:select-package` para pre-llenar paquete, invitados y día preferido sin obligar al usuario a reiniciar el formulario desde el Paso 1.
+3. **Ajuste de Umbral de `StickyPriceCompareBar.tsx` al `22%` de Scroll + Homologación de Modal**:
+   - Ahora aparece desde el `22%` de scroll (cubriendo el punto exacto de `29%` donde ocurrió `scroll_return_prices` en la sesión de Gustavo A. Madero) y sus viñetas coinciden 100% con `PaquetesInteractiveSection.tsx`.
+4. **Corrección de Observador de Secciones Altas en Móvil (`UXMonitorProvider.tsx`) y Normalización `l.wl.co` en Cliente (`trackEvent.ts`)**:
+   - Soporte de `threshold: [0.08, 0.15, 0.25, 0.5, 0.75]` para secciones móviles altas (`>75%` del viewport) y normalización automática de `l.wl.co` a `"WhatsApp Business (Enlace Directo)"`.
+
+---
+
+## Ciclo Autónomo #4 — `2026-11-02 08:07 CDMX` (`v2.0.2-cycle4` — `POSTPONED`)
+
+### 1. Diagnóstico Telemétrico Post-Ciclo #3 (`>= 2026-11-02T08:03:59Z` a `2026-11-02T14:06:42Z`)
+- **Eventos registrados en la franja de madrugada/amanecer (`02:04` a `08:06 hrs CDMX`)**: `0` eventos humanos y `0` leads nuevos.
+- **Estado acumulado desde el último deploy (`d7efbff`)**: `0` sesiones nuevas en horario nocturno, `0` `dead_clicks` y `0` `rage_clicks`.
+- **Decisión Consciente (`POSTPONED`)**: Siguiendo el Estándar Maestro v2.0, no se ejecutan cambios forzados ante `0` visitas en horario de madrugada. Se preserva intacta la versión en producción para evaluar el tráfico dominical diurno (`08:07` a `14:07 hrs CDMX`), se registra el ciclo en Supabase, se envía el reporte ejecutivo por correo y se programa el timer de 6 horas para el Ciclo #5.
+
+---
+
+## Ciclo Autónomo #3 — `2026-11-02 02:05 CDMX` (`v2.0.1-cycle3` — `POSTPONED`)
+
+### 1. Diagnóstico Telemétrico Post-Deploy (`>= 2026-11-02T01:59:49Z` a `2026-11-02T08:03:59Z`)
+- **Eventos registrados en la ventana nocturna (20:00 a 02:04 CDMX)**: `4` eventos (`a548d83c-674f-4339-934d-80a519c33f94`, `d694b71e-30bd-4b8b-b5e1-63a993d83eac`, `b930824f-8296-4eb7-9555-35d591e60d8d`, `ac3517ab-4a94-4b52-8d5e-9d7dabeb2e44`).
+- **Naturaleza de los eventos**: Pertenecen exclusivamente al cierre de pestaña (`tab_hidden`, `exit_from_ubicacion` y `page_unload`) de la sesión previa `ses_l1e77_zf96b45n` (Cuauhtémoc, CDMX — Desktop `3440x1440`), la cual había permanecido con la pestaña oculta durante `7,462,526 ms` (~2.07 horas) antes de cerrarse a las `04:01:28Z` (`22:01 CDMX`).
+- **Nuevas sesiones (`session_start`)**: `0`.
+- **Fricción UX (`dead_clicks` / `rage_clicks`)**: `0`.
+- **Decisión Consciente (`POSTPONED`)**: Siguiendo la Regla de Oro del Estándar Maestro v2.0, no se realizan cambios forzados ni despliegues innecesarios cuando no hubo tráfico nuevo en la ventana nocturna. Se registra el ciclo en Supabase, se envía el reporte ejecutivo por correo y se reprograma el timer de 6 horas para el Ciclo #4.
+
+---
+
+## Iteración Autónoma #1 / Sync v2.0 — `2026-11-01 19:35 CDMX` (Corte Estricto Post-Commit `d4fa3b2` >= `2026-10-31T20:00:46Z`)
 
 ### 1. Verificación de No-Contraposición y Auditoría de Eventos Post-Último Commit
 - **Fecha/Hora del último commit previo (`d4fa3b2` / `9a3f653`)**: `2026-10-31T20:00:46Z` (`13:55 hrs CDMX`).

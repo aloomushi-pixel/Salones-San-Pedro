@@ -22,6 +22,89 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.1.0-cycle5',
+    cycle_number: 5,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-02 14:12 CDMX',
+    title:
+      'Ciclo Diurno #5 (IMPLEMENTED): Simulador Instantáneo de Inversión en #paquetes + Preselección hacia Cotizador + Ajuste Sticky Bar al 22% Scroll + Fix Telemetría Móvil iPhone',
+    vectors: ['UX', 'CRO', 'SEO', 'PERF'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #4 (>= 2026-11-02T14:06:42Z a 2026-11-02T20:08:09Z): 33 eventos humanos nuevos en 3 sesiones reales: (1) ses_1evws_2mn26nqa (Tecámac, Android, WhatsApp Business l.wl.co); (2) ses_io43s_jqd1i0sf (CDMX CP 06740, iPhone 390x665, Google Orgánico SEO, TTFB 84ms, FCP 468ms) que hizo clic en VER PRECIOS (#paquetes) con 34.7s activos pero donde sec_paquetes no disparó en móvil por superar 2,850px de alto (<25% intersectionRatio); (3) ses_n8qfi_2fj14wp7 (Gustavo A. Madero CP 07510, Desktop 1536x730, Google Orgánico SEO, 44.1s activos, 100% scroll) que disparó scroll_return_prices (regreso_a_paquetes) en scroll_pct: 29% (antes del umbral previo de 32% de la StickyPriceCompareBar) y al final regresó a #precotizador (11s). 0 dead_clicks y 0 rage_clicks.',
+    autonomousActions: [
+      'CRO en #paquetes (PaquetesInteractiveSection.tsx): Adición de Simulador Instantáneo de Invitados (80, 100, 150, 200, 250 pers.) y Día (Viernes/Domingo Preferencial vs Sábado Estelar) con cálculo en vivo del Total en MXN dentro de cada tarjeta (Premier, Plus, All Inclusive) + botón "Personalizar en Cotizador ↑" con pre-llenado directo al Paso 3.',
+      'Sincronización Paquetes ↔ Precotizador (Precotizador.tsx): Listener del evento ssp:select-package para pre-cargar paquete, número de invitados y día preferido al instante cuando el usuario elige personalizar desde #paquetes.',
+      'CRO contra scroll_return_prices al 29% de scroll (StickyPriceCompareBar.tsx): Reducción del umbral de aparición de 32% a 22% de scroll y homologación 100% de las viñetas del modal comparativo con PaquetesInteractiveSection.tsx.',
+      'Precisión de Telemetría Móvil en iPhone (UXMonitorProvider.tsx y trackEvent.ts): Ajuste de IntersectionObserver (threshold 0.08/0.15 para secciones altas >75% del viewport móvil) y normalización cliente de l.wl.co como "WhatsApp Business (Enlace Directo)".',
+    ],
+    filesModified: [
+      'src/components/PaquetesInteractiveSection.tsx',
+      'src/components/Precotizador.tsx',
+      'src/components/StickyPriceCompareBar.tsx',
+      'src/components/UXMonitorProvider.tsx',
+      'src/utils/trackEvent.ts',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'pending',
+    nextTimerSeconds: 21600,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Con el simulador de inversión total integrado en #paquetes, la pre-selección directa hacia el Paso 3 del Precotizador y la StickyPriceCompareBar activa desde el 22% de scroll, se espera eliminar el scroll_return_prices al 29% y elevar el paso de #paquetes a cotización.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.0.2-cycle4',
+    cycle_number: 4,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-02 08:07 CDMX',
+    title:
+      'Ciclo de Amanecer #4 (POSTPONED): Sin Tráfico en Madrugada (02:04 a 08:06 hrs CDMX) — Preservación de Línea Base Dominical',
+    vectors: ['UX', 'CRO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #3 (>= 2026-11-02T08:03:59Z hasta 2026-11-02T14:06:42Z): 0 eventos de telemetría humana y 0 leads nuevos durante la franja de madrugada/amanecer (02:04 a 08:06 hrs CDMX, domingo 2 de noviembre). Acumulado desde deploy d7efbff: 0 dead_clicks y 0 rage_clicks.',
+    autonomousActions: [
+      'Criterio Consciente (POSTPONED): Ante 0 sesiones en la franja 02:04–08:06 hrs CDMX, se conserva intacta la versión en producción (commit d7efbff) sin cambios forzados ni redespliegues artificiales, manteniendo limpia la línea base para medir el tráfico dominical diurno (08:06 a 14:07 hrs CDMX).',
+    ],
+    filesModified: [],
+    postponedReason:
+      'Franja de madrugada/amanecer (02:04 a 08:06 hrs CDMX) con 0 sesiones nuevas y 0 eventos de interacción desde el corte del Ciclo #3. Siguiendo el Estándar Maestro v2.0, se pospone cualquier cambio para evaluar el tráfico diurno real.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'd7efbff',
+    deploymentUuid: 'ds9fr8kcx1bwubhncfo9v8yb',
+    nextTimerSeconds: 21600,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Evaluar el tráfico dominical diurno (08:07 a 14:07 hrs CDMX) en el Ciclo #5 para medir interacciones con el Precotizador, StickyPriceCompareBar y canales SEO/GEO/WhatsApp.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.0.1-cycle3',
+    cycle_number: 3,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-02 02:05 CDMX',
+    title:
+      'Ciclo Nocturno #3 (POSTPONED): Sin Nuevas Sesiones en Madrugada (20:00 a 02:04 CDMX) — Cero Cambios Forzados',
+    vectors: ['UX', 'CRO'],
+    telemetrySignal:
+      'Corte estricto post-deploy d7efbff (>= 2026-11-02T01:59:49Z hasta 2026-11-02T08:03:59Z): 4 eventos registrados correspondientes únicamente al cierre de pestaña (tab_hidden, exit_from_ubicacion y page_unload) de la sesión previa ses_l1e77_zf96b45n (Cuauhtémoc CDMX, Desktop 3440x1440) que había quedado abierta con 7,462s de tiempo oculto. 0 sesiones nuevas (session_start), 0 dead_clicks, 0 rage_clicks y 0 scroll_return_prices.',
+    autonomousActions: [
+      'Criterio Consciente (POSTPONED): Al tratarse de ventana nocturna (20:00 a 02:04 hrs CDMX) sin nuevas sesiones iniciadas ni señales de fricción posteriores al último deploy, se pospone cualquier modificación de código para evitar cambios forzados y permitir que la versión v2.0.0-sync acumule tráfico diurno real.',
+    ],
+    filesModified: [],
+    postponedReason:
+      'Ventana nocturna (20:00 a 02:04 hrs CDMX) con 0 sesiones nuevas (session_start) desde el deploy d7efbff (2026-11-02T01:59:49Z); únicamente se registró el cierre de pestaña de la sesión previa ses_l1e77_zf96b45n. Se conserva intacta la versión en producción para evaluar el tráfico matutino.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'd7efbff',
+    deploymentUuid: 'ds9fr8kcx1bwubhncfo9v8yb',
+    nextTimerSeconds: 21600,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Evaluar el tráfico matutino (02:05 a 08:05 hrs CDMX) y validar la interacción real con StickyPriceCompareBar.tsx y el puente de cierre en #testimonios.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.0.0-sync',
     cycle_number: 2,
     status: 'TEST_SYNC',
