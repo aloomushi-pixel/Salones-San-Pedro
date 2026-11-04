@@ -264,6 +264,10 @@ export default function UXMonitorProvider({ children }: { children: React.ReactN
 
       if (recentClicksRef.current.length >= 3) {
         recentClicksRef.current = [];
+        // Excluir botones incrementales (steppers −10 / +10) donde 3 clics seguidos son uso normal
+        if (target.closest('[data-ux-stepper="true"]')) {
+          return;
+        }
         trackEvent('rage_click', `rage_${activeSectionRef.current}`, {
           section: activeSectionRef.current,
           element_tag: target.tagName.toLowerCase(),

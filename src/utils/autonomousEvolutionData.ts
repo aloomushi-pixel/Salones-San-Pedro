@@ -22,6 +22,89 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.3.3-cycle18',
+    cycle_number: 18,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-04 13:48 CDMX',
+    title:
+      'Ciclo Mediodía #18 (IMPLEMENTED): Conversión Real desde ChatGPT/GEO a WhatsApp ($26,500 MXN Empresarial 50 pax) + Eliminación de Falso Rage-Click en Stepper −10/+10 (ses_b6ku9_bpi4mywu)',
+    vectors: ['CRO', 'UX', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #17 (>= 2026-11-04T15:45:40Z a 2026-11-04T19:46:25Z): 16 eventos humanos reales en la sesión ses_b6ku9_bpi4mywu (10:06 hrs CDMX, Gustavo A. Madero CP 07550, Desktop Windows 10 1920x945 proveniente de IA Generativa ChatGPT / GEO vía utm_source=chatgpt.com). El prospecto completó todo el Precotizador en 38.1s activos y convirtió en whatsapp_click en el Paso 4 (Evento Empresarial, 50 personas, Viernes, Temporada Alta Oct-Dic, Paquete Premier $530 p/p = $26,500 MXN, wants_tour: true). Al bajar de 80 a 50 personas con 3 clics rápidos en el botón −10 (80→70→60→50 en 370ms), UXMonitorProvider disparó un falso positivo de rage_click sobre el botón −10.',
+    autonomousActions: [
+      'Nivel 1 (Menor — Micro-UX/CRO en Precotizador.tsx): La tarjeta de rango "50 – 80" ahora alterna directamente entre 80 y 50 invitados al hacer clic, muestra la etiqueta contextual "invitados (mínimo de paquete)" al llegar a 50 personas y marca los botones −10 / +10 con data-ux-stepper="true".',
+      'Nivel 1 (Menor — Precisión Telemétrica en UXMonitorProvider.tsx y telemetryParser.ts): Exclusión de botones incrementales [data-ux-stepper="true"] del detector de rage_click y reclasificación retroactiva de eventos rage_click sobre −10 / +10 como guests_slider_adjust (stepper_rapid_adjust).',
+    ],
+    filesModified: [
+      'src/components/Precotizador.tsx',
+      'src/components/UXMonitorProvider.tsx',
+      'src/utils/telemetryParser.ts',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'pending',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Continuar midiendo la tasa de conversión a WhatsApp desde tráfico GEO (ChatGPT) y orgánico sin falsos positivos de rage_click en ajustes de aforo de 50 personas.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.3.2-cycle17',
+    cycle_number: 17,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-04 09:44 CDMX',
+    title:
+      'Ciclo Matutino #17 (POSTPONED): 0 Eventos Humanos en Franja 05:43–09:44 CDMX y Sitemap Estable con 0 Errores en Search Console',
+    vectors: ['CRO', 'UX', 'SEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #16 (>= 2026-11-04T11:43:33Z a 2026-11-04T15:44:24Z): 0 eventos humanos nuevos y 0 leads durante la ventana de pre-apertura matutina del martes (05:43 a 09:44 hrs CDMX). En Google Search Console API (sc-domain:sanpedro.aionia.com.mx), el sitemap https://sanpedro.aionia.com.mx/sitemap.xml se mantiene validado con 37 URLs enviadas, 0 errores y 0 advertencias.',
+    autonomousActions: [
+      'Auditoría puntual de Supabase (analytics_events y leads) y Google Search Console API (sc-domain:sanpedro.aionia.com.mx).',
+      'Decisión Consciente POSTPONED bajo Estándar Maestro v2.1: Sin sesiones nuevas entre las 05:43 y 09:44 hrs CDMX, se conserva intacta la versión en producción (commit 5d3d7fe) para evaluar la franja comercial del mediodía.',
+    ],
+    filesModified: [],
+    postponedReason:
+      '0 sesiones y 0 eventos humanos nuevos en la franja matutina (05:43 a 09:44 hrs CDMX); producción opera estable en commit 5d3d7fe.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: '5d3d7fe',
+    deploymentUuid: 'fu22scrzsbszf15aftctedqh',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Evaluar el tráfico comercial de mediodía del martes (09:44 a 13:44 hrs CDMX) sobre el nuevo Paso 4 del Precotizador y la atribución de Instagram Link-in-Bio.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.3.1-cycle16',
+    cycle_number: 16,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-04 05:42 CDMX',
+    title:
+      'Ciclo Amanecer #16 (POSTPONED): 0 Eventos Humanos en Franja 01:41–05:42 CDMX tras Despliegue de Ciclo #15 (commit 5d3d7fe)',
+    vectors: ['CRO', 'UX', 'SEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #15 (>= 2026-11-04T07:41:36Z a 2026-11-04T11:42:14Z): 0 eventos humanos nuevos y 0 leads durante la ventana de madrugada/amanecer del martes (01:41 a 05:42 hrs CDMX). En Google Search Console API (sc-domain:sanpedro.aionia.com.mx), el sitemap https://sanpedro.aionia.com.mx/sitemap.xml se mantiene validado con 37 URLs enviadas, 0 errores y 0 advertencias.',
+    autonomousActions: [
+      'Auditoría puntual de Supabase (analytics_events y leads) y Google Search Console API (sc-domain:sanpedro.aionia.com.mx).',
+      'Decisión Consciente POSTPONED bajo Estándar Maestro v2.1: Al haberse desplegado hace 4 horas las mejoras del Ciclo #15 (commit 5d3d7fe) y no registrarse tráfico humano entre las 01:41 y 05:42 hrs CDMX, se conserva intacta la versión en producción para evaluar el tráfico matutino.',
+    ],
+    filesModified: [],
+    postponedReason:
+      '0 sesiones y 0 eventos humanos nuevos en la franja de amanecer (01:41 a 05:42 hrs CDMX) posterior al despliegue del Ciclo #15 (commit 5d3d7fe).',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: '5d3d7fe',
+    deploymentUuid: 'fu22scrzsbszf15aftctedqh',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Evaluar las primeras sesiones matutinas del martes (05:42 a 09:42 hrs CDMX) sobre el nuevo Paso 4 del Precotizador y la atribución de Instagram Link-in-Bio.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.3.0-cycle15',
     cycle_number: 15,
     status: 'IMPLEMENTED',
@@ -45,8 +128,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'pending',
+    commitHash: '5d3d7fe',
+    deploymentUuid: 'fu22scrzsbszf15aftctedqh',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:

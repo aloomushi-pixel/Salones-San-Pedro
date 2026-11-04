@@ -499,10 +499,20 @@ export function parseAnalyticsRow(row: RawAnalyticsRow): ParsedAnalyticsEvent {
 
   const hygiene = detectBotOrInternalQA(rawUA, meta, session_id, visitor_id);
 
+  let normalizedEventType = row.event_type;
+  let normalizedSource = row.source || 'desconocido';
+  if (
+    row.event_type === 'rage_click' &&
+    (meta.element_text === '−10' || meta.element_text === '-10' || meta.element_text === '+10')
+  ) {
+    normalizedEventType = 'guests_slider_adjust';
+    normalizedSource = 'stepper_rapid_adjust';
+  }
+
   return {
     id: row.id,
-    event_type: row.event_type,
-    source: row.source || 'desconocido',
+    event_type: normalizedEventType,
+    source: normalizedSource,
     path: row.path || '/',
     raw_user_agent: rawUA,
     created_at: row.created_at,

@@ -4,6 +4,44 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #18 — `2026-11-04 13:48 CDMX` (`v2.3.3-cycle18` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-04T15:45:40Z`)
+- **Telemetría en Supabase (`09:45` a `13:46 hrs CDMX`):** `16` eventos humanos reales en la sesión **`ses_b6ku9_bpi4mywu`** (`10:06 hrs CDMX`, **Gustavo A. Madero, CDMX CP `07550`**, Desktop Windows 10 `1920x945`, canal **`IA Generativa (ChatGPT / GEO)`** vía `utm_source=chatgpt.com`).
+  - **Conversión completa del embudo a WhatsApp (`38.1s` activos):**
+    - **Paso 1 (`17.4s`):** `Empresarial` • **50 personas** (`50 a 99 personas`).
+    - **Paso 2 (`9.2s`):** `Viernes` • `Temporada Alta / Fin de Año (Oct-Dic)`.
+    - **Paso 3 (`9.5s`):** `Paquete Premier` (`$530 p/p` = **`$26,500 MXN`**).
+    - **Paso 4 (`1.9s`):** **`whatsapp_click` en Precotizador** (`estimated_budget: $26,500 MXN`, `wants_tour: true`), seguido inmediatamente (`49ms` después) por `tab_visibility: tab_hidden` al abrirse la pestaña de WhatsApp con el mensaje prellenado.
+  - **Fricción / Falso Positivo detectado en Paso 1:** Al bajar de `80` a `50` personas haciendo 3 clics seguidos en el botón `−10` (`80 -> 70 -> 60 -> 50` en `370ms`), `UXMonitorProvider` disparó un falso `rage_click` sobre `<button>−10</button>`.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap `https://sanpedro.aionia.com.mx/sitemap.xml` estable con `37` URLs enviadas, `0` errores y `0` advertencias.
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 (Menor — `IMPLEMENTED`)
+1. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx):**
+   - La tarjeta de rango `"50 – 80"` ahora alterna entre `80` y `50` invitados con un solo clic, muestra la etiqueta `"invitados (mínimo de paquete)"` al llegar a `50` y marca los botones `−10` / `+10` con `data-ux-stepper="true"`.
+2. **[`src/components/UXMonitorProvider.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/UXMonitorProvider.tsx) y [`src/utils/telemetryParser.ts`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/utils/telemetryParser.ts):**
+   - Exclusión de botones `[data-ux-stepper="true"]` del detector de `rage_click` y reclasificación retroactiva de `rage_click` sobre `−10` / `+10` como `guests_slider_adjust` (`stepper_rapid_adjust`).
+
+---
+
+## Ciclo Autónomo #17 — `2026-11-04 09:44 CDMX` (`v2.3.2-cycle17` — `POSTPONED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-04T11:43:33Z`)
+- **Telemetría en Supabase (`05:43` a `09:44 hrs CDMX`):** `0` sesiones nuevas, `0` eventos humanos y `0` leads durante la ventana de pre-apertura matutina del martes.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap `https://sanpedro.aionia.com.mx/sitemap.xml` estable con `37` URLs enviadas, `0` errores y `0` advertencias.
+- **Decisión Consciente (`POSTPONED`):** Se mantiene intacta la versión en producción (`commit 5d3d7fe`, Coolify `fu22scrzsbszf15aftctedqh`) para evaluar el tráfico comercial del mediodía.
+
+---
+
+## Ciclo Autónomo #16 — `2026-11-04 05:42 CDMX` (`v2.3.1-cycle16` — `POSTPONED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-04T07:41:36Z`)
+- **Telemetría en Supabase (`01:41` a `05:42 hrs CDMX`):** `0` sesiones nuevas, `0` eventos humanos y `0` leads durante la ventana de amanecer del martes posterior al despliegue del Ciclo #15 (`commit 5d3d7fe`).
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap `https://sanpedro.aionia.com.mx/sitemap.xml` estable con `37` URLs enviadas, `0` errores y `0` advertencias.
+- **Decisión Consciente (`POSTPONED`):** Se mantiene intacta la versión en producción (`commit 5d3d7fe`, Coolify `fu22scrzsbszf15aftctedqh`) para evaluar el tráfico matutino sobre el nuevo Paso 4 del Precotizador.
+
+---
+
 ## Ciclo Autónomo #15 — `2026-11-04 01:33 CDMX` (`v2.3.0-cycle15` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-04T03:27:27Z`)

@@ -559,7 +559,9 @@ export default function Precotizador() {
                     <button
                       key={rc.label}
                       type="button"
-                      onClick={() => applyGuestsValue(rc.value, true)}
+                      onClick={() =>
+                        applyGuestsValue(rc.value === 80 && guests === 80 ? 50 : rc.value, true)
+                      }
                       className={`py-2 px-1.5 rounded-xl border text-center transition-all cursor-pointer ${
                         isRangeSelected
                           ? 'border-primary bg-primary/15 text-primary font-bold shadow-xs'
@@ -568,7 +570,7 @@ export default function Precotizador() {
                     >
                       <div className="text-xs font-extrabold pointer-events-none">{rc.label}</div>
                       <div className="text-[10px] text-secondary truncate pointer-events-none">
-                        {rc.sub}
+                        {rc.value === 80 && guests === 50 ? 'Mínimo 50 pers.' : rc.sub}
                       </div>
                     </button>
                   );
@@ -579,6 +581,7 @@ export default function Precotizador() {
               <div className="flex items-center justify-between max-w-xs mx-auto gap-3 my-2">
                 <button
                   type="button"
+                  data-ux-stepper="true"
                   onClick={() => handleGuestsDelta(-10)}
                   disabled={guests <= 50}
                   aria-label="Restar 10 invitados"
@@ -592,12 +595,17 @@ export default function Precotizador() {
                     {guests}
                   </span>
                   <span className="text-xs text-secondary font-medium mt-1">
-                    invitados
+                    {guests === 50
+                      ? 'invitados (mínimo de paquete)'
+                      : guests === 250
+                      ? 'invitados (máximo cotizador)'
+                      : 'invitados'}
                   </span>
                 </div>
 
                 <button
                   type="button"
+                  data-ux-stepper="true"
                   onClick={() => handleGuestsDelta(10)}
                   disabled={guests >= 250}
                   aria-label="Sumar 10 invitados"
