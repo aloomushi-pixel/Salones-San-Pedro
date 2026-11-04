@@ -105,6 +105,13 @@ const EXTRAS = [
 const COMBO_VIP_IDS = ['limusina', 'shots', 'letras'];
 const COMBO_VIP_PRICE = 11500; // Ahorro conjunto frente a $14,500 individual
 
+// Servicios que ya vienen incluidos sin costo extra en cada nivel de paquete
+const PACKAGE_INCLUDED_EXTRAS: Record<string, string[]> = {
+  Premier: [],
+  Plus: ['dulces', 'robot', 'cabina'],
+  'All Inclusive': ['limusina', 'dulces', 'mariachi', 'robot', 'cabina'],
+};
+
 const STEP_LABELS = [
   { num: 1, label: 'Aforo' },
   { num: 2, label: 'Fecha' },
@@ -255,10 +262,11 @@ export default function Precotizador() {
 
   const handleStep3Next = () => {
     const duration = Date.now() - stepStartRef.current;
-    const normalizedExtras = selectedExtras.map(
-      (id) => EXTRAS.find((e) => e.id === id)?.label || id
-    );
-    if (comboVipActive) {
+    const includedIds = PACKAGE_INCLUDED_EXTRAS[packageType] || [];
+    const normalizedExtras = selectedExtras
+      .filter((id) => !includedIds.includes(id))
+      .map((id) => EXTRAS.find((e) => e.id === id)?.label || id);
+    if (comboVipActive && packageType !== 'All Inclusive') {
       normalizedExtras.unshift('Combo Fiesta VIP (Limusina + Shots + Letras)');
     }
     const pkgObj = PACKAGES.find((p) => p.id === packageType);
@@ -267,6 +275,7 @@ export default function Precotizador() {
     const calcExtras =
       (comboVipActive && packageType !== 'All Inclusive' ? COMBO_VIP_PRICE : 0) +
       selectedExtras.reduce((sum, id) => {
+        if (includedIds.includes(id)) return sum;
         const ex = EXTRAS.find((e) => e.id === id);
         return sum + (ex ? ex.approxPrice : 0);
       }, 0);
@@ -351,7 +360,12 @@ export default function Precotizador() {
     }
   };
 
+  const includedByPackageIds = PACKAGE_INCLUDED_EXTRAS[packageType] || [];
+
   const handleExtraToggle = (id: string) => {
+    if (includedByPackageIds.includes(id)) {
+      return;
+    }
     if (comboVipActive && COMBO_VIP_IDS.includes(id)) {
       // Si desmarca uno de los del combo, desactivar combo y dejar los otros dos
       setComboVipActive(false);
@@ -386,6 +400,7 @@ export default function Precotizador() {
   const extrasTotal =
     (comboVipActive && packageType !== 'All Inclusive' ? COMBO_VIP_PRICE : 0) +
     selectedExtras.reduce((sum, id) => {
+      if (includedByPackageIds.includes(id)) return sum;
       const ex = EXTRAS.find((e) => e.id === id);
       return sum + (ex ? ex.approxPrice : 0);
     }, 0);
@@ -399,7 +414,9 @@ export default function Precotizador() {
     ...(comboVipActive && packageType !== 'All Inclusive'
       ? ['Combo Fiesta VIP (Limusina + Carrito de Shots + Letras Gigantes)']
       : []),
-    ...EXTRAS.filter((e) => selectedExtras.includes(e.id)).map((e) => e.label),
+    ...EXTRAS.filter(
+      (e) => selectedExtras.includes(e.id) && !includedByPackageIds.includes(e.id)
+    ).map((e) => e.label),
   ];
   const extrasText =
     activeExtraLabels.length > 0 ? activeExtraLabels.join(', ') : 'Ninguno adicional';
@@ -1010,29 +1027,40 @@ export default function Precotizador() {
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
                 {EXTRAS.map((extra) => {
+                  const isIncludedByPkg = includedByPackageIds.includes(extra.id);
                   const isIncludedInCombo =
                     comboVipActive &&
                     packageType !== 'All Inclusive' &&
                     COMBO_VIP_IDS.includes(extra.id);
-                  const isSelected = isIncludedInCombo || selectedExtras.includes(extra.id);
+                  const isSelected =
+                    isIncludedByPkg || isIncludedInCombo || selectedExtras.includes(extra.id);
                   return (
                     <button
                       key={extra.id}
                       type="button"
                       onClick={() => handleExtraToggle(extra.id)}
-                      className={`flex items-center gap-1.5 px-2.5 py-2.5 rounded-xl border text-left text-xs transition-all cursor-pointer min-h-[44px] active:scale-95 select-none ${
-                        isSelected
+                      className={`flex items-center justify-between gap-1 px-2.5 py-2.5 rounded-xl border text-left text-xs transition-all cursor-pointer min-h-[44px] active:scale-95 select-none ${
+                        isIncludedByPkg
+                          ? 'border-green-500/40 bg-green-500/10 text-green-300 font-bold cursor-default'
+                          : isSelected
                           ? 'border-primary bg-primary/15 text-primary font-bold shadow-xs'
                           : 'border-outline-variant/30 bg-surface-container-low text-on-surface hover:border-primary/40'
                       }`}
                     >
-                      <span
-                        data-ux-decorative="true"
-                        className="material-symbols-outlined text-sm shrink-0 pointer-events-none"
-                      >
-                        {isSelected ? 'check_circle' : extra.icon}
-                      </span>
-                      <span className="truncate pointer-events-none">{extra.label}</span>
+                      <div className="flex items-center gap-1.5 min-w-0 pointer-events-none">
+                        <span
+                          data-ux-decorative="true"
+                          className="material-symbols-outlined text-sm shrink-0 pointer-events-none"
+                        >
+                          {isSelected ? 'check_circle' : extra.icon}
+                        </span>
+                        <span className="truncate pointer-events-none">{extra.label}</span>
+                      </div>
+                      {isIncludedByPkg && (
+                        <span className="text-[9px] font-extrabold uppercase tracking-wider px-1.5 py-0.5 rounded bg-green-500/20 text-green-300 shrink-0 pointer-events-none">
+                          Incluido
+                        </span>
+                      )}
                     </button>
                   );
                 })}

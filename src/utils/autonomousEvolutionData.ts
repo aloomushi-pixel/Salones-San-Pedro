@@ -22,6 +22,36 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.3.4-cycle19',
+    cycle_number: 19,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-04 17:57 CDMX',
+    title:
+      'Ciclo Vespertino #19 (IMPLEMENTED): 2ª Conversión ChatGPT/GEO ($26,500 MXN) + Tráfico Orgánico en Nuevo Blog de Fotos (XV Años $252,500 MXN) + Protección Anti-Cobro Duplicado en Extras y CTA en Lightbox',
+    vectors: ['CRO', 'UX', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #18 (>= 2026-11-04T19:53:33Z a 2026-11-04T23:54:14Z): 105 eventos humanos reales en 2 sesiones de alta intención: (1) ses_na1z3_eheca1ru (15:44 hrs CDMX, Benito Juárez CP 03300, Desktop Windows 10 desde ChatGPT / GEO utm_source=chatgpt.com) que usó el nuevo selector de 50 personas en 1 clic con 0 rage_clicks y convirtió en whatsapp_click en el Paso 4 (Bautizo / Cumpleaños, 50 pax, Sábado, Paquete Premier $26,500 MXN, wants_tour: true); y (2) ses_pavc9_pbzu4j94 (16:41 hrs CDMX, Azcapotzalco CP 02300, Android 10 desde Google Orgánico SEO) que aterrizó en el nuevo artículo /blog/fotos-y-recorrido-salones-san-pedro-plus-diamante-y-platino-norte-84-gam, hizo clic a la Home, cotizó XV Años para 250 personas en Paquete All Inclusive ($252,500 MXN) y exploró 20 fotos en el Lightbox de Salón Platino y Salón Diamante. Se detectó que en su primera cotización (22:42:38Z) el usuario marcó Mariachi dentro de All Inclusive (donde ya está incluido), sumándole $6,500 duplicados ($263,500 MXN) y obligándolo a recargar para recotizar ($252,500 MXN), además de carecer de CTA directo a WhatsApp o retorno al cotizador dentro del Lightbox de Galería.',
+    autonomousActions: [
+      'Nivel 1 (Menor — Transparencia de Precios CRO en Precotizador.tsx): Definición de PACKAGE_INCLUDED_EXTRAS para marcar automáticamente con insignia verde "Incluido" ($0 costo adicional) los servicios ya incluidos en Paquete Plus (Mesa de Dulces, Robot LED, Cabina 360) y Paquete All Inclusive (Mariachi, Limusina, Mesa de Dulces, Robot LED, Cabina 360), evitando cobros duplicados.',
+      'Nivel 1 (Menor — Conversión en Lightbox en GaleriaSection.tsx): Adición de barra de acción directa dentro del visor a pantalla completa ("Volver a mi Cotización" + "Agendar Visita a Salón Diamante/Platino en WhatsApp") y atributo data-ux-stepper="true" en flechas de galería.',
+    ],
+    filesModified: [
+      'src/components/Precotizador.tsx',
+      'src/components/GaleriaSection.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'pending',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Medir conversiones directas desde el Lightbox de Galería y eliminación de recargas por servicios ya incluidos en paquetes Plus y All Inclusive.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.3.3-cycle18',
     cycle_number: 18,
     status: 'IMPLEMENTED',
@@ -44,8 +74,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'pending',
+    commitHash: '5e876fe',
+    deploymentUuid: 'zmtjt0gimho2d2lnb7obph6e',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:

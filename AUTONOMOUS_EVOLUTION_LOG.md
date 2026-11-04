@@ -4,6 +4,26 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #19 — `2026-11-04 17:57 CDMX` (`v2.3.4-cycle19` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-04T19:53:33Z`)
+- **Telemetría en Supabase (`13:53` a `17:54 hrs CDMX`):** **`105` eventos humanos reales** en 2 sesiones de altísima intención comercial:
+  1. **Sesión `ses_na1z3_eheca1ru` (`15:44 hrs CDMX`, Benito Juárez, CDMX CP `03300`, Desktop Windows 10 desde `IA Generativa ChatGPT / GEO` vía `utm_source=chatgpt.com`):**
+     - Utilizó el nuevo botón de alternancia `50 / 80` desplegado en el Ciclo #18 para elegir **50 personas en 1 clic (`0` `rage_clicks`)** y **convirtió en `whatsapp_click` en el Paso 4** (`Bautizo / Cumpleaños`, `50 personas`, `Sábado`, `Temporada Alta Oct-Dic`, `Paquete Premier $26,500 MXN`, `wants_tour: true`).
+  2. **Sesión `ses_pavc9_pbzu4j94` (`16:41 hrs CDMX`, Azcapotzalco, CDMX CP `02300`, Android 10 desde `Google Orgánico SEO`):**
+     - Aterrizó directamente desde Google en **`/blog/fotos-y-recorrido-salones-san-pedro-plus-diamante-y-platino-norte-84-gam`** (uno de los 3 artículos nuevos creados en el Ciclo #6 a partir de Search Console), leyó hasta el `88%` del artículo, hizo clic en el CTA hacia la Home, cotizó **XV Años para 250 personas en Paquete All Inclusive (`$252,500 MXN`)** y exploró **20 fotografías** a pantalla completa en el Lightbox de **Salón Platino** y **Salón Diamante** (`122.8s` activos).
+     - **Dos oportunidades reales detectadas en `ses_pavc9_pbzu4j94`:**
+       - En su primera cotización (`22:42:38Z`), tras elegir `Paquete All Inclusive` (`$1,010 p/p`), el usuario seleccionó `Mariachi` en la lista de extras (sin notar que `All Inclusive` ya incluye 1 hora de Mariachi), lo que sumó `+$6,500 MXN` duplicados (`$263,500 MXN`) y lo obligó a recargar la página para recotizar sin extras (`$252,500 MXN`).
+       - Al pasar del Paso 4 a inspeccionar 20 fotos en el Lightbox de Salón Platino y Salón Diamante, el visor a pantalla completa carecía de un botón directo para **"Volver a mi Cotización"** o **"Agendar Visita a Salón Diamante/Platino en WhatsApp"**.
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 (Menor — `IMPLEMENTED`)
+1. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx):**
+   - Definición de `PACKAGE_INCLUDED_EXTRAS` para etiquetar automáticamente como **"Incluido" (`$0` extra)** los servicios que ya forman parte de `Paquete Plus` (`Mesa de Dulces`, `Robot LED`, `Cabina 360`) y `Paquete All Inclusive` (`Mariachi`, `Limusina`, `Mesa de Dulces`, `Robot LED`, `Cabina 360`), evitando cobros duplicados.
+2. **[`src/components/GaleriaSection.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/GaleriaSection.tsx):**
+   - Barra de conversión dentro del Lightbox a pantalla completa con **"Volver a mi Cotización"** y **"Agendar Visita a Salón Diamante/Platino en WhatsApp"**, más atributo `data-ux-stepper="true"` en las flechas de galería.
+
+---
+
 ## Ciclo Autónomo #18 — `2026-11-04 13:48 CDMX` (`v2.3.3-cycle18` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-04T15:45:40Z`)

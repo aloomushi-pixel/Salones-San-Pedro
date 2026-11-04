@@ -345,6 +345,7 @@ export default function GaleriaSection() {
           {/* Left Arrow — Siempre visible en móvil y con respuesta instantánea sin bloqueo */}
           <button
             type="button"
+            data-ux-stepper="true"
             onClick={handlePrev}
             className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 rounded-full bg-black/60 hover:bg-primary active:scale-90 text-white flex items-center justify-center transition-all cursor-pointer z-20 border border-white/20 shadow-lg"
             aria-label="Imagen anterior"
@@ -357,6 +358,7 @@ export default function GaleriaSection() {
           {/* Right Arrow — Siempre visible en móvil y con respuesta instantánea sin bloqueo (Resuelve rage_click) */}
           <button
             type="button"
+            data-ux-stepper="true"
             onClick={handleNext}
             className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 rounded-full bg-black/60 hover:bg-primary active:scale-90 text-white flex items-center justify-center transition-all cursor-pointer z-20 border border-white/20 shadow-lg"
             aria-label="Siguiente imagen"
@@ -452,6 +454,7 @@ export default function GaleriaSection() {
 
             <button
               type="button"
+              data-ux-stepper="true"
               onClick={handlePrev}
               className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/70 hover:bg-primary active:scale-90 text-white flex items-center justify-center border border-white/20 cursor-pointer shadow-xl"
               aria-label="Foto anterior"
@@ -463,6 +466,7 @@ export default function GaleriaSection() {
 
             <button
               type="button"
+              data-ux-stepper="true"
               onClick={handleNext}
               className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/70 hover:bg-primary active:scale-90 text-white flex items-center justify-center border border-white/20 cursor-pointer shadow-xl"
               aria-label="Siguiente foto"
@@ -473,31 +477,73 @@ export default function GaleriaSection() {
             </button>
           </div>
 
-          {/* Miniaturas Inferiores dentro del Lightbox */}
+          {/* Barra de Conversión Directa en Lightbox + Miniaturas Inferiores */}
           <div
-            className="flex justify-center gap-2 overflow-x-auto py-2 max-w-4xl mx-auto w-full"
+            className="flex flex-col gap-2.5 max-w-4xl mx-auto w-full"
             onClick={(e) => e.stopPropagation()}
           >
-            {photos.map((photo, idx) => (
+            <div className="flex flex-wrap items-center justify-center gap-2.5">
               <button
-                key={idx}
                 type="button"
-                onClick={() => setActiveIndex(idx)}
-                className={`relative flex-shrink-0 w-16 sm:w-20 aspect-[16/10] rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
-                  idx === activeIndex
-                    ? 'border-primary scale-105'
-                    : 'border-transparent opacity-50 hover:opacity-100'
-                }`}
+                onClick={() => {
+                  setLightboxOpen(false);
+                  const el = document.getElementById('precotizador');
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                className="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer border border-white/20"
               >
-                <Image
-                  src={photo.src}
-                  alt={photo.caption}
-                  fill
-                  className="object-cover pointer-events-none"
-                  sizes="80px"
-                />
+                <span data-ux-decorative="true" className="material-symbols-outlined text-base text-primary pointer-events-none">
+                  calculate
+                </span>
+                <span className="pointer-events-none">Volver a mi Cotización</span>
               </button>
-            ))}
+
+              <a
+                href={`https://wa.me/526633670431?text=${encodeURIComponent(
+                  `¡Hola! Estuve viendo la galería fotográfica del ${canonicalCategory} (${photos[activeIndex].caption}) en Salones San Pedro Plus y me gustaría agendar una visita guiada y confirmar disponibilidad.`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent('whatsapp_click', `galeria_lightbox_${activeTab}`, {
+                    section: 'galeria',
+                    gallery_category: canonicalCategory,
+                    photo_title: photos[activeIndex].caption,
+                  })
+                }
+                className="px-4 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer shadow-lg"
+              >
+                <span data-ux-decorative="true" className="material-symbols-outlined text-base pointer-events-none">
+                  forum
+                </span>
+                <span className="pointer-events-none">
+                  Agendar Visita a {canonicalCategory} en WhatsApp
+                </span>
+              </a>
+            </div>
+
+            <div className="flex justify-center gap-2 overflow-x-auto py-1.5 w-full">
+              {photos.map((photo, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setActiveIndex(idx)}
+                  className={`relative flex-shrink-0 w-16 sm:w-20 aspect-[16/10] rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
+                    idx === activeIndex
+                      ? 'border-primary scale-105'
+                      : 'border-transparent opacity-50 hover:opacity-100'
+                  }`}
+                >
+                  <Image
+                    src={photo.src}
+                    alt={photo.caption}
+                    fill
+                    className="object-cover pointer-events-none"
+                    sizes="80px"
+                  />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}
