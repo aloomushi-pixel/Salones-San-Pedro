@@ -127,9 +127,23 @@ export default function Precotizador() {
   const [lockedAttemptPkg, setLockedAttemptPkg] = useState<string | null>(null);
   const [showMathBreakdown, setShowMathBreakdown] = useState(true);
   const [wantsTour, setWantsTour] = useState(true);
+  const [copiedQuote, setCopiedQuote] = useState(false);
 
   const stepStartRef = useRef<number>(Date.now());
   const wizardStartRef = useRef<number>(Date.now());
+
+  const scrollPrecotizadorIntoView = () => {
+    if (typeof window === 'undefined') return;
+    window.requestAnimationFrame(() => {
+      const el = document.getElementById('precotizador');
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < 0 || rect.top > 140) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  };
 
   useEffect(() => {
     stepStartRef.current = Date.now();
@@ -220,6 +234,7 @@ export default function Precotizador() {
       extra: { exact_guests: guests, manually_adjusted: hasTouchedGuests },
     });
     setStep(2);
+    scrollPrecotizadorIntoView();
   };
 
   const handleStep2Next = () => {
@@ -235,6 +250,7 @@ export default function Precotizador() {
       extra: { exact_guests: guests },
     });
     setStep(3);
+    scrollPrecotizadorIntoView();
   };
 
   const handleStep3Next = () => {
@@ -245,6 +261,18 @@ export default function Precotizador() {
     if (comboVipActive) {
       normalizedExtras.unshift('Combo Fiesta VIP (Limusina + Shots + Letras)');
     }
+    const pkgObj = PACKAGES.find((p) => p.id === packageType);
+    const pkgPrice = pkgObj ? pkgObj.price : 530;
+    const calcBase = guests * pkgPrice;
+    const calcExtras =
+      (comboVipActive && packageType !== 'All Inclusive' ? COMBO_VIP_PRICE : 0) +
+      selectedExtras.reduce((sum, id) => {
+        const ex = EXTRAS.find((e) => e.id === id);
+        return sum + (ex ? ex.approxPrice : 0);
+      }, 0);
+    const calcTotal = calcBase + calcExtras;
+    const calcPerPerson = Math.round(calcTotal / guests);
+
     trackEvent('precotizador_step', 'step_3_completado', {
       section: 'precotizador',
       step_number: 3,
@@ -258,9 +286,12 @@ export default function Precotizador() {
         exact_guests: guests,
         extras: normalizedExtras,
         combo_vip: comboVipActive,
+        estimated_budget: calcTotal,
+        effective_per_person: calcPerPerson,
       },
     });
     setStep(4);
+    scrollPrecotizadorIntoView();
   };
 
   const handleBackStep = (targetStep: number) => {
@@ -275,6 +306,7 @@ export default function Precotizador() {
       timers: { step_duration_ms: duration },
     });
     setStep(targetStep);
+    scrollPrecotizadorIntoView();
   };
 
   const handleLockedPackageClick = (pkgName: string) => {
@@ -363,26 +395,28 @@ export default function Precotizador() {
   const selectedDayInfo =
     PREFERRED_DAYS.find((d) => d.id === preferredDay) || PREFERRED_DAYS[0];
 
+  const activeExtraLabels = [
+    ...(comboVipActive && packageType !== 'All Inclusive'
+      ? ['Combo Fiesta VIP (Limusina + Carrito de Shots + Letras Gigantes)']
+      : []),
+    ...EXTRAS.filter((e) => selectedExtras.includes(e.id)).map((e) => e.label),
+  ];
+  const extrasText =
+    activeExtraLabels.length > 0 ? activeExtraLabels.join(', ') : 'Ninguno adicional';
+
+  const bonusText = selectedDayInfo.hasBonus
+    ? `\n• Beneficio aplicable: ${selectedDayInfo.badge} (${selectedDayInfo.benefit})`
+    : '';
+  const tourText = wantsTour
+    ? `\n• Solicitud: Me gustaría agendar un recorrido presencial para conocer los Salones Diamante y Platino.`
+    : '';
+
+  const quoteSummaryMessage = `¡Hola! Realicé mi cotización en el Precotizador de Salones San Pedro Plus:\n• Tipo de evento: ${eventKind}\n• Invitados: ${guests} personas\n• Día de interés: ${preferredDay}\n• Temporada tentativa: ${preferredSeason}\n• Paquete elegido: Paquete ${packageType} ($${getPackagePrice()} p/p)\n• Extras / Combos: ${extrasText}${bonusText}\n• Presupuesto estimado: $${budget.toLocaleString('es-MX')} MXN ($${effectivePerPerson} p/p)${tourText}\n¿Podrían confirmarme disponibilidad de fecha y enviarme la cotización formal?`;
+
+  const whatsappUrl = `https://wa.me/526633670431?text=${encodeURIComponent(quoteSummaryMessage)}`;
+
   const handleWhatsApp = () => {
-    const activeExtraLabels = [
-      ...(comboVipActive && packageType !== 'All Inclusive'
-        ? ['Combo Fiesta VIP (Limusina + Carrito de Shots + Letras Gigantes)']
-        : []),
-      ...EXTRAS.filter((e) => selectedExtras.includes(e.id)).map((e) => e.label),
-    ];
-    const extrasText =
-      activeExtraLabels.length > 0 ? activeExtraLabels.join(', ') : 'Ninguno adicional';
-
     const totalWizardMs = Date.now() - wizardStartRef.current;
-
-    const bonusText = selectedDayInfo.hasBonus
-      ? `\n• Beneficio aplicable: ${selectedDayInfo.badge} (${selectedDayInfo.benefit})`
-      : '';
-    const tourText = wantsTour
-      ? `\n• Solicitud: Me gustaría agendar un recorrido presencial para conocer los Salones Diamante y Platino.`
-      : '';
-
-    const message = `¡Hola! Realicé mi cotización en el Precotizador de Salones San Pedro Plus:\n• Tipo de evento: ${eventKind}\n• Invitados: ${guests} personas\n• Día de interés: ${preferredDay}\n• Temporada tentativa: ${preferredSeason}\n• Paquete elegido: Paquete ${packageType} ($${getPackagePrice()} p/p)\n• Extras / Combos: ${extrasText}${bonusText}\n• Presupuesto estimado: $${budget.toLocaleString('es-MX')} MXN ($${effectivePerPerson} p/p)${tourText}\n¿Podrían confirmarme disponibilidad de fecha y enviarme la cotización formal?`;
 
     trackEvent('whatsapp_click', 'precotizador', {
       section: 'precotizador',
@@ -403,9 +437,34 @@ export default function Precotizador() {
         wants_tour: wantsTour,
       },
     });
+  };
 
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/526633670431?text=${encodedMessage}`, '_blank');
+  const handleCopyQuote = async () => {
+    const copyText = `Cotización Salones San Pedro Plus (${eventKind} • ${guests} personas)\n• Paquete ${packageType} ($${getPackagePrice()} p/p)\n• Día: ${preferredDay} (${preferredSeason})\n• Extras: ${extrasText}\n• Total Estimado: $${budget.toLocaleString('es-MX')} MXN ($${effectivePerPerson} p/p)\n• WhatsApp Directo: 66 3367 0431`;
+    try {
+      await navigator.clipboard.writeText(copyText);
+      setCopiedQuote(true);
+      setTimeout(() => setCopiedQuote(false), 3500);
+    } catch {
+      // Fallback silencioso
+    }
+    trackEvent('text_copy', 'precotizador_copy_quote', {
+      section: 'precotizador',
+      step_number: 4,
+      guests_range: getGuestsBucket(guests),
+      package_name: `Paquete ${packageType}`,
+      event_kind: eventKind,
+      preferred_day: preferredDay,
+      preferred_season: preferredSeason,
+      copied_text: `$${budget.toLocaleString('es-MX')} MXN (${guests} pax - Paquete ${packageType})`,
+      extra: {
+        exact_guests: guests,
+        estimated_budget: budget,
+        effective_per_person: effectivePerPerson,
+        extras: activeExtraLabels,
+        combo_vip: comboVipActive,
+      },
+    });
   };
 
   return (
@@ -1186,8 +1245,10 @@ export default function Precotizador() {
               </span>
             </div>
 
-            <button
-              type="button"
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={handleWhatsApp}
               className="w-full min-h-[54px] bg-[#25D366] text-white font-bold py-4 px-6 rounded-2xl hover:bg-[#1EBE5D] active:scale-[0.99] transition-all uppercase tracking-wider text-sm shadow-xl flex items-center justify-center gap-2.5 cursor-pointer"
             >
@@ -1196,6 +1257,24 @@ export default function Precotizador() {
               </span>
               <span className="pointer-events-none">
                 Recibir Cotización y Disponibilidad en WhatsApp
+              </span>
+            </a>
+
+            <button
+              type="button"
+              onClick={handleCopyQuote}
+              className="w-full min-h-[42px] bg-surface-container-highest/90 border border-outline-variant/60 hover:border-primary/60 text-on-surface font-semibold py-2.5 px-4 rounded-xl transition-all text-xs flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <span
+                data-ux-decorative="true"
+                className="material-symbols-outlined text-base text-primary pointer-events-none"
+              >
+                {copiedQuote ? 'check_circle' : 'content_copy'}
+              </span>
+              <span className="pointer-events-none">
+                {copiedQuote
+                  ? '¡Cotización copiada al portapapeles!'
+                  : `Copiar resumen de cotización ($${budget.toLocaleString('es-MX')} MXN)`}
               </span>
             </button>
 

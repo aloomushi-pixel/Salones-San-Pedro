@@ -4,6 +4,96 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #15 — `2026-11-04 01:33 CDMX` (`v2.3.0-cycle15` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-04T03:27:27Z`)
+- **Telemetría en Supabase (`21:27` a `01:27 hrs CDMX`):** `10` eventos humanos reales en la sesión **`ses_l573r_twr1t40i`** (`21:57 hrs CDMX`, **Delegación Iztapalapa, CDMX CP `09000`**, iPhone `440x879` dentro de **Instagram In-App Browser `IABMV/1`** vía `utm_source=ig&utm_medium=social&utm_content=link_in_bio`).
+  - **Recorrido completo del embudo (`56.7s` activos):**
+    - **Paso 1 (`28.5s`):** `Bautizo / Cumpleaños`, `80 personas` (`50 a 99 personas`).
+    - **Paso 2 (`7.2s`):** `Sábado`, `Temporada Baja / Invierno (Ene-Mar)`.
+    - **Paso 3 (`21.0s`):** `Paquete Premier` (`$530 p/p` = **`$42,400 MXN`**), sin extras.
+  - **Dos fricciones reales detectadas:**
+    1. **Salto de scroll móvil al pasar de Paso 3 a Paso 4 (`47ms` de diferencia):** `step_3_completado` se disparó a las `03:58:02.313Z` e inmediatamente después (`03:58:02.360Z`, apenas `47ms` más tarde) se disparó `section_view: sec_paquetes` porque el Paso 3 es mucho más alto que el Paso 4 en pantallas móviles (`440x879`), haciendo que el encabezado con el precio final (`$42,400 MXN`) quedara arriba del viewport al contraerse el contenedor.
+    2. **Atribución de Instagram Link-in-Bio opacada por `fbclid`:** Como Instagram inyecta `fbclid=PAZXh0...` en enlaces salientes desde la biografía (`utm_source=ig`), evaluar `fbclid` antes que `instagram` etiquetaba la sesión como `'Facebook Ads / App'` en lugar de `'Instagram'`.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap `https://sanpedro.aionia.com.mx/sitemap.xml` estable con `37` URLs enviadas, `0` errores y `0` advertencias.
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 (Menor — `IMPLEMENTED`)
+1. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx):**
+   - Auto-anclaje suave (`scrollPrecotizadorIntoView`) en cada cambio de paso (`1 -> 2 -> 3 -> 4`) para mantener siempre visible el encabezado y el monto cotizado en pantallas móviles.
+   - Conversión del botón de WhatsApp en Paso 4 a un enlace universal nativo `<a href={whatsappUrl} target="_blank" rel="noopener noreferrer">` para compatibilidad total con `Instagram IABMV/1` en iOS, más botón de 1 toque **"Copiar resumen de cotización ($XX,XXX MXN)"** para usuarios nocturnos.
+   - Inclusión de `estimated_budget` y `effective_per_person` desde `step_3_completado`.
+2. **[`src/utils/trackEvent.ts`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/utils/trackEvent.ts) y [`src/utils/telemetryParser.ts`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/utils/telemetryParser.ts):**
+   - Priorización de `utm_source=ig`, `l.instagram.com` y User-Agent `Instagram` por encima de `fbclid`, con normalización retroactiva en `/admin`.
+
+---
+
+## Ciclo Autónomo #14 — `2026-11-03 21:27 CDMX` (`v2.2.8-cycle14` — `POSTPONED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-03T23:25:36Z`)
+- **Telemetría en Supabase (`17:25` a `21:26 hrs CDMX`):** `0` sesiones nuevas, `0` eventos humanos y `0` leads durante la ventana nocturna del lunes.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap `https://sanpedro.aionia.com.mx/sitemap.xml` estable con `37` URLs enviadas, `0` errores y `0` advertencias.
+- **Decisión Consciente (`POSTPONED`):** Se mantiene intacta la versión en producción (`commit 0400407`) sin forzar cambios ni redeploys innecesarios.
+
+---
+
+## Ciclo Autónomo #13 — `2026-11-03 17:24 CDMX` (`v2.2.7-cycle13` — `POSTPONED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-03T19:22:40Z`)
+- **Telemetría en Supabase (`13:22` a `17:23 hrs CDMX`):** `5` eventos humanos en **`1` sesión orgánica nueva** (`ses_69wzb_xbdfjbm0`, Benito Juárez, CDMX CP `03020`, Android 10 Chrome `411x745` en red AT&T 4G, canal `Google Orgánico (SEO)` a las `15:00 hrs CDMX`).
+  - **Web Vitals y Auditoría SEO en dispositivo real:** `TTFB: 141ms`, `DOM Load: 1,117ms`, `FCP: 1,364ms`, `TTFI: 3,569ms` (`scroll_start`), confirmando en producción el nuevo `<title>` (`110` caracteres) y `<meta description>` (`281` caracteres) desplegados en el Ciclo #7 (`commit 0400407`). `0` `dead_clicks` y `0` `rage_clicks`.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap `https://sanpedro.aionia.com.mx/sitemap.xml` estable con `37` URLs enviadas, `0` errores y `0` advertencias.
+- **Decisión Consciente (`POSTPONED`):** La sesión orgánica validó el rendimiento y los metadatos del `commit 0400407` con `0` fricciones; se posponen cambios de código para seguir acumulando sesiones en la franja nocturna.
+
+---
+
+## Ciclo Autónomo #12 — `2026-11-03 13:22 CDMX` (`v2.2.6-cycle12` — `POSTPONED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-03T15:20:53Z`)
+- **Telemetría en Supabase (`09:20` a `13:21 hrs CDMX`):** `0` sesiones nuevas, `0` eventos humanos y `0` leads durante la ventana matutina/mediodía del lunes.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap `https://sanpedro.aionia.com.mx/sitemap.xml` estable con `37` URLs enviadas, `0` errores y `0` advertencias.
+- **Decisión Consciente (`POSTPONED`):** Se mantiene intacta la versión en producción (`commit 0400407`) sin forzar cambios ni redeploys innecesarios.
+
+---
+
+## Ciclo Autónomo #11 — `2026-11-03 09:20 CDMX` (`v2.2.5-cycle11` — `POSTPONED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-03T11:18:40Z`)
+- **Telemetría en Supabase (`05:18` a `09:19 hrs CDMX`):** `0` sesiones nuevas, `0` eventos humanos y `0` leads durante la franja pre-apertura matutina del lunes.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap `https://sanpedro.aionia.com.mx/sitemap.xml` estable con `37` URLs enviadas, `0` errores y `0` advertencias.
+- **Decisión Consciente (`POSTPONED`):** Se mantiene intacta la versión en producción (`commit 0400407`) sin forzar cambios ni redeploys innecesarios.
+
+---
+
+## Ciclo Autónomo #10 — `2026-11-03 05:18 CDMX` (`v2.2.4-cycle10` — `POSTPONED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-03T07:16:36Z`)
+- **Telemetría en Supabase (`01:16` a `05:17 hrs CDMX`):** `0` sesiones nuevas, `0` eventos humanos y `0` leads durante la ventana de amanecer del lunes.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap `https://sanpedro.aionia.com.mx/sitemap.xml` estable con `37` URLs enviadas, `0` errores y `0` advertencias.
+- **Decisión Consciente (`POSTPONED`):** Se mantiene intacta la versión en producción (`commit 0400407`) sin forzar cambios ni redeploys innecesarios.
+
+---
+
+## Ciclo Autónomo #9 — `2026-11-03 01:16 CDMX` (`v2.2.3-cycle9` — `POSTPONED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-03T03:14:45Z`)
+- **Telemetría en Supabase (`21:14` a `01:15 hrs CDMX`):** `0` sesiones nuevas, `0` eventos humanos y `0` leads durante la ventana nocturna/madrugada.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap `https://sanpedro.aionia.com.mx/sitemap.xml` estable con `37` URLs enviadas, `0` errores y `0` advertencias.
+- **Decisión Consciente (`POSTPONED`):** Se mantiene intacta la versión en producción (`commit 0400407`) sin forzar cambios ni redeploys innecesarios.
+
+---
+
+## Ciclo Autónomo #8 — `2026-11-02 21:14 CDMX` (`v2.2.2-cycle8` — `POSTPONED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-02T23:10:52Z`)
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):**
+  - El nuevo sitemap (`https://sanpedro.aionia.com.mx/sitemap.xml`) ya fue descargado y validado por Google (`lastDownloaded: 2026-11-02T21:55:52.349Z`) con **`37` URLs enviadas, `0` errores y `0` advertencias** (limpiando por completo los `32` errores históricos del 30 de octubre).
+- **Telemetría en Supabase (`23:10:52Z` a `03:12:32Z` / `17:10` a `21:12 hrs CDMX`):**
+  - Únicamente `2` eventos pasivos de recarga de pestaña en segundo plano (`active_time_ms: 0`) de la sesión previa `ses_io43s_jqd1i0sf` (iPhone CDMX). `0` sesiones nuevas con interacción activa, `0` `dead_clicks`, `0` `rage_clicks` y `0` nuevos leads.
+- **Decisión Consciente (`POSTPONED`):**
+  - Bajo el **Estándar Maestro v2.1**, al haberse desplegado hace 4 horas las optimizaciones Nivel 1 de CTR en la Home y los artículos de Página 1 (`commit 0400407`) y no existir tráfico nuevo en la ventana nocturna dominical, se pospone cualquier cambio de código hasta acumular nuevas sesiones activas.
+
+---
+
 ## Ciclo Autónomo #7 — Alineación Estándar Maestro v2.1 + Gobernanza por Magnitud (`v2.2.1-gsc-governance` — `2026-11-02 17:08 CDMX`)
 
 ### 1. Adopción del Protocolo de Gobernanza por Magnitud (Nivel 1 / Nivel 2 / Nivel 3) y `.gsc-credentials.json`

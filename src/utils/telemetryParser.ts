@@ -460,10 +460,12 @@ export function parseAnalyticsRow(row: RawAnalyticsRow): ParsedAnalyticsEvent {
   } else if (refLower.includes('l.wl.co') || (meta.acquisition.traffic_channel || '').includes('l.wl.co')) {
     meta.acquisition.traffic_channel = 'WhatsApp Business (Enlace Directo)';
   } else if (
-    (utmSourceLower === 'ig' || utmSourceLower.includes('instagram')) &&
-    meta.acquisition.traffic_channel === 'Tráfico Directo'
+    utmSourceLower === 'ig' ||
+    utmSourceLower.includes('instagram') ||
+    refLower.includes('instagram.com') ||
+    rawUA.toLowerCase().includes('instagram')
   ) {
-    meta.acquisition.traffic_channel = 'Instagram Ads / App';
+    meta.acquisition.traffic_channel = 'Instagram';
   }
 
   // Normalizar campos comerciales dentro de meta para evitar fragmentación estadística

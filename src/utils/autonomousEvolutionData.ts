@@ -22,6 +22,220 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.3.0-cycle15',
+    cycle_number: 15,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-04 01:33 CDMX',
+    title:
+      'Ciclo Madrugada #15 (IMPLEMENTED): Corrección de Salto de Scroll Móvil en Paso 4 ($42,400 MXN), Enlace Universal de WhatsApp y Atribución Instagram Link-in-Bio (ses_l573r_twr1t40i)',
+    vectors: ['CRO', 'UX', 'SEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #14 (>= 2026-11-04T03:27:27Z a 2026-11-04T07:27:30Z): 10 eventos humanos reales en la sesión ses_l573r_twr1t40i (21:57 hrs CDMX, Delegación Iztapalapa CP 09000, iPhone 440x879 dentro de Instagram In-App Browser IABMV/1 vía utm_source=ig&utm_medium=social&utm_content=link_in_bio). El prospecto completó los 3 pasos del Precotizador en 56.7s activos (Bautizo / Cumpleaños, 80 personas, Sábado, Invierno Ene-Mar, Paquete Premier $530 p/p = $42,400 MXN). Al pasar de Paso 3 a Paso 4 (03:58:02.313Z), el menor alto del Paso 4 provocó un salto de scroll móvil que metió #paquetes en pantalla 47ms después (03:58:02.360Z) desplazando el precio final fuera del viewport superior. Además, como Instagram agrega fbclid=PAZXh0... a los enlaces de bio, el chequeo previo de fbclid clasificaba la sesión como Facebook Ads / App en lugar de Instagram.',
+    autonomousActions: [
+      'Nivel 1 (Menor — Micro-UX/CRO en Precotizador.tsx): Auto-anclaje suave (scrollPrecotizadorIntoView) al cambiar de paso (1→2→3→4) para evitar que el cambio de altura entre el Paso 3 y el Paso 4 desplace el resumen de cotización fuera de la pantalla móvil.',
+      'Nivel 1 (Menor — CRO para Instagram In-App Browser IABMV/1 en Precotizador.tsx): Conversión del CTA principal del Paso 4 en un enlace nativo <a href="https://wa.me/526633670431?text=..." target="_blank" rel="noopener noreferrer"> para máxima compatibilidad con WebViews iOS de Instagram/Facebook, más botón de 1 toque para copiar el resumen desglosado al portapapeles e inclusión de estimated_budget en el evento step_3_completado.',
+      'Nivel 1 (Menor — Precisión de Atribución en trackEvent.ts y telemetryParser.ts): Priorización de utm_source=ig, l.instagram.com y User-Agent Instagram antes de fbclid, con auto-curación retroactiva en el panel /admin.',
+    ],
+    filesModified: [
+      'src/components/Precotizador.tsx',
+      'src/utils/trackEvent.ts',
+      'src/utils/telemetryParser.ts',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'pending',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Medir el incremento en clics efectivos a WhatsApp y copias de cotización en el Paso 4 para visitantes móviles provenientes de Instagram Link-in-Bio y Google Orgánico.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.2.8-cycle14',
+    cycle_number: 14,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-03 21:27 CDMX',
+    title:
+      'Ciclo Nocturno #14 (POSTPONED): 0 Eventos Humanos en Franja 17:25–21:26 CDMX y Sitemap Estable con 0 Errores en Search Console',
+    vectors: ['SEO', 'UX', 'CRO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #13 (>= 2026-11-03T23:25:36Z a 2026-11-04T03:26:25Z): 0 eventos humanos nuevos y 0 leads en la ventana nocturna de lunes (17:25 a 21:26 hrs CDMX). En Google Search Console API (sc-domain:sanpedro.aionia.com.mx), el sitemap https://sanpedro.aionia.com.mx/sitemap.xml se mantiene procesado con 37 URLs enviadas, 0 errores y 0 advertencias.',
+    autonomousActions: [
+      'Auditoría puntual de Supabase (analytics_events y leads) y Google Search Console API (sc-domain:sanpedro.aionia.com.mx).',
+      'Decisión Consciente POSTPONED bajo Estándar Maestro v2.1: Sin sesiones nuevas entre las 17:25 y 21:26 hrs CDMX, se conserva intacta la versión en producción (commit 0400407).',
+    ],
+    filesModified: [],
+    postponedReason:
+      '0 sesiones y 0 eventos humanos nuevos durante la ventana de 17:25 a 21:26 hrs CDMX; producción opera estable en commit 0400407.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: '0400407',
+    deploymentUuid: 'opxqfmpcxfobvr1iuulgh08c',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Evaluar la ventana de madrugada del martes (21:27 a 01:27 hrs CDMX) en Supabase y Google Search Console.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.2.7-cycle13',
+    cycle_number: 13,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-03 17:24 CDMX',
+    title:
+      'Ciclo Vespertino #13 (POSTPONED): 1 Sesión Orgánica SEO en Benito Juárez CDMX (Android 4G, TTFB 141ms) Confirma Metadatos v2.1 Activos con 0 Fricciones',
+    vectors: ['SEO', 'UX', 'PERF'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #12 (>= 2026-11-03T19:22:40Z a 2026-11-03T23:23:20Z): 5 eventos humanos en 1 sesión real (ses_69wzb_xbdfjbm0 desde Benito Juárez, CDMX CP 03020 en Android 10 Chrome vía AT&T 4G por Google Orgánico SEO a las 15:00 hrs CDMX). Excelente rendimiento móvil (TTFB 141ms, DOM Load 1,117ms, FCP 1,364ms, TTFI 3,569ms en scroll_start) y confirmación en seo_audit de los nuevos metadatos de Ciclo #7 (title_len: 110, meta_desc_len: 281, img_missing_alt: 0). 0 dead_clicks, 0 rage_clicks y 0 errores.',
+    autonomousActions: [
+      'Verificación en vivo de la sesión orgánica ses_69wzb_xbdfjbm0 en Supabase y del estado de Sitemap (37 URLs, 0 errores) en Google Search Console API.',
+      'Decisión Consciente POSTPONED bajo Estándar Maestro v2.1: La sesión orgánica en Benito Juárez presentó 0 fricciones UX y confirmó que los metadatos optimizados en el commit 0400407 ya están sirviéndose en dispositivos móviles reales con TTFB de 141ms.',
+    ],
+    filesModified: [],
+    postponedReason:
+      '1 sesión orgánica breve (5 eventos, 0 dead_clicks, 0 rage_clicks, TTFB 141ms) que valida en producción los nuevos metadatos SEO del commit 0400407; se continúa acumulando muestra sin forzar cambios.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: '0400407',
+    deploymentUuid: 'opxqfmpcxfobvr1iuulgh08c',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Evaluar la ventana nocturna del lunes (17:25 a 21:25 hrs CDMX) en Supabase y Google Search Console.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.2.6-cycle12',
+    cycle_number: 12,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-03 13:22 CDMX',
+    title:
+      'Ciclo Mediodía #12 (POSTPONED): 0 Eventos Humanos en Franja 09:20–13:21 CDMX y Sitemap Estable con 0 Errores en Search Console',
+    vectors: ['SEO', 'UX', 'CRO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #11 (>= 2026-11-03T15:20:53Z a 2026-11-03T19:21:40Z): 0 eventos humanos nuevos y 0 leads en la ventana de 09:20 a 13:21 hrs CDMX del lunes. En Google Search Console API (sc-domain:sanpedro.aionia.com.mx), el sitemap https://sanpedro.aionia.com.mx/sitemap.xml se mantiene procesado con 37 URLs enviadas, 0 errores y 0 advertencias.',
+    autonomousActions: [
+      'Auditoría puntual de Supabase (analytics_events y leads) y Google Search Console API (sc-domain:sanpedro.aionia.com.mx).',
+      'Decisión Consciente POSTPONED bajo Estándar Maestro v2.1: Sin sesiones nuevas entre las 09:20 y 13:21 hrs CDMX, se conserva intacta la versión en producción (commit 0400407).',
+    ],
+    filesModified: [],
+    postponedReason:
+      '0 sesiones y 0 eventos humanos nuevos durante la ventana de 09:20 a 13:21 hrs CDMX; producción opera estable en commit 0400407.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: '0400407',
+    deploymentUuid: 'opxqfmpcxfobvr1iuulgh08c',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Evaluar la ventana vespertina del lunes (13:22 a 17:22 hrs CDMX) en Supabase y Google Search Console.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.2.5-cycle11',
+    cycle_number: 11,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-03 09:20 CDMX',
+    title:
+      'Ciclo Matutino #11 (POSTPONED): 0 Eventos Humanos en Franja Pre-Apertura (05:18–09:19 CDMX) y Sitemap Estable con 0 Errores en Search Console',
+    vectors: ['SEO', 'UX', 'CRO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #10 (>= 2026-11-03T11:18:40Z a 2026-11-03T15:19:45Z): 0 eventos humanos nuevos y 0 leads en la franja matutina pre-apertura de oficina (05:18 a 09:19 hrs CDMX). En Google Search Console API (sc-domain:sanpedro.aionia.com.mx), el sitemap https://sanpedro.aionia.com.mx/sitemap.xml se mantiene procesado con 37 URLs enviadas, 0 errores y 0 advertencias.',
+    autonomousActions: [
+      'Auditoría puntual de Supabase (analytics_events y leads) y Google Search Console API (sc-domain:sanpedro.aionia.com.mx).',
+      'Decisión Consciente POSTPONED bajo Estándar Maestro v2.1: Sin sesiones nuevas entre las 05:18 y 09:19 hrs CDMX, se conserva intacta la versión en producción (commit 0400407).',
+    ],
+    filesModified: [],
+    postponedReason:
+      '0 sesiones y 0 eventos humanos nuevos durante la franja pre-apertura matutina (05:18 a 09:19 hrs CDMX); producción opera estable en commit 0400407.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: '0400407',
+    deploymentUuid: 'opxqfmpcxfobvr1iuulgh08c',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Evaluar la ventana comercial matutina/mediodía del lunes (09:20 a 13:20 hrs CDMX) tras la apertura de oficina a las 10:00 AM.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.2.4-cycle10',
+    cycle_number: 10,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-03 05:18 CDMX',
+    title:
+      'Ciclo de Amanecer #10 (POSTPONED): 0 Eventos Humanos en Franja 01:16–05:17 CDMX y Sitemap Validado con 0 Errores en Search Console',
+    vectors: ['SEO', 'UX', 'CRO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #9 (>= 2026-11-03T07:16:36Z a 2026-11-03T11:17:15Z): 0 eventos humanos nuevos y 0 leads en la ventana de amanecer (01:16 a 05:17 hrs CDMX). En Google Search Console API (sc-domain:sanpedro.aionia.com.mx), el sitemap https://sanpedro.aionia.com.mx/sitemap.xml se mantiene procesado con 37 URLs enviadas, 0 errores y 0 advertencias.',
+    autonomousActions: [
+      'Auditoría puntual de Supabase (analytics_events y leads) y Google Search Console API (sc-domain:sanpedro.aionia.com.mx).',
+      'Decisión Consciente POSTPONED bajo Estándar Maestro v2.1: Sin sesiones nuevas entre las 01:16 y 05:17 hrs CDMX, se conserva intacta la versión en producción (commit 0400407).',
+    ],
+    filesModified: [],
+    postponedReason:
+      '0 sesiones y 0 eventos humanos nuevos durante la ventana de amanecer (01:16 a 05:17 hrs CDMX); producción opera estable en commit 0400407.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: '0400407',
+    deploymentUuid: 'opxqfmpcxfobvr1iuulgh08c',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Evaluar la apertura comercial del lunes por la mañana (05:18 a 09:18 hrs CDMX) en Supabase y Google Search Console.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.2.3-cycle9',
+    cycle_number: 9,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-03 01:16 CDMX',
+    title:
+      'Ciclo de Madrugada #9 (POSTPONED): 0 Eventos Humanos Nuevos en Franja Nocturna (21:14–01:15 CDMX) y Sitemap Estable con 0 Errores en Search Console',
+    vectors: ['SEO', 'UX', 'CRO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #8 (>= 2026-11-03T03:14:45Z a 2026-11-03T07:15:30Z): 0 eventos humanos nuevos y 0 leads en la franja de madrugada (21:14 a 01:15 hrs CDMX). En Google Search Console API (sc-domain:sanpedro.aionia.com.mx), el sitemap https://sanpedro.aionia.com.mx/sitemap.xml se mantiene procesado con 37 URLs enviadas, 0 errores y 0 advertencias.',
+    autonomousActions: [
+      'Auditoría puntual de Supabase (analytics_events y leads) y Google Search Console API (sc-domain:sanpedro.aionia.com.mx).',
+      'Decisión Consciente POSTPONED bajo Estándar Maestro v2.1: Sin sesiones nuevas durante la madrugada, se conserva intacta la versión en producción (commit 0400407) sin forzar commits ni despliegues innecesarios.',
+    ],
+    filesModified: [],
+    postponedReason:
+      '0 sesiones y 0 eventos humanos nuevos durante la ventana de madrugada (21:14 a 01:15 hrs CDMX); producción opera estable en commit 0400407 con 0 errores de Sitemap en Google Search Console.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: '0400407',
+    deploymentUuid: 'opxqfmpcxfobvr1iuulgh08c',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Evaluar la ventana matutina del lunes para analizar nuevas sesiones orgánicas/WhatsApp y el impacto inicial en CTR de los títulos optimizados.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.2.2-cycle8',
+    cycle_number: 8,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-02 21:14 CDMX',
+    title:
+      'Ciclo Nocturno Dominical #8 (POSTPONED): Sitemap Validado por Google con 0 Errores (37 URLs) y Sin Tráfico Activo Nuevo en Ventana 17:10–21:12 CDMX',
+    vectors: ['SEO', 'UX', 'CRO'],
+    telemetrySignal:
+      'Corte estricto post-deploy 0400407 (>= 2026-11-02T23:10:52Z a 2026-11-03T03:12:32Z): (1) En Google Search Console API (sc-domain:sanpedro.aionia.com.mx), Google descargó exitosamente el nuevo sitemap (lastDownloaded: 2026-11-02T21:55:52.349Z) con 37 URLs enviadas, 0 errores y 0 advertencias (limpiando los 32 errores históricos del 30-oct); (2) En Supabase solo se registraron 2 eventos pasivos de recarga de pestaña en segundo plano de la sesión previa ses_io43s_jqd1i0sf (active_time_ms: 0, 0 dead_clicks, 0 rage_clicks, 0 nuevos leads).',
+    autonomousActions: [
+      'Verificación en vivo de Google Search Console API (/sitemaps): Confirmación de que las 37 URLs canónicas están procesadas con 0 errores y 0 warnings.',
+      'Decisión Consciente POSTPONED bajo Estándar Maestro v2.1: Al no existir sesiones nuevas con interacción activa en la ventana dominical de 17:10 a 21:12 hrs CDMX y encontrarse recién desplegadas las optimizaciones Nivel 1 de CTR (commit 0400407), se pospone cualquier modificación de código para evaluar el tráfico orgánico matutino del lunes.',
+    ],
+    filesModified: [],
+    postponedReason:
+      'Únicamente 1 recarga pasiva de pestaña en segundo plano (0ms de tiempo activo) entre las 17:10 y 21:12 hrs CDMX del domingo; el sitemap ya fue validado por Google con 0 errores (37 URLs) y las optimizaciones de CTR de Ciclo #6 y #7 están recién desplegadas.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: '0400407',
+    deploymentUuid: 'opxqfmpcxfobvr1iuulgh08c',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Monitorear el tráfico nocturno/matutino de inicio de semana y el incremento de impresiones/CTR en las 37 URLs canónicas tras la validación sin errores del sitemap en Google Search Console.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.2.1-gsc-governance',
     cycle_number: 7,
     status: 'IMPLEMENTED',
@@ -49,8 +263,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     postponedReason: null,
     humanActionRequired:
       'Ninguna — las optimizaciones ejecutadas en este ciclo corresponden a Nivel 1 (Menor: metadatos SERP, JSON-LD y CTR copy). No se requiere pivotaje arquitectónico Mayor (Nivel 3) por ahora.',
-    commitHash: 'pending',
-    deploymentUuid: 'pending',
+    commitHash: '0400407',
+    deploymentUuid: 'opxqfmpcxfobvr1iuulgh08c',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:

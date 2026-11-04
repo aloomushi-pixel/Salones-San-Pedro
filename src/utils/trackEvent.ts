@@ -74,10 +74,10 @@ function detectTrafficChannel(referrer: string, ua: string, searchParams: URLSea
     traffic_channel = 'IA Generativa (ChatGPT / GEO)';
   } else if (gclid || (utm_source && /google/i.test(utm_source) && /cpc|ppc|paid/i.test(utm_medium || ''))) {
     traffic_channel = 'Google Ads (Pagado)';
-  } else if (fbclid || lowerUA.includes('fb_iab') || lowerUA.includes('fbav') || /facebook|fb\.com|m\.facebook/i.test(lowerRef) || /facebook|fb|meta/i.test(utm_source || '')) {
-    traffic_channel = 'Facebook Ads / App';
   } else if (lowerUA.includes('instagram') || /instagram/i.test(lowerRef) || /instagram|^ig$/i.test(utm_source || '')) {
     traffic_channel = 'Instagram';
+  } else if (fbclid || lowerUA.includes('fb_iab') || lowerUA.includes('fbav') || /facebook|fb\.com|m\.facebook/i.test(lowerRef) || /facebook|fb|meta/i.test(utm_source || '')) {
+    traffic_channel = 'Facebook Ads / App';
   } else if (ttclid || lowerUA.includes('tiktok') || lowerUA.includes('musical_ly') || /tiktok/i.test(lowerRef) || /tiktok/i.test(utm_source || '')) {
     traffic_channel = 'TikTok';
   } else if (lowerUA.includes('gsa/')) {
@@ -166,6 +166,14 @@ export function getOrInitMonitorState(): RuntimeMonitorState | null {
           acquisition.traffic_channel === 'Referencia Web (l.wl.co)')
       ) {
         acquisition.traffic_channel = 'WhatsApp Business (Enlace Directo)';
+        sessionStorage.setItem('ssp_acquisition', JSON.stringify(acquisition));
+      } else if (
+        acquisition &&
+        (acquisition.utm_source === 'ig' ||
+          acquisition.referrer_domain === 'l.instagram.com' ||
+          (acquisition.referrer && acquisition.referrer.includes('instagram.com')))
+      ) {
+        acquisition.traffic_channel = 'Instagram';
         sessionStorage.setItem('ssp_acquisition', JSON.stringify(acquisition));
       }
     } else {
