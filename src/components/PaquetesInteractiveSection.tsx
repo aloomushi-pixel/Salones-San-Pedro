@@ -378,7 +378,7 @@ export default function PaquetesInteractiveSection() {
                 👥 Calcular total para:
               </span>
               <div className="flex flex-wrap justify-center gap-1.5">
-                {[80, 100, 150, 200, 250].map((g) => (
+                {[50, 80, 100, 150, 200, 250].map((g) => (
                   <button
                     key={g}
                     type="button"
@@ -522,6 +522,18 @@ export default function PaquetesInteractiveSection() {
                         {formatMXN(getPackageTotal(710, 100))} MXN
                       </span>
                     </div>
+                    {simGuests < 100 && (
+                      <button
+                        type="button"
+                        onClick={() => handlePreselectInCalculator('Premier')}
+                        className="mt-2 block w-full text-left p-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/40 text-[11px] leading-snug text-on-surface transition-colors cursor-pointer"
+                      >
+                        <span className="font-extrabold text-primary block">
+                          💡 ¿Tu evento es de {simGuests} personas?
+                        </span>
+                        Cotiza <strong>Premier ({formatMXN(getPackageTotal(530, 50))})</strong> y suma Robot LED, Mesa de Dulces o Combo VIP a tu medida ↑
+                      </button>
+                    )}
                   </div>
                 </div>
                 <div className="p-7">

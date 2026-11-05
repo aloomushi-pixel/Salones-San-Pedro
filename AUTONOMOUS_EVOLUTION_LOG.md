@@ -4,6 +4,28 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #21 — `2026-11-05 02:14 CDMX` (`v2.3.6-cycle21` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-05T04:09:35Z`)
+- **Telemetría en Supabase (`22:09` a `02:09 hrs CDMX`):** **`57` eventos humanos reales** en 5 sesiones:
+  1. **Sesión `ses_1kusk_r6y7h1nx` (`22:24 hrs CDMX`, CDMX CP `06740`, Mobile `360x674` desde `Google Orgánico SEO`):**
+     - Aterrizó directamente desde Google en **`/blog/cuanto-cuesta-un-salon-de-fiestas-en-gustavo-a-madero-cdmx-precios-2026`** — el **3er artículo nuevo creado en el Ciclo #6** a partir de datos de Search Console. Con esto, **los 3 artículos nuevos del Ciclo #6 ya posicionan en Google y atraen tráfico orgánico real**.
+     - Leyó el `100%` del artículo durante **`206.9s` activos** (`3.5 minutos`). En `web_vitals` (`seo_audit`) se detectó `title_len: 129` y `meta_desc_len: 277`.
+  2. **Sesión `ses_51doi_ahs7l4us` (`00:01 hrs CDMX`, CDMX CP `06740`, Mobile `384x694` desde `Instagram Link-in-Bio` `utm_source=ig`):**
+     - Validó en producción la prioridad de atribución `utm_source=ig` sobre `fbclid` implementada en el Ciclo #15 y **convirtió en `whatsapp_click` (`floating_button`)** en `1.6s`.
+  3. **Sesiones `ses_698pg_cefjcq4r` y `ses_743ze_fggz0n3y` (`00:35` y `00:59 hrs CDMX`, Mobile):**
+     - `ses_698pg_cefjcq4r` disparó `scroll_return_prices: regreso_a_paquetes` y permaneció **`99s` activos** en `#paquetes`.
+     - `ses_743ze_fggz0n3y` seleccionó **`80 personas` (`paquetes_sim_80`)** en la barra rápida de `#paquetes` y permaneció **`110s` activos** comparando `Paquete Premier` (`80 pers.`) contra `Paquete Plus` (`mínimo 100 pers.`), sin saber que puede cotizar `Premier` para `50` u `80` invitados y agregar extras de `Plus` (`Robot LED`, `Mesa de Dulces`, `Combo VIP`) a su medida.
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 (Menor — `IMPLEMENTED`)
+1. **[`src/components/PaquetesInteractiveSection.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/PaquetesInteractiveSection.tsx):**
+   - Adición del botón rápido **`50 pers.`** (`$26,500 MXN`) a la barra de simulación (`[50, 80, 100, 150, 200, 250]`).
+   - Inclusión de un puente interactivo dentro de la tarjeta `Paquete Plus` cuando `simGuests < 100` (`"💡 ¿Tu evento es de 50/80 personas? Cotiza Premier y suma Robot LED, Mesa de Dulces o Combo VIP a tu medida ↑"`).
+2. **[`src/app/blog/[slug]/page.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/blog/%5Bslug%5D/page.tsx):**
+   - Optimización de `generateMetadata` colocando el gancho de precio (`"Desde $530 p/p ($26,500 por 50 pers.) en GAM CDMX:"`) al inicio de la `meta description` acotada a `<= 160` caracteres para evitar truncamiento en Google SERPs, y personalización de la barra flotante para los artículos de Precios 2026 y Fotos/Recorrido.
+
+---
+
 ## Ciclo Autónomo #20 — `2026-11-04 22:06 CDMX` (`v2.3.5-cycle20` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-05T00:03:03Z`)

@@ -28,8 +28,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const seoTitle = `${post.title} | Salones San Pedro Plus CDMX`;
-  const seoDescription = `${post.excerpt} Cotiza tu evento en Gustavo A. Madero, CDMX desde $530 MXN p/p en Salones Diamante y Platino.`;
+  const seoTitle =
+    post.title.length > 62
+      ? post.title
+      : `${post.title} | Salones San Pedro Plus CDMX`;
+  const rawDescription = `Desde $530 p/p ($26,500 por 50 pers.) en GAM CDMX: ${post.excerpt}`;
+  const seoDescription =
+    rawDescription.length > 160
+      ? `${rawDescription.slice(0, 157).trim()}...`
+      : rawDescription;
 
   return {
     title: seoTitle,
@@ -67,14 +74,24 @@ export default async function BlogPostPage({ params }: PageProps) {
     .slice(0, 4);
 
   const isSmallEventsArticle = slug.includes("50-a-80-personas");
+  const isPricingArticle = slug.includes("cuanto-cuesta-un-salon");
+  const isPhotosArticle = slug.includes("fotos-y-recorrido");
   const precotizadorHref = isSmallEventsArticle
     ? "/?guests=60#precotizador"
     : "/#precotizador";
   const stickyHeadline = isSmallEventsArticle
     ? "¿Buscas salón para 50 a 80 personas en GAM CDMX?"
+    : isPricingArticle
+    ? "Precios Oficiales 2026 GAM: 50 pers. $26,500 • 100 pers. $53,000"
+    : isPhotosArticle
+    ? "¿Te gustaron los Salones Diamante y Platino en Norte 84 GAM?"
     : "Salones Diamante y Platino en Gustavo A. Madero, CDMX";
   const stickySubheadline = isSmallEventsArticle
     ? "Paquete Premier Todo Incluido desde $530 p/p ($26,500 MXN para 50 invitados)"
+    : isPricingArticle
+    ? "Simula tu presupuesto exacto con barra libre, banquete, DJ, Robot LED o Limusina"
+    : isPhotosArticle
+    ? "Agenda un recorrido presencial sin costo o simula el precio de tu fecha en 30 segundos"
     : "Cotiza tu Boda, XV Años o Evento Empresarial desde $530 p/p en 30 segundos";
 
   const articleJsonLd = {

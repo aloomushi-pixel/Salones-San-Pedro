@@ -22,6 +22,36 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.3.6-cycle21',
+    cycle_number: 21,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-05 02:14 CDMX',
+    title:
+      'Ciclo Madrugada #21 (IMPLEMENTED): 3er Artículo Nuevo SEO Posicionado (Precios 2026) + Conversión Instagram Link-in-Bio a WhatsApp + Puente de Personalización 50/80 Pers. en Paquete Plus',
+    vectors: ['CRO', 'UX', 'SEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #20 (>= 2026-11-05T04:09:35Z a 2026-11-05T08:09:54Z): 57 eventos humanos reales en 5 sesiones: (1) ses_1kusk_r6y7h1nx (22:24 hrs CDMX, CDMX CP 06740, Mobile 360x674 desde Google Orgánico SEO) que aterrizó en /blog/cuanto-cuesta-un-salon-de-fiestas-en-gustavo-a-madero-cdmx-precios-2026 (confirmando que los 3 artículos nuevos creados en el Ciclo #6 ya posicionan en Google y atraen tráfico orgánico) y leyó el 100% del artículo durante 206.9s activos, reportando en web_vitals title_len=129 y meta_desc_len=277; (2) ses_51doi_ahs7l4us (00:01 hrs CDMX, CDMX CP 06740, Mobile 384x694 desde Instagram Link-in-Bio utm_source=ig) que validó la atribución corregida en el Ciclo #15 y convirtió en whatsapp_click (floating_button); y (3) ses_698pg_cefjcq4r y ses_743ze_fggz0n3y (00:35 y 00:59 hrs CDMX) que permanecieron 99s y 110s activos en #paquetes tras simular 80 personas (paquetes_sim_80) y disparar scroll_return_prices: regreso_a_paquetes al comparar Paquete Premier (80 pax) contra Paquete Plus (mínimo 100 pax).',
+    autonomousActions: [
+      'Nivel 1 (Menor — Simulador 50/80 Personas y Puente en PaquetesInteractiveSection.tsx): Adición del botón rápido "50 pers." ($26,500 MXN) en la barra de #paquetes y banner interactivo dentro de Paquete Plus cuando simGuests < 100 ("💡 ¿Tu evento es de 50/80 personas? Cotiza Premier y suma Robot LED, Mesa de Dulces o Combo VIP a tu medida ↑").',
+      'Nivel 1 (Menor — Optimización de Meta Tags SERP y Sticky Bar en src/app/blog/[slug]/page.tsx): Front-loading del gancho de precio ("Desde $530 p/p ($26,500 por 50 pers.) en GAM CDMX:") dentro del límite de 160 caracteres de meta description y copia personalizada en la barra flotante para los artículos de Precios 2026 y Fotos/Recorrido.',
+    ],
+    filesModified: [
+      'src/components/PaquetesInteractiveSection.tsx',
+      'src/app/blog/[slug]/page.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Medir clics en el puente de personalización 50/80 personas dentro de #paquetes y CTR hacia el Precotizador desde el artículo posicionado /blog/cuanto-cuesta-un-salon-de-fiestas-en-gustavo-a-madero-cdmx-precios-2026.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.3.5-cycle20',
     cycle_number: 20,
     status: 'IMPLEMENTED',
@@ -43,8 +73,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    commitHash: '4ab6047',
+    deploymentUuid: 'qpg7r8teziteuzp6spx8o0bb',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:
