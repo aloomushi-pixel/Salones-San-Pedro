@@ -22,6 +22,36 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.3.5-cycle20',
+    cycle_number: 20,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-04 22:06 CDMX',
+    title:
+      'Ciclo Nocturno #20 (IMPLEMENTED): 2º Artículo Nuevo SEO Posicionado (50–80 Personas) + Persistencia de Avance en Precotizador Móvil (sessionStorage) + Barra Contextual Flotante en Blog',
+    vectors: ['CRO', 'UX', 'SEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #19 (>= 2026-11-05T00:03:03Z a 2026-11-05T04:04:19Z): 57 eventos humanos reales en 4 sesiones: (1) ses_v82vs_0rkrdoqf y ses_v8nkl_ur74fdf9 (19:27 hrs CDMX, CP 03220, Desktop Windows 10 desde Google Orgánico SEO) que aterrizaron en /blog/salones-de-fiestas-pequenos-en-cdmx-gustavo-a-madero-50-a-80-personas (el 2º artículo nuevo creado en Ciclo #6 que ya posiciona en Google), leyeron 408s activos (58% y 100% scroll) y dispararon exit_intent: exit_from_blog_articulo sin hacer clic en cotizar por falta de barra flotante durante la lectura; (2) ses_xf8j4_exrntueu (20:28 hrs CDMX, Gustavo A. Madero CP 07050, Android 10 desde Google Orgánico SEO) que activó upsell_a_100_invitados (Paquete Plus) y llegó al Paso 3 (XV Años, 100 pax, Viernes, Temporada Alta), ocultó la pestaña y al volver 90 min después (21:57 hrs CDMX) Chrome recargó la página borrando su avance al Paso 1; y (3) ses_zouxo_a6ztqeg6 (21:32 hrs CDMX, GAM CP 07510, Android 10 desde WhatsApp Business l.wl.co).',
+    autonomousActions: [
+      'Nivel 1 (Menor — Persistencia de Embudo Móvil en Precotizador.tsx): Hidratación y guardado automático de borrador en sessionStorage (sanpedro_precotizador_draft_v1) para conservar el paso actual, aforo, tipo de evento, día, temporada, paquete y extras cuando Android/iOS recarga la pestaña al cambiar de app, más soporte de parámetro ?guests=60 desde artículos SEO y botón "Reiniciar" en el encabezado.',
+      'Nivel 1 (Menor — Barra Contextual Flotante de Conversión en src/app/blog/[slug]/page.tsx): Barra inferior fija en artículos del blog con mensaje adaptado a la intención del artículo (ej. "¿Buscas salón para 50 a 80 personas? Simular 50–80 Personas ($530 p/p) →" que pre-carga 60 invitados en el Precotizador + botón directo de WhatsApp) para capturar usuarios antes del exit_intent.',
+    ],
+    filesModified: [
+      'src/components/Precotizador.tsx',
+      'src/app/blog/[slug]/page.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Medir reducción de exit_intent sin clic en artículos SEO (/blog/salones-de-fiestas-pequenos-...) y recuperación del Paso 3/4 en usuarios móviles que alternan entre WhatsApp y el navegador.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.3.4-cycle19',
     cycle_number: 19,
     status: 'IMPLEMENTED',
@@ -43,8 +73,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'pending',
+    commitHash: '92a45a8',
+    deploymentUuid: 'il7gn08tda0byon8f6nw6z9r',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:

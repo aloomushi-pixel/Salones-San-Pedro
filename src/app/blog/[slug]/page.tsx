@@ -66,6 +66,17 @@ export default async function BlogPostPage({ params }: PageProps) {
     .filter((p) => p.slug !== slug)
     .slice(0, 4);
 
+  const isSmallEventsArticle = slug.includes("50-a-80-personas");
+  const precotizadorHref = isSmallEventsArticle
+    ? "/?guests=60#precotizador"
+    : "/#precotizador";
+  const stickyHeadline = isSmallEventsArticle
+    ? "¿Buscas salón para 50 a 80 personas en GAM CDMX?"
+    : "Salones Diamante y Platino en Gustavo A. Madero, CDMX";
+  const stickySubheadline = isSmallEventsArticle
+    ? "Paquete Premier Todo Incluido desde $530 p/p ($26,500 MXN para 50 invitados)"
+    : "Cotiza tu Boda, XV Años o Evento Empresarial desde $530 p/p en 30 segundos";
+
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -157,7 +168,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <TrackedLink
             eventType="cotizar_click"
             source={`blog_cover_img_${slug}`}
-            href="/#precotizador-hero"
+            href={precotizadorHref}
             className="group block relative h-64 md:h-[480px] rounded-2xl overflow-hidden shadow-xl mb-12 border border-outline-variant/30"
           >
             <Image
@@ -200,7 +211,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                   <TrackedLink
                     eventType="cotizar_click"
                     source={`blog_footer_precotizador_${slug}`}
-                    href="/#precotizador-hero"
+                    href={precotizadorHref}
                     className="flex-1 py-3.5 px-5 rounded-xl bg-primary text-on-primary font-bold text-xs uppercase tracking-wider text-center shadow-md hover:opacity-95 transition-opacity"
                   >
                     Calcular Presupuesto en Línea
@@ -292,8 +303,44 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="flex flex-wrap justify-center gap-8 font-body-md text-body-md text-secondary">
           <LegalModals />
         </div>
-        <p className="font-body-md text-body-md text-on-surface dark:text-inverse-on-surface mt-4 text-center opacity-70">© 2026 Salones San Pedro Eventos. Todos los derechos reservados.</p>
+        <p className="font-body-md text-body-md text-on-surface dark:text-inverse-on-surface mt-4 text-center opacity-70 pb-16">© 2026 Salones San Pedro Eventos. Todos los derechos reservados.</p>
       </footer>
+
+      {/* Barra Flotante Contextual de Conversión en Lectura de Blog (Evita exit_intent sin cotizar en artículos SEO) */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-surface-container-highest/95 dark:bg-inverse-surface/95 backdrop-blur-md border-t border-primary/30 shadow-2xl px-4 py-2.5">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5">
+          <div className="text-center sm:text-left">
+            <p className="text-xs sm:text-sm font-bold text-on-surface dark:text-inverse-on-surface leading-tight">
+              {stickyHeadline}
+            </p>
+            <p className="text-[11px] text-secondary leading-tight hidden sm:block">
+              {stickySubheadline}
+            </p>
+          </div>
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <TrackedLink
+              eventType="cotizar_click"
+              source={`blog_sticky_precotizador_${slug}`}
+              href={precotizadorHref}
+              className="flex-1 sm:flex-initial py-2 px-4 rounded-xl bg-primary text-on-primary font-extrabold text-[11px] uppercase tracking-wider text-center shadow-md hover:opacity-95 transition-opacity whitespace-nowrap"
+            >
+              {isSmallEventsArticle ? "Simular 50–80 Personas ($530 p/p) →" : "Cotizar en 30 Seg ($530 p/p) →"}
+            </TrackedLink>
+            <TrackedLink
+              eventType="whatsapp_click"
+              source={`blog_sticky_wa_${slug}`}
+              href={`https://wa.me/526633670431?text=${encodeURIComponent(
+                `¡Hola Salones San Pedro! Leí su artículo "${post.title}" y me gustaría cotizar mi evento y conocer fechas disponibles.`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-2 px-3.5 rounded-xl bg-[#25D366] text-white font-extrabold text-[11px] uppercase tracking-wider text-center shadow-md hover:opacity-95 transition-opacity whitespace-nowrap"
+            >
+              WhatsApp
+            </TrackedLink>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

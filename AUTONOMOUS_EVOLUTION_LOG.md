@@ -4,6 +4,27 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #20 — `2026-11-04 22:06 CDMX` (`v2.3.5-cycle20` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-05T00:03:03Z`)
+- **Telemetría en Supabase (`18:03` a `22:04 hrs CDMX`):** **`57` eventos humanos reales** en 4 sesiones:
+  1. **Sesiones `ses_v82vs_0rkrdoqf` y `ses_v8nkl_ur74fdf9` (`19:27 hrs CDMX`, CDMX CP `03220`, Desktop Windows 10 desde `Google Orgánico SEO`):**
+     - Aterrizaron directamente desde Google en **`/blog/salones-de-fiestas-pequenos-en-cdmx-gustavo-a-madero-50-a-80-personas`** — el **2º artículo nuevo creado en el Ciclo #6** a partir de datos de Search Console que ya posiciona en Google y atrae tráfico orgánico.
+     - Leyeron el artículo durante **`408s` activos** (`58%` y `100%` de scroll) y dispararon `exit_intent: exit_from_blog_articulo` sin hacer clic en cotizar porque los botones de llamada a la acción solo se encontraban en la imagen de portada o hasta el final del texto.
+  2. **Sesión `ses_xf8j4_exrntueu` (`20:28 hrs CDMX` y `21:57 hrs CDMX`, Gustavo A. Madero, CDMX CP `07050`, Android 10 desde `Google Orgánico SEO`):**
+     - Activó `upsell_a_100_invitados` (`Paquete Plus`), completó el Paso 1 (`XV Años`, `100 personas`) y el Paso 2 (`Viernes`, `Temporada Alta Oct-Dic`), llegó al Paso 3 (`49s` activos) y ocultó la pestaña (`tab_hidden`).
+     - Al regresar **90 minutos después (`21:57 hrs CDMX`)**, Chrome en Android recargó la pestaña (`page_view: home_landing`), reiniciando el `Precotizador` al Paso 1 (`80 personas`, `Boda`) y provocando que el usuario saliera 2 segundos después al ver perdido su avance.
+  3. **Sesión `ses_zouxo_a6ztqeg6` (`21:32 hrs CDMX`, Gustavo A. Madero, CDMX CP `07510`, Android 10 desde `WhatsApp Business` `l.wl.co`):**
+     - Tráfico directo desde el enlace del perfil de WhatsApp Business de Salones San Pedro Plus (`TTFB: 102ms`, `DOM Load: 826ms`).
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 (Menor — `IMPLEMENTED`)
+1. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx):**
+   - Persistencia automática del estado del cotizador en `sessionStorage` (`sanpedro_precotizador_draft_v1`) para restaurar el paso exacto (`step`), número de invitados, tipo de evento, día, temporada, paquete y extras cuando Android/iOS recarga la pestaña al cambiar de aplicación, junto con botón `"Reiniciar"` en el encabezado y soporte de parámetro `?guests=60` desde artículos SEO.
+2. **[`src/app/blog/[slug]/page.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/blog/%5Bslug%5D/page.tsx):**
+   - Barra inferior fija de conversión contextual durante la lectura del blog (`"¿Buscas salón para 50 a 80 personas? Simular 50–80 Personas ($530 p/p) →"` hacia `/?guests=60#precotizador` + botón directo de WhatsApp) para capturar a los lectores orgánicos antes de `exit_intent`.
+
+---
+
 ## Ciclo Autónomo #19 — `2026-11-04 17:57 CDMX` (`v2.3.4-cycle19` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-04T19:53:33Z`)

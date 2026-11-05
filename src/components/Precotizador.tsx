@@ -135,6 +135,7 @@ export default function Precotizador() {
   const [showMathBreakdown, setShowMathBreakdown] = useState(true);
   const [wantsTour, setWantsTour] = useState(true);
   const [copiedQuote, setCopiedQuote] = useState(false);
+  const [hydratedDraft, setHydratedDraft] = useState(false);
 
   const stepStartRef = useRef<number>(Date.now());
   const wizardStartRef = useRef<number>(Date.now());
@@ -150,6 +151,117 @@ export default function Precotizador() {
         }
       }
     });
+  };
+
+  // Hidratación de borrador en sessionStorage (evita pérdida de avance en Paso 2/3/4 cuando Android/iOS recarga la pestaña al cambiar de app) + soporte de ?guests= desde el Blog SEO
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const queryGuests = Number(params.get('guests'));
+      if (queryGuests && queryGuests >= 50 && queryGuests <= 250) {
+        setGuests(queryGuests);
+        setHasTouchedGuests(true);
+        if (queryGuests < 100) {
+          setPackageType('Premier');
+        }
+        setHydratedDraft(true);
+        return;
+      }
+
+      const raw = window.sessionStorage.getItem('sanpedro_precotizador_draft_v1');
+      if (raw) {
+        const saved = JSON.parse(raw);
+        if (typeof saved.guests === 'number' && saved.guests >= 50 && saved.guests <= 250) {
+          setGuests(saved.guests);
+        }
+        if (typeof saved.hasTouchedGuests === 'boolean') {
+          setHasTouchedGuests(saved.hasTouchedGuests);
+        }
+        if (typeof saved.eventKind === 'string') {
+          setEventKind(saved.eventKind);
+        }
+        if (typeof saved.preferredDay === 'string') {
+          setPreferredDay(saved.preferredDay);
+        }
+        if (typeof saved.preferredSeason === 'string') {
+          setPreferredSeason(saved.preferredSeason);
+        }
+        if (typeof saved.packageType === 'string') {
+          setPackageType(saved.packageType);
+        }
+        if (Array.isArray(saved.selectedExtras)) {
+          setSelectedExtras(saved.selectedExtras);
+        }
+        if (typeof saved.comboVipActive === 'boolean') {
+          setComboVipActive(saved.comboVipActive);
+        }
+        if (typeof saved.wantsTour === 'boolean') {
+          setWantsTour(saved.wantsTour);
+        }
+        if (typeof saved.step === 'number' && saved.step >= 1 && saved.step <= 4) {
+          setStep(saved.step);
+        }
+      }
+    } catch {
+      // Ignorar errores de sessionStorage en modo incógnito restringido
+    }
+    setHydratedDraft(true);
+  }, []);
+
+  // Guardar avance automáticamente en sessionStorage
+  useEffect(() => {
+    if (!hydratedDraft || typeof window === 'undefined') return;
+    try {
+      window.sessionStorage.setItem(
+        'sanpedro_precotizador_draft_v1',
+        JSON.stringify({
+          step,
+          guests,
+          hasTouchedGuests,
+          eventKind,
+          preferredDay,
+          preferredSeason,
+          packageType,
+          selectedExtras,
+          comboVipActive,
+          wantsTour,
+          updatedAt: Date.now(),
+        })
+      );
+    } catch {
+      // Ignorar si sessionStorage no está disponible
+    }
+  }, [
+    hydratedDraft,
+    step,
+    guests,
+    hasTouchedGuests,
+    eventKind,
+    preferredDay,
+    preferredSeason,
+    packageType,
+    selectedExtras,
+    comboVipActive,
+    wantsTour,
+  ]);
+
+  const handleResetQuote = () => {
+    setStep(1);
+    setGuests(80);
+    setHasTouchedGuests(false);
+    setEventKind('Boda');
+    setPreferredDay('Sábado');
+    setPreferredSeason('Temporada Alta / Fin de Año (Oct-Dic)');
+    setPackageType('Premier');
+    setSelectedExtras([]);
+    setComboVipActive(false);
+    setLockedAttemptPkg(null);
+    try {
+      window.sessionStorage.removeItem('sanpedro_precotizador_draft_v1');
+    } catch {
+      // Ignorar
+    }
   };
 
   useEffect(() => {
@@ -504,9 +616,21 @@ export default function Precotizador() {
               Precotizador de Evento
             </h2>
           </div>
-          <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-surface-container-high text-secondary border border-outline-variant/30">
-            Paso {step} de 4
-          </span>
+          <div className="flex items-center gap-1.5">
+            {step > 1 && (
+              <button
+                type="button"
+                onClick={handleResetQuote}
+                className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-surface-container-low text-secondary hover:text-primary border border-outline-variant/30 transition-colors cursor-pointer"
+                title="Reiniciar cotización desde el Paso 1"
+              >
+                Reiniciar
+              </button>
+            )}
+            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-surface-container-high text-secondary border border-outline-variant/30">
+              Paso {step} de 4
+            </span>
+          </div>
         </div>
 
         {/* Barra de pasos con etiquetas táctiles */}
