@@ -76,6 +76,11 @@ export default async function BlogPostPage({ params }: PageProps) {
   const isSmallEventsArticle = slug.includes("50-a-80-personas");
   const isPricingArticle = slug.includes("cuanto-cuesta-un-salon");
   const isPhotosArticle = slug.includes("fotos-y-recorrido");
+  const isShotsOrAnimationArticle =
+    slug.includes("carrito-de-shots") ||
+    slug.includes("robot") ||
+    slug.includes("limosinas") ||
+    slug.includes("dulces");
   const precotizadorHref = isSmallEventsArticle
     ? "/?guests=60#precotizador"
     : "/#precotizador";
@@ -85,6 +90,8 @@ export default async function BlogPostPage({ params }: PageProps) {
     ? "Precios Oficiales 2026 GAM: 50 pers. $26,500 • 100 pers. $53,000"
     : isPhotosArticle
     ? "¿Te gustaron los Salones Diamante y Platino en Norte 84 GAM?"
+    : isShotsOrAnimationArticle
+    ? "🔥 Carrito de Shots LED, Letras Gigantes, Robot y Limo en un solo lugar"
     : "Salones Diamante y Platino en Gustavo A. Madero, CDMX";
   const stickySubheadline = isSmallEventsArticle
     ? "Paquete Premier Todo Incluido desde $530 p/p ($26,500 MXN para 50 invitados)"
@@ -92,6 +99,8 @@ export default async function BlogPostPage({ params }: PageProps) {
     ? "Simula tu presupuesto exacto con barra libre, banquete, DJ, Robot LED o Limusina"
     : isPhotosArticle
     ? "Agenda un recorrido presencial sin costo o simula el precio de tu fecha en 30 segundos"
+    : isShotsOrAnimationArticle
+    ? "Incluidos en Paquete Plus ($710 p/p) o en nuestro Combo Fiesta VIP en Salones San Pedro Plus"
     : "Cotiza tu Boda, XV Años o Evento Empresarial desde $530 p/p en 30 segundos";
 
   const articleJsonLd = {

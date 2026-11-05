@@ -22,6 +22,38 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.3.9-cycle24',
+    cycle_number: 24,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-05 14:29 CDMX',
+    title:
+      'Ciclo Mediodía #24 (IMPLEMENTED): Validación SERP 64/159 Chars en Vivo + Eliminación de 4 Dead-Clicks en Paso 4 y #Paquetes (ses_rgthm_te0w64xf • $121,000 MXN) + Sticky Bar Carrito de Shots',
+    vectors: ['CRO', 'UX', 'SEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #23 (>= 2026-11-05T16:25:37Z a 2026-11-05T20:25:46Z): 76 eventos humanos reales en 3 sesiones: (1) ses_rgthm_te0w64xf (10:29 hrs CDMX, CDMX CP 06479, Mobile 430x775 desde Google Orgánico SEO) que validó en vivo la optimización SERP de la Home (title_len=64, meta_desc_len=159), cotizó dos escenarios hasta el Paso 4 (100 pax Premier $53,000 MXN y 150 pax Paquete Plus + Carrito de Shots + Mariachi + Letras Gigantes = $121,000 MXN) y registró 4 dead_clicks: 2 en el Paso 4 sobre "🎁 Tarifa Preferencial Incluido" y "verified PRESUPUESTO ESTIMADO EN VIVO", y 2 en #paquetes sobre "<p>A partir de 100 personas</p>" al intentar regresar el simulador de 150 a 100 personas; (2) ses_zouxo_a6ztqeg6 (11:18 hrs CDMX, Gustavo A. Madero CP 07050, 3ª visita del prospecto); y (3) ses_zksye_mr4rdhc4 (14:16 hrs CDMX, Azcapotzalco CP 09810, Desktop desde Google Orgánico SEO) que aterrizó en /blog/carrito-de-shots-para-animacion-de-fiestas (validando title_len=67, meta_desc_len=160) y leyó el 100% del artículo.',
+    autonomousActions: [
+      'Nivel 1 (Menor — Eliminación de Dead-Clicks en #Paquetes en PaquetesInteractiveSection.tsx): Conversión de las etiquetas estáticas "Disponible desde 50 personas" y "A partir de 100 personas" en botones interactivos que ajustan el simulador a 50 o 100 invitados en 1 toque, más anclaje de scroll block: "start" hacia #precotizador.',
+      'Nivel 1 (Menor — Eliminación de Dead-Clicks en Paso 4 en Precotizador.tsx): Integración de la insignia "verified Presupuesto Estimado en Vivo" dentro del botón desplegable del desglose matemático y conversión de la fila "Día (Viernes/Sábado)" en un botón interactivo que alterna el día y explicita el bono ("🎁 Tarifa Preferencial (+ Cortesía VIP de Bienvenida)").',
+      'Nivel 1 (Menor — Barra Flotante Contextual para Artículos de Animación en src/app/blog/[slug]/page.tsx): Mensaje específico para artículos de Carrito de Shots, Robot LED, Limusinas y Mesa de Dulces destacando su inclusión en Paquete Plus ($710 p/p) y Combo Fiesta VIP.',
+    ],
+    filesModified: [
+      'src/components/PaquetesInteractiveSection.tsx',
+      'src/components/Precotizador.tsx',
+      'src/app/blog/[slug]/page.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Verificar 0 dead_clicks sobre "A partir de 100 personas" en #paquetes y sobre las insignias del Paso 4 del Precotizador.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.3.8-cycle23',
     cycle_number: 23,
     status: 'IMPLEMENTED',
@@ -43,8 +75,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    commitHash: 'c77bd66',
+    deploymentUuid: 'xtv1sdoagjkb1o02w67ibg5r',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:

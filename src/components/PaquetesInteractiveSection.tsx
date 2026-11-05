@@ -289,9 +289,9 @@ export default function PaquetesInteractiveSection() {
           detail: { packageId, guests: simGuests, dayMode: simDayMode },
         })
       );
-      const heroEl = document.getElementById('precotizador-hero');
+      const heroEl = document.getElementById('precotizador') || document.getElementById('precotizador-hero');
       if (heroEl) {
-        heroEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        heroEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
   };
@@ -443,9 +443,23 @@ export default function PaquetesInteractiveSection() {
                   <h3 className="font-display-lg text-3xl text-on-surface font-bold mb-1">
                     Premier
                   </h3>
-                  <p className="text-primary text-sm font-semibold">
-                    Disponible desde 50 personas
-                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSimGuests(50);
+                      trackEvent('guests_slider_adjust', 'paquetes_card_min_50', {
+                        section: 'paquetes',
+                        guests_range: '50 personas',
+                        extra: { exact_guests: 50, source_widget: 'paquete_premier_badge' },
+                      });
+                    }}
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/10 hover:bg-primary/20 text-primary text-xs font-semibold transition-colors cursor-pointer"
+                    title="Toca para simular con 50 personas"
+                  >
+                    <span className="pointer-events-none">
+                      Disponible desde 50 personas {simGuests !== 50 ? '(simular 50)' : '✓'}
+                    </span>
+                  </button>
                   <div className="mt-3 space-y-1.5 text-on-surface/80 text-sm">
                     <p>
                       {simDayMode === 'viernes_domingo' ? 'Viernes / Dom desde' : 'Sábado Platino'}{' '}
@@ -508,7 +522,23 @@ export default function PaquetesInteractiveSection() {
               <div>
                 <div className="p-7 text-center bg-primary-container/10 border-b border-outline-variant/30 mt-6">
                   <h3 className="font-display-lg text-3xl text-primary font-bold mb-1">Plus</h3>
-                  <p className="text-secondary text-sm">A partir de 100 personas</p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSimGuests(100);
+                      trackEvent('guests_slider_adjust', 'paquetes_card_min_100', {
+                        section: 'paquetes',
+                        guests_range: '100 personas',
+                        extra: { exact_guests: 100, source_widget: 'paquete_min_100_badge' },
+                      });
+                    }}
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container hover:bg-primary/15 text-secondary hover:text-primary text-xs font-semibold transition-colors cursor-pointer"
+                    title="Toca para simular con 100 personas"
+                  >
+                    <span className="pointer-events-none">
+                      A partir de 100 personas {simGuests !== 100 ? '(simular 100)' : '✓'}
+                    </span>
+                  </button>
                   <div className="mt-3 space-y-1.5 text-on-surface/80 text-sm">
                     <p>
                       {simDayMode === 'viernes_domingo' ? 'Platino desde' : 'Sábado Platino'}{' '}
@@ -586,7 +616,23 @@ export default function PaquetesInteractiveSection() {
                   <h3 className="font-display-lg text-3xl text-on-surface font-bold mb-1">
                     All Inclusive
                   </h3>
-                  <p className="text-secondary text-sm">A partir de 100 personas</p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSimGuests(100);
+                      trackEvent('guests_slider_adjust', 'paquetes_card_min_100', {
+                        section: 'paquetes',
+                        guests_range: '100 personas',
+                        extra: { exact_guests: 100, source_widget: 'paquete_min_100_badge' },
+                      });
+                    }}
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container hover:bg-primary/15 text-secondary hover:text-primary text-xs font-semibold transition-colors cursor-pointer"
+                    title="Toca para simular con 100 personas"
+                  >
+                    <span className="pointer-events-none">
+                      A partir de 100 personas {simGuests !== 100 ? '(simular 100)' : '✓'}
+                    </span>
+                  </button>
                   <div className="mt-3 space-y-1.5 text-on-surface/80 text-sm">
                     <p>
                       {simDayMode === 'viernes_domingo' ? 'Platino desde' : 'Sábado Platino'}{' '}

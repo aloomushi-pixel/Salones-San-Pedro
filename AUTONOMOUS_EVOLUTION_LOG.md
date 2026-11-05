@@ -4,6 +4,33 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #24 — `2026-11-05 14:29 CDMX` (`v2.3.9-cycle24` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-05T16:25:37Z`)
+- **Telemetría en Supabase (`10:25` a `14:25 hrs CDMX`):** **`76` eventos humanos reales** en 3 sesiones:
+  1. **Sesión `ses_rgthm_te0w64xf` (`10:29 hrs CDMX`, CDMX CP `06479`, Mobile `430x775` desde `Google Orgánico SEO`):**
+     - **Validación en Vivo del Ciclo #23:** El monitor `web_vitals` (`seo_audit`) confirmó `title_len: 64` y `meta_desc_len: 159` en la Home (`/`).
+     - Recorrió el embudo dos veces hasta el Paso 4: primero cotizó `Bautizo / Cumpleaños` para `100 personas` en `Paquete Premier` (`$53,000 MXN`), y luego desde `#paquetes` seleccionó `150 personas` (`paquetes_sim_150`) y cotizó `Paquete Plus` + `Carrito de Shots` + `Mariachi` + `Letras Gigantes` (**`$121,000 MXN`**).
+     - **4 `dead_clicks` detectados y aislados en `ses_rgthm_te0w64xf`:**
+       - `2` en el Paso 4 del `Precotizador`: sobre `<span>🎁 Tarifa Preferencial Incluido</span>` y sobre `<div>verified PRESUPUESTO ESTIMADO EN VIVO</div>`.
+       - `2` en `#paquetes`: sobre `<p>A partir de 100 personas</p>` cuando el simulador estaba en `150 personas` y el usuario tocó dos veces `"A partir de 100 personas"` intentando regresar el cálculo de la tarjeta a `100 invitados`.
+  2. **Sesión `ses_zouxo_a6ztqeg6` (`11:18 hrs CDMX`, Gustavo A. Madero CP `07050`):**
+     - Tercera visita del prospecto local de GAM CDMX (`title_len: 64`, `meta_desc_len: 159`).
+  3. **Sesión `ses_zksye_mr4rdhc4` (`14:16 hrs CDMX`, Azcapotzalco CP `09810`, Desktop desde `Google Orgánico SEO`):**
+     - Aterrizó directamente desde Google en `/blog/carrito-de-shots-para-animacion-de-fiestas` (confirmando `title_len: 67` y `meta_desc_len: 160` tras la optimización del Ciclo #21) y leyó hasta el `100%` del artículo.
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 (Menor — `IMPLEMENTED`)
+1. **[`src/components/PaquetesInteractiveSection.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/PaquetesInteractiveSection.tsx):**
+   - Conversión de las leyendas estáticas `"Disponible desde 50 personas"` (`Premier`) y `"A partir de 100 personas"` (`Plus` y `All Inclusive`) en botones interactivos que ajustan el simulador a `50` o `100` invitados en 1 toque.
+   - Ajuste de `scrollIntoView({ behavior: 'smooth', block: 'start' })` hacia `#precotizador` al preseleccionar un paquete.
+2. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx):**
+   - Inclusión de la insignia `"verified Presupuesto Estimado en Vivo"` dentro del `<button>` desplegable del desglose matemático en el Paso 4.
+   - Conversión de la fila `"Día (Viernes/Sábado)"` dentro del desglose matemático en un botón interactivo que alterna el día y muestra el beneficio explícito (`"🎁 Tarifa Preferencial (+ Cortesía VIP de Bienvenida)"`).
+3. **[`src/app/blog/[slug]/page.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/blog/%5Bslug%5D/page.tsx):**
+   - Copia contextual en la barra inferior fija para artículos de animación y servicios (`carrito-de-shots`, `robot`, `limosinas`, `dulces`) destacando que vienen incluidos en `Paquete Plus` (`$710 p/p`) y `Combo Fiesta VIP`.
+
+---
+
 ## Ciclo Autónomo #23 — `2026-11-05 10:23 CDMX` (`v2.3.8-cycle23` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-05T12:20:14Z`)

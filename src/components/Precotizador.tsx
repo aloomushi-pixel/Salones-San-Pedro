@@ -1223,20 +1223,19 @@ export default function Precotizador() {
         {step === 4 && (
           <div className="animate-fade-in space-y-3.5 text-center">
             <div className="bg-surface-container-lowest p-4 sm:p-5 rounded-2xl border border-outline-variant/30 shadow-inner">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 text-green-500 text-[11px] font-bold uppercase tracking-wider mb-1">
-                <span data-ux-decorative="true" className="material-symbols-outlined text-sm pointer-events-none">
-                  verified
-                </span>
-                Presupuesto Estimado en Vivo
-              </div>
-
-              {/* Monto total clicable para ver/ocultar el desglose matemático (Resuelve dead_click en "$111,300 MXN") */}
+              {/* Monto total + insignia clicable para ver/ocultar el desglose matemático (Resuelve dead_click en "verified PRESUPUESTO ESTIMADO EN VIVO" y "$111,300 MXN") */}
               <button
                 type="button"
                 onClick={() => setShowMathBreakdown((prev) => !prev)}
                 className="w-full py-1.5 rounded-xl hover:bg-surface-container-low transition-colors cursor-pointer group"
                 title="Haz clic para ver u ocultar el desglose matemático"
               >
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 text-green-500 text-[11px] font-bold uppercase tracking-wider mb-1 pointer-events-none">
+                  <span data-ux-decorative="true" className="material-symbols-outlined text-sm pointer-events-none">
+                    verified
+                  </span>
+                  <span className="pointer-events-none">Presupuesto Estimado en Vivo</span>
+                </div>
                 <div className="font-display-lg text-3xl sm:text-5xl text-primary font-bold pointer-events-none">
                   ${budget.toLocaleString('es-MX')}{' '}
                   <span className="text-sm sm:text-base font-normal text-secondary">MXN</span>
@@ -1278,14 +1277,26 @@ export default function Precotizador() {
                       </span>
                     </div>
                   ))}
-                  <div className="pt-1.5 border-t border-outline-variant/30 flex justify-between items-center text-[11px]">
-                    <span className="text-secondary">Día seleccionado ({preferredDay}):</span>
-                    <span className="font-bold text-green-400">
-                      {selectedDayInfo.hasBonus
-                        ? `${selectedDayInfo.badge} Incluido`
-                        : 'Tarifa Estándar Sábado'}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const nextIdx =
+                        (PREFERRED_DAYS.findIndex((d) => d.id === preferredDay) + 1) %
+                        PREFERRED_DAYS.length;
+                      setPreferredDay(PREFERRED_DAYS[nextIdx].id);
+                    }}
+                    className="w-full pt-1.5 border-t border-outline-variant/30 flex justify-between items-center text-[11px] hover:opacity-90 transition-opacity cursor-pointer text-left"
+                    title="Toca para alternar día y comparar beneficio"
+                  >
+                    <span className="text-secondary pointer-events-none">
+                      Día ({preferredDay}):
                     </span>
-                  </div>
+                    <span className="font-bold text-green-400 pointer-events-none text-right">
+                      {selectedDayInfo.hasBonus
+                        ? `${selectedDayInfo.badge} (${selectedDayInfo.benefit})`
+                        : 'Tarifa Estándar Sábado (toca para ver Viernes 🎁)'}
+                    </span>
+                  </button>
                 </div>
               )}
 
