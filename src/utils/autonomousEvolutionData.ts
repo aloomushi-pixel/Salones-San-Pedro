@@ -22,6 +22,65 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.3.8-cycle23',
+    cycle_number: 23,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-05 10:23 CDMX',
+    title:
+      'Ciclo Matutino #23 (IMPLEMENTED): Recorrido Continuo Diamante ↔ Platino en Lightbox (26 Clics en ses_zouxo_a6ztqeg6) + Optimización SERP Home Title (64 chars) y Meta Description (159 chars)',
+    vectors: ['UX', 'CRO', 'SEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #22 (>= 2026-11-05T12:20:14Z a 2026-11-05T16:20:26Z): 43 eventos humanos reales en 2 sesiones matutinas: (1) ses_zouxo_a6ztqeg6 (07:34 hrs CDMX, Mobile 406x760, retorno del prospecto que visitó anoche desde WhatsApp Business) que hizo clic en hero_click: ver_galeria, abrió lightbox_open_diamante y tocó next_diamante 26 veces seguidas durante 47s activos dando 2.6 vueltas al Salón Diamante sin poder pasar automáticamente al Salón Platino por falta de transición entre salones y de selector de salón dentro del Lightbox; y (2) ses_oy2ts_fi7854yu (09:19 hrs CDMX, Mobile 440x894) y ses_zouxo_a6ztqeg6 cuyo auditor web_vitals (seo_audit) en la Home (/) reportó title_len=110 y meta_desc_len=281 (truncando el precio "$530 p/p" en Google SERPs).',
+    autonomousActions: [
+      'Nivel 1 (Menor — Navegación Continua entre Salones y Selector en Lightbox en GaleriaSection.tsx): Al llegar a la foto 10 del Salón Diamante dentro del Lightbox y tocar "Siguiente", ahora avanza automáticamente a la foto 1 del Salón Platino (y viceversa), además de incorporar un selector rápido "Salón Diamante | Salón Platino" en la barra superior del Lightbox.',
+      'Nivel 1 (Menor — Optimización de Longitud SERP en src/app/layout.tsx): Ajuste del <title> de la Home de 110 a 64 caracteres ("Salones de Fiestas en GAM CDMX | San Pedro Plus (Desde $530 p/p)") y de la <meta name="description"> de 281 a 159 caracteres para evitar truncamiento del precio y ubicación en Google Search.',
+    ],
+    filesModified: [
+      'src/components/GaleriaSection.tsx',
+      'src/app/layout.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Verificar en web_vitals de la Home title_len=64 y meta_desc_len=159 (0 truncamiento SERP) y medir exploración cruzada Salón Diamante ↔ Salón Platino dentro del Lightbox.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.3.7-cycle22',
+    cycle_number: 22,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-05 06:18 CDMX',
+    title:
+      'Ciclo Amanecer #22 (POSTPONED): Ventana de Madrugada sin Tráfico Nuevo (02:18–06:18 hrs CDMX) — Se Conserva Intacta la Versión v2.3.6-cycle21 para Medir Tráfico Matutino',
+    vectors: ['UX', 'CRO', 'SEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #21 (>= 2026-11-05T08:18:03Z a 2026-11-05T12:18:14Z): 0 sesiones nuevas, 0 eventos humanos y 0 leads durante la ventana de descanso de madrugada (02:18 a 06:18 hrs CDMX). Sitemap en Google Search Console saludable con 37 URLs enviadas y 0 errores.',
+    autonomousActions: [
+      'Auditoría telemétrica estricta post-deploy del Ciclo #21 (commit 1c0f57e) y verificación de estado de indexación en Google Search Console.',
+      'Aplicación de Criterio Consciente (POSTPONED): se mantiene sin cambios el código en producción para evaluar con tráfico real matutino el nuevo botón de 50 personas, el puente de personalización en Paquete Plus y la barra flotante contextual en los 3 artículos SEO.',
+    ],
+    filesModified: [
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason:
+      '0 eventos humanos registrados en la ventana de amanecer (02:18 a 06:18 hrs CDMX); se preserva la estabilidad del despliegue 1c0f57e para medir conversión matutina.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: '1c0f57e',
+    deploymentUuid: 'olc5xvbpzdoc6zwmfns8xoiw',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Evaluar las sesiones matutinas (06:18 a 10:18 hrs CDMX) sobre el puente de 50/80 invitados en #paquetes y los 3 artículos SEO posicionados.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.3.6-cycle21',
     cycle_number: 21,
     status: 'IMPLEMENTED',
@@ -43,8 +102,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    commitHash: '1c0f57e',
+    deploymentUuid: 'olc5xvbpzdoc6zwmfns8xoiw',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:

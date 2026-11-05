@@ -18,9 +18,9 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL("https://sanpedro.aionia.com.mx"),
   title:
-    "Salones San Pedro Plus CDMX | Salones de Fiestas y Eventos Todo Incluido en Gustavo A. Madero (Desde $530 p/p)",
+    "Salones de Fiestas en GAM CDMX | San Pedro Plus (Desde $530 p/p)",
   description:
-    "Salones de fiestas y eventos en Gustavo A. Madero, CDMX (Salón Diamante y Platino en Norte 84 #6507, San Pedro el Chico). Paquetes Todo Incluido 2026 desde $530 MXN p/p para 50 a 300 personas con Banquete, DJ, Pista LED, Robot LED, Limusina y Mariachi. Cotiza en línea al instante.",
+    "Salones Diamante y Platino en Gustavo A. Madero CDMX (Norte 84 #6507). Paquetes Todo Incluido 2026 desde $530 p/p (50 a 300 pers.): Banquete, DJ, Robot y Limo.",
   alternates: {
     canonical: "https://sanpedro.aionia.com.mx",
   },

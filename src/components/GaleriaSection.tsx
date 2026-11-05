@@ -143,6 +143,16 @@ export default function GaleriaSection() {
     (e?: React.MouseEvent) => {
       if (e) e.stopPropagation();
       if (activeTab === 'diamante') {
+        if (lightboxOpen && diamanteIndex === diamantePhotos.length - 1) {
+          setActiveTab('platino');
+          setPlatinoIndex(0);
+          trackEvent('gallery_interaction', 'next_platino_auto_from_diamante', {
+            section: 'galeria',
+            gallery_category: 'Salón Platino',
+            photo_title: platinoPhotos[0]?.caption,
+          });
+          return;
+        }
         setDiamanteIndex((prev) => {
           const nextIdx = (prev + 1) % diamantePhotos.length;
           trackEvent('gallery_interaction', `next_diamante`, {
@@ -153,6 +163,16 @@ export default function GaleriaSection() {
           return nextIdx;
         });
       } else {
+        if (lightboxOpen && platinoIndex === platinoPhotos.length - 1) {
+          setActiveTab('diamante');
+          setDiamanteIndex(0);
+          trackEvent('gallery_interaction', 'next_diamante_auto_from_platino', {
+            section: 'galeria',
+            gallery_category: 'Salón Diamante',
+            photo_title: diamantePhotos[0]?.caption,
+          });
+          return;
+        }
         setPlatinoIndex((prev) => {
           const nextIdx = (prev + 1) % platinoPhotos.length;
           trackEvent('gallery_interaction', `next_platino`, {
@@ -164,13 +184,23 @@ export default function GaleriaSection() {
         });
       }
     },
-    [activeTab]
+    [activeTab, lightboxOpen, diamanteIndex, platinoIndex]
   );
 
   const handlePrev = useCallback(
     (e?: React.MouseEvent) => {
       if (e) e.stopPropagation();
       if (activeTab === 'diamante') {
+        if (lightboxOpen && diamanteIndex === 0) {
+          setActiveTab('platino');
+          setPlatinoIndex(platinoPhotos.length - 1);
+          trackEvent('gallery_interaction', 'prev_platino_auto_from_diamante', {
+            section: 'galeria',
+            gallery_category: 'Salón Platino',
+            photo_title: platinoPhotos[platinoPhotos.length - 1]?.caption,
+          });
+          return;
+        }
         setDiamanteIndex((prev) => {
           const prevIdx = (prev - 1 + diamantePhotos.length) % diamantePhotos.length;
           trackEvent('gallery_interaction', `prev_diamante`, {
@@ -181,6 +211,16 @@ export default function GaleriaSection() {
           return prevIdx;
         });
       } else {
+        if (lightboxOpen && platinoIndex === 0) {
+          setActiveTab('diamante');
+          setDiamanteIndex(diamantePhotos.length - 1);
+          trackEvent('gallery_interaction', 'prev_diamante_auto_from_platino', {
+            section: 'galeria',
+            gallery_category: 'Salón Diamante',
+            photo_title: diamantePhotos[diamantePhotos.length - 1]?.caption,
+          });
+          return;
+        }
         setPlatinoIndex((prev) => {
           const prevIdx = (prev - 1 + platinoPhotos.length) % platinoPhotos.length;
           trackEvent('gallery_interaction', `prev_platino`, {
@@ -192,7 +232,7 @@ export default function GaleriaSection() {
         });
       }
     },
-    [activeTab]
+    [activeTab, lightboxOpen, diamanteIndex, platinoIndex]
   );
 
   const openLightbox = () => {
@@ -411,9 +451,9 @@ export default function GaleriaSection() {
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          {/* Barra Superior del Lightbox */}
+          {/* Barra Superior del Lightbox + Selector Rápido de Salón */}
           <div
-            className="flex items-center justify-between max-w-6xl w-full mx-auto z-10"
+            className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 max-w-6xl w-full mx-auto z-10"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="text-white">
@@ -424,16 +464,54 @@ export default function GaleriaSection() {
                 {photos[activeIndex].caption}
               </h4>
             </div>
-            <button
-              type="button"
-              onClick={() => setLightboxOpen(false)}
-              className="px-4 py-2 rounded-full bg-white/15 hover:bg-white/25 text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer"
-            >
-              <span className="pointer-events-none">Cerrar</span>
-              <span data-ux-decorative="true" className="material-symbols-outlined text-base pointer-events-none">
-                close
-              </span>
-            </button>
+            <div className="flex items-center justify-between sm:justify-end gap-2">
+              <div className="inline-flex items-center bg-white/10 p-1 rounded-full border border-white/15">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveTab('diamante');
+                    trackEvent('gallery_interaction', 'lightbox_switch_diamante', {
+                      section: 'galeria',
+                      gallery_category: 'Salón Diamante',
+                    });
+                  }}
+                  className={`px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                    activeTab === 'diamante'
+                      ? 'bg-primary text-on-primary shadow-xs'
+                      : 'text-white/80 hover:text-white'
+                  }`}
+                >
+                  Salón Diamante
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveTab('platino');
+                    trackEvent('gallery_interaction', 'lightbox_switch_platino', {
+                      section: 'galeria',
+                      gallery_category: 'Salón Platino',
+                    });
+                  }}
+                  className={`px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                    activeTab === 'platino'
+                      ? 'bg-primary text-on-primary shadow-xs'
+                      : 'text-white/80 hover:text-white'
+                  }`}
+                >
+                  Salón Platino
+                </button>
+              </div>
+              <button
+                type="button"
+                onClick={() => setLightboxOpen(false)}
+                className="px-3.5 py-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1 cursor-pointer"
+              >
+                <span className="pointer-events-none">Cerrar</span>
+                <span data-ux-decorative="true" className="material-symbols-outlined text-base pointer-events-none">
+                  close
+                </span>
+              </button>
+            </div>
           </div>
 
           {/* Imagen Central Ampliada */}

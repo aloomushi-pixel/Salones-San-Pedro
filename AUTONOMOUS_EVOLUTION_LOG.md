@@ -4,6 +4,34 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #23 — `2026-11-05 10:23 CDMX` (`v2.3.8-cycle23` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-05T12:20:14Z`)
+- **Telemetría en Supabase (`06:20` a `10:20 hrs CDMX`):** **`43` eventos humanos reales** en 2 sesiones matutinas:
+  1. **Sesión `ses_zouxo_a6ztqeg6` (`07:34 hrs CDMX`, Mobile `406x760`, retorno del prospecto que visitó anoche desde WhatsApp Business):**
+     - Hizo clic en `hero_click: ver_galeria`, abrió el visor a pantalla completa (`lightbox_open_diamante`) y **tocó `next_diamante` `26` veces consecutivas** durante `47s` activos.
+     - **Fricción detectada en el Lightbox:** Como `Salón Diamante` tiene 10 fotos y el botón "Siguiente" del Lightbox reiniciaba el mismo salón (`0 -> 9 -> 0`), el usuario dio **2.6 vueltas completas al Salón Diamante** sin poder pasar automáticamente al `Salón Platino` ni contar con un selector de salón dentro del visor a pantalla completa.
+  2. **Auditoría `web_vitals` (`seo_audit`) en la Home (`/`) (`ses_zouxo_a6ztqeg6` y `ses_oy2ts_fi7854yu`):**
+     - El monitor reportó `title_len: 110` y `meta_desc_len: 281` en la página principal (`/`), ocasionando que Google SERP truncara el precio (`Desde $530 p/p`) y la ubicación (`Gustavo A. Madero`).
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 (Menor — `IMPLEMENTED`)
+1. **[`src/components/GaleriaSection.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/GaleriaSection.tsx):**
+   - Navegación continua entre salones dentro del Lightbox: al avanzar después de la foto 10 del `Salón Diamante`, el visor pasa automáticamente a la foto 1 del `Salón Platino` (y viceversa), permitiendo recorrer las 20 fotografías sin quedar atrapado en un bucle de un solo salón.
+   - Adición de un selector rápido **`Salón Diamante | Salón Platino`** en la barra superior del Lightbox.
+2. **[`src/app/layout.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/layout.tsx):**
+   - Optimización del `<title>` de la Home de `110` a **`64` caracteres** (`"Salones de Fiestas en GAM CDMX | San Pedro Plus (Desde $530 p/p)"`) y de la `<meta name="description">` de `281` a **`159` caracteres** para eliminar por completo el truncamiento en Google Search.
+
+---
+
+## Ciclo Autónomo #22 — `2026-11-05 06:18 CDMX` (`v2.3.7-cycle22` — `POSTPONED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-05T08:18:03Z`)
+- **Telemetría en Supabase (`02:18` a `06:18 hrs CDMX`):** `0` sesiones nuevas, `0` eventos humanos y `0` leads durante la ventana de amanecer del miércoles posterior al despliegue del Ciclo #21 (`commit 1c0f57e`).
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap `https://sanpedro.aionia.com.mx/sitemap.xml` estable con `37` URLs enviadas, `0` errores y `0` advertencias.
+- **Decisión Consciente (`POSTPONED`):** Se mantiene intacta la versión en producción (`commit 1c0f57e`, Coolify `olc5xvbpzdoc6zwmfns8xoiw`) para evaluar el tráfico matutino sobre el nuevo botón de 50 personas, el puente de personalización en `Paquete Plus` y los 3 artículos SEO posicionados.
+
+---
+
 ## Ciclo Autónomo #21 — `2026-11-05 02:14 CDMX` (`v2.3.6-cycle21` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-05T04:09:35Z`)
