@@ -4,6 +4,28 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #25 — `2026-11-05 18:36 CDMX` (`v2.4.0-cycle25` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-05T20:32:15Z`)
+- **Telemetría en Supabase (`14:32` a `18:32 hrs CDMX`):** **`9` eventos humanos reales** en la sesión **`ses_4p25u_u6ohd636`** (`16:39 hrs CDMX`, CDMX CP `03220`, Desktop `1272x634` / pantalla `1280x800` desde **`Buscadores Orgánicos (Bing/Yahoo)`** `https://www.bing.com/`):
+  1. **Validación SEO en Vivo:** `web_vitals` (`seo_audit`) en `/` confirmó `title_len: 64`, `meta_desc_len: 159`, `h1_count: 1`, `img_missing_alt: 0`.
+  2. **Fricción Detectada (Viewport Laptop Compacto `1272x634` + `exit_intent` sin Rescate):**
+     - El visitante permaneció **`32.6s` activos** (`26s` en `#inicio`/`#precotizador` y `6s` en `#paquetes` al `11%` de scroll), regresó a `scroll: 0%` y disparó **`exit_intent` (`exit_from_inicio`)** a los `30.5s` antes de cerrar la pestaña (`session_exit: page_unload`).
+     - Como [`StickyPriceCompareBar.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/StickyPriceCompareBar.tsx) exigía `scroll >= 22%` y [`UXMonitorProvider.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/UXMonitorProvider.tsx) no emitía señal visual al detectar `exit_intent`, la barra de referencia rápida (`$530 / $710 / $1,010`) nunca se mostró ni al bajar al `11%` ni al intentar abandonar la página.
+     - Además, en un viewport de `634px` de alto (`1272x634`), el padding superior acumulado de `#inicio` (`152px`) más el `<h1>` `lg:text-6xl` desplazaban la mitad inferior del `Precotizador` debajo del pliegue inicial.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):**
+  - La consulta **`"autos para bodas distrito federal"`** hacia `/blog/renta-de-auto-clasico-para-bodas` acumula **`135` impresiones con `0` clics** (4ª consulta con más impresiones de todo el dominio, posición `27.99`), y su `<title>` medía `89` caracteres (truncado en SERP).
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/components/UXMonitorProvider.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/UXMonitorProvider.tsx) y [`src/components/StickyPriceCompareBar.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/StickyPriceCompareBar.tsx) (Nivel 2 — Mediana):**
+   - Emisión del evento `CustomEvent('sanpedro:exit-intent')` cuando el usuario lleva el cursor al borde superior (`e.clientY <= 8` tras `>= 4s` activos) y reducción del umbral de aparición por scroll de `22%` a `10%`, activando la barra inferior en modo rescate (`⚡ Antes de salir: Premier $530 • Plus $710 ⭐ • All Inclusive $1,010`) incluso en `scroll: 0%`.
+2. **[`src/app/page.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/page.tsx) (Nivel 1 — Menor):**
+   - Ajuste vertical en `lg:` (`lg:pt-20 lg:pb-12`, contenedor `pt-4 lg:pt-6`, `<h1>` `lg:text-4xl xl:text-5xl mb-4 lg:mb-6`) para que el Paso 1 completo del `Precotizador` y su CTA principal queden 100% visibles sin scroll en laptops de `634px–768px` de altura.
+3. **[`src/utils/blogData.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/utils/blogData.tsx) y [`src/app/blog/[slug]/page.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/blog/%5Bslug%5D/page.tsx) (Nivel 2 — Mediana):**
+   - Optimización del `<title>` de `renta-de-auto-clasico-para-bodas` a **`58` caracteres** (`"Autos para Bodas en CDMX (DF): Clásico y Limusina Incluida"`), blindaje de `generateMetadata` (`<= 66` chars en todos los artículos) e incorporación de tabla comparativa 2026 (**Renta Externa en DF `$6,500–$9,500 MXN` vs Combo Fiesta VIP / Paquete All Inclusive en Salones San Pedro Plus GAM**).
+
+---
+
 ## Ciclo Autónomo #24 — `2026-11-05 14:29 CDMX` (`v2.3.9-cycle24` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-05T16:25:37Z`)

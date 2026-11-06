@@ -29,9 +29,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const seoTitle =
-    post.title.length > 62
+    post.title.length <= 36
+      ? `${post.title} | Salones San Pedro Plus CDMX`
+      : post.title.length <= 49
+      ? `${post.title} | San Pedro Plus`
+      : post.title.length <= 66
       ? post.title
-      : `${post.title} | Salones San Pedro Plus CDMX`;
+      : `${post.title.slice(0, 63).trim()}...`;
   const rawDescription = `Desde $530 p/p ($26,500 por 50 pers.) en GAM CDMX: ${post.excerpt}`;
   const seoDescription =
     rawDescription.length > 160
@@ -80,6 +84,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     slug.includes("carrito-de-shots") ||
     slug.includes("robot") ||
     slug.includes("limosinas") ||
+    slug.includes("auto-clasico") ||
     slug.includes("dulces");
   const precotizadorHref = isSmallEventsArticle
     ? "/?guests=60#precotizador"

@@ -18,7 +18,7 @@ export default function Home() {
 
       <main>
         {/* Hero Section */}
-        <section id="inicio" data-ux-section="inicio" className="relative min-h-screen pt-16 pb-12 lg:pt-24 lg:pb-16 w-full flex items-center justify-center overflow-hidden">
+        <section id="inicio" data-ux-section="inicio" className="relative min-h-screen pt-16 pb-10 lg:pt-20 lg:pb-12 w-full flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0">
             <Image
               className="object-cover"
@@ -31,14 +31,14 @@ export default function Home() {
             <div className="absolute inset-0 hero-gradient"></div>
           </div>
           
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pt-6 lg:pt-14">
-            <h1 className="font-display-lg text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-surface-container-lowest mb-5 lg:mb-10 text-center lg:text-left drop-shadow-xl font-bold leading-tight">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pt-4 lg:pt-6">
+            <h1 className="font-display-lg text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl text-surface-container-lowest mb-4 lg:mb-6 text-center lg:text-left drop-shadow-xl font-bold leading-tight">
               Salón de eventos en Gustavo A. Madero - CDMX San Pedro Plus
             </h1>
             
-            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-start justify-between">
+            <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-center lg:items-start justify-between">
               {/* Columna Izquierda: Texto, Píldoras Interactivas de Confianza y CTA */}
-              <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-5 lg:space-y-8 pt-1 lg:pt-4">
+              <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-6 pt-1 lg:pt-2">
                 <p className="font-body-lg text-base sm:text-xl md:text-2xl text-surface-variant max-w-xl drop-shadow-md leading-relaxed">
                   Salón de eventos en Ciudad de México para bodas, XV años, bautizos, graduaciones y eventos corporativos con paquetes todo incluido desde $530 MXN por persona.
                 </p>

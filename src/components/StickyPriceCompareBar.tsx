@@ -7,6 +7,7 @@ export default function StickyPriceCompareBar() {
   const [visible, setVisible] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const [exitRescueTriggered, setExitRescueTriggered] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,13 +16,23 @@ export default function StickyPriceCompareBar() {
       const docHeight =
         document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      setVisible(pct >= 22 && pct <= 94);
+      setVisible(exitRescueTriggered || (pct >= 10 && pct <= 94));
+    };
+
+    const handleExitIntent = () => {
+      if (dismissed) return;
+      setExitRescueTriggered(true);
+      setVisible(true);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('sanpedro:exit-intent', handleExitIntent as EventListener);
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [dismissed]);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('sanpedro:exit-intent', handleExitIntent as EventListener);
+    };
+  }, [dismissed, exitRescueTriggered]);
 
   if (!visible && !openModal) return null;
 
@@ -30,12 +41,16 @@ export default function StickyPriceCompareBar() {
       {visible && (
         <div
           data-interactive="true"
-          className="fixed bottom-4 left-3 right-24 sm:left-6 sm:right-28 z-[90] max-w-3xl mx-auto bg-[#121212]/95 text-white border border-primary/40 rounded-2xl px-3.5 py-2.5 shadow-2xl backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 animate-in fade-in slide-in-from-bottom-4 duration-300"
+          className={`fixed bottom-4 left-3 right-24 sm:left-6 sm:right-28 z-[90] max-w-3xl mx-auto bg-[#121212]/95 text-white border ${
+            exitRescueTriggered
+              ? 'border-amber-400 ring-2 ring-amber-400/30'
+              : 'border-primary/40'
+          } rounded-2xl px-3.5 py-2.5 shadow-2xl backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 animate-in fade-in slide-in-from-bottom-4 duration-300`}
         >
           <div className="flex items-center justify-between sm:justify-start gap-2 text-xs">
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2.5">
               <span className="hidden md:inline-block text-[10px] font-extrabold uppercase tracking-wider text-primary">
-                Referencia Rápida:
+                {exitRescueTriggered ? '⚡ Antes de salir:' : 'Referencia Rápida:'}
               </span>
               <span className="px-2 py-0.5 rounded-md bg-white/10 font-semibold text-[11px]">
                 Premier <strong className="text-primary">$530</strong>

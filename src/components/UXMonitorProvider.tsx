@@ -326,10 +326,16 @@ export default function UXMonitorProvider({ children }: { children: React.ReactN
         const st = getOrInitMonitorState();
         if (st && st.activeTimeMs >= 4000) {
           exitIntentTrackedRef.current = true;
-          trackEvent('exit_intent', `exit_from_${activeSectionRef.current}`, {
-            section: activeSectionRef.current,
-            element_text: `Intento de salida mientras veía ${activeSectionRef.current}`,
+          const currentSec = activeSectionRef.current;
+          trackEvent('exit_intent', `exit_from_${currentSec}`, {
+            section: currentSec,
+            element_text: `Intento de salida mientras veía ${currentSec}`,
           });
+          window.dispatchEvent(
+            new CustomEvent('sanpedro:exit-intent', {
+              detail: { section: currentSec },
+            })
+          );
         }
       }
     };

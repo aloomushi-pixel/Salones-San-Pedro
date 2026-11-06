@@ -215,10 +215,10 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "renta-de-auto-clasico-para-bodas",
-    title: "Autos para Bodas en CDMX (Distrito Federal) y Limusina Incluida | Salones San Pedro Plus",
-    excerpt: "¿Buscas renta de autos para boda en CDMX o Distrito Federal? Conoce nuestro Mercedes-Benz clásico 1930 y Limusina con chofer incluidos en paquetes de salón en Gustavo A. Madero.",
+    title: "Autos para Bodas en CDMX (DF): Clásico y Limusina Incluida",
+    excerpt: "Renta de autos para bodas en Distrito Federal (CDMX): Mercedes-Benz clásico 1930 y Limusina con chofer incluidos en paquetes de Salones San Pedro Plus GAM.",
     date: "28 de Mayo, 2026",
-    readTime: "3 min de lectura",
+    readTime: "4 min de lectura",
     category: "Servicios Plus",
     imageUrl: "/servicios/auto-clasico.jpg"
   }
@@ -712,28 +712,57 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
   },
   "renta-de-auto-clasico-para-bodas": {
     slug: "renta-de-auto-clasico-para-bodas",
-    title: "Autos para Bodas en CDMX (Distrito Federal) y Limusina Incluida | Salones San Pedro Plus",
-    excerpt: "¿Buscas renta de autos para boda en CDMX o Distrito Federal? Conoce nuestro Mercedes-Benz clásico 1930 y Limusina con chofer incluidos en paquetes de salón en Gustavo A. Madero.",
+    title: "Autos para Bodas en CDMX (DF): Clásico y Limusina Incluida",
+    excerpt: "Renta de autos para bodas en Distrito Federal (CDMX): Mercedes-Benz clásico 1930 y Limusina con chofer incluidos en paquetes de Salones San Pedro Plus GAM.",
     date: "28 de Mayo, 2026",
-    readTime: "3 min de lectura",
+    readTime: "4 min de lectura",
     category: "Servicios Plus",
     imageUrl: "/servicios/auto-clasico.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
-        <p>Para las bodas que buscan un estilo clásico, romántico e inolvidable, el traslado de los novios en un automóvil de época de los años 1930 es la opción idónea. Añade un glamour nostálgico que luce de ensueño en la sesión de fotografía nupcial.</p>
+        <p>Si estás buscando <strong>autos para bodas en Distrito Federal (Ciudad de México)</strong>, el traslado de los novios en un automóvil de época de los años 1930 o en una Limusina de lujo marca la diferencia desde la salida de la iglesia hasta la entrada triunfal al salón. En <strong>Salones San Pedro Plus (Gustavo A. Madero, Norte CDMX)</strong> integramos el servicio de transporte nupcial directamente en tu paquete de evento para que ahorres hasta un 45% frente a rentadoras externas.</p>
         
-        <h2 className="font-display-lg text-2xl text-on-surface font-bold mt-8">Un Mercedes-Benz Clásico de los años 30 a tu servicio</h2>
-        <p>Ofrecemos en renta un elegante auto clásico Mercedes-Benz en color marfil y negro, perfectamente restaurado. Cuenta con interiores de lujo, capacidad para 2 personas (ideal para el traslado exclusivo de la novia y su padre, y posteriormente para los recién casados) y chofer formalmente uniformado.</p>
+        <h2 className="font-display-lg text-2xl text-on-surface font-bold mt-8">Un Mercedes-Benz Clásico 1930 o Limusina VIP en CDMX a tu servicio</h2>
+        <p>Contamos con un elegante auto clásico tipo Mercedes-Benz años 30 en color marfil y negro, perfectamente restaurado, con interiores de piel, capacidad para 2 personas (ideal para el traslado exclusivo de la novia y su padre, y posteriormente de los recién casados) y chofer formalmente uniformado. Además, si prefieres viajar con tus padrinos o damas de honor, puedes elegir nuestra <strong>Limusina Hummer H2, Lincoln o Chrysler 300</strong> para 10 pasajeros.</p>
 
-        <h2 className="font-display-lg text-xl text-on-surface font-semibold mt-6">¿Qué incluye el servicio de Auto Clásico?</h2>
+        <h2 className="font-display-lg text-xl text-on-surface font-semibold mt-6">Comparativa 2026: Renta Externa de Autos para Bodas en DF vs Salón Todo Incluido</h2>
+        <div className="overflow-x-auto my-4">
+          <table className="w-full text-left border-collapse border border-outline-variant/40 text-xs sm:text-sm">
+            <thead>
+              <tr className="bg-surface-container-high text-on-surface">
+                <th className="p-3 border border-outline-variant/40 font-bold">Modalidad en CDMX / DF</th>
+                <th className="p-3 border border-outline-variant/40 font-bold">Costo Promedio</th>
+                <th className="p-3 border border-outline-variant/40 font-bold">Qué Incluye</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="p-3 border border-outline-variant/40 font-semibold">Renta Externa de Auto Clásico en DF</td>
+                <td className="p-3 border border-outline-variant/40">$6,500 – $9,500 MXN</td>
+                <td className="p-3 border border-outline-variant/40">Solo traslado de 3 hrs; cargos extra por hora adicional o distancia en GAM/Norte CDMX.</td>
+              </tr>
+              <tr className="bg-primary/5">
+                <td className="p-3 border border-outline-variant/40 font-bold text-primary">Combo Fiesta VIP en Salones San Pedro Plus</td>
+                <td className="p-3 border border-outline-variant/40 font-bold text-on-surface">+$11,500 MXN (20% DTO.)</td>
+                <td className="p-3 border border-outline-variant/40">Transporte de lujo + Carrito de Shots LED + Letras Gigantes Iluminadas al contratar Paquete Premier ($530 p/p) o Plus ($710 p/p).</td>
+              </tr>
+              <tr>
+                <td className="p-3 border border-outline-variant/40 font-bold text-primary">Paquete All Inclusive ($1,010 p/p)</td>
+                <td className="p-3 border border-outline-variant/40 font-bold text-emerald-700">$0 Extra (Ya Incluido)</td>
+                <td className="p-3 border border-outline-variant/40">Limusina o traslado de gala + 1 hr de Mariachi + Robot LED + Foto/Video + Cabina 360° + Banquete 4 tiempos.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="font-display-lg text-xl text-on-surface font-semibold mt-6">¿Qué incluye nuestro traslado nupcial en CDMX?</h2>
         <ul className="list-disc pl-5 space-y-2">
-          <li>3 horas de servicio de traslado para la ceremonia y el salón.</li>
-          <li>Chofer uniformado a cargo de la ruta.</li>
-          <li>Arreglos de flores naturales en cofre y cajuela del auto clásico.</li>
-          <li>Bebidas refrescantes de cortesía para el novio y la novia.</li>
+          <li><strong>3 a 4 horas de recorrido continuo:</strong> Recolección en domicilio, espera en ceremonia religiosa y llegada de gala a Calle Norte 84 No. 6507, Col. San Pedro el Chico, Gustavo A. Madero, CDMX.</li>
+          <li><strong>Chofer uniformado:</strong> Coordinado directamente con el capitán de banquete de Salones San Pedro Plus para que tu entrada coincida al minuto con la recepción y la música.</li>
+          <li><strong>Arreglo floral y bebidas de cortesía:</strong> Decoración nupcial en cofre y bebidas refrescantes para los novios durante el trayecto y sesión fotográfica.</li>
         </ul>
 
-        {renderCTA("el servicio de Auto Clásico Mercedes-Benz")}
+        {renderCTA("el servicio de Auto Clásico Mercedes-Benz o Limusina")}
       </article>
     )
   }

@@ -22,6 +22,40 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.4.0-cycle25',
+    cycle_number: 25,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-05 18:36 CDMX',
+    title:
+      'Ciclo Vespertino #25 (IMPLEMENTED): Rescate Activo ante Exit-Intent en Desktop (ses_4p25u_u6ohd636 • Bing Orgánico) + Ajuste Above-the-Fold para Laptops 1272x634 + Boost GSC "autos para bodas distrito federal" (135 imp.)',
+    vectors: ['CRO', 'UX', 'SEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #24 (>= 2026-11-05T20:32:15Z a 2026-11-06T00:32:23Z): 9 eventos humanos reales en la sesión ses_4p25u_u6ohd636 (16:39 hrs CDMX, CDMX CP 03220, Desktop 1272x634 / screen 1280x800 desde Buscadores Orgánicos Bing) que confirmó seo_audit 100% óptimo en Home (title_len=64, meta_desc_len=159, img_missing_alt=0), permaneció 32.6s activos (26s en #inicio/#precotizador y 6s en #paquetes al 11% de scroll), regresó a scroll 0% y disparó exit_intent (exit_from_inicio) a los 30.5s sin que la barra comparadora (que exigía scroll >= 22%) apareciera al rescate. En paralelo, Google Search Console reportó 135 impresiones y 0 clics (pos 27.99) para "autos para bodas distrito federal" hacia /blog/renta-de-auto-clasico-para-bodas (cuyo title medía 89 chars).',
+    autonomousActions: [
+      'Nivel 2 (Mediana — Rescate Activo ante Exit-Intent y Umbral 10% en StickyPriceCompareBar.tsx + UXMonitorProvider.tsx): Emisión del evento DOM "sanpedro:exit-intent" cuando el cursor abandona el viewport superior tras >=4s activos y reducción del umbral de aparición por scroll de 22% a 10%, activando la barra de referencia rápida ($530 / $710 / $1,010) en modo rescate incluso en scroll 0%.',
+      'Nivel 1 (Menor — Compactación Vertical Above-the-Fold para Laptops 1272x634 en src/app/page.tsx): Reducción del padding superior acumulado en lg: y ajuste tipográfico del H1 en lg: para que el Paso 1 completo del Precotizador y su botón de acción queden 100% visibles sin hacer scroll en pantallas de 634px–768px de altura.',
+      'Nivel 2 (Mediana — Optimización SEO Search Console para "autos para bodas distrito federal" en src/utils/blogData.tsx y src/app/blog/[slug]/page.tsx): Ajuste del <title> a 58 caracteres ("Autos para Bodas en CDMX (DF): Clásico y Limusina Incluida"), blindaje de generateMetadata (<=66 chars en todos los artículos) e inclusión de tabla comparativa 2026 (Renta Externa en DF $6,500–$9,500 vs Combo Fiesta VIP / Paquete All Inclusive en GAM CDMX).',
+    ],
+    filesModified: [
+      'src/components/UXMonitorProvider.tsx',
+      'src/components/StickyPriceCompareBar.tsx',
+      'src/app/page.tsx',
+      'src/app/blog/[slug]/page.tsx',
+      'src/utils/blogData.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Convertir intentos de salida en Desktop (exit_intent) en aperturas del modal comparador rápido o clics hacia el Precotizador, y elevar el CTR en Google Search para "autos para bodas distrito federal".',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.3.9-cycle24',
     cycle_number: 24,
     status: 'IMPLEMENTED',
@@ -45,8 +79,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    commitHash: 'e853973',
+    deploymentUuid: 'h85qrxy5p586rhbvevznlgag',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:
