@@ -22,6 +22,65 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.4.4-cycle29',
+    cycle_number: 29,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-06 11:02 CDMX',
+    title:
+      'Ciclo Matutino #29 (IMPLEMENTED): Barra de Conversión Inline en #Galeria (ses_7v211_cjcn9adx • 6 Clics next_platino) + Validación Cero Colisión StickyBar + Calibración de scroll_return_prices',
+    vectors: ['CRO', 'UX'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #28 (>= 2026-11-06T12:55:24Z a 2026-11-06T16:58:00Z): 21 eventos humanos reales en la sesión ses_7v211_cjcn9adx (10:56 hrs CDMX, Mobile 411x782 desde Google Orgánico SEO) que (1) confirmó en vivo 0 clics falsos sobre sticky_bar_ir_precotizador tras el auto-ocultamiento sobre #precotizador desplegado en el Ciclo #27; (2) tocó hero_click: ver_galeria, cambió a tab_platino y avanzó 6 veces seguidas en el carrusel inline (next_platino) durante 16s activos sin abrir el Lightbox, donde el contenedor inline de #galeria carecía de un botón directo de cotización por salón; y (3) reveló un falso positivo en scroll_return_prices (regreso_a_paquetes) disparado 49ms después de entrar a #galeria mientras el usuario hacía scroll hacia abajo porque #paquetes seguía intersectando al 15%.',
+    autonomousActions: [
+      'Nivel 2 (Mediana — Barra de Conversión y Aforo Inline en GaleriaSection.tsx): Adición de barra de conversión directamente debajo de las miniaturas del carrusel inline mostrando el aforo ideal de Salón Diamante (100 a 250+ pers.) y Salón Platino (50 a 180 pers.) junto con los botones "Cotizar en {Salón} ↑" y "Agendar Visita", además de habilitar el paso continuo Diamante ↔ Platino también en el carrusel inline.',
+      'Nivel 1 (Menor — Calibración Direccional de scroll_return_prices en UXMonitorProvider.tsx): Exigencia de que #paquetes haya dejado de intersectar y que la dirección de scroll sea ascendente (window.scrollY <= lastScrollYRef.current) antes de emitir scroll_return_prices.',
+    ],
+    filesModified: [
+      'src/components/GaleriaSection.tsx',
+      'src/components/UXMonitorProvider.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Convertir la exploración inline de fotografías en #galeria en aperturas del Precotizador o mensajes de WhatsApp y eliminar falsos positivos de scroll_return_prices en bajada.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.4.3-cycle28',
+    cycle_number: 28,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-06 06:56 CDMX',
+    title:
+      'Ciclo Amanecer #28 (POSTPONED): Ventana Nocturna 02:54–06:55 CDMX Sin Tráfico Humano — Preservación de Línea Base v2.4.2 (Commit 5464895)',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #27 (>= 2026-11-06T08:54:09Z a 2026-11-06T12:55:24Z): 0 eventos humanos nuevos y 0 leads durante la ventana de amanecer (02:54 a 06:55 hrs CDMX). Google Search Console reporta sitemap saludable con 37 URLs enviadas y 0 errores.',
+    autonomousActions: [
+      'Auditoría en vivo de Supabase (analytics_events y leads >= 2026-11-06T08:54:09Z) y Google Search Console API (sc-domain:sanpedro.aionia.com.mx).',
+      'Decisión consciente POSTPONED bajo Estándar Maestro v2.1: se preserva intacta la versión en producción (commit 5464895, Coolify rjr2l6nsyrkgfwi3gmsydcpb) para evaluar con tráfico matutino real la supresión de StickyPriceCompareBar sobre #precotizador y el botón de avance directo en el Paso 3.',
+    ],
+    filesModified: [
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason:
+      'Ventana de amanecer (02:54 a 06:55 hrs CDMX) con 0 sesiones humanas nuevas tras el despliegue del Ciclo #27 (commit 5464895). Se evita sobre-editar a ciegas antes de medir el tráfico matutino.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: '5464895',
+    deploymentUuid: 'rjr2l6nsyrkgfwi3gmsydcpb',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Confirmar 0 clics redundantes sobre sticky_bar_ir_precotizador durante el llenado del Precotizador y mayor conversión del Paso 3 al Paso 4 en la ventana matutina (06:56 a 10:56 hrs CDMX).',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.4.2-cycle27',
     cycle_number: 27,
     status: 'IMPLEMENTED',
@@ -45,8 +104,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    commitHash: '5464895',
+    deploymentUuid: 'rjr2l6nsyrkgfwi3gmsydcpb',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:

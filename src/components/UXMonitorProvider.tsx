@@ -126,17 +126,19 @@ export default function UXMonitorProvider({ children }: { children: React.ReactN
             }
 
             if (
-              secName === 'galeria' ||
+              secName === 'tiktok-videos' ||
               secName === 'banquetes' ||
               secName === 'animacion' ||
               secName === 'testimonios' ||
-              secName === 'ubicacion'
+              secName === 'ubicacion' ||
+              (secName === 'galeria' && !visibleRatios.has('paquetes'))
             ) {
               wentBelowPricesRef.current = true;
             }
             if (
               wentBelowPricesRef.current &&
               !returnToPricesTrackedRef.current &&
+              window.scrollY <= lastScrollYRef.current &&
               (secName === 'paquetes' || secName === 'precotizador' || secName === 'inicio')
             ) {
               returnToPricesTrackedRef.current = true;
@@ -147,6 +149,9 @@ export default function UXMonitorProvider({ children }: { children: React.ReactN
             }
           } else {
             visibleRatios.delete(secName);
+            if (secName === 'paquetes' && visibleRatios.has('galeria')) {
+              wentBelowPricesRef.current = true;
+            }
           }
         });
 

@@ -4,6 +4,33 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #29 — `2026-11-06 11:02 CDMX` (`v2.4.4-cycle29` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-06T12:55:24Z`)
+- **Telemetría en Supabase (`06:55` a `10:58 hrs CDMX`):** **`21` eventos humanos reales** en la sesión **`ses_7v211_cjcn9adx`** (`10:56 hrs CDMX`, Mobile `411x782` vía `Google Orgánico SEO`):
+  1. **Validación en Vivo del Ciclo #27:** `0` clics falsos sobre `sticky_bar_ir_precotizador` durante los `13s` de permanencia en `#inicio`/`#precotizador`, y auditoría SEO limpia (`title_len: 64`, `meta_desc_len: 159`).
+  2. **Exploración Inline en `#galeria` sin Lightbox (`16s` activos — sección con mayor permanencia):**
+     - El visitante tocó `hero_click: ver_galeria`, cambió a la pestaña **`Salón Platino` (`tab_platino`)** y **avanzó `6` fotos seguidas (`next_platino`)** en el carrusel inline sin abrir el visor Lightbox.
+     - **Fricción detectada en `#galeria` inline:** Mientras que el visor Lightbox a pantalla completa sí contaba con un botón inferior `"Cotizar en este Salón"`, el carrusel inline principal carecía de botones de conversión (`Cotizar en Salón Platino ↑` / `Agendar Visita`) debajo de las miniaturas.
+  3. **Calibración de `scroll_return_prices`:** Se detectó que al bajar desde `#paquetes` hacia `#galeria`, `scroll_return_prices: regreso_a_paquetes` se disparó `49ms` después de que `#galeria` entró en pantalla porque `#paquetes` aún mantenía `15%` de intersección superior durante el desplazamiento descendente.
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/components/GaleriaSection.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/GaleriaSection.tsx) (Nivel 2 — Mediana):**
+   - Incorporación de una **Barra de Conversión y Aforo Inline** debajo de las miniaturas del carrusel principal (*"✨ Salón Diamante • Ideal de 100 a 250+ Invitados"* / *"✨ Salón Platino • Ideal de 50 a 180 Invitados"*) con los botones **`"Cotizar en {Salón} ↑"`** (`galeria_inline_cotizar_diamante` / `platino`) y **`"Agendar Visita"`** (`galeria_inline_wa_diamante` / `platino`), además de habilitar la transición continua `Diamante ↔ Platino` también en el carrusel inline.
+2. **[`src/components/UXMonitorProvider.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/UXMonitorProvider.tsx) (Nivel 1 — Menor):**
+   - Calibración de `scroll_return_prices` exigiendo que `#paquetes` haya dejado de intersectar previamente y que el desplazamiento sea ascendente (`window.scrollY <= lastScrollYRef.current`).
+
+---
+
+## Ciclo Autónomo #28 — `2026-11-06 06:56 CDMX` (`v2.4.3-cycle28` — `POSTPONED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-06T08:54:09Z`)
+- **Telemetría en Supabase (`02:54` a `06:55 hrs CDMX`):** `0` sesiones nuevas, `0` eventos humanos y `0` leads durante la ventana de amanecer del jueves posterior al despliegue del Ciclo #27 (`commit 5464895`).
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap `https://sanpedro.aionia.com.mx/sitemap.xml` estable con `37` URLs enviadas y `0` errores.
+- **Decisión Consciente (`POSTPONED`):** Se preserva intacta la versión en producción (`commit 5464895`, Coolify `rjr2l6nsyrkgfwi3gmsydcpb`) para medir con tráfico matutino real la supresión automática de `StickyPriceCompareBar` sobre `#precotizador` y el nuevo botón de avance directo en el Paso 3.
+
+---
+
 ## Ciclo Autónomo #27 — `2026-11-06 02:52 CDMX` (`v2.4.2-cycle27` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-06T04:46:56Z`)

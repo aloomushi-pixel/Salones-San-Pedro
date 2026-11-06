@@ -143,7 +143,7 @@ export default function GaleriaSection() {
     (e?: React.MouseEvent) => {
       if (e) e.stopPropagation();
       if (activeTab === 'diamante') {
-        if (lightboxOpen && diamanteIndex === diamantePhotos.length - 1) {
+        if (diamanteIndex === diamantePhotos.length - 1) {
           setActiveTab('platino');
           setPlatinoIndex(0);
           trackEvent('gallery_interaction', 'next_platino_auto_from_diamante', {
@@ -163,7 +163,7 @@ export default function GaleriaSection() {
           return nextIdx;
         });
       } else {
-        if (lightboxOpen && platinoIndex === platinoPhotos.length - 1) {
+        if (platinoIndex === platinoPhotos.length - 1) {
           setActiveTab('diamante');
           setDiamanteIndex(0);
           trackEvent('gallery_interaction', 'next_diamante_auto_from_platino', {
@@ -184,14 +184,14 @@ export default function GaleriaSection() {
         });
       }
     },
-    [activeTab, lightboxOpen, diamanteIndex, platinoIndex]
+    [activeTab, diamanteIndex, platinoIndex]
   );
 
   const handlePrev = useCallback(
     (e?: React.MouseEvent) => {
       if (e) e.stopPropagation();
       if (activeTab === 'diamante') {
-        if (lightboxOpen && diamanteIndex === 0) {
+        if (diamanteIndex === 0) {
           setActiveTab('platino');
           setPlatinoIndex(platinoPhotos.length - 1);
           trackEvent('gallery_interaction', 'prev_platino_auto_from_diamante', {
@@ -211,7 +211,7 @@ export default function GaleriaSection() {
           return prevIdx;
         });
       } else {
-        if (lightboxOpen && platinoIndex === 0) {
+        if (platinoIndex === 0) {
           setActiveTab('diamante');
           setDiamanteIndex(diamantePhotos.length - 1);
           trackEvent('gallery_interaction', 'prev_diamante_auto_from_platino', {
@@ -232,7 +232,7 @@ export default function GaleriaSection() {
         });
       }
     },
-    [activeTab, lightboxOpen, diamanteIndex, platinoIndex]
+    [activeTab, diamanteIndex, platinoIndex]
   );
 
   const openLightbox = () => {
@@ -438,6 +438,56 @@ export default function GaleriaSection() {
               />
             </button>
           ))}
+        </div>
+
+        {/* Barra de Conversión Inline bajo el Carrusel de Galería (Convierte sesiones como ses_7v211_cjcn9adx que navegan las fotos sin abrir Lightbox) */}
+        <div className="mt-4 pt-4 border-t border-outline-variant/30 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="text-center sm:text-left">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-primary block">
+              {activeTab === 'diamante'
+                ? '✨ Salón Diamante • Ideal de 100 a 250+ Invitados (Pista LED y Techo Estrellado)'
+                : '✨ Salón Platino • Ideal de 50 a 180 Invitados (Pista LED, Mampara Shimmer y Gala)'}
+            </span>
+            <p className="text-xs text-secondary mt-0.5">
+              Paquetes Todo Incluido desde <strong className="text-on-surface">$530 MXN por persona</strong> en Calle Norte 84, Gustavo A. Madero, CDMX.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-2 w-full sm:w-auto shrink-0">
+            <button
+              type="button"
+              onClick={() => {
+                trackEvent('cotizar_click', `galeria_inline_cotizar_${activeTab}`, {
+                  section: 'galeria',
+                  gallery_category: canonicalCategory,
+                  photo_title: photos[activeIndex]?.caption,
+                });
+                const el =
+                  document.getElementById('precotizador') ||
+                  document.getElementById('precotizador-hero');
+                el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              className="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-primary text-on-primary font-extrabold text-xs uppercase tracking-wider shadow-md hover:opacity-95 transition-opacity cursor-pointer"
+            >
+              <span className="pointer-events-none">Cotizar en {canonicalCategory} ↑</span>
+            </button>
+            <a
+              href={`https://wa.me/526633670431?text=${encodeURIComponent(
+                `¡Hola Salones San Pedro Plus! Estuve viendo las fotos del ${canonicalCategory} en su galería web y me gustaría cotizar mi evento o agendar una visita.`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                trackEvent('whatsapp_click', `galeria_inline_wa_${activeTab}`, {
+                  section: 'galeria',
+                  gallery_category: canonicalCategory,
+                  photo_title: photos[activeIndex]?.caption,
+                })
+              }
+              className="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-[#25D366] text-white font-extrabold text-xs uppercase tracking-wider text-center shadow-md hover:opacity-95 transition-opacity"
+            >
+              Agendar Visita
+            </a>
+          </div>
         </div>
       </div>
 
