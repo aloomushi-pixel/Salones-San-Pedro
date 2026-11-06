@@ -22,6 +22,38 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.4.1-cycle26',
+    cycle_number: 26,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-05 22:45 CDMX',
+    title:
+      'Ciclo Nocturno #26 (IMPLEMENTED): Conversión en #Ubicacion para Tráfico ChatGPT/GEO (ses_19hbq_toap2r4z • Scroll 92%) + Tabla Interactiva Precios 2026 en Blog (ses_drp7m_u0ixm7n1 • 100% Scroll)',
+    vectors: ['GEO', 'CRO', 'SEO', 'UX'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #25 (>= 2026-11-06T00:40:04Z a 2026-11-06T04:41:45Z): 51 eventos humanos reales en 3 sesiones: (1) ses_19hbq_toap2r4z (21:20 y 22:06 hrs CDMX, Brownsville, Texas CP 78521, Mobile 390x651 vía IA Generativa ChatGPT utm_source=chatgpt.com) que exploró hasta el 72% en su primera pasada, regresó 46 minutos después y bajó hasta el 92% de scroll (#ubicacion) permaneciendo 15s revisando el mapa donde StickyPriceCompareBar se oculta (>94%) y el Footer carecía de botones de cotización; (2) ses_drp7m_u0ixm7n1 (20:53 hrs CDMX, Gustavo A. Madero CP 07950, Mobile 432x814 vía Google Orgánico SEO) que aterrizó en /blog/cuanto-cuesta-un-salon-de-fiestas-en-gustavo-a-madero-cdmx-precios-2026 (validando en vivo title_len=66 y meta_desc_len=160 del Ciclo #25) y leyó del 0% al 100% durante 47.4s; y (3) ses_gasng_sk3qegjg (22:04 hrs CDMX, GAM CP 07420, Mobile vía Google Orgánico SEO).',
+    autonomousActions: [
+      'Nivel 2 (Mediana — Banda de Conversión y Conectividad al Final de #Ubicacion en src/app/page.tsx): Incorporación de tarjeta de conversión debajo del mapa en #ubicacion para capturar sesiones GEO/ChatGPT y orgánicas en el 90%–100% de scroll con botones rastreados hacia el Precotizador y WhatsApp.',
+      'Nivel 2 (Mediana — Tabla Comparativa Interactiva 2026 y Chips de Aforo Rápido en src/utils/blogDataSEO.tsx + soporte ?pkg= en Precotizador.tsx): Construcción de tabla interactiva para 50, 80, 100, 150 y 200 invitados con enlaces directos (?guests=X&pkg=Plus#precotizador-hero) y actualización del bloque CTA de los artículos SEO con píldoras de 1 toque.',
+      'Nivel 1 (Menor — Optimización de Título sin Elipsis en src/utils/blogDataSEO.tsx): Ajuste del título del artículo de precios a 65 caracteres exactos ("¿Cuánto Cuesta un Salón de Fiestas en GAM CDMX? Precios 2026 Reales").',
+    ],
+    filesModified: [
+      'src/app/page.tsx',
+      'src/components/Precotizador.tsx',
+      'src/utils/blogDataSEO.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Convertir lecturas al 100% en el artículo de precios 2026 y visitas GEO/ChatGPT que llegan hasta #ubicacion en simulaciones activas dentro del Precotizador.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.4.0-cycle25',
     cycle_number: 25,
     status: 'IMPLEMENTED',
@@ -47,8 +79,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    commitHash: '40e2679',
+    deploymentUuid: 'n7lyrzppnjp4nokp9fibvv6z',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:

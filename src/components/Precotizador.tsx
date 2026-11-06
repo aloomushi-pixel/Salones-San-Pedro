@@ -159,10 +159,17 @@ export default function Precotizador() {
     try {
       const params = new URLSearchParams(window.location.search);
       const queryGuests = Number(params.get('guests'));
+      const queryPkg = params.get('pkg');
       if (queryGuests && queryGuests >= 50 && queryGuests <= 250) {
         setGuests(queryGuests);
         setHasTouchedGuests(true);
         if (queryGuests < 100) {
+          setPackageType('Premier');
+        } else if (queryPkg === 'Plus') {
+          setPackageType('Plus');
+        } else if (queryPkg === 'All' || queryPkg === 'All Inclusive') {
+          setPackageType('All Inclusive');
+        } else if (queryPkg === 'Premier') {
           setPackageType('Premier');
         }
         setHydratedDraft(true);

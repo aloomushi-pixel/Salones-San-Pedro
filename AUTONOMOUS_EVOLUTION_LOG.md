@@ -4,6 +4,30 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #26 — `2026-11-05 22:45 CDMX` (`v2.4.1-cycle26` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-06T00:40:04Z`)
+- **Telemetría en Supabase (`18:40` a `22:41 hrs CDMX`):** **`51` eventos humanos reales** en 3 sesiones:
+  1. **Sesión `ses_19hbq_toap2r4z` (`21:20` y `22:06 hrs CDMX`, Brownsville, Texas CP `78521`, Mobile `390x651` vía **`IA Generativa (ChatGPT / GEO)`** `utm_source=chatgpt.com`):**
+     - **Hito GEO Verificado:** ChatGPT recomendó directamente `https://sanpedro.aionia.com.mx/?utm_source=chatgpt.com`.
+     - En su primera visita exploró hasta el `72%` de scroll (`#banquetes`/`#animacion`), y **46 minutos más tarde regresó a la pestaña** y bajó hasta **`scroll: 92%` (`#ubicacion` — Footer)** permaneciendo `15s` revisando la ubicación y el mapa.
+     - **Fricción detectada en `#ubicacion`:** A partir del `94%` de scroll `StickyPriceCompareBar` se oculta para no tapar el pie de página, y el Footer (`#ubicacion`) no tenía ningún botón de conversión (`Simular Presupuesto` o `WhatsApp`).
+  2. **Sesión `ses_drp7m_u0ixm7n1` (`20:53 hrs CDMX`, Gustavo A. Madero CP `07950`, Mobile `432x814` vía `Google Orgánico SEO`):**
+     - Aterrizó directamente desde Google en `/blog/cuanto-cuesta-un-salon-de-fiestas-en-gustavo-a-madero-cdmx-precios-2026`, **validando en vivo el blindaje `generateMetadata` del Ciclo #25 (`title_len: 66`, `meta_desc_len: 160`, `0` errores)**.
+     - Leyó el `100%` del artículo durante **`47.4s` activos**, pero la sección `1. Tabla de Precios por Persona y Totales para 50, 100, 150 y 200 Invitados` era solo una lista de viñetas sin tabla interactiva ni botones por aforo.
+  3. **Sesión `ses_gasng_sk3qegjg` (`22:04 hrs CDMX`, Gustavo A. Madero CP `07420`, Mobile `392x736` vía `Google Orgánico SEO`):**
+     - Visitante local en GAM CDMX (`21s` activos en `#inicio`, `#precotizador` y `#paquetes`, confirmando `title_len: 64`, `meta_desc_len: 159`).
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/app/page.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/page.tsx) (Nivel 2 — Mediana):**
+   - Incorporación de una **Banda de Conversión y Referencia Vial al cierre de `#ubicacion`** debajo del mapa (*"A 10 min de Lindavista, Aragón y Circuito Interior"*) con CTAs rastreados (`footer_ubicacion_ir_precotizador` y `footer_ubicacion_whatsapp`) para convertir a los usuarios GEO/ChatGPT y orgánicos que llegan al `90%–100%` de scroll.
+2. **[`src/utils/blogDataSEO.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/utils/blogDataSEO.tsx) y [`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx) (Nivel 2 — Mediana):**
+   - Construcción de la **Tabla Interactiva de Precios 2026 (`50, 80, 100, 150 y 200 personas`)** con botones de simulación directa (`/?guests=100&pkg=Plus#precotizador-hero`) y soporte del parámetro `?pkg=` en el `Precotizador`, además de píldoras rápidas de aforo en el componente `CTA` final de los artículos SEO.
+3. **[`src/utils/blogDataSEO.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/utils/blogDataSEO.tsx) (Nivel 1 — Menor):**
+   - Ajuste del título de `/blog/cuanto-cuesta-un-salon-de-fiestas-en-gustavo-a-madero-cdmx-precios-2026` a **`65` caracteres exactos sin elipsis** (`"¿Cuánto Cuesta un Salón de Fiestas en GAM CDMX? Precios 2026 Reales"`).
+
+---
+
 ## Ciclo Autónomo #25 — `2026-11-05 18:36 CDMX` (`v2.4.0-cycle25` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-05T20:32:15Z`)

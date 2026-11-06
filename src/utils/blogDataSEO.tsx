@@ -1,18 +1,73 @@
 import React from 'react';
 import { BlogPost, BlogPostDetail } from './blogData';
 import Link from 'next/link';
+import TrackedLink from '../components/TrackedLink';
 
 const CTA = () => (
-  <div className="bg-primary/10 border-l-4 border-primary p-6 rounded-r-lg my-8 shadow-sm">
-    <h2 className="font-display-lg text-xl font-bold text-on-surface mb-2">¿Listo para empezar a planear tu evento en CDMX?</h2>
-    <p className="text-secondary mb-4">En Salones San Pedro nos encargamos de que tu celebración sea perfecta de principio a fin. Calcula tu presupuesto en línea o agenda un recorrido por nuestras instalaciones.</p>
-    <div className="flex flex-wrap gap-3">
-      <Link href="/#precotizador-hero" className="inline-flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-full font-bold hover:scale-105 transition-transform shadow-md text-xs uppercase tracking-wider">
-        Calcular Cotización en Línea
-      </Link>
-      <a href="https://wa.me/526633670431?text=%C2%A1Hola%20Salones%20San%20Pedro!%20Le%C3%AD%20su%20gu%C3%ADa%20de%20eventos%20en%20el%20blog%20y%20me%20interesa%20cotizar%20mi%20evento." target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-full font-bold hover:scale-105 transition-transform shadow-md text-xs uppercase tracking-wider">
-        Contactar por WhatsApp
-      </a>
+  <div className="bg-primary/10 border-l-4 border-primary p-6 rounded-r-xl my-8 shadow-sm space-y-4">
+    <h2 className="font-display-lg text-xl font-bold text-on-surface">
+      ¿Cuántos invitados tendrá tu evento en Gustavo A. Madero, CDMX?
+    </h2>
+    <p className="text-secondary text-sm">
+      Toca tu número aproximado de invitados para abrir el simulador oficial con el precio precargado al instante:
+    </p>
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+      <TrackedLink
+        eventType="cotizar_click"
+        source="blog_cta_chip_50"
+        href="/?guests=50#precotizador-hero"
+        className="px-3 py-2 rounded-xl bg-surface-container-lowest border border-primary/40 hover:border-primary text-center transition-colors shadow-xs"
+      >
+        <span className="block text-xs font-extrabold text-primary">50 Personas</span>
+        <span className="block text-[11px] font-semibold text-on-surface">Desde $26,500</span>
+      </TrackedLink>
+      <TrackedLink
+        eventType="cotizar_click"
+        source="blog_cta_chip_80"
+        href="/?guests=80#precotizador-hero"
+        className="px-3 py-2 rounded-xl bg-surface-container-lowest border border-primary/40 hover:border-primary text-center transition-colors shadow-xs"
+      >
+        <span className="block text-xs font-extrabold text-primary">80 Personas</span>
+        <span className="block text-[11px] font-semibold text-on-surface">Desde $42,400</span>
+      </TrackedLink>
+      <TrackedLink
+        eventType="cotizar_click"
+        source="blog_cta_chip_100"
+        href="/?guests=100&pkg=Plus#precotizador-hero"
+        className="px-3 py-2 rounded-xl bg-primary/15 border-2 border-primary text-center transition-colors shadow-xs"
+      >
+        <span className="block text-xs font-extrabold text-primary">100 Personas ⭐</span>
+        <span className="block text-[11px] font-semibold text-on-surface">$53,000 – $71,000</span>
+      </TrackedLink>
+      <TrackedLink
+        eventType="cotizar_click"
+        source="blog_cta_chip_150"
+        href="/?guests=150&pkg=Plus#precotizador-hero"
+        className="px-3 py-2 rounded-xl bg-surface-container-lowest border border-primary/40 hover:border-primary text-center transition-colors shadow-xs"
+      >
+        <span className="block text-xs font-extrabold text-primary">150 Personas</span>
+        <span className="block text-[11px] font-semibold text-on-surface">$79,500 – $106,500</span>
+      </TrackedLink>
+    </div>
+    <div className="flex flex-wrap gap-3 pt-1">
+      <TrackedLink
+        eventType="cotizar_click"
+        source="blog_inline_cta_precotizador"
+        href="/#precotizador-hero"
+        className="inline-flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-full font-bold hover:scale-105 transition-transform shadow-md text-xs uppercase tracking-wider"
+      >
+        Personalizar mi Cotización en Línea →
+      </TrackedLink>
+      <TrackedLink
+        eventType="whatsapp_click"
+        source="blog_inline_cta_whatsapp"
+        href="https://wa.me/526633670431?text=%C2%A1Hola%20Salones%20San%20Pedro!%20Le%C3%AD%20su%20gu%C3%ADa%20de%20precios%202026%20en%20el%20blog%20y%20me%20interesa%20cotizar%20mi%20evento."
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-full font-bold hover:scale-105 transition-transform shadow-md text-xs uppercase tracking-wider"
+      >
+        Recibir Cotización por WhatsApp
+      </TrackedLink>
     </div>
   </div>
 );
@@ -20,7 +75,7 @@ const CTA = () => (
 export const SEO_BLOG_POSTS: BlogPost[] = [
   {
     slug: "cuanto-cuesta-un-salon-de-fiestas-en-gustavo-a-madero-cdmx-precios-2026",
-    title: "¿Cuánto cuesta un salón de fiestas en Gustavo A. Madero CDMX? Precios 2026 (50, 100 y 200 personas)",
+    title: "¿Cuánto Cuesta un Salón de Fiestas en GAM CDMX? Precios 2026 Reales",
     excerpt: "Guía real de precios 2026 de salones de fiestas en Gustavo A. Madero (CDMX) para XV años, bodas y graduaciones. Paquetes todo incluido desde $530 p/p ($53,000 MXN para 100 invitados).",
     date: "2 de Noviembre, 2026",
     readTime: "5 min de lectura",
@@ -122,7 +177,7 @@ export const SEO_BLOG_POSTS: BlogPost[] = [
 export const SEO_BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
   "cuanto-cuesta-un-salon-de-fiestas-en-gustavo-a-madero-cdmx-precios-2026": {
     slug: "cuanto-cuesta-un-salon-de-fiestas-en-gustavo-a-madero-cdmx-precios-2026",
-    title: "¿Cuánto cuesta un salón de fiestas en Gustavo A. Madero CDMX? Precios 2026 (50, 100 y 200 personas)",
+    title: "¿Cuánto Cuesta un Salón de Fiestas en GAM CDMX? Precios 2026 Reales",
     excerpt: "Guía real de precios 2026 de salones de fiestas en Gustavo A. Madero (CDMX) para XV años, bodas y graduaciones. Paquetes todo incluido desde $530 p/p ($53,000 MXN para 100 invitados).",
     date: "2 de Noviembre, 2026",
     readTime: "5 min de lectura",
@@ -130,14 +185,77 @@ export const SEO_BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
     imageUrl: "/galeria/diamante/diamante_1.jpg",
     content: (
       <div className="space-y-6">
-        <p>Si estás buscando <strong>salones de fiestas en Gustavo A. Madero económicos y elegantes</strong> o te preguntas <strong>cuánto cuesta un salón de fiestas para 100 personas o para XV años en CDMX</strong>, en esta guía transparente te compartimos las tarifas oficiales 2026 de <strong>Salones San Pedro Plus</strong> (ubicados en Calle Norte 84 No. 6507, Col. San Pedro el Chico, Alcaldía Gustavo A. Madero).</p>
+        <p>Si estás buscando <strong>salones de fiestas en Gustavo A. Madero económicos y elegantes</strong> o te preguntas <strong>cuánto cuesta un salón de fiestas para 50, 100 o 200 personas en CDMX</strong>, en esta guía transparente te compartimos las tarifas oficiales 2026 de <strong>Salones San Pedro Plus</strong> (ubicados en Calle Norte 84 No. 6507, Col. San Pedro el Chico, Alcaldía Gustavo A. Madero).</p>
 
-        <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">1. Tabla de Precios por Persona y Totales para 50, 100, 150 y 200 Invitados</h2>
-        <p>En <strong><Link href="/#paquetes" className="text-primary hover:underline">Salones San Pedro Plus</Link></strong> manejamos 3 paquetes todo incluido con descorche libre sin cargo adicional:</p>
+        <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">1. Tabla Interactiva de Precios 2026 (50, 80, 100, 150 y 200 Invitados)</h2>
+        <p>Toca cualquier fila de la tabla para abrir nuestro simulador con ese número de invitados y paquete precargado:</p>
+
+        <div className="overflow-x-auto my-4">
+          <table className="w-full text-left border-collapse border border-outline-variant/40 text-xs sm:text-sm">
+            <thead>
+              <tr className="bg-surface-container-high text-on-surface">
+                <th className="p-3 border border-outline-variant/40 font-bold">Invitados</th>
+                <th className="p-3 border border-outline-variant/40 font-bold">Premier ($530 p/p)</th>
+                <th className="p-3 border border-outline-variant/40 font-bold text-primary">Plus ⭐ ($710 p/p)</th>
+                <th className="p-3 border border-outline-variant/40 font-bold">All Inclusive ($1,010 p/p)</th>
+                <th className="p-3 border border-outline-variant/40 font-bold text-center">Cotizar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="p-3 border border-outline-variant/40 font-bold">50 personas</td>
+                <td className="p-3 border border-outline-variant/40 font-semibold">$26,500 MXN</td>
+                <td className="p-3 border border-outline-variant/40 text-secondary">Personalizable con Extras</td>
+                <td className="p-3 border border-outline-variant/40 text-secondary">Personalizable con Extras</td>
+                <td className="p-3 border border-outline-variant/40 text-center">
+                  <TrackedLink eventType="cotizar_click" source="blog_table_50" href="/?guests=50#precotizador-hero" className="inline-block px-3 py-1 rounded-lg bg-primary text-on-primary font-bold text-xs">Simular 50 →</TrackedLink>
+                </td>
+              </tr>
+              <tr className="bg-surface-container-low/50">
+                <td className="p-3 border border-outline-variant/40 font-bold">80 personas</td>
+                <td className="p-3 border border-outline-variant/40 font-semibold">$42,400 MXN</td>
+                <td className="p-3 border border-outline-variant/40 text-secondary">Premier + Combo VIP ($53,900)</td>
+                <td className="p-3 border border-outline-variant/40 text-secondary">Personalizable con Extras</td>
+                <td className="p-3 border border-outline-variant/40 text-center">
+                  <TrackedLink eventType="cotizar_click" source="blog_table_80" href="/?guests=80#precotizador-hero" className="inline-block px-3 py-1 rounded-lg bg-primary text-on-primary font-bold text-xs">Simular 80 →</TrackedLink>
+                </td>
+              </tr>
+              <tr className="bg-primary/5">
+                <td className="p-3 border border-outline-variant/40 font-bold text-primary">100 personas ⭐</td>
+                <td className="p-3 border border-outline-variant/40 font-semibold">$53,000 MXN</td>
+                <td className="p-3 border border-outline-variant/40 font-bold text-primary">$71,000 MXN</td>
+                <td className="p-3 border border-outline-variant/40 font-semibold">$101,000 MXN</td>
+                <td className="p-3 border border-outline-variant/40 text-center">
+                  <TrackedLink eventType="cotizar_click" source="blog_table_100" href="/?guests=100&pkg=Plus#precotizador-hero" className="inline-block px-3 py-1 rounded-lg bg-primary text-on-primary font-bold text-xs">Simular 100 →</TrackedLink>
+                </td>
+              </tr>
+              <tr>
+                <td className="p-3 border border-outline-variant/40 font-bold">150 personas</td>
+                <td className="p-3 border border-outline-variant/40 font-semibold">$79,500 MXN</td>
+                <td className="p-3 border border-outline-variant/40 font-bold text-primary">$106,500 MXN</td>
+                <td className="p-3 border border-outline-variant/40 font-semibold">$151,500 MXN</td>
+                <td className="p-3 border border-outline-variant/40 text-center">
+                  <TrackedLink eventType="cotizar_click" source="blog_table_150" href="/?guests=150&pkg=Plus#precotizador-hero" className="inline-block px-3 py-1 rounded-lg bg-primary text-on-primary font-bold text-xs">Simular 150 →</TrackedLink>
+                </td>
+              </tr>
+              <tr className="bg-surface-container-low/50">
+                <td className="p-3 border border-outline-variant/40 font-bold">200 personas</td>
+                <td className="p-3 border border-outline-variant/40 font-semibold">$106,000 MXN</td>
+                <td className="p-3 border border-outline-variant/40 font-bold text-primary">$142,000 MXN</td>
+                <td className="p-3 border border-outline-variant/40 font-semibold">$202,000 MXN</td>
+                <td className="p-3 border border-outline-variant/40 text-center">
+                  <TrackedLink eventType="cotizar_click" source="blog_table_200" href="/?guests=200&pkg=Plus#precotizador-hero" className="inline-block px-3 py-1 rounded-lg bg-primary text-on-primary font-bold text-xs">Simular 200 →</TrackedLink>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>En <strong><Link href="/#paquetes" className="text-primary hover:underline">Salones San Pedro Plus</Link></strong> todos los paquetes incluyen descorche libre sin cargo adicional:</p>
         <ul className="list-disc pl-5 space-y-2">
-          <li><strong>Paquete Premier ($530 MXN por persona):</strong> Disponible desde 50 invitados. Ideal para eventos de 50 personas ($26,500 MXN), 80 personas ($42,400 MXN) o 100 personas ($53,000 MXN). Incluye 6.5 horas totales, menú formal a 3 tiempos + tornafiesta, barra libre de refrescos/mezcladores, DJ con pista LED y montaje imperial con mesa de cristal.</li>
-          <li><strong>Paquete Plus ($710 MXN por persona — ⭐ El más elegido en XV años y Bodas):</strong> A partir de 100 invitados ($71,000 MXN para 100 personas / $106,500 MXN para 150 personas). Suma 7 horas de servicio, menú a 4 tiempos, show de Robot LED gigante, mesa de dulces, cabina fotográfica, letras gigantes, carrito de shots y pre-fiesta de cortesía para 30 personas.</li>
-          <li><strong>Paquete All Inclusive ($1,010 MXN por persona):</strong> A partir de 100 invitados ($101,000 MXN para 100 personas). Incluye todo lo del Paquete Plus más 1 hora de Mariachi en vivo, traslado en Limusina de lujo, Robot Iron Man, foto/video con álbum, vino espumoso, 1 botella de licor por mesa y Cabina 360°.</li>
+          <li><strong>Paquete Premier ($530 MXN por persona):</strong> Disponible desde 50 invitados. Incluye 6.5 horas totales, menú formal a 3 tiempos + tornafiesta (chilaquiles), barra libre de refrescos/mezcladores, DJ con pista LED y montaje imperial con mesa de cristal.</li>
+          <li><strong>Paquete Plus ($710 MXN por persona — ⭐ El más elegido en XV años y Bodas):</strong> A partir de 100 invitados. Suma 7 horas de servicio, menú a 4 tiempos, show de Robot LED gigante, mesa de dulces, cabina fotográfica, letras gigantes, carrito de shots y pre-fiesta de cortesía para 30 personas.</li>
+          <li><strong>Paquete All Inclusive ($1,010 MXN por persona):</strong> A partir de 100 invitados. Incluye todo lo del Paquete Plus más 1 hora de Mariachi en vivo, traslado en Limusina de lujo, Robot Iron Man, foto/video con álbum, vino espumoso, 1 botella de licor por mesa y Cabina 360°.</li>
         </ul>
 
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">2. ¿Cómo ahorrar al cotizar tu salón en Gustavo A. Madero?</h2>
