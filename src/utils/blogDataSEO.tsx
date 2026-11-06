@@ -278,12 +278,57 @@ export const SEO_BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
         <p>Encontrar <strong>salones de fiestas pequeños en CDMX (50 a 80 personas)</strong> que ofrezcan la misma elegancia, pista iluminada y banquete formal que una gran gala suele ser difícil, ya que muchos recintos exigen mínimos de 150 o 200 personas. En <strong>Salones San Pedro Plus (Gustavo A. Madero)</strong> diseñamos configuraciones íntimas desde <strong>50 invitados</strong>.</p>
 
         <h2 className="font-display-lg text-2xl font-bold text-on-surface mt-8 mb-4">Paquete Todo Incluido desde 50 y 80 Personas ($530 MXN p/p)</h2>
-        <p>Nuestro <strong><Link href="/#paquetes" className="text-primary hover:underline">Paquete Premier</Link></strong> está disponible a partir de 50 personas en nuestros salones climatizados y con distribución modular para que tu evento luzca cálido, lleno y espectacular:</p>
-        <ul className="list-disc pl-5 space-y-2">
-          <li><strong>50 invitados:</strong> Desde <strong>$26,500 MXN</strong> todo incluido.</li>
-          <li><strong>70 invitados:</strong> Desde <strong>$37,100 MXN</strong> todo incluido.</li>
-          <li><strong>80 invitados:</strong> Desde <strong>$42,400 MXN</strong> todo incluido.</li>
-        </ul>
+        <p>Nuestro <strong><Link href="/#paquetes" className="text-primary hover:underline">Paquete Premier</Link></strong> está disponible a partir de 50 personas en nuestros salones climatizados y con distribución modular para que tu evento luzca cálido, lleno y espectacular. Toca cualquier opción para simular tu evento al instante:</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 my-4">
+          <TrackedLink
+            eventType="cotizar_click"
+            source="blog_small_venues_50"
+            href="/?guests=50&pkg=Premier#precotizador-hero"
+            className="flex items-center justify-between p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/40 hover:border-primary transition-all shadow-xs"
+          >
+            <div>
+              <strong className="text-on-surface block text-sm">50 invitados (Íntimo)</strong>
+              <span className="text-xs text-secondary">Desde <strong className="text-primary">$26,500 MXN</strong> todo incluido</span>
+            </div>
+            <span className="px-2.5 py-1 rounded-lg bg-primary text-on-primary font-bold text-xs shrink-0">Simular 50 →</span>
+          </TrackedLink>
+          <TrackedLink
+            eventType="cotizar_click"
+            source="blog_small_venues_70"
+            href="/?guests=70&pkg=Premier#precotizador-hero"
+            className="flex items-center justify-between p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/40 hover:border-primary transition-all shadow-xs"
+          >
+            <div>
+              <strong className="text-on-surface block text-sm">70 invitados (Intermedio)</strong>
+              <span className="text-xs text-secondary">Desde <strong className="text-primary">$37,100 MXN</strong> todo incluido</span>
+            </div>
+            <span className="px-2.5 py-1 rounded-lg bg-primary text-on-primary font-bold text-xs shrink-0">Simular 70 →</span>
+          </TrackedLink>
+          <TrackedLink
+            eventType="cotizar_click"
+            source="blog_small_venues_80"
+            href="/?guests=80&pkg=Premier#precotizador-hero"
+            className="flex items-center justify-between p-3.5 rounded-xl bg-primary/10 border-2 border-primary hover:bg-primary/15 transition-all shadow-xs"
+          >
+            <div>
+              <strong className="text-on-surface block text-sm">80 invitados ⭐ (Más Solicitado)</strong>
+              <span className="text-xs text-secondary">Desde <strong className="text-primary">$42,400 MXN</strong> todo incluido</span>
+            </div>
+            <span className="px-2.5 py-1 rounded-lg bg-primary text-on-primary font-bold text-xs shrink-0">Simular 80 →</span>
+          </TrackedLink>
+          <TrackedLink
+            eventType="cotizar_click"
+            source="blog_small_venues_100"
+            href="/?guests=100&pkg=Plus#precotizador-hero"
+            className="flex items-center justify-between p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/40 hover:border-primary transition-all shadow-xs"
+          >
+            <div>
+              <strong className="text-on-surface block text-sm">100 invitados (Desbloquea Plus)</strong>
+              <span className="text-xs text-secondary"><strong className="text-primary">$53,000</strong> Premier • <strong className="text-primary">$71,000</strong> Plus</span>
+            </div>
+            <span className="px-2.5 py-1 rounded-lg bg-primary text-on-primary font-bold text-xs shrink-0">Simular 100 →</span>
+          </TrackedLink>
+        </div>
         <p>Perfecto para bautizos, bodas civiles o íntimas, aniversarios, cumpleaños y reuniones empresariales cerca de Aragón, Lindavista, Eduardo Molina y Circuito Interior.</p>
 
         <CTA />

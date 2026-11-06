@@ -22,6 +22,36 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.4.5-cycle30',
+    cycle_number: 30,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-06 15:11 CDMX',
+    title:
+      'Ciclo Vespertino #30 (IMPLEMENTED): ¡1ª Conversión Real de ChatGPT a WhatsApp (ses_acl9j_4zhonfzt en 47s)! + Eliminación de dead_click en Blog Salones Pequeños + Precio en Vivo en Paso 1/2 y Ubicación Copiable en 1 Clic',
+    vectors: ['CRO', 'UX', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #29 (>= 2026-11-06T17:03:17Z a 2026-11-06T21:07:10Z): 68 eventos humanos reales en 4 sesiones: (1) ¡Hito GEO/CRO! ses_acl9j_4zhonfzt (12:06 hrs CDMX, Xochimilco, Mobile 384x728) aterrizó desde IA Generativa ChatGPT (utm_source=chatgpt.com), cotizó 50 personas • Empresarial • Viernes • Temporada Alta • Paquete Premier ($26,500 MXN), completó los Pasos 1, 2 y 3 con 0 colisiones en sticky_bar_ir_precotizador y convirtió en whatsapp_click: precotizador en 47 segundos (wants_tour: true); (2) ses_gquu1_ugyr3f5t (15:05 hrs CDMX, Mobile 392x791) aterrizó desde Google Orgánico SEO en /blog/salones-de-fiestas-pequenos-en-cdmx-gustavo-a-madero-50-a-80-personas, hizo un dead_click en el <li> "80 invitados: Desde $42,400 MXN todo incluido.", luego tocó cotizar_click: blog_cta_chip_80 hacia /?guests=80#precotizador y deslizó el slider (80 -> 240 -> 80 -> 250) buscando ver cómo cambiaba el precio en el Paso 1; y (3) ses_awql0_d10h5q0p (Desktop 1920x911, Benito Juárez CDMX, 144s activos) completó el Paso 1 (80 pers., Bautizo/Cumpleaños), se detuvo en el Paso 2 y ejecutó 2 eventos text_copy: copy_precotizador ("San Pedro Plus" y "Salón de eventos en Gustavo A. Madero - CDMX San Pedro Plus").',
+    autonomousActions: [
+      'Nivel 1 (Menor — Eliminación de dead_click en Blog de Salones Pequeños en src/utils/blogDataSEO.tsx): Conversión de la lista plana <ul> de 50, 70 y 80 invitados en tarjetas interactivas TrackedLink (blog_small_venues_50, blog_small_venues_70, blog_small_venues_80 y blog_small_venues_100) con botón "Simular {N} →" directo a /?guests={N}&pkg=Premier#precotizador-hero.',
+      'Nivel 2 (Mediana — Precio en Tiempo Real en Paso 1/2 + Barra de Ubicación Copiable en 1 Clic en src/components/Precotizador.tsx): Adición de píldora de presupuesto en vivo debajo del contador de invitados en el Paso 1 ("Desde $42,400 MXN todo incluido" / "Premier $53,000 • Plus ⭐ $71,000"), barra resumen y botón con precio explícito en el Paso 2 ("Ver Paquetes desde $42,400 MXN →") y barra inferior de confianza con botón "Copiar Ubicación y Teléfono" (precotizador_copy_location) para atender la intención de copia detectada en ses_awql0_d10h5q0p.',
+    ],
+    filesModified: [
+      'src/utils/blogDataSEO.tsx',
+      'src/components/Precotizador.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Eliminar al 100% los dead_clicks sobre la lista de precios de 50-80 invitados en el blog, retener en el Precotizador a quienes deslizan el slider en el Paso 1 mostrando el precio en vivo y acelerar el paso del Paso 2 al Paso 3.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.4.4-cycle29',
     cycle_number: 29,
     status: 'IMPLEMENTED',
@@ -43,8 +73,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    commitHash: 'a2a844f',
+    deploymentUuid: 'hl20xzw8eocb1rjefzhly0ry',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:

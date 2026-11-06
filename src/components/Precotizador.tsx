@@ -135,6 +135,7 @@ export default function Precotizador() {
   const [showMathBreakdown, setShowMathBreakdown] = useState(true);
   const [wantsTour, setWantsTour] = useState(true);
   const [copiedQuote, setCopiedQuote] = useState(false);
+  const [copiedLocation, setCopiedLocation] = useState(false);
   const [hydratedDraft, setHydratedDraft] = useState(false);
 
   const stepStartRef = useRef<number>(Date.now());
@@ -603,6 +604,27 @@ export default function Precotizador() {
     });
   };
 
+  const handleCopyLocation = async () => {
+    const locationText = `Salones San Pedro Plus (Salón Diamante y Salón Platino)\n📍 Dirección: Calle Norte 84 No. 6507, Col. San Pedro el Chico, Alcaldía Gustavo A. Madero, CP 07800, CDMX\n🗺️ Google Maps: https://maps.app.goo.gl/sanpedroplus\n📱 WhatsApp Directo: 66 3367 0431`;
+    try {
+      await navigator.clipboard.writeText(locationText);
+      setCopiedLocation(true);
+      setTimeout(() => setCopiedLocation(false), 3500);
+    } catch {
+      // Fallback silencioso
+    }
+    trackEvent('text_copy', 'precotizador_copy_location', {
+      section: 'precotizador',
+      step_number: step,
+      guests_range: getGuestsBucket(guests),
+      copied_text: 'Salones San Pedro Plus - Calle Norte 84 #6507, GAM CDMX',
+      extra: {
+        exact_guests: guests,
+        estimated_budget: budget,
+      },
+    });
+  };
+
   return (
     <div
       id="precotizador"
@@ -749,6 +771,11 @@ export default function Precotizador() {
                       ? 'invitados (máximo cotizador)'
                       : 'invitados'}
                   </span>
+                  <span className="mt-1.5 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/15 border border-primary/30 text-[11px] font-bold text-primary">
+                    {guests < 100
+                      ? `Desde $${(guests * 530).toLocaleString('es-MX')} MXN todo incluido`
+                      : `Premier $${(guests * 530).toLocaleString('es-MX')} • Plus ⭐ $${(guests * 710).toLocaleString('es-MX')}`}
+                  </span>
                 </div>
 
                 <button
@@ -874,6 +901,14 @@ export default function Precotizador() {
         ================================================================= */}
         {step === 2 && (
           <div className="animate-fade-in space-y-4">
+            <div className="p-2.5 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-between gap-2 text-xs">
+              <span className="text-on-surface font-semibold">
+                {guests} invitados • <strong>{eventKind}</strong>
+              </span>
+              <span className="text-primary font-extrabold shrink-0">
+                Desde ${(guests * 530).toLocaleString('es-MX')} MXN
+              </span>
+            </div>
             <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-4">
               <label className="block text-xs font-bold uppercase tracking-wider text-secondary mb-2.5">
                 ¿Qué día de la semana prefieres?
@@ -986,9 +1021,11 @@ export default function Precotizador() {
               <button
                 type="button"
                 onClick={handleStep2Next}
-                className="flex-1 min-h-[50px] bg-primary text-on-primary font-bold py-3.5 px-5 rounded-2xl hover:opacity-95 active:scale-[0.99] transition-all uppercase tracking-wider text-sm shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+                className="flex-1 min-h-[50px] bg-primary text-on-primary font-bold py-3.5 px-5 rounded-2xl hover:opacity-95 active:scale-[0.99] transition-all uppercase tracking-wider text-xs sm:text-sm shadow-lg flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span className="pointer-events-none">Siguiente: Paquete y Combo VIP</span>
+                <span className="pointer-events-none">
+                  Ver Paquetes desde ${(guests * 530).toLocaleString('es-MX')} MXN
+                </span>
                 <span data-ux-decorative="true" className="material-symbols-outlined text-lg pointer-events-none">
                   arrow_forward
                 </span>
@@ -1488,6 +1525,30 @@ export default function Precotizador() {
             </div>
           </div>
         )}
+      </div>
+
+      {/* Pie de Ubicación y Confianza Copiable en 1 Clic (Atiende text_copy: copy_precotizador) */}
+      <div className="relative z-10 mt-4 pt-3 border-t border-outline-variant/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-secondary">
+        <div className="flex items-center gap-1.5">
+          <span data-ux-decorative="true" className="material-symbols-outlined text-primary text-sm pointer-events-none">
+            location_on
+          </span>
+          <span>
+            <strong className="text-on-surface">Calle Norte 84 #6507</strong>, San Pedro el Chico, GAM, CDMX • ★ 4.9 Google
+          </span>
+        </div>
+        <button
+          type="button"
+          onClick={handleCopyLocation}
+          className="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/40 text-on-surface font-semibold text-[11px] transition-colors cursor-pointer shrink-0"
+        >
+          <span data-ux-decorative="true" className="material-symbols-outlined text-xs text-primary pointer-events-none">
+            {copiedLocation ? 'check_circle' : 'content_copy'}
+          </span>
+          <span className="pointer-events-none">
+            {copiedLocation ? '¡Ubicación copiada!' : 'Copiar Ubicación y Teléfono'}
+          </span>
+        </button>
       </div>
     </div>
   );
