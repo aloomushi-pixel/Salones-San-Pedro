@@ -22,6 +22,38 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.4.2-cycle27',
+    cycle_number: 27,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-06 02:52 CDMX',
+    title:
+      'Ciclo Madrugada #27 (IMPLEMENTED): Auto-Ocultamiento de StickyPriceCompareBar sobre #Precotizador (6 Clics en ses_mczh3_ph3wj3kl) + CTA Directo a Paso 4 en Selección de Paquete + H1 Accionable',
+    vectors: ['CRO', 'UX'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #26 (>= 2026-11-06T04:46:56Z a 2026-11-06T08:47:51Z): 25 eventos humanos reales en 2 sesiones: (1) ses_mczh3_ph3wj3kl (00:54 hrs CDMX, Cuautlalpan EdoMéx CP 56383, Mobile desde Facebook App m.facebook.com, 206.5s = 3.4 min activos) que cotizó un evento Empresarial para 100 personas en Viernes (Temporada Alta / Fin de Año), registró 1 dead_click sobre el <h1> del Hero y tocó 6 veces el botón "Cotizar Ahora ↑" de StickyPriceCompareBar mientras llenaba los Pasos 1 y 2 del Precotizador (scroll 5%–10%) porque la barra flotante permanecía superpuesta sobre el wizard y el usuario la confundía con el botón "Siguiente" del formulario; al llegar al Paso 3 permaneció 15s sin bajar hasta el botón inferior situado debajo de los extras; y (2) ses_khrwk_o9xd6phd (/blog/tendencias-decoracion-boutique-este-ano, validando title_len=54, meta_desc_len=160).',
+    autonomousActions: [
+      'Nivel 2 (Mediana — Supresión Inteligente de StickyPriceCompareBar cuando #Precotizador está en Viewport en StickyPriceCompareBar.tsx): Integración de IntersectionObserver sobre #precotizador para ocultar automáticamente la barra flotante mientras el usuario interactúa con el cotizador, restauración del umbral de scroll a 24%–88% y cierre automático al tocar "Cotizar Ahora ↑".',
+      'Nivel 1 (Menor — Botón de Avance Directo al Paso 4 arriba de los Extras en Precotizador.tsx): Adición del botón "Continuar con Paquete {packageType} (${budget} MXN) →" inmediatamente debajo de las 3 tarjetas de paquete en el Paso 3 para que eventos Empresariales o sin extras avancen al Paso 4 sin hacer scroll adicional.',
+      'Nivel 1 (Menor — Conversión del <h1> del Hero en Enlace Rastreado hacia #Precotizador en src/app/page.tsx): Eliminación del dead_click en el título principal.',
+    ],
+    filesModified: [
+      'src/components/StickyPriceCompareBar.tsx',
+      'src/components/Precotizador.tsx',
+      'src/app/page.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Eliminar al 100% los clics redundantes sobre sticky_bar_ir_precotizador mientras el usuario llena el Precotizador en móvil y elevar el paso del Paso 3 al Paso 4.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.4.1-cycle26',
     cycle_number: 26,
     status: 'IMPLEMENTED',
@@ -45,8 +77,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    commitHash: '8503438',
+    deploymentUuid: 'w9zzjmlo9uzb4iobjepgdllj',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:

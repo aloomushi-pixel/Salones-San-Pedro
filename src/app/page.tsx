@@ -33,7 +33,14 @@ export default function Home() {
           
           <div className="relative z-10 w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pt-4 lg:pt-6">
             <h1 className="font-display-lg text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl text-surface-container-lowest mb-4 lg:mb-6 text-center lg:text-left drop-shadow-xl font-bold leading-tight">
-              Salón de eventos en Gustavo A. Madero - CDMX San Pedro Plus
+              <TrackedLink
+                eventType="hero_click"
+                source="h1_headline_precotizador"
+                href="#precotizador"
+                className="hover:text-primary transition-colors"
+              >
+                Salón de eventos en Gustavo A. Madero - CDMX San Pedro Plus
+              </TrackedLink>
             </h1>
             
             <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-center lg:items-start justify-between">

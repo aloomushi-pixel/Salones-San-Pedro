@@ -4,6 +4,28 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #27 — `2026-11-06 02:52 CDMX` (`v2.4.2-cycle27` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-06T04:46:56Z`)
+- **Telemetría en Supabase (`22:46` a `02:47 hrs CDMX`):** **`25` eventos humanos reales** en 2 sesiones:
+  1. **Sesión `ses_mczh3_ph3wj3kl` (`00:54 hrs CDMX`, Cuautlalpan, Estado de México CP `56383`, Mobile desde `Facebook Ads / App` `m.facebook.com`, **`206.5s` = `3.4 minutos` activos**):**
+     - Prospecto de alto interés cotizando un evento **`Empresarial` para `100 personas` en `Viernes` (`Temporada Alta / Fin de Año Oct-Dic`)**.
+     - **Fricción Crítica #1 (Colisión de `StickyPriceCompareBar` con `#precotizador` en móvil):** Al encontrarse en los Pasos 1 y 2 del `Precotizador` (`scroll: 5% a 10%`), la barra flotante `StickyPriceCompareBar` permanecía visible en la parte inferior mostrando el botón dorado `"Cotizar Ahora ↑"`. El usuario **tocó `sticky_bar_ir_precotizador` `6` veces seguidas** creyendo que era el botón de avance del cotizador, lo que rebotaba el scroll al tope de `#precotizador-hero` sin avanzar de paso.
+     - **Fricción #2 (Distancia al CTA en Paso 3 para eventos Empresariales):** Al avanzar finalmente al Paso 3 (`step_2_completado`), el usuario permaneció `15s` viendo las tarjetas de paquete sin llegar al botón inferior `"Ver Cotización y Simulador"` (situado debajo de `Combo Fiesta VIP` y los 6 servicios extra).
+     - **Fricción #3 (`dead_click` en `<h1>`):** Registró `1` `dead_click` (`dead_inicio`) sobre el `<h1>` principal en `scroll: 0%`.
+  2. **Sesión `ses_khrwk_o9xd6phd` (`/blog/tendencias-decoracion-boutique-este-ano`):**
+     - Validó `title_len: 54`, `meta_desc_len: 160`, `0` imágenes sin `alt`.
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/components/StickyPriceCompareBar.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/StickyPriceCompareBar.tsx) (Nivel 2 — Mediana):**
+   - Integración de `IntersectionObserver` sobre `#precotizador` para ocultar automáticamente la barra flotante siempre que el `Precotizador` esté visible en pantalla (`precotizadorInView = true`), restauración del rango de scroll a `24%–88%` y cierre inmediato de la barra al tocar `"Cotizar Ahora ↑"`.
+2. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx) (Nivel 1 — Menor):**
+   - Adición de un botón de avance directo **`"Continuar con Paquete {packageType} (${budget} MXN) →"`** inmediatamente debajo de las 3 tarjetas de paquete en el Paso 3, permitiendo pasar al Paso 4 en 1 toque sin tener que hacer scroll por la sección opcional de extras.
+3. **[`src/app/page.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/page.tsx) (Nivel 1 — Menor):**
+   - Conversión del `<h1>` del Hero en un `TrackedLink` (`h1_headline_precotizador` → `#precotizador`) para eliminar `dead_clicks` sobre el titular principal.
+
+---
+
 ## Ciclo Autónomo #26 — `2026-11-05 22:45 CDMX` (`v2.4.1-cycle26` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-06T00:40:04Z`)

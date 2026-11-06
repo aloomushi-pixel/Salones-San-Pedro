@@ -1106,6 +1106,20 @@ export default function Precotizador() {
               })}
             </div>
 
+            {/* Botón de Avance Directo arriba de los Extras (Evita abandono en Paso 3 para eventos Empresariales o sin extras) */}
+            <button
+              type="button"
+              onClick={handleStep3Next}
+              className="w-full min-h-[46px] bg-primary text-on-primary font-bold py-3 px-4 rounded-2xl hover:opacity-95 active:scale-[0.99] transition-all uppercase tracking-wider text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <span data-ux-decorative="true" className="material-symbols-outlined text-base pointer-events-none">
+                calculate
+              </span>
+              <span className="pointer-events-none">
+                Continuar con Paquete {packageType} (${budget.toLocaleString('es-MX')} MXN) →
+              </span>
+            </button>
+
             {/* NUEVO FRENTE 4.2: COMBO FIESTA VIP (Limusina + Carrito de Shots + Letras Gigantes) */}
             {packageType !== 'All Inclusive' && (
               <button

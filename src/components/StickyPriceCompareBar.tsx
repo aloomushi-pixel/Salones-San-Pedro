@@ -8,6 +8,26 @@ export default function StickyPriceCompareBar() {
   const [openModal, setOpenModal] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [exitRescueTriggered, setExitRescueTriggered] = useState(false);
+  const [precotizadorInView, setPrecotizadorInView] = useState(true);
+
+  useEffect(() => {
+    const target =
+      document.getElementById('precotizador') ||
+      document.getElementById('precotizador-hero');
+    if (!target || typeof IntersectionObserver === 'undefined') return;
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry) {
+          setPrecotizadorInView(entry.isIntersecting && entry.intersectionRatio >= 0.08);
+        }
+      },
+      { threshold: [0, 0.08, 0.2] }
+    );
+    obs.observe(target);
+    return () => obs.disconnect();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,7 +36,12 @@ export default function StickyPriceCompareBar() {
       const docHeight =
         document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      setVisible(exitRescueTriggered || (pct >= 10 && pct <= 94));
+      // Ocultar siempre que el Precotizador esté visible en pantalla (evita que el usuario móvil confunda "Cotizar Ahora ↑" con el botón Siguiente del wizard)
+      if (precotizadorInView && !exitRescueTriggered) {
+        setVisible(false);
+        return;
+      }
+      setVisible(exitRescueTriggered || (pct >= 24 && pct <= 88));
     };
 
     const handleExitIntent = () => {
@@ -32,7 +57,7 @@ export default function StickyPriceCompareBar() {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('sanpedro:exit-intent', handleExitIntent as EventListener);
     };
-  }, [dismissed, exitRescueTriggered]);
+  }, [dismissed, exitRescueTriggered, precotizadorInView]);
 
   if (!visible && !openModal) return null;
 
@@ -86,12 +111,19 @@ export default function StickyPriceCompareBar() {
               ¿Qué incluye cada uno?
             </button>
             <a
-              href="#precotizador-hero"
-              onClick={() =>
+              href="#precotizador"
+              onClick={(e) => {
+                e.preventDefault();
+                setExitRescueTriggered(false);
+                setVisible(false);
                 trackEvent('cotizar_click', 'sticky_bar_ir_precotizador', {
                   section: 'sticky_price_bar',
-                })
-              }
+                });
+                const el =
+                  document.getElementById('precotizador') ||
+                  document.getElementById('precotizador-hero');
+                el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
               className="flex-1 sm:flex-initial px-3.5 py-1.5 rounded-xl bg-primary text-on-primary text-[11px] font-extrabold uppercase tracking-wider text-center hover:opacity-95 transition-opacity"
             >
               Cotizar Ahora ↑
