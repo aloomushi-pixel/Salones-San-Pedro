@@ -4,6 +4,28 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #31 — `2026-11-06 19:17 CDMX` (`v2.4.6-cycle31` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-06T21:14:25Z`)
+- **Telemetría en Supabase (`15:14` a `19:15 hrs CDMX`):** **`14` eventos humanos reales** en 2 sesiones:
+  1. **Validación en Vivo de Precio en Paso 1/2 desde Instagram + Análisis del Paso 3 (`ses_oavh8_u9qkge30`, `18:36 hrs CDMX`, Gustavo A. Madero CP `07400`, Mobile `428x835` desde Instagram `link_in_bio`, `74.6s` activos):**
+     - Ajustó el aforo a **`100 personas` (`aforo_100`)**, seleccionó **`XV Años`** y completó el Paso 1 (`step_1_completado` en `24s`) gracias a la nueva píldora de precio en vivo.
+     - En el Paso 2 seleccionó **`Sábado`** y **`Primavera / Graduaciones (Abr-Jun)`**, completando el Paso 2 (`step_2_completado` en `27.5s`) con la nueva barra resumen de precio.
+     - En el Paso 3 permaneció `22.6s` (`scroll: 8% -> 15%`), donde se detectaron 3 oportunidades clave:
+       - Cada tarjeta de paquete solo mostraba `"desde $530/$710/$1010 p/p"` sin mostrar el monto total calculado para sus `100` invitados (`$53,000`, `$71,000` y `$101,000 MXN`).
+       - La condición `!hasTouchedGuests` en `handleStep1Next` impedía que al elegir `100+` invitados para `XV Años` / `Boda` / `Graduación` se pre-seleccionara automáticamente el **`Paquete Plus`** (`⭐ El Más Elegido`).
+       - Los usuarios de Instagram en móvil que ya definieron sus 5 variables en el Paso 3 aún debían pasar al Paso 4 antes de ver el botón verde de WhatsApp.
+  2. **Sesión `ses_lxd9t_y40q8nnm` (`17:30 hrs CDMX`, WhatsApp Business `l.wl.co`):**
+     - Validó `title_len: 64`, `meta_desc_len: 159`, `0` imágenes sin `alt`.
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx) (Nivel 1 — Menor):**
+   - Pre-selección automática de **`Paquete Plus`** cuando el usuario elige `100+` invitados para `XV Años`, `Boda` o `Graduación` en `handleStep1Next`, y telemetría `precotizador_step: select_pkg_*` al tocar cualquier tarjeta en el Paso 3.
+2. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx) (Nivel 2 — Mediana):**
+   - Visualización del monto total calculado (`$53,000 MXN`, `$71,000 MXN`, `$101,000 MXN` para 100 invitados) junto al precio por persona en cada tarjeta del Paso 3, e integración de la doble fila de acción debajo de los paquetes: **`"Desglose {packageType} ($71,000) →"`** + **`"WhatsApp Directo ($71,000)"`**.
+
+---
+
 ## Ciclo Autónomo #30 — `2026-11-06 15:11 CDMX` (`v2.4.5-cycle30` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-06T17:03:17Z`)

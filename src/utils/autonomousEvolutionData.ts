@@ -22,6 +22,35 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.4.6-cycle31',
+    cycle_number: 31,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-06 19:17 CDMX',
+    title:
+      'Ciclo Nocturno #31 (IMPLEMENTED): Validación de Avance Paso 1→2→3 desde Instagram (ses_oavh8_u9qkge30) + Precio Total por Paquete y WhatsApp Express en Paso 3 + Auto-Selección Paquete Plus (100+ XV/Boda)',
+    vectors: ['CRO', 'UX'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #30 (>= 2026-11-06T21:14:25Z a 2026-11-07T01:15:00Z): 14 eventos humanos reales en 2 sesiones: (1) ses_oavh8_u9qkge30 (18:36 hrs CDMX, Gustavo A. Madero CP 07400, Mobile 428x835 desde Instagram link_in_bio) validó en vivo la píldora de precio en el Paso 1 y el resumen del Paso 2 completando step_1_completado (100 personas • XV Años) en 24s y step_2_completado (Sábado • Primavera/Graduaciones Abr-Jun) en 27.5s, y luego permaneció 22.6s en el Paso 3 (scroll 8% -> 15%) donde cada tarjeta solo mostraba "desde $530/$710/$1010 p/p" sin el total calculado ($53,000 / $71,000 / $101,000 MXN), donde la condición !hasTouchedGuests impedía pre-seleccionar Paquete Plus al elegir 100+ personas y donde aún no existía un botón de WhatsApp directo en el Paso 3; y (2) ses_lxd9t_y40q8nnm (WhatsApp Business link preview, title_len=64, meta_desc_len=159).',
+    autonomousActions: [
+      'Nivel 1 (Menor — Pre-selección Inteligente de Paquete Plus para 100+ Invitados en XV Años/Boda/Graduación + Telemetría select_pkg_* en src/components/Precotizador.tsx): Corrección de handleStep1Next eliminando la restricción !hasTouchedGuests para que eventos sociales de 100+ invitados pre-seleccionen Paquete Plus (⭐ El Más Elegido) y registro de precotizador_step: select_pkg_* al tocar cualquier tarjeta del Paso 3.',
+      'Nivel 2 (Mediana — Monto Total Calculado en Tarjetas del Paso 3 + Botón WhatsApp Directo en Paso 3 en src/components/Precotizador.tsx): Visualización del monto total ($53,000 / $71,000 / $101,000 MXN) junto al precio por persona en cada tarjeta del Paso 3 e integración del botón verde "WhatsApp Directo (${budget})" junto a "Desglose {packageType} →" para permitir conversión inmediata desde el Paso 3.',
+    ],
+    filesModified: [
+      'src/components/Precotizador.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Capturar conversiones a WhatsApp directamente desde el Paso 3 para tráfico móvil de Instagram/Google que ya definió aforo, giro, día y temporada en los Pasos 1 y 2.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.4.5-cycle30',
     cycle_number: 30,
     status: 'IMPLEMENTED',
@@ -43,8 +72,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    commitHash: '7277040',
+    deploymentUuid: 'ycdbm2kkpdpkanfjjhuecvij',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:

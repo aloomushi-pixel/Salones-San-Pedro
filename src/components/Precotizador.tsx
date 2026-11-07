@@ -349,7 +349,11 @@ export default function Precotizador() {
     const duration = Date.now() - stepStartRef.current;
     if (guests < 100 && packageType !== 'Premier') {
       setPackageType('Premier');
-    } else if (guests >= 100 && packageType === 'Premier' && !hasTouchedGuests) {
+    } else if (
+      guests >= 100 &&
+      packageType === 'Premier' &&
+      (eventKind === 'XV Años' || eventKind === 'Boda' || eventKind === 'Graduación')
+    ) {
       setPackageType('Plus');
     }
     trackEvent('precotizador_step', 'step_1_completado', {
@@ -1082,6 +1086,23 @@ export default function Precotizador() {
                       if (isAvailable) {
                         setPackageType(pkg.id);
                         setLockedAttemptPkg(null);
+                        trackEvent(
+                          'precotizador_step',
+                          `select_pkg_${pkg.id.toLowerCase().replace(/\s+/g, '_')}`,
+                          {
+                            section: 'precotizador',
+                            step_number: 3,
+                            guests_range: getGuestsBucket(guests),
+                            package_name: `Paquete ${pkg.name}`,
+                            event_kind: eventKind,
+                            preferred_day: preferredDay,
+                            preferred_season: preferredSeason,
+                            extra: {
+                              exact_guests: guests,
+                              estimated_budget: guests * pkg.price,
+                            },
+                          }
+                        );
                       } else {
                         handleLockedPackageClick(pkg.name);
                       }
@@ -1123,9 +1144,14 @@ export default function Precotizador() {
                           </span>
                         )}
                       </div>
-                      <span className="text-xs sm:text-sm font-extrabold text-primary bg-primary/10 px-2.5 py-1 rounded-full shrink-0">
-                        desde ${pkg.price} p/p
-                      </span>
+                      <div className="text-right shrink-0">
+                        <span className="text-xs sm:text-sm font-extrabold text-primary bg-primary/10 px-2.5 py-0.5 rounded-full block">
+                          ${(guests * pkg.price).toLocaleString('es-MX')} MXN
+                        </span>
+                        <span className="text-[10px] text-secondary font-medium block mt-0.5">
+                          ${pkg.price} p/p
+                        </span>
+                      </div>
                     </div>
 
                     <div className="flex flex-wrap gap-1.5 mt-2 pl-7 pointer-events-none">
@@ -1143,19 +1169,35 @@ export default function Precotizador() {
               })}
             </div>
 
-            {/* Botón de Avance Directo arriba de los Extras (Evita abandono en Paso 3 para eventos Empresariales o sin extras) */}
-            <button
-              type="button"
-              onClick={handleStep3Next}
-              className="w-full min-h-[46px] bg-primary text-on-primary font-bold py-3 px-4 rounded-2xl hover:opacity-95 active:scale-[0.99] transition-all uppercase tracking-wider text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <span data-ux-decorative="true" className="material-symbols-outlined text-base pointer-events-none">
-                calculate
-              </span>
-              <span className="pointer-events-none">
-                Continuar con Paquete {packageType} (${budget.toLocaleString('es-MX')} MXN) →
-              </span>
-            </button>
+            {/* Doble Acción Directa en Paso 3: Simulador Paso 4 o WhatsApp Directo (Evita abandono en Paso 3 como ses_oavh8_u9qkge30) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={handleStep3Next}
+                className="w-full min-h-[46px] bg-primary text-on-primary font-bold py-3 px-4 rounded-2xl hover:opacity-95 active:scale-[0.99] transition-all uppercase tracking-wider text-xs shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <span data-ux-decorative="true" className="material-symbols-outlined text-base pointer-events-none">
+                  calculate
+                </span>
+                <span className="pointer-events-none">
+                  Desglose {packageType} (${budget.toLocaleString('es-MX')}) →
+                </span>
+              </button>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleWhatsApp}
+                className="w-full min-h-[46px] bg-[#25D366] text-white font-bold py-3 px-4 rounded-2xl hover:bg-[#1EBE5D] active:scale-[0.99] transition-all uppercase tracking-wider text-xs shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <span data-ux-decorative="true" className="material-symbols-outlined text-base pointer-events-none">
+                  forum
+                </span>
+                <span className="pointer-events-none">
+                  WhatsApp Directo (${budget.toLocaleString('es-MX')})
+                </span>
+              </a>
+            </div>
 
             {/* NUEVO FRENTE 4.2: COMBO FIESTA VIP (Limusina + Carrito de Shots + Letras Gigantes) */}
             {packageType !== 'All Inclusive' && (
