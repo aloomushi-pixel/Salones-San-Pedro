@@ -299,8 +299,39 @@ export default function Precotizador() {
       setStep(3);
     };
 
+    const handleSyncFromPaquetes = (e: Event) => {
+      const customEvent = e as CustomEvent<{
+        packageId?: string;
+        guests?: number;
+        dayMode?: 'viernes_domingo' | 'sabado';
+      }>;
+      const rawGuests = customEvent.detail?.guests;
+      const pkg = customEvent.detail?.packageId;
+      if (typeof rawGuests === 'number' && rawGuests >= 50 && rawGuests <= 250) {
+        setGuests(rawGuests);
+        setHasTouchedGuests(true);
+        if (rawGuests < 100) {
+          setPackageType('Premier');
+        } else if (pkg) {
+          setPackageType(pkg);
+        }
+      } else if (pkg) {
+        setPackageType(pkg);
+      }
+      if (customEvent.detail?.dayMode === 'viernes_domingo') {
+        setPreferredDay('Viernes');
+      } else if (customEvent.detail?.dayMode === 'sabado') {
+        setPreferredDay('Sábado');
+      }
+      setLockedAttemptPkg(null);
+    };
+
     window.addEventListener('ssp:select-package', handlePreselectPackage);
-    return () => window.removeEventListener('ssp:select-package', handlePreselectPackage);
+    window.addEventListener('ssp:sync-from-paquetes', handleSyncFromPaquetes);
+    return () => {
+      window.removeEventListener('ssp:select-package', handlePreselectPackage);
+      window.removeEventListener('ssp:sync-from-paquetes', handleSyncFromPaquetes);
+    };
   }, []);
 
   const getGuestsBucket = (val: number) => {

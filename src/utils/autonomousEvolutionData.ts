@@ -22,6 +22,36 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.4.7-cycle32',
+    cycle_number: 32,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-06 23:24 CDMX',
+    title:
+      'Ciclo Nocturno #32 (IMPLEMENTED): Sincronización en Vivo #Paquetes ↔ #Precotizador (ses_xybsg_koj9ors7 • 142.8s Activos) + Precio Simulado y Botón de Precotizador dentro de Modales de Servicios',
+    vectors: ['CRO', 'UX'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #31 (>= 2026-11-07T01:20:01Z a 2026-11-07T05:20:14Z): 34 eventos humanos reales en 3 sesiones de Google Orgánico SEO: (1) ses_xybsg_koj9ors7 (23:06 hrs CDMX, Cuauhtémoc CDMX CP 06800, Desktop 1536x791, 142.8s activos y 92s en #paquetes) eligió aforo_200 en el Precotizador, fue rescatado tras exit_intent: exit_from_confianza_ubicacion (+67s de retención), interactuó intensivamente con el simulador de #paquetes (sim_dia_sabado -> sim_dia_viernes_domingo -> sim_dia_sabado -> paquetes_sim_250), abrió el modal modal_paquete_servicio_7h ("7 Horas de Celebración Extendida - Paquete Plus") y subió de regreso a #precotizador (scroll: 2%), donde el modal no tenía botón para personalizar en el cotizador in-page ni sincronizaba automáticamente sus 250 invitados + Sábado + Paquete Plus hacia el Precotizador; y (2) sesiones ses_rus0r_fvnsxh79 y ses_s1rdl_tp4profe con auditoría SEO limpia (title_len=64, meta_desc_len=159, 0 img_missing_alt).',
+    autonomousActions: [
+      'Nivel 2 (Mediana — Sincronización Silenciosa #Paquetes → #Precotizador vía ssp:sync-from-paquetes en PaquetesInteractiveSection.tsx y Precotizador.tsx): Cada ajuste de aforo (50 a 250 pers.), cambio de día (Viernes/Dom vs Sábado) o apertura de modal de servicio en #paquetes sincroniza automáticamente guests, preferredDay y packageType en el Precotizador superior.',
+      'Nivel 1 (Menor — Presupuesto Simulado en Vivo + Botón "Personalizar en Cotizador ↑" dentro del Modal de Servicios en PaquetesInteractiveSection.tsx): Adición de cintillo con el total calculado para el aforo y día activos dentro del modal de servicio (selectedInclusion) y botón directo para abrir el Paso 3 del Precotizador con ese paquete precargado.',
+    ],
+    filesModified: [
+      'src/components/PaquetesInteractiveSection.tsx',
+      'src/components/Precotizador.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Convertir a los usuarios de Desktop y Mobile que configuran su aforo/día en #paquetes y abren modales de servicios incluidos en cotizaciones completas del Precotizador o mensajes de WhatsApp.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.4.6-cycle31',
     cycle_number: 31,
     status: 'IMPLEMENTED',
@@ -42,8 +72,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    commitHash: '1f71235',
+    deploymentUuid: 'mzipmq43prihjgpglbj3gyxy',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:

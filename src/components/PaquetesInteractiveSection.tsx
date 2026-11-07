@@ -276,7 +276,26 @@ export default function PaquetesInteractiveSection() {
     return effectiveGuests * getPackageUnitPrice(basePrice);
   };
 
-  const handlePreselectInCalculator = (packageId: 'Premier' | 'Plus' | 'All Inclusive') => {
+  const getInclusionPackageMeta = (pkgOrigin: string) => {
+    if (pkgOrigin === 'Premier') return { basePrice: 530, minGuests: 50 };
+    if (pkgOrigin === 'Plus') return { basePrice: 710, minGuests: 100 };
+    return { basePrice: 1010, minGuests: 100 };
+  };
+
+  const syncWithPrecotizador = (
+    nextGuests: number,
+    nextDayMode: 'viernes_domingo' | 'sabado',
+    nextPkg?: string
+  ) => {
+    if (typeof window === 'undefined') return;
+    window.dispatchEvent(
+      new CustomEvent('ssp:sync-from-paquetes', {
+        detail: { guests: nextGuests, dayMode: nextDayMode, packageId: nextPkg },
+      })
+    );
+  };
+
+  const handlePreselectInCalculator = (packageId: string) => {
     trackEvent('cotizar_click', `paquete_preseleccionar_${packageId.toLowerCase().replace(/\s+/g, '_')}`, {
       section: 'paquetes',
       package_name: `Paquete ${packageId}`,
@@ -300,6 +319,7 @@ export default function PaquetesInteractiveSection() {
     const item = INCLUSION_CATALOG[key];
     if (!item) return;
     setSelectedInclusion(item);
+    syncWithPrecotizador(simGuests, simDayMode, item.packageOrigin);
     trackEvent('experience_interaction', `modal_paquete_${key}`, {
       section: 'paquetes',
       package_name: `Paquete ${item.packageOrigin}`,
@@ -384,6 +404,7 @@ export default function PaquetesInteractiveSection() {
                     type="button"
                     onClick={() => {
                       setSimGuests(g);
+                      syncWithPrecotizador(g, simDayMode);
                       trackEvent('guests_slider_adjust', `paquetes_sim_${g}`, {
                         section: 'paquetes',
                         guests_range: `${g} personas`,
@@ -407,6 +428,7 @@ export default function PaquetesInteractiveSection() {
                 type="button"
                 onClick={() => {
                   setSimDayMode('viernes_domingo');
+                  syncWithPrecotizador(simGuests, 'viernes_domingo');
                   trackEvent('package_select', 'sim_dia_viernes_domingo', { section: 'paquetes' });
                 }}
                 className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${
@@ -421,6 +443,7 @@ export default function PaquetesInteractiveSection() {
                 type="button"
                 onClick={() => {
                   setSimDayMode('sabado');
+                  syncWithPrecotizador(simGuests, 'sabado');
                   trackEvent('package_select', 'sim_dia_sabado', { section: 'paquetes' });
                 }}
                 className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${
@@ -867,6 +890,23 @@ export default function PaquetesInteractiveSection() {
             </div>
 
             <div className="p-5 sm:p-6 space-y-4">
+              {(() => {
+                const meta = getInclusionPackageMeta(selectedInclusion.packageOrigin);
+                const effGuests = Math.max(meta.minGuests, simGuests);
+                const totalSim = getPackageTotal(meta.basePrice, meta.minGuests);
+                const dayLabel = simDayMode === 'sabado' ? 'Sábado Estelar' : 'Viernes / Domingo';
+                return (
+                  <div className="p-3 rounded-2xl bg-primary/10 border border-primary/30 flex flex-wrap items-center justify-between gap-2 text-xs">
+                    <span className="text-on-surface font-medium">
+                      Incluido en <strong>Paquete {selectedInclusion.packageOrigin}</strong> ({effGuests} pers. • {dayLabel}):
+                    </span>
+                    <span className="text-primary font-extrabold text-sm">
+                      {formatMXN(totalSim)} MXN
+                    </span>
+                  </div>
+                );
+              })()}
+
               <p className="text-sm text-secondary leading-relaxed">
                 {selectedInclusion.description}
               </p>
@@ -887,26 +927,42 @@ export default function PaquetesInteractiveSection() {
                 </ul>
               </div>
 
-              <div className="flex gap-2.5 pt-1">
+              <div className="flex flex-col sm:flex-row gap-2 pt-1">
                 <button
                   type="button"
-                  onClick={() => setSelectedInclusion(null)}
-                  className="px-4 py-3 rounded-xl border border-outline-variant/40 text-secondary hover:text-on-surface font-bold text-xs uppercase tracking-wider cursor-pointer"
+                  onClick={() => {
+                    const pkg = selectedInclusion.packageOrigin;
+                    setSelectedInclusion(null);
+                    handlePreselectInCalculator(pkg);
+                  }}
+                  className="flex-1 py-3 px-4 rounded-xl bg-primary text-on-primary font-bold text-xs uppercase tracking-wider text-center shadow-md hover:opacity-95 transition-opacity cursor-pointer"
                 >
-                  <span className="pointer-events-none">Cerrar</span>
+                  <span className="pointer-events-none">
+                    Personalizar {selectedInclusion.packageOrigin} ({Math.max(selectedInclusion.packageOrigin === 'Premier' ? 50 : 100, simGuests)} pers.) ↑
+                  </span>
                 </button>
                 <TrackedLink
                   eventType="cotizar_click"
                   source={`modal_inclusion_${selectedInclusion.id}`}
                   href={`https://wa.me/526633670431?text=${encodeURIComponent(
-                    `¡Hola! Vi el detalle de "${selectedInclusion.title}" en su web y me interesa cotizar el Paquete ${selectedInclusion.packageOrigin}.`
+                    `¡Hola! Vi el detalle de "${selectedInclusion.title}" en su web y me interesa cotizar el Paquete ${selectedInclusion.packageOrigin} para ${Math.max(
+                      selectedInclusion.packageOrigin === 'Premier' ? 50 : 100,
+                      simGuests
+                    )} personas (${simDayMode === 'sabado' ? 'Sábado' : 'Viernes / Domingo'}).`
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 py-3 px-4 rounded-xl bg-primary text-on-primary font-bold text-xs uppercase tracking-wider text-center shadow-md hover:opacity-95 transition-opacity"
+                  className="flex-1 py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs uppercase tracking-wider text-center shadow-md transition-colors"
                 >
-                  Cotizar con este servicio en WhatsApp
+                  Pedir en WhatsApp
                 </TrackedLink>
+                <button
+                  type="button"
+                  onClick={() => setSelectedInclusion(null)}
+                  className="px-3.5 py-3 rounded-xl border border-outline-variant/40 text-secondary hover:text-on-surface font-bold text-xs uppercase tracking-wider cursor-pointer"
+                >
+                  <span className="pointer-events-none">Cerrar</span>
+                </button>
               </div>
             </div>
           </div>

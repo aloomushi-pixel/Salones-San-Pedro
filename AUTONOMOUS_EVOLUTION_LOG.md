@@ -4,6 +4,28 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #32 — `2026-11-06 23:24 CDMX` (`v2.4.7-cycle32` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-07T01:20:01Z`)
+- **Telemetría en Supabase (`19:20` a `23:20 hrs CDMX`):** **`34` eventos humanos reales** en 3 sesiones de `Google Orgánico (SEO)`:
+  1. **Exploración Intensiva en `#paquetes` y Regreso a `#precotizador` (`ses_xybsg_koj9ors7`, `23:06 hrs CDMX`, Cuauhtémoc CDMX CP `06800`, Desktop `1536x791`, `142.8s` activos y `92s` en `#paquetes`):**
+     - Seleccionó `aforo_200` en el Precotizador (`05:06:54Z`), bajó a `#paquetes` y `#confianza_ubicacion`, y tras activar `exit_intent: exit_from_confianza_ubicacion` fue retenido durante **`67` segundos adicionales** gracias a la barra de rescate.
+     - En `#paquetes` utilizó intensivamente la barra simuladora: alternó `sim_dia_sabado` -> `sim_dia_viernes_domingo` -> `sim_dia_sabado`, seleccionó **`250 personas` (`paquetes_sim_250`)** y abrió el modal **`modal_paquete_servicio_7h`** (*"7 Horas de Celebración Extendida (Paquete Plus)"*).
+     - Finalmente subió de regreso a `scroll: 2%` (`last_section: "precotizador"`).
+     - **Oportunidades detectadas:**
+       - Cuando el usuario cambia el aforo (`250 personas`), el día (`Sábado`) o abre un modal de servicio (`Paquete Plus`) en `#paquetes` y luego sube manualmente a `#precotizador`, esos cambios en `#paquetes` no se sincronizaban silenciosamente con el `Precotizador` superior.
+       - Además, el modal de servicio incluido (`selectedInclusion`) en `#paquetes` solo tenía el botón `"Cotizar con este servicio en WhatsApp"` (sin mostrar el monto total simulado para sus `250` personas ni ofrecer el botón `"Personalizar en Cotizador ↑"` para usuarios de Desktop).
+  2. **Sesiones `ses_rus0r_fvnsxh79` y `ses_s1rdl_tp4profe`:**
+     - Validaron auditoría SEO limpia (`title_len: 64`, `meta_desc_len: 159`, `0` imágenes sin `alt`).
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/components/PaquetesInteractiveSection.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/PaquetesInteractiveSection.tsx) y [`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx) (Nivel 2 — Mediana):**
+   - Sincronización automática `#paquetes` -> `#precotizador` mediante `CustomEvent('ssp:sync-from-paquetes')` cada vez que el usuario selecciona un aforo (`50` a `250`), cambia entre `Viernes/Dom` y `Sábado` o abre el modal de un servicio en `#paquetes`.
+2. **[`src/components/PaquetesInteractiveSection.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/PaquetesInteractiveSection.tsx) (Nivel 1 — Menor):**
+   - Adición de cintillo con el presupuesto simulado en vivo dentro del modal de servicio incluido (*"Incluido en Paquete Plus (250 pers. • Sábado Estelar): $186,250 MXN"*) y botón **`"Personalizar {Paquete} ({simGuests} pers.) ↑"`** junto al botón de WhatsApp.
+
+---
+
 ## Ciclo Autónomo #31 — `2026-11-06 19:17 CDMX` (`v2.4.6-cycle31` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-06T21:14:25Z`)
