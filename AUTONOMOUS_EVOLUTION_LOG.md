@@ -4,6 +4,51 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #35 — `2026-11-11 15:18 CDMX` (`v2.5.0-cycle35` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-07T13:34:23Z` a `2026-11-11T21:15:00Z`)
+- **Telemetría en Supabase (`478` eventos humanos reales en `33` sesiones):**
+  - **¡Récord de Conversión y Validación GEO/CRO (`14` conversiones: `9` `whatsapp_click` + `5` `cotizar_click`):**
+    1. **75% de Conversión a WhatsApp desde ChatGPT (`IA Generativa / GEO` — 3 de 4 sesiones convirtieron):**
+       - `ses_yhryf_ftnjnejs` (`2026-11-10`, Ecatepec, Mobile desde ChatGPT): Completó los Pasos 1 y 2 (`50 personas • Bautizo / Cumpleaños • Sábado`) y **convirtió directamente desde el nuevo botón WhatsApp Express del Paso 3 (`whatsapp_click: precotizador` con `$26,500 MXN`)** implementado en el Ciclo #31.
+       - `ses_9rtcj_zykw8yn6` (`2026-11-11`, Miguel Hidalgo CDMX, Desktop desde ChatGPT): Seleccionó `70 personas`, completó el Paso 1 y convirtió en `whatsapp_click: floating_button`.
+       - `ses_eiylj_j403dzzk` (`2026-11-11`, Miguel Hidalgo CDMX, Desktop desde ChatGPT): Fue rescatado por `exit_intent: exit_from_precotizador`, completó los Pasos 1 a 3 (`50 personas`), activó el upsell a **`100 invitados` (`upsell_a_100_invitados` -> `Paquete Plus`)** y convirtió en `whatsapp_click: floating_button`.
+    2. **Conversión Orgánica High-Ticket (`200+ personas • Paquete All Inclusive` — `ses_63d54_37zdrn2v`):**
+       - Aterrizó desde Google Orgánico, seleccionó `200 o más personas`, utilizó el nuevo selector `select_pkg_all_inclusive`, completó el Paso 3 y convirtió en **`whatsapp_click: precotizador` (`Paquete All Inclusive`)**; luego recorrió `#galeria` (`next_platino_auto_from_diamante`) y volvió a convertir en **`whatsapp_click: galeria_lightbox_platino`**.
+  - **3 Fricciones Reales Detectadas en las `478` Señales y Resueltas en este Ciclo:**
+    1. **Botón Flotante de WhatsApp (`floating_button`) sin sincronización del borrador activo (`ses_dezol_8r7zq2x6`, `ses_3mpb4_m2gply9j`, `ses_9rtcj_zykw8yn6`, `ses_eiylj_j403dzzk`):** 4 usuarios cotizaron su evento en el Precotizador (`60`, `70` y `100` invitados) y luego hicieron clic en el botón verde flotante de la esquina inferior derecha (`floating_button`), el cual abría un mensaje genérico sin incluir su cotización simulada.
+    2. **Selección manual de los 3 extras del Combo VIP en lugar del paquete con descuento + `locked_plus` en `< 100` invitados (`ses_nimj4_3bfai4cp` y `ses_eloly_6dxi1cjn`):** En `ses_nimj4_3bfai4cp` (ChatGPT, `70 personas`), tras tocar `locked_plus`, el usuario seleccionó manualmente `extra_letras`, `extra_limusina` y `extra_shots` (`$14,500 MXN` individuales en lugar de `$11,500 MXN` del Combo Fiesta VIP).
+    3. **`dead_click` en el encabezado del simulador en vivo del Paso 4 + retrocesos `back_from_4_to_2` (`ses_eloly_6dxi1cjn`):** El usuario hizo clic sobre `"⚡ Ajusta tu simulación en vivo sin salir: {eventKind}"` intentando cambiar el tipo de evento desde el Paso 4 y retrocedió dos veces al Paso 2 para cambiar la temporada.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** `563` impresiones y `24` clics acumulados (CTR `4.26%`, posición media `8.4`). Fuerte tracción en artículos SEO/GEO: `/blog/salones-de-fiestas-pequenos-en-cdmx-gustavo-a-madero-50-a-80-personas` (`104` impresiones, `2` clics, pos `9.3`), `/blog/fotos-y-recorrido-salones-san-pedro-plus-diamante-y-platino-norte-84-gam` (`104` impresiones, `1` clic, pos `6.8`) y `/blog/cuanto-cuesta-un-salon-de-fiestas-en-gustavo-a-madero-cdmx-precios-2026` (`79` impresiones, `2` clics, pos `6.6`).
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/components/TrackedLink.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/TrackedLink.tsx) (Nivel 2 — Mediana):**
+   - Sincronización automática del borrador activo (`sanpedro_precotizador_draft_v1` en `sessionStorage`) al hacer clic en `whatsapp_click` (`floating_button`, `header_nav`, `footer_ubicacion_whatsapp`), inyectando aforo, tipo de evento, día, temporada, paquete y presupuesto estimado tanto en el evento de Supabase como en el mensaje de WhatsApp enviado al asesor.
+2. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx) (Nivel 2 — Mediana):**
+   - Auto-activación del **Combo Fiesta VIP (`$11,500 MXN`, ahorro inmediato de `$3,000 MXN`)** cuando el usuario marca manualmente los 3 extras (`limusina`, `shots`, `letras`), y adición del botón **`"Conservar {guests} pers. + Combo VIP (+$11,500)"`** en el banner de `< 100` invitados del Paso 3.
+3. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx) (Nivel 1 — Menor):**
+   - Conversión del encabezado `"⚡ Ajusta tu simulación en vivo sin salir: {eventKind} ↻"` del Paso 4 en un botón interactivo para alternar el tipo de evento sin salir del Paso 4, más selector compacto de temporada (`Oct–Dic 2026`, `Ene–Sep`, `Año 2027`).
+
+---
+
+## Ciclo Autónomo #34 — `2026-11-07 07:32 CDMX` (`v2.4.9-cycle34` — `POSTPONED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-07T09:31:27Z`)
+- **Telemetría en Supabase (`03:31` a `07:32 hrs CDMX`):** `0` sesiones nuevas, `0` eventos humanos y `0` leads durante la ventana de amanecer del sábado posterior al Ciclo #33.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap `https://sanpedro.aionia.com.mx/sitemap.xml` estable con `37` URLs enviadas y `0` errores.
+- **Decisión Consciente (`POSTPONED`):** Se preserva intacta la versión en producción (`commit 65145d0`, Coolify `qrjhojb5rofr6ic3c4khkcrg`) para evaluar con el tráfico matutino de fin de semana la sincronización `#paquetes` ↔ `#precotizador` y el botón de WhatsApp directo en el Paso 3.
+
+---
+
+## Ciclo Autónomo #33 — `2026-11-07 03:30 CDMX` (`v2.4.8-cycle33` — `POSTPONED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-07T05:28:56Z`)
+- **Telemetría en Supabase (`23:28` a `03:29 hrs CDMX`):** `0` sesiones nuevas, `0` eventos humanos y `0` leads durante la ventana de sueño profundo de madrugada posterior al despliegue del Ciclo #32 (`commit 65145d0`).
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap `https://sanpedro.aionia.com.mx/sitemap.xml` estable con `37` URLs enviadas y `0` errores.
+- **Decisión Consciente (`POSTPONED`):** Se preserva intacta la versión en producción (`commit 65145d0`, Coolify `qrjhojb5rofr6ic3c4khkcrg`) para evaluar con el tráfico matutino la sincronización en vivo `#paquetes` ↔ `#precotizador` (`ssp:sync-from-paquetes`) y el cintillo de precio + botón de cotizador dentro de los modales de servicios incluidos.
+
+---
+
 ## Ciclo Autónomo #32 — `2026-11-06 23:24 CDMX` (`v2.4.7-cycle32` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-07T01:20:01Z`)

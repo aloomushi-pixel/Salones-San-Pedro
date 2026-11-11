@@ -22,6 +22,95 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.5.0-cycle35',
+    cycle_number: 35,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-11 15:18 CDMX',
+    title:
+      'Ciclo Autónomo #35: 478 Eventos y 14 Conversiones (75% Conversión ChatGPT GEO) — Enriquecimiento de WhatsApp Flotante con Borrador Activo, Auto-Upgrade a Combo VIP (-$3,000) y Simulador de Evento/Temporada en Paso 4',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #34 (>= 2026-11-07T13:34:23Z a 2026-11-11T21:15:00Z): 478 eventos humanos en 33 sesiones con 14 conversiones directas (9 whatsapp_click + 5 cotizar_click). 4 sesiones desde ChatGPT GEO con 3 conversiones a WhatsApp (75% tasa de conversión: ses_yhryf_ftnjnejs usando el nuevo botón WhatsApp Express del Paso 3, ses_9rtcj_zykw8yn6 y ses_eiylj_j403dzzk usando floating_button tras cotizar) y 1 conversión orgánica High-Ticket de 200+ invitados en Paquete All Inclusive (ses_63d54_37zdrn2v). Fricciones detectadas: (1) 4 sesiones cotizaron en Precotizador y tocaron floating_button enviando texto genérico sin su borrador; (2) ses_nimj4_3bfai4cp (ChatGPT, 70 pers.) tocó locked_plus y marcó manualmente los 3 extras del Combo VIP ($14,500 vs $11,500); (3) ses_eloly_6dxi1cjn hizo dead_click en el encabezado del simulador del Paso 4 buscando cambiar el tipo de evento y retrocedió 2 veces back_from_4_to_2.',
+    autonomousActions: [
+      'Enriquecimiento inteligente de TrackedLink.tsx: cuando el usuario hace clic en whatsapp_click (floating_button, header_nav, footer_ubicacion_whatsapp) y tiene un borrador activo en sessionStorage (sanpedro_precotizador_draft_v1), se adjunta la configuración (invitados, paquete, tipo de evento, día, presupuesto estimado) tanto a la telemetría de Supabase como al mensaje prellenado de WhatsApp.',
+      'Auto-activación de Combo Fiesta VIP (-$3,000 MXN de ahorro automático) en Precotizador.tsx cuando el usuario selecciona manualmente los 3 extras individuales (limusina, shots, letras), más nuevo botón de 1 clic "Conservar {guests} pers. + Combo VIP (+$11,500)" en el banner de desbloqueo < 100 invitados del Paso 3.',
+      'Conversión del encabezado "⚡ Ajusta tu simulación en vivo sin salir: {eventKind}" del Paso 4 en un botón interactivo que alterna el tipo de evento (XV Años, Boda, Graduación, Bautizo / Cumpleaños, Empresarial) + chips de temporada (Oct–Dic, Ene–Sep, Año 2027) para erradicar dead_precotizador y back_from_4_to_2.',
+    ],
+    filesModified: [
+      'src/components/TrackedLink.tsx',
+      'src/components/Precotizador.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'pending',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Capturar el 100% del contexto de cotización (aforo, paquete, fecha y presupuesto) en los clics sobre floating_button y elevar la adopción del Combo Fiesta VIP en eventos de 50 a 90 invitados.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.4.9-cycle34',
+    cycle_number: 34,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-07 07:32 CDMX',
+    title:
+      'Ciclo Amanecer #34 (POSTPONED): Ventana de Amanecer 03:31–07:32 CDMX Sin Tráfico Humano — Preservación de Línea Base v2.4.7 (Commit 65145d0)',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #33 (>= 2026-11-07T09:31:27Z a 2026-11-07T13:32:22Z): 0 eventos humanos nuevos y 0 leads durante la ventana de amanecer (03:31 a 07:32 hrs CDMX). Google Search Console reporta sitemap saludable con 37 URLs enviadas y 0 errores.',
+    autonomousActions: [
+      'Auditoría en vivo de Supabase (analytics_events y leads >= 2026-11-07T09:31:27Z) y Google Search Console API (sc-domain:sanpedro.aionia.com.mx).',
+      'Decisión consciente POSTPONED bajo Estándar Maestro v2.1: se preserva intacta la versión en producción (commit 65145d0, Coolify qrjhojb5rofr6ic3c4khkcrg) para evaluar con el tráfico matutino de sábado la sincronización en vivo #paquetes ↔ #precotizador y la barra de conversión dentro de los modales de servicios.',
+    ],
+    filesModified: [
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason:
+      'Ventana de amanecer (03:31 a 07:32 hrs CDMX) con 0 sesiones humanas nuevas tras el despliegue del Ciclo #32 (commit 65145d0). Se evita sobre-editar a ciegas antes de medir el tráfico matutino de fin de semana.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: '65145d0',
+    deploymentUuid: 'qrjhojb5rofr6ic3c4khkcrg',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Evaluar con el tráfico matutino de sábado (07:32 a 11:32 hrs CDMX) la conversión desde los modales de servicios incluidos en #paquetes y el botón de WhatsApp directo en el Paso 3.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.4.8-cycle33',
+    cycle_number: 33,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-07 03:30 CDMX',
+    title:
+      'Ciclo Madrugada #33 (POSTPONED): Ventana de Sueño 23:28–03:29 CDMX Sin Tráfico Humano — Preservación de Línea Base v2.4.7 (Commit 65145d0)',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #32 (>= 2026-11-07T05:28:56Z a 2026-11-07T09:29:48Z): 0 eventos humanos nuevos y 0 leads durante la ventana de madrugada (23:28 a 03:29 hrs CDMX). Google Search Console reporta sitemap saludable con 37 URLs enviadas y 0 errores.',
+    autonomousActions: [
+      'Auditoría en vivo de Supabase (analytics_events y leads >= 2026-11-07T05:28:56Z) y Google Search Console API (sc-domain:sanpedro.aionia.com.mx).',
+      'Decisión consciente POSTPONED bajo Estándar Maestro v2.1: se preserva intacta la versión en producción (commit 65145d0, Coolify qrjhojb5rofr6ic3c4khkcrg) para evaluar con el tráfico matutino de viernes/sábado la sincronización en vivo #paquetes ↔ #precotizador y la barra de conversión dentro de los modales de servicios.',
+    ],
+    filesModified: [
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason:
+      'Ventana de madrugada (23:28 a 03:29 hrs CDMX) con 0 sesiones humanas nuevas tras el despliegue del Ciclo #32 (commit 65145d0). Se evita sobre-editar a ciegas antes de medir el tráfico matutino.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: '65145d0',
+    deploymentUuid: 'qrjhojb5rofr6ic3c4khkcrg',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Medir en el tráfico matutino la conversión desde los modales de servicios incluidos en #paquetes y la retención cuando el usuario sube hacia #precotizador con su aforo y día sincronizados.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.4.7-cycle32',
     cycle_number: 32,
     status: 'IMPLEMENTED',
@@ -43,8 +132,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'jpgg3sovj8zh2mec0e54sfws',
+    commitHash: '65145d0',
+    deploymentUuid: 'qrjhojb5rofr6ic3c4khkcrg',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:

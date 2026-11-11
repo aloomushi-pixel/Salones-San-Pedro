@@ -541,9 +541,30 @@ export default function Precotizador() {
         package_name: `Paquete ${packageType}`,
       });
     }
-    setSelectedExtras((prev) =>
-      prev.includes(id) ? prev.filter((e) => e !== id) : [...prev, id]
-    );
+
+    const nextExtras = selectedExtras.includes(id)
+      ? selectedExtras.filter((e) => e !== id)
+      : [...selectedExtras, id];
+
+    // Si el usuario seleccionó manualmente los 3 extras de COMBO_VIP_IDS (limusina, shots, letras),
+    // activar automáticamente Combo Fiesta VIP ($11,500 en lugar de $14,500) ahorrándole $3,000 MXN
+    if (
+      packageType !== 'All Inclusive' &&
+      !comboVipActive &&
+      COMBO_VIP_IDS.every((cid) => nextExtras.includes(cid))
+    ) {
+      setComboVipActive(true);
+      setSelectedExtras(nextExtras.filter((e) => !COMBO_VIP_IDS.includes(e)));
+      trackEvent('extra_service_interest', 'combo_fiesta_vip_auto_bundle', {
+        section: 'precotizador',
+        element_text: 'Combo Fiesta VIP Auto-Activado (Ahorro $3,000)',
+        guests_range: getGuestsBucket(guests),
+        package_name: `Paquete ${packageType}`,
+      });
+      return;
+    }
+
+    setSelectedExtras(nextExtras);
   };
 
   const getPackagePrice = () => {
@@ -1074,29 +1095,52 @@ export default function Precotizador() {
         ================================================================= */}
         {step === 3 && (
           <div className="animate-fade-in space-y-3.5">
-            {/* Banner de desbloqueo a 100 invitados */}
+            {/* Banner de desbloqueo a 100 invitados + Alternativa Combo VIP para 50-90 personas */}
             {guests < 100 && (
-              <div className="p-3 bg-amber-500/15 border border-amber-500/40 rounded-2xl text-xs text-amber-300 flex flex-col sm:flex-row sm:items-center justify-between gap-2 animate-fade-in">
+              <div className="p-3 bg-amber-500/15 border border-amber-500/40 rounded-2xl text-xs text-amber-300 flex flex-col gap-2.5 animate-fade-in">
                 <span>
                   {lockedAttemptPkg ? (
                     <>
-                      El paquete <strong>{lockedAttemptPkg}</strong> aplica desde 100 invitados (tienes {guests}).
+                      El paquete <strong>{lockedAttemptPkg}</strong> aplica desde 100 invitados (tienes {guests}). Puedes subir a 100 personas o conservar tus <strong>{guests} invitados</strong> agregando el <strong>Combo Fiesta VIP</strong> (Limusina + Shots + Letras):
                     </>
                   ) : (
                     <>
-                      Con <strong>{guests} invitados</strong> aplica Paquete Premier. Sube a 100 para desbloquear <strong>Plus</strong> y <strong>All Inclusive</strong>.
+                      Con <strong>{guests} invitados</strong> aplica Paquete Premier. Sube a 100 para desbloquear <strong>Plus</strong> / <strong>All Inclusive</strong> o suma el <strong>Combo Fiesta VIP</strong>:
                     </>
                   )}
                 </span>
-                <button
-                  type="button"
-                  onClick={() => handleUpsellTo100(lockedAttemptPkg || 'Plus')}
-                  className="px-3.5 py-2 rounded-xl bg-amber-500 text-neutral-950 font-extrabold text-xs shrink-0 hover:bg-amber-400 transition-colors cursor-pointer"
-                >
-                  <span className="pointer-events-none">
-                    Subir a 100 pers. y elegir {lockedAttemptPkg || 'Plus'}
-                  </span>
-                </button>
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleUpsellTo100(lockedAttemptPkg || 'Plus')}
+                    className="px-3.5 py-2 rounded-xl bg-amber-500 text-neutral-950 font-extrabold text-xs shrink-0 hover:bg-amber-400 transition-colors cursor-pointer"
+                  >
+                    <span className="pointer-events-none">
+                      Subir a 100 pers. y elegir {lockedAttemptPkg || 'Plus'}
+                    </span>
+                  </button>
+                  {!comboVipActive && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setComboVipActive(true);
+                        setSelectedExtras((prev) => prev.filter((id) => !COMBO_VIP_IDS.includes(id)));
+                        setLockedAttemptPkg(null);
+                        trackEvent('extra_service_interest', 'combo_fiesta_vip_from_locked_banner', {
+                          section: 'precotizador',
+                          element_text: `Conservar ${guests} pers. + Combo Fiesta VIP`,
+                          guests_range: getGuestsBucket(guests),
+                          package_name: `Paquete ${packageType}`,
+                        });
+                      }}
+                      className="px-3.5 py-2 rounded-xl bg-surface-container-highest border border-amber-400/50 text-amber-200 font-bold text-xs shrink-0 hover:bg-amber-500/20 transition-colors cursor-pointer"
+                    >
+                      <span className="pointer-events-none">
+                        Conservar {guests} pers. + Combo VIP (+$11,500)
+                      </span>
+                    </button>
+                  )}
+                </div>
               </div>
             )}
 
@@ -1431,12 +1475,30 @@ export default function Precotizador() {
                 </div>
               )}
 
-              {/* SIMULADOR EN VIVO EN EL PASO 4 (Evita que el usuario tenga que regresar al Paso 1 para probar otro aforo o día) */}
+              {/* SIMULADOR EN VIVO EN EL PASO 4 (Evita que el usuario tenga que regresar al Paso 1 o 2 para probar otro aforo, día, tipo de evento o temporada) */}
               <div className="mt-3 p-3 rounded-xl bg-surface-container-high/50 border border-outline-variant/30 text-left space-y-2.5">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-primary flex items-center justify-between">
-                  <span>⚡ Ajusta tu simulación en vivo sin salir:</span>
-                  <span className="text-[10px] text-secondary font-normal">{eventKind}</span>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const currentIndex = EVENT_KINDS.findIndex((ek) => ek.id === eventKind);
+                    const nextIndex = (currentIndex + 1) % EVENT_KINDS.length;
+                    const nextKind = EVENT_KINDS[nextIndex]?.id || 'XV Años';
+                    setEventKind(nextKind);
+                    trackEvent('precotizador_step', 'step_4_toggle_event_kind', {
+                      section: 'precotizador',
+                      step_number: 4,
+                      event_kind: nextKind,
+                      guests_range: getGuestsBucket(guests),
+                      package_name: `Paquete ${packageType}`,
+                    });
+                  }}
+                  className="w-full text-[11px] font-bold uppercase tracking-wider text-primary flex items-center justify-between gap-2 py-1 px-2 -mx-1 rounded-lg hover:bg-primary/10 transition-colors cursor-pointer"
+                >
+                  <span className="pointer-events-none">⚡ Ajusta tu simulación en vivo sin salir:</span>
+                  <span className="text-[10px] text-on-surface bg-surface-container-lowest border border-outline-variant/40 px-2 py-0.5 rounded-md font-bold pointer-events-none">
+                    {eventKind} ↻
+                  </span>
+                </button>
 
                 {/* 1. Simulador rápido de Invitados */}
                 <div className="flex items-center justify-between gap-2 bg-surface-container-lowest px-3 py-1.5 rounded-xl border border-outline-variant/20">
@@ -1488,7 +1550,28 @@ export default function Precotizador() {
                   })}
                 </div>
 
-                {/* 3. Simulador rápido de Paquete */}
+                {/* 3. Simulador rápido de Temporada (Evita back_from_4_to_2) */}
+                <div className="grid grid-cols-3 gap-1">
+                  {SEASONS.slice(0, 6).map((s) => {
+                    const isSeasonSelected = preferredSeason === s.id;
+                    return (
+                      <button
+                        key={s.id}
+                        type="button"
+                        onClick={() => setPreferredSeason(s.id)}
+                        className={`py-1 px-1.5 rounded-lg border text-[10px] font-bold transition-all cursor-pointer ${
+                          isSeasonSelected
+                            ? 'border-primary/70 bg-primary/15 text-primary'
+                            : 'border-outline-variant/30 bg-surface-container-lowest text-secondary hover:text-on-surface'
+                        }`}
+                      >
+                        <span className="pointer-events-none block truncate">{s.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* 4. Simulador rápido de Paquete */}
                 <div className="grid grid-cols-3 gap-1">
                   {PACKAGES.map((pkg) => {
                     const isPkgAvail = guests >= pkg.minGuests;
