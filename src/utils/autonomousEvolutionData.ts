@@ -22,6 +22,40 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.5.6-cycle41',
+    cycle_number: 41,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-12 15:52 CDMX',
+    title:
+      'Ciclo Autónomo #41: Eliminación de Modal Duplicado en Header, Selección Directa en Modal Comparador (Scroll 86%), 4to Tiempo en Banquetes y Puente en Miniatura #10 de Galería',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #40 (>= 2026-11-12T17:47:04Z a 2026-11-12T21:47:30Z): 58 eventos humanos reales en ses_yjhug_1f5yj18a (Azcapotzalco CDMX, Desktop 1920x945, 635s de permanencia acumulada en secciones). Hallazgos clave: (1) El usuario usó el nuevo comparador del Paso 1 (aforo_100 -> step1_preview_pkg_premier) y luego tocó el botón COTIZAR del Header (cotizar_click: header_desktop), lo que abrió un segundo <Precotizador /> en modal encima del Precotizador del Hero, provocando precotizador_abandon: modal_header_close 64s después; (2) En #banquetes ocurrió 1 dead_click: dead_banquetes ("PRIMER TIEMPO SEGUNDO TIEMPO TERCER TIEMPO") seguido de 8 swipes en los tiempos del menú; (3) En #galeria recorrió thumb_diamante_1 a thumb_diamante_10 y tocó thumb_diamante_10 tres veces seguidas en 1.3s antes de buscar tab_platino; (4) En scroll 86% abrió sticky_bar_comparar_paquetes ("¿Qué incluye cada uno?"), donde las 3 tarjetas eran informativas sin botones de selección directa por paquete ni WhatsApp.',
+    autonomousActions: [
+      'En Header.tsx: detección inteligente del Precotizador inline en la página actual (/); al hacer clic en COTIZAR en el Header dentro de Home, hace scroll suave hacia #precotizador en lugar de montar un segundo modal duplicado encima (evitando modal_header_close).',
+      'En StickyPriceCompareBar.tsx: sincronización con sessionStorage y ssp:sync-from-precotizador para mostrar el total exacto según el aforo elegido (ej. 100 pers.: $53,000 / $71,000 / $101,000 MXN), botones de selección directa por paquete ("Elegir Premier / Plus ⭐ / All Inclusive →") y CTA directo de WhatsApp dentro del modal.',
+      'En MenuTinderCards.tsx: eliminación del dead_click en la barra de píldoras de tiempos (data-interactive="true", clic en la píldora activa avanza al siguiente tiempo) e incorporación de la tarjeta del 4to Tiempo y Tornafiesta.',
+      'En GaleriaSection.tsx: segundo clic sobre la miniatura activa abre el Lightbox a pantalla completa y se añade un botón #11 al final de la tira de miniaturas ("Ver Salón Platino →" / "Ver Salón Diamante →").',
+    ],
+    filesModified: [
+      'src/components/Header.tsx',
+      'src/components/StickyPriceCompareBar.tsx',
+      'src/components/MenuTinderCards.tsx',
+      'src/components/GaleriaSection.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: '530a710',
+    deploymentUuid: 'coolify-auto-cycle41',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Con la eliminación del modal duplicado en Home, los botones de selección directa dentro del modal comparador (scroll 86%) y el cierre de dead_banquetes, esperamos 0 dead_clicks en #banquetes y conversión directa desde el modal comparador.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.5.5-cycle40',
     cycle_number: 40,
     status: 'POSTPONED',

@@ -4,6 +4,33 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #41 — `2026-11-12 15:52 CDMX` (`v2.5.6-cycle41` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-12T17:47:04Z` a `2026-11-12T21:47:30Z`)
+- **Telemetría en Supabase (`58` eventos humanos reales en `ses_yjhug_1f5yj18a`, Azcapotzalco CDMX, Desktop `1920x945`, `635s` de permanencia acumulada en secciones):**
+  1. **Uso del Nuevo Comparador del Paso 1 + Fricción por Modal Duplicado del Header (`[19:48:43]` a `[19:50:27]`):**
+     - El usuario ajustó `aforo_100` y utilizó el nuevo comparador del Paso 1 (`precotizador_step: step1_preview_pkg_premier`, `$53,000 MXN`).
+     - A los `29s` hizo clic en el botón **`COTIZAR`** del Header (`cotizar_click: header_desktop`), el cual montó un **segundo `<Precotizador />` en modal** encima del Precotizador que ya estaba usando en el Hero, terminando en `precotizador_abandon: modal_header_close` `64s` después.
+  2. **Fricción Puntual en `#banquetes` (`[19:52:23]`):**
+     - Se registró `1` `dead_click: dead_banquetes` sobre la barra `"PRIMER TIEMPO SEGUNDO TIEMPO TERCER TIEMPO"` seguido de `8` interacciones `menu_card_swipe` (`next_Primer Tiempo`, `next_Segundo Tiempo`, `next_Tercer Tiempo`, `tab_Tercer Tiempo`).
+  3. **Recorrido Secuencial de Miniaturas `1` a `10` en `#galeria` (`[19:53:25]` a `[19:55:06]`):**
+     - Hizo clic uno por uno desde `thumb_diamante_1` hasta `thumb_diamante_10` y tocó **`thumb_diamante_10` tres veces seguidas en `1.3s`** antes de subir a cambiar a `tab_platino`.
+  4. **Apertura del Modal Comparador en `scroll: 86%` (`[19:55:24]`):**
+     - Tras leer el testimonio de `Mauricio Ortega`, hizo clic en `cotizar_click: sticky_bar_comparar_paquetes` (*"¿Qué incluye cada uno?"*), donde las 3 tarjetas dentro del modal no contaban con botones de selección directa por paquete ni botón directo de WhatsApp.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap saludable con `37` URLs enviadas y `0` errores; `/` acumula `144` clics y `7,686` impresiones.
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/components/Header.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Header.tsx) (Nivel 1 — Menor):**
+   - Si `#precotizador` ya existe en el DOM (Home `/`), el botón `COTIZAR` del Header hace scroll suave al cotizador activo en lugar de abrir un segundo modal duplicado encima (conservando el modal para las páginas de `/blog`).
+2. **[`src/components/StickyPriceCompareBar.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/StickyPriceCompareBar.tsx) (Nivel 2 — Mediana):**
+   - Sincronización en vivo del modal comparador con el aforo elegido (`100` a `250` invitados), mostrando el monto total por paquete (`$53,000`, `$71,000`, `$101,000 MXN`), botones directos **`"Elegir Premier / Plus ⭐ / All Inclusive →"`** en cada tarjeta y botón de **WhatsApp** directo en el pie del modal.
+3. **[`src/components/MenuTinderCards.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/MenuTinderCards.tsx) (Nivel 1 — Menor):**
+   - Eliminación del `dead_click` en la barra de píldoras de tiempos (`data-interactive="true"`, tocar la píldora activa avanza al siguiente tiempo) e incorporación de la 4ta tarjeta (**`4to Tiempo y Tornafiesta`**).
+4. **[`src/components/GaleriaSection.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/GaleriaSection.tsx) (Nivel 1 — Menor):**
+   - Tocar nuevamente la miniatura activa abre el **Lightbox** a pantalla completa, y al final de la tira de miniaturas (`#10`) se añade el botón directo **`"Ver Salón Platino →"` / `"Ver Salón Diamante →"`**.
+
+---
+
 ## Ciclo Autónomo #40 — `2026-11-12 11:45 CDMX` (`v2.5.5-cycle40` — `POSTPONED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-12T13:43:45Z`)
