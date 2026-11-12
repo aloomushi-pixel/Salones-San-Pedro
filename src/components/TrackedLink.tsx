@@ -31,12 +31,12 @@ export default function TrackedLink({ eventType, source, onClick, ...props }: Tr
         const rawDraft = window.sessionStorage.getItem('sanpedro_precotizador_draft_v1');
         if (rawDraft) {
           const parsed = JSON.parse(rawDraft);
-          const guests = typeof parsed.guests === 'number' ? parsed.guests : 80;
+          const guests = typeof parsed.guests === 'number' ? Math.max(100, parsed.guests) : 100;
           const activeInteraction = Boolean(
             parsed.hasTouchedGuests || (typeof parsed.step === 'number' && parsed.step >= 2)
           );
 
-          if (activeInteraction && guests >= 50 && guests <= 250) {
+          if (activeInteraction && guests >= 100 && guests <= 250) {
             const pkgType = typeof parsed.packageType === 'string' ? parsed.packageType : 'Premier';
             const eventKind = typeof parsed.eventKind === 'string' ? parsed.eventKind : 'Evento Social';
             const preferredDay = typeof parsed.preferredDay === 'string' ? parsed.preferredDay : 'Sábado';

@@ -8,8 +8,8 @@ const PACKAGES = [
     id: 'Premier',
     name: 'Premier',
     price: 530,
-    minGuests: 50,
-    badge: 'Desde 50 pers.',
+    minGuests: 100,
+    badge: 'Desde 100 pers.',
     features: ['6 hrs servicio', 'Menú 3 tiempos', 'Barra mezcladores', 'DJ y luces'],
   },
   {
@@ -30,15 +30,15 @@ const PACKAGES = [
   },
 ];
 
-// Rangos desanclados para evitar el sesgo del 45% en 100 invitados por defecto
+// Rangos comenzando en 100 personas como base del cotizador
 const GUEST_RANGE_CARDS = [
-  { label: '50 – 80', sub: 'Evento Íntimo', value: 80 },
-  { label: '100 – 120', sub: 'Estándar Plus', value: 100 },
-  { label: '150', sub: 'Clásico Gala', value: 150 },
-  { label: '200+', sub: 'Gran Evento', value: 200 },
+  { label: '100', sub: 'Desde 100 pers.', value: 100 },
+  { label: '120 – 140', sub: 'Estándar Plus', value: 120 },
+  { label: '150 – 180', sub: 'Clásico Gala', value: 150 },
+  { label: '200 – 250', sub: 'Gran Evento', value: 200 },
 ];
 
-const QUICK_GUEST_PRESETS = [50, 70, 80, 90, 100, 120, 150, 200, 250];
+const QUICK_GUEST_PRESETS = [100, 120, 150, 180, 200, 220, 250];
 
 const PREFERRED_DAYS = [
   {
@@ -122,8 +122,8 @@ const STEP_LABELS = [
 export default function Precotizador() {
   const [step, setStep] = useState(1);
 
-  // Iniciamos en 80 invitados (desanclado de 100) para medir demanda real y activar upsell consciente a 100
-  const [guests, setGuests] = useState(80);
+  // Iniciamos en 100 invitados como base mínima del cotizador
+  const [guests, setGuests] = useState(100);
   const [hasTouchedGuests, setHasTouchedGuests] = useState(false);
   const [eventKind, setEventKind] = useState('Boda');
   const [preferredDay, setPreferredDay] = useState('Sábado');
@@ -162,11 +162,10 @@ export default function Precotizador() {
       const queryGuests = Number(params.get('guests'));
       const queryPkg = params.get('pkg');
       if (queryGuests && queryGuests >= 50 && queryGuests <= 250) {
-        setGuests(queryGuests);
+        const clampedGuests = Math.max(100, queryGuests);
+        setGuests(clampedGuests);
         setHasTouchedGuests(true);
-        if (queryGuests < 100) {
-          setPackageType('Premier');
-        } else if (queryPkg === 'Plus') {
+        if (queryPkg === 'Plus') {
           setPackageType('Plus');
         } else if (queryPkg === 'All' || queryPkg === 'All Inclusive') {
           setPackageType('All Inclusive');
@@ -181,7 +180,7 @@ export default function Precotizador() {
       if (raw) {
         const saved = JSON.parse(raw);
         if (typeof saved.guests === 'number' && saved.guests >= 50 && saved.guests <= 250) {
-          setGuests(saved.guests);
+          setGuests(Math.max(100, saved.guests));
         }
         if (typeof saved.hasTouchedGuests === 'boolean') {
           setHasTouchedGuests(saved.hasTouchedGuests);
@@ -256,7 +255,7 @@ export default function Precotizador() {
 
   const handleResetQuote = () => {
     setStep(1);
-    setGuests(80);
+    setGuests(100);
     setHasTouchedGuests(false);
     setEventKind('Boda');
     setPreferredDay('Sábado');
@@ -308,11 +307,10 @@ export default function Precotizador() {
       const rawGuests = customEvent.detail?.guests;
       const pkg = customEvent.detail?.packageId;
       if (typeof rawGuests === 'number' && rawGuests >= 50 && rawGuests <= 250) {
-        setGuests(rawGuests);
+        const clampedGuests = Math.max(100, rawGuests);
+        setGuests(clampedGuests);
         setHasTouchedGuests(true);
-        if (rawGuests < 100) {
-          setPackageType('Premier');
-        } else if (pkg) {
+        if (pkg) {
           setPackageType(pkg);
         }
       } else if (pkg) {
@@ -335,20 +333,16 @@ export default function Precotizador() {
   }, []);
 
   const getGuestsBucket = (val: number) => {
-    if (val < 100) return '50 a 99 personas';
     if (val < 150) return '100 a 149 personas';
     if (val < 200) return '150 a 199 personas';
     return '200+ personas';
   };
 
   const applyGuestsValue = (newVal: number, recordTelemetry = false) => {
-    const clamped = Math.min(250, Math.max(50, newVal));
+    const clamped = Math.min(250, Math.max(100, newVal));
     setGuests(clamped);
     setHasTouchedGuests(true);
     setLockedAttemptPkg(null);
-    if (clamped < 100 && packageType !== 'Premier') {
-      setPackageType('Premier');
-    }
     if (recordTelemetry) {
       trackEvent('guests_slider_adjust', `aforo_${clamped}`, {
         section: 'precotizador',
@@ -361,10 +355,7 @@ export default function Precotizador() {
   // Actualización funcional sin latencia para evitar rage_click en botones -10 / +10
   const handleGuestsDelta = (delta: number) => {
     setGuests((prev) => {
-      const clamped = Math.min(250, Math.max(50, prev + delta));
-      if (clamped < 100 && packageType !== 'Premier') {
-        setPackageType('Premier');
-      }
+      const clamped = Math.min(250, Math.max(100, prev + delta));
       setHasTouchedGuests(true);
       setLockedAttemptPkg(null);
       trackEvent('guests_slider_adjust', `aforo_${clamped}`, {
@@ -773,21 +764,19 @@ export default function Precotizador() {
                 1. Selecciona tu rango o número de invitados
               </label>
 
-              {/* Botones de Rangos Claros (Recomendación Frente 4: Desanclar de 100) */}
+              {/* Botones de Rangos Claros (Base desde 100 personas) */}
               <div className="grid grid-cols-4 gap-1.5 mb-3">
                 {GUEST_RANGE_CARDS.map((rc) => {
                   const isRangeSelected =
-                    (rc.value === 80 && guests >= 50 && guests < 100) ||
-                    (rc.value === 100 && guests >= 100 && guests <= 130) ||
-                    (rc.value === 150 && guests >= 140 && guests < 200) ||
+                    (rc.value === 100 && guests >= 100 && guests < 120) ||
+                    (rc.value === 120 && guests >= 120 && guests <= 140) ||
+                    (rc.value === 150 && guests >= 150 && guests < 200) ||
                     (rc.value === 200 && guests >= 200);
                   return (
                     <button
                       key={rc.label}
                       type="button"
-                      onClick={() =>
-                        applyGuestsValue(rc.value === 80 && guests === 80 ? 50 : rc.value, true)
-                      }
+                      onClick={() => applyGuestsValue(rc.value, true)}
                       className={`py-2 px-1.5 rounded-xl border text-center transition-all cursor-pointer ${
                         isRangeSelected
                           ? 'border-primary bg-primary/15 text-primary font-bold shadow-xs'
@@ -796,7 +785,7 @@ export default function Precotizador() {
                     >
                       <div className="text-xs font-extrabold pointer-events-none">{rc.label}</div>
                       <div className="text-[10px] text-secondary truncate pointer-events-none">
-                        {rc.value === 80 && guests === 50 ? 'Mínimo 50 pers.' : rc.sub}
+                        {rc.sub}
                       </div>
                     </button>
                   );
@@ -809,7 +798,7 @@ export default function Precotizador() {
                   type="button"
                   data-ux-stepper="true"
                   onClick={() => handleGuestsDelta(-10)}
-                  disabled={guests <= 50}
+                  disabled={guests <= 100}
                   aria-label="Restar 10 invitados"
                   className="w-12 h-12 rounded-2xl bg-surface-container-high hover:bg-primary hover:text-on-primary active:scale-90 disabled:opacity-30 font-bold text-lg flex items-center justify-center transition-transform border border-outline-variant/40 cursor-pointer shrink-0 select-none"
                 >
@@ -821,16 +810,14 @@ export default function Precotizador() {
                     {guests}
                   </span>
                   <span className="text-xs text-secondary font-medium mt-1">
-                    {guests === 50
+                    {guests === 100
                       ? 'invitados (mínimo de paquete)'
                       : guests === 250
                       ? 'invitados (máximo cotizador)'
                       : 'invitados'}
                   </span>
                   <span className="mt-1.5 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/15 border border-primary/30 text-[11px] font-bold text-primary">
-                    {guests < 100
-                      ? `Desde $${(guests * 530).toLocaleString('es-MX')} MXN todo incluido`
-                      : `Premier $${(guests * 530).toLocaleString('es-MX')} • Plus ⭐ $${(guests * 710).toLocaleString('es-MX')}`}
+                    {`Premier $${(guests * 530).toLocaleString('es-MX')} • Plus ⭐ $${(guests * 710).toLocaleString('es-MX')}`}
                   </span>
                 </div>
 
@@ -870,7 +857,7 @@ export default function Precotizador() {
               {/* Slider táctil grueso */}
               <input
                 type="range"
-                min="50"
+                min="100"
                 max="250"
                 step="10"
                 value={guests}
@@ -1507,7 +1494,7 @@ export default function Precotizador() {
                     <button
                       type="button"
                       onClick={() => handleGuestsDelta(-10)}
-                      disabled={guests <= 50}
+                      disabled={guests <= 100}
                       className="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-primary hover:text-on-primary font-bold text-xs flex items-center justify-center cursor-pointer disabled:opacity-30"
                     >
                       <span className="pointer-events-none">−10</span>

@@ -277,7 +277,7 @@ export default function PaquetesInteractiveSection() {
   };
 
   const getInclusionPackageMeta = (pkgOrigin: string) => {
-    if (pkgOrigin === 'Premier') return { basePrice: 530, minGuests: 50 };
+    if (pkgOrigin === 'Premier') return { basePrice: 530, minGuests: 100 };
     if (pkgOrigin === 'Plus') return { basePrice: 710, minGuests: 100 };
     return { basePrice: 1010, minGuests: 100 };
   };
@@ -398,7 +398,7 @@ export default function PaquetesInteractiveSection() {
                 👥 Calcular total para:
               </span>
               <div className="flex flex-wrap justify-center gap-1.5">
-                {[50, 80, 100, 150, 200, 250].map((g) => (
+                {[100, 120, 150, 180, 200, 250].map((g) => (
                   <button
                     key={g}
                     type="button"
@@ -469,18 +469,18 @@ export default function PaquetesInteractiveSection() {
                   <button
                     type="button"
                     onClick={() => {
-                      setSimGuests(50);
-                      trackEvent('guests_slider_adjust', 'paquetes_card_min_50', {
+                      setSimGuests(100);
+                      trackEvent('guests_slider_adjust', 'paquetes_card_min_100', {
                         section: 'paquetes',
-                        guests_range: '50 personas',
-                        extra: { exact_guests: 50, source_widget: 'paquete_premier_badge' },
+                        guests_range: '100 personas',
+                        extra: { exact_guests: 100, source_widget: 'paquete_premier_badge' },
                       });
                     }}
                     className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/10 hover:bg-primary/20 text-primary text-xs font-semibold transition-colors cursor-pointer"
-                    title="Toca para simular con 50 personas"
+                    title="Toca para simular con 100 personas"
                   >
                     <span className="pointer-events-none">
-                      Disponible desde 50 personas {simGuests !== 50 ? '(simular 50)' : '✓'}
+                      Disponible desde 100 personas {simGuests !== 100 ? '(simular 100)' : '✓'}
                     </span>
                   </button>
                   <div className="mt-3 space-y-1.5 text-on-surface/80 text-sm">
@@ -493,7 +493,7 @@ export default function PaquetesInteractiveSection() {
                     <div className="inline-block px-3 py-1 rounded-lg bg-primary/10 border border-primary/25 text-xs font-bold text-on-surface">
                       Total {simGuests} pers.:{' '}
                       <span className="text-primary font-extrabold">
-                        {formatMXN(getPackageTotal(530, 50))} MXN
+                        {formatMXN(getPackageTotal(530, 100))} MXN
                       </span>
                     </div>
                   </div>
