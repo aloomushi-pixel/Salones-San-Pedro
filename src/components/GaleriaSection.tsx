@@ -416,6 +416,10 @@ export default function GaleriaSection() {
               key={idx}
               type="button"
               onClick={() => {
+                if (idx === activeIndex) {
+                  openLightbox();
+                  return;
+                }
                 setActiveIndex(idx);
                 trackEvent('gallery_interaction', `thumb_${activeTab}_${idx + 1}`, {
                   section: 'galeria',
@@ -423,6 +427,11 @@ export default function GaleriaSection() {
                   photo_title: photo.caption,
                 });
               }}
+              title={
+                idx === activeIndex
+                  ? 'Toca de nuevo para ampliar a pantalla completa'
+                  : `Ver foto ${idx + 1}: ${photo.caption}`
+              }
               className={`relative flex-shrink-0 w-20 md:w-24 aspect-[16/10] rounded-lg overflow-hidden border-2 transition-all duration-200 cursor-pointer ${
                 idx === activeIndex
                   ? 'border-primary scale-105 shadow-md'
@@ -438,6 +447,27 @@ export default function GaleriaSection() {
               />
             </button>
           ))}
+          <button
+            type="button"
+            onClick={() => {
+              const nextSalon = activeTab === 'diamante' ? 'platino' : 'diamante';
+              setActiveTab(nextSalon);
+              if (nextSalon === 'platino') {
+                setPlatinoIndex(0);
+              } else {
+                setDiamanteIndex(0);
+              }
+              trackEvent('gallery_interaction', `thumb_end_switch_${nextSalon}`, {
+                section: 'galeria',
+                gallery_category: nextSalon === 'platino' ? 'Salón Platino' : 'Salón Diamante',
+              });
+            }}
+            className="flex-shrink-0 w-24 md:w-28 aspect-[16/10] rounded-lg border-2 border-primary/50 bg-primary/10 hover:bg-primary hover:text-on-primary text-primary px-2 flex flex-col items-center justify-center text-center transition-all cursor-pointer"
+          >
+            <span className="text-[10px] font-extrabold uppercase leading-tight pointer-events-none">
+              {activeTab === 'diamante' ? 'Ver Salón Platino →' : 'Ver Salón Diamante →'}
+            </span>
+          </button>
         </div>
 
         {/* Barra de Conversión Inline bajo el Carrusel de Galería (Convierte sesiones como ses_7v211_cjcn9adx que navegan las fotos sin abrir Lightbox) */}

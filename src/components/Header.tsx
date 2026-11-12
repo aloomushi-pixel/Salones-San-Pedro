@@ -29,8 +29,17 @@ export default function Header() {
   };
 
   const handleOpenPrecotizadorModal = (origin: 'header_desktop' | 'header_mobile') => {
-    modalOpenTimeRef.current = Date.now();
     trackEvent('cotizar_click', origin, { section: 'header' });
+    if (typeof document !== 'undefined') {
+      const inlinePrecotizador =
+        document.getElementById('precotizador') ||
+        document.getElementById('precotizador-hero');
+      if (inlinePrecotizador) {
+        inlinePrecotizador.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+    }
+    modalOpenTimeRef.current = Date.now();
     setIsPrecotizadorOpen(true);
   };
 

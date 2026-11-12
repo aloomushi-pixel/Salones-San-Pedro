@@ -32,6 +32,15 @@ const initialCards = [
     options: ['Lomo al Ciruelo o Tamarindo', 'Suprema de Ave Rellena', 'Medallón en Salsa de Champiñones'],
     image: '/gastronomia/tercer_tiempo.jpg',
   },
+  {
+    id: 4,
+    tiempo: '4to Tiempo y Tornafiesta',
+    badge: 'Postre Gourmet + Chilaquiles / Tacos',
+    title: 'Cierre dulce de gala y tornafiesta tradicional para seguir bailando.',
+    desc: 'Pastel y postre individual en mesa (Paquete Plus / All Inclusive) más tornafiesta de chilaquiles o taquiza de madrugada.',
+    options: ['Postre Gourmet Individual (4to Tiempo)', 'Tornafiesta de Chilaquiles', 'Café Americano y Pastel'],
+    image: '/gastronomia/primer_tiempo.jpg',
+  },
 ];
 
 export default function MenuTinderCards() {
@@ -78,7 +87,11 @@ export default function MenuTinderCards() {
   };
 
   const handleSelectById = (id: number) => {
-    if (animating || cards[0]?.id === id) return;
+    if (animating) return;
+    if (cards[0]?.id === id) {
+      handleNext();
+      return;
+    }
     const target = initialCards.find((c) => c.id === id);
     trackEvent('menu_card_swipe', `tab_${target?.tiempo || id}`, {
       section: 'banquetes',
@@ -96,13 +109,17 @@ export default function MenuTinderCards() {
   return (
     <div className="space-y-6">
       {/* Píldoras de Navegación Directa por Tiempo (Accesible en Móvil y Desktop) */}
-      <div className="flex flex-wrap items-center justify-center gap-2">
+      <div
+        data-interactive="true"
+        className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-surface-container-low border border-outline-variant/30 mx-auto"
+      >
         {initialCards.map((item) => {
           const isActive = activeId === item.id;
           return (
             <button
               key={item.id}
               type="button"
+              data-interactive="true"
               onClick={() => handleSelectById(item.id)}
               className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border ${
                 isActive
@@ -110,7 +127,7 @@ export default function MenuTinderCards() {
                   : 'bg-surface-container-high text-on-surface border-outline-variant/40 hover:border-primary/60'
               }`}
             >
-              {item.tiempo}
+              <span className="pointer-events-none">{item.tiempo}</span>
             </button>
           );
         })}
