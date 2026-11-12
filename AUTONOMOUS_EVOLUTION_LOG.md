@@ -4,6 +4,26 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #36 — `2026-11-11 19:26 CDMX` (`v2.5.1-cycle36` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-11T21:22:58Z` a `2026-11-12T01:24:00Z`)
+- **Telemetría en Supabase (`50` eventos humanos reales en `2` sesiones con `0` `dead_clicks` y `0` `rage_clicks`):**
+  1. **`ses_mmp5y_xcx9srhc` (Iztacalco CDMX, Desktop `1920x911`, `55s` activos):**
+     - Exploró `#precotizador`, `#paquetes`, `#galeria` (`5` clics en `next_diamante` y `3` clics en miniaturas `thumb_diamante_7`, `thumb_diamante_8`, `thumb_diamante_10`), entró a `#tiktok-videos` (`9s` de permanencia) donde activó **`exit_intent: exit_from_tiktok-videos`** y continuó hasta `#banquetes`, `#animacion` y `#testimonios`.
+  2. **`ses_pe4my_fythbm5x` (San Miguel Totoltepec -> Gustavo A. Madero CDMX, Mobile `389x775`):**
+     - Hizo clic en `hero_click: ver_precios`, interactuó con el simulador de `#paquetes` (`sim_dia_sabado`) y regresó horas después desde Gustavo A. Madero para consultar nuevamente `#paquetes`.
+- **Directriz Comercial del Humano Incorporada:**
+  - El cotizador y el simulador de paquetes inician en **`100 personas`** como aforo mínimo en lugar de `50 personas`, permitiendo que los 3 paquetes (**Premier**, **Plus** y **All Inclusive**) estén desbloqueados desde el inicio.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap saludable con `37` URLs enviadas y `0` errores; consultas principales lideradas por `"salones san pedro plus"` (`22` clics, `631` impresiones, pos `1.02`) y `"salon san pedro plus"` (`16` clics, `205` impresiones, pos `1.21`).
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx), [`src/components/PaquetesInteractiveSection.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/PaquetesInteractiveSection.tsx), [`src/components/StickyPriceCompareBar.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/StickyPriceCompareBar.tsx) y [`src/app/page.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/page.tsx) (Nivel 2 — Mediana):**
+   - Estandarización integral del mínimo de **`100 personas`** en el Precotizador (`min="100"`, presets `100` a `250`), en la barra simuladora y modales de `#paquetes`, en la barra comparativa flotante y en los textos del Hero y Footer.
+2. **[`src/components/TikTokVideos.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/TikTokVideos.tsx) (Nivel 1 — Menor):**
+   - En respuesta a `exit_intent: exit_from_tiktok-videos` (`ses_mmp5y_xcx9srhc`), se integró el botón primario **`"Cotizar este Montaje ↑"`** (`cotizar_click: tiktok_ir_precotizador`) y se actualizó el CTA de WhatsApp (`tiktok_section_cta`) con el título del video activo hacia `wa.me/526633670431`.
+
+---
+
 ## Ciclo Autónomo #35 — `2026-11-11 15:18 CDMX` (`v2.5.0-cycle35` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-07T13:34:23Z` a `2026-11-11T21:15:00Z`)

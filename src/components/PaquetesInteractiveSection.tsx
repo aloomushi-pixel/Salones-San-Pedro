@@ -524,8 +524,8 @@ export default function PaquetesInteractiveSection() {
                   eventType="cotizar_click"
                   source="paquete_premier"
                   href={`https://wa.me/526633670431?text=${encodeURIComponent(
-                    `¡Hola! Visité su sitio web y me interesa el Paquete Premier para ${simGuests} personas (aprox. ${formatMXN(
-                      getPackageTotal(530, 50)
+                    `¡Hola! Visité su sitio web y me interesa el Paquete Premier para ${Math.max(100, simGuests)} personas (aprox. ${formatMXN(
+                      getPackageTotal(530, 100)
                     )} MXN). ¿Me podrían dar más detalles y fechas disponibles?`
                   )}`}
                   target="_blank"
@@ -938,7 +938,7 @@ export default function PaquetesInteractiveSection() {
                   className="flex-1 py-3 px-4 rounded-xl bg-primary text-on-primary font-bold text-xs uppercase tracking-wider text-center shadow-md hover:opacity-95 transition-opacity cursor-pointer"
                 >
                   <span className="pointer-events-none">
-                    Personalizar {selectedInclusion.packageOrigin} ({Math.max(selectedInclusion.packageOrigin === 'Premier' ? 50 : 100, simGuests)} pers.) ↑
+                    Personalizar {selectedInclusion.packageOrigin} ({Math.max(100, simGuests)} pers.) ↑
                   </span>
                 </button>
                 <TrackedLink
@@ -946,7 +946,7 @@ export default function PaquetesInteractiveSection() {
                   source={`modal_inclusion_${selectedInclusion.id}`}
                   href={`https://wa.me/526633670431?text=${encodeURIComponent(
                     `¡Hola! Vi el detalle de "${selectedInclusion.title}" en su web y me interesa cotizar el Paquete ${selectedInclusion.packageOrigin} para ${Math.max(
-                      selectedInclusion.packageOrigin === 'Premier' ? 50 : 100,
+                      100,
                       simGuests
                     )} personas (${simDayMode === 'sabado' ? 'Sábado' : 'Viernes / Domingo'}).`
                   )}`}

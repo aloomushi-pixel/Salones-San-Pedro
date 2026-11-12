@@ -174,7 +174,7 @@ export default function StickyPriceCompareBar() {
                   <span className="font-display-lg text-base font-bold text-primary">Premier</span>
                   <span className="text-lg font-black">$530 p/p</span>
                 </div>
-                <p className="text-[11px] text-secondary">Disponible desde 50 hasta 250+ invitados.</p>
+                <p className="text-[11px] text-secondary">Disponible desde 100 hasta 250+ invitados.</p>
                 <ul className="space-y-1.5 text-on-surface pt-1">
                   <li>✓ 6 hrs de servicio + 1/2 hr recepción</li>
                   <li>✓ Menú formal a 3 tiempos + Tornafiesta</li>

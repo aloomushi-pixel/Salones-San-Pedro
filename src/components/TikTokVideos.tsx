@@ -249,21 +249,37 @@ export default function TikTokVideos() {
           </div>
 
           {/* Action CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-outline-variant/40 mt-6">
+          <div className="flex flex-col sm:flex-row gap-2.5 pt-6 border-t border-outline-variant/40 mt-6">
             <a
-              href="https://wa.me/message/U7UANPSABGW4K1"
+              href="#precotizador"
+              onClick={() =>
+                trackEvent("cotizar_click", "tiktok_ir_precotizador", {
+                  section: "tiktok-videos",
+                  experience_title: selectedVideo.title,
+                })
+              }
+              className="flex-1 flex items-center justify-center gap-1.5 py-3 px-3 bg-primary text-on-primary rounded-xl font-bold text-xs hover:opacity-90 transition-opacity uppercase tracking-wider shadow text-center"
+            >
+              <span className="material-symbols-outlined text-base pointer-events-none">calculate</span>
+              <span className="pointer-events-none">Cotizar este Montaje ↑</span>
+            </a>
+
+            <a
+              href={`https://wa.me/526633670431?text=${encodeURIComponent(
+                `¡Hola Salones San Pedro Plus! Vi su video "${selectedVideo.title}" en el sitio web y me gustaría cotizar mi evento desde 100 personas.`
+              )}`}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() =>
                 trackEvent("whatsapp_click", "tiktok_section_cta", {
-                  section: "experiencias",
+                  section: "tiktok-videos",
                   experience_title: selectedVideo.title,
                 })
               }
-              className="flex-1 flex items-center justify-center gap-2 py-3 bg-[#25D366] text-white rounded-xl font-label-sm text-xs hover:opacity-90 transition-opacity uppercase tracking-wider shadow"
+              className="flex-1 flex items-center justify-center gap-1.5 py-3 px-3 bg-[#25D366] text-white rounded-xl font-bold text-xs hover:opacity-90 transition-opacity uppercase tracking-wider shadow text-center"
             >
-              <span className="material-symbols-outlined text-lg">chat</span>
-              Preguntar por Disponibilidad
+              <span className="material-symbols-outlined text-base pointer-events-none">chat</span>
+              <span className="pointer-events-none">Disponibilidad WhatsApp</span>
             </a>
 
             <a
@@ -272,15 +288,15 @@ export default function TikTokVideos() {
               rel="noopener noreferrer"
               onClick={() =>
                 trackEvent("tiktok_interaction", "follow_profile_cta", {
-                  section: "experiencias",
+                  section: "tiktok-videos",
                 })
               }
-              className="flex-1 flex items-center justify-center gap-2 py-3 bg-inverse-surface text-inverse-on-surface rounded-xl font-label-sm text-xs hover:opacity-90 transition-opacity uppercase tracking-wider shadow"
+              className="sm:w-auto flex items-center justify-center gap-1.5 py-3 px-3.5 bg-inverse-surface text-inverse-on-surface rounded-xl font-bold text-xs hover:opacity-90 transition-opacity uppercase tracking-wider shadow text-center"
             >
-              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-3.5 h-3.5 fill-current pointer-events-none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .8.11V9.4a6.27 6.27 0 0 0-3.66 1 6.33 6.33 0 0 0-3 5.37 6.34 6.34 0 0 0 10.86 4.5 6.3 6.3 0 0 0 2.25-4.81V7.26a9.68 9.68 0 0 0 4.7-2.13 9.77 9.77 0 0 0 2.83-4.13V2h-3.46a4.84 4.84 0 0 1-3.42 4.69z"></path>
               </svg>
-              Seguir en @salones_sanpedroplus
+              <span className="pointer-events-none">TikTok</span>
             </a>
           </div>
 

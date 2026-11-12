@@ -22,6 +22,40 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.5.1-cycle36',
+    cycle_number: 36,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-11 19:26 CDMX',
+    title:
+      'Ciclo Autónomo #36: Estandarización Integral del Cotizador desde 100 Personas en toda la Home/Modales + Puente de Conversión en #tiktok-videos (Neutraliza exit_from_tiktok-videos)',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #35 (>= 2026-11-11T21:22:58Z a 2026-11-12T01:24:00Z): 50 eventos humanos en 2 sesiones reales con 0 dead_clicks y 0 rage_clicks (ses_mmp5y_xcx9srhc desde Iztacalco Desktop con 8 interacciones en #galeria y exit_intent: exit_from_tiktok-videos, y ses_pe4my_fythbm5x desde San Miguel Totoltepec / Gustavo A. Madero Mobile interactuando con #paquetes y regresando a las 00:04Z). Adicionalmente, por instrucción directa del humano se estableció 100 personas como base mínima del cotizador.',
+    autonomousActions: [
+      'Alineación integral del aforo mínimo de 100 personas en Precotizador.tsx, PaquetesInteractiveSection.tsx (cálculos de Paquete Premier y modales de servicios incluidos), StickyPriceCompareBar.tsx, TrackedLink.tsx y hero/footer de src/app/page.tsx.',
+      'Integración del puente de conversión "Cotizar este Montaje ↑" (cotizar_click: tiktok_ir_precotizador) y enlace de WhatsApp contextual con el título del video activo en TikTokVideos.tsx para capturar la intención comercial antes de exit_from_tiktok-videos (ses_mmp5y_xcx9srhc).',
+    ],
+    filesModified: [
+      'src/components/Precotizador.tsx',
+      'src/components/PaquetesInteractiveSection.tsx',
+      'src/components/StickyPriceCompareBar.tsx',
+      'src/components/TikTokVideos.tsx',
+      'src/components/TrackedLink.tsx',
+      'src/app/page.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'pending',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Medir la tasa de avance del Paso 1 al Paso 3 iniciando directamente en 100 invitados con los 3 paquetes (Premier, Plus y All Inclusive) desbloqueados desde el primer segundo, y evaluar los clics en tiktok_ir_precotizador.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.5.0-cycle35',
     cycle_number: 35,
     status: 'IMPLEMENTED',

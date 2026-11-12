@@ -59,7 +59,7 @@ export default function Home() {
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/55 hover:bg-primary hover:text-on-primary text-surface-container-lowest text-xs font-semibold border border-white/20 backdrop-blur-xs transition-colors"
                   >
                     <span data-ux-decorative="true" className="text-primary font-bold">✓</span>
-                    <span>Aforos de 50 a 250+ personas</span>
+                    <span>Aforos de 100 a 250+ personas</span>
                   </TrackedLink>
                   <TrackedLink
                     eventType="hero_click"
@@ -226,7 +226,7 @@ export default function Home() {
                 ¿Ya revisaste nuestra ubicación en Calle Norte 84, Gustavo A. Madero?
               </h3>
               <p className="text-xs sm:text-sm text-[#c4c4c4]">
-                Paquetes Todo Incluido desde <strong className="text-[#d4af37]">$530 MXN p/p</strong> (50 a 250+ invitados). Cotiza en línea en 30 segundos o agenda visita presencial / videollamada por WhatsApp.
+                Paquetes Todo Incluido desde <strong className="text-[#d4af37]">$530 MXN p/p</strong> (100 a 250+ invitados). Cotiza en línea en 30 segundos o agenda visita presencial / videollamada por WhatsApp.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto shrink-0">
