@@ -22,6 +22,37 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.5.3-cycle38',
+    cycle_number: 38,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-12 03:39 CDMX',
+    title:
+      'Ciclo Autónomo #38: Comparador Táctil de los 3 Paquetes en el Paso 1 del Precotizador + Anclaje Directo de Píldora de Aforo al Cotizador',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #37 (>= 2026-11-12T05:36:55Z a 2026-11-12T09:37:08Z): 44 eventos humanos reales en 2 sesiones con 0 dead_clicks y 0 rage_clicks. En ses_ayv74_n27llc2i (Gustavo A. Madero CDMX, Mobile 473x855, 323s de permanencia total): (1) El usuario tocó hero_click: badge_aforo_50_400 ("✓ Aforos de 100 a 250+ personas") que lo envió a #paquetes en lugar de #precotizador, teniendo que subir manualmente 3s después; (2) En el Paso 1 deslizó el aforo 4 veces (aforo_250 -> aforo_100 -> aforo_230 -> aforo_100) buscando comparar los precios totales de los 3 paquetes y terminó bajando a #paquetes (69s) porque el Paso 1 solo mostraba una píldora estática con Premier y Plus sin incluir All Inclusive ni reflejar el monto en el botón Siguiente.',
+    autonomousActions: [
+      'Reemplazo del cintillo estático debajo del slider en el Paso 1 de Precotizador.tsx por un Comparador Táctil en Vivo de 3 columnas (Premier $530, Plus ⭐ $710 y All Inclusive $1,010) que calcula el monto total instantáneo para el aforo seleccionado (100 a 250) y permite preseleccionar el nivel de paquete desde el Paso 1.',
+      'Inyección del paquete y monto total activo en el botón primario del Paso 1 ("Siguiente: Día y Beneficios (Plus $71,000) →") en Precotizador.tsx.',
+      'Re-enrutamiento de la píldora hero_click: badge_aforo_50_400 en src/app/page.tsx hacia #precotizador para llevar al usuario móvil directamente al selector de invitados.',
+    ],
+    filesModified: [
+      'src/components/Precotizador.tsx',
+      'src/app/page.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'pending',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Aumentar el avance directo del Paso 1 al Paso 2/3 en usuarios móviles que comparan distintos aforos (100 a 250) al mostrarles en tiempo real el total de los 3 paquetes (Premier, Plus y All Inclusive) sin necesidad de abandonar el wizard.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.5.2-cycle37',
     cycle_number: 37,
     status: 'IMPLEMENTED',

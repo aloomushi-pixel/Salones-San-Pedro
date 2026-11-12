@@ -4,6 +4,27 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #38 — `2026-11-12 03:39 CDMX` (`v2.5.3-cycle38` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-12T05:36:55Z` a `2026-11-12T09:37:08Z`)
+- **Telemetría en Supabase (`44` eventos humanos reales en `2` sesiones con `0` `dead_clicks` y `0` `rage_clicks`):**
+  1. **Exploración de Alto Aforo (`100` a `250` personas) en Gustavo A. Madero (`ses_ayv74_n27llc2i`, Mobile `473x855`, GAM CDMX, `323s` de permanencia acumulada):**
+     - Aterrizó a las `02:45 hrs CDMX` (`08:45:28Z`) y tocó la píldora del Hero **`hero_click: badge_aforo_50_400`** (*"✓ Aforos de 100 a 250+ personas"*). Como ese enlace apuntaba a `#paquetes` en vez de `#precotizador`, bajó a `scroll: 10%` y 3 segundos después tuvo que regresar manualmente a `#precotizador`.
+     - Ya en el Paso 1 del Precotizador, ajustó el slider **4 veces seguidas** (`aforo_250` -> `aforo_100` -> `aforo_230` -> `aforo_100`) buscando comparar el costo total de los 3 paquetes para distintos tamaños de evento, y luego bajó a `#paquetes` (`69s` de lectura) y `#galeria` (`13` interacciones en el Lightbox de Diamante y Platino).
+     - **Oportunidad detectada:** En el Paso 1, debajo del slider solo aparecía un texto estático (*"100+ personas: Todos los paquetes desbloqueados"*) y la píldora superior solo mostraba `Premier` y `Plus` (sin `All Inclusive`), además de que el botón `Siguiente: Día y Beneficios` no reflejaba el paquete ni el monto total activo.
+  2. **Cierre de Sesión de `ses_3fu1u_xlccu5ey` (Benito Juárez CDMX, Desktop `3432x1316`):**
+     - Concluyó su sesión con `102s` acumulados en `#galeria` y `68s` en `#tiktok-videos`.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap saludable con `37` URLs enviadas y `0` errores.
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx) (Nivel 2 — Mediana):**
+   - Sustitución de la etiqueta estática inferior del Paso 1 por un **Comparador Táctil en Vivo de los 3 Paquetes (`Premier $530`, `Plus ⭐ $710`, `All Inclusive $1,010`)** que muestra simultáneamente los 3 totales conforme el usuario mueve el slider (`100` a `250` invitados) y permite preseleccionar cualquier paquete desde el Paso 1 (`step1_preview_pkg_*`).
+   - Actualización del botón primario del Paso 1 para mostrar el paquete y presupuesto activo: **`"Siguiente: Día y Beneficios ({packageType} $71,000) →"`**.
+2. **[`src/app/page.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/page.tsx) (Nivel 1 — Menor):**
+   - Cambio de destino en `badge_aforo_50_400` (*"✓ Aforos de 100 a 250+ personas"*) de `#paquetes` a `#precotizador`.
+
+---
+
 ## Ciclo Autónomo #37 — `2026-11-11 23:34 CDMX` (`v2.5.2-cycle37` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-12T01:29:03Z` a `2026-11-12T05:30:00Z`)

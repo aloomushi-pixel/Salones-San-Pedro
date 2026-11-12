@@ -876,32 +876,47 @@ export default function Precotizador() {
                 className="w-full h-2.5 bg-outline-variant/40 rounded-lg appearance-none cursor-pointer accent-primary mt-1"
               />
 
-              {/* Incentivo Inteligente de Volumen para 50-99 invitados (Activa upsell_a_100_invitados) */}
-              <div className="mt-3">
-                {guests < 100 ? (
-                  <div className="p-2.5 rounded-xl bg-primary/10 border border-primary/30 text-left flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div className="text-[11px] text-on-surface leading-snug">
-                      <span className="font-bold text-primary block">
-                        💡 Tip de Volumen ({guests} pers. → Paquete Premier $530 p/p):
-                      </span>
-                      Al llegar a <strong>100 invitados</strong> desbloqueas el <strong>Paquete Plus ($710 p/p)</strong> con Robot LED, Mesa de Dulces, Cabina y Letras Gigantes incluidas.
-                    </div>
+              {/* Comparador Interactivo en Vivo de los 3 Paquetes para el Aforo Seleccionado */}
+              <div className="mt-3 grid grid-cols-3 gap-1.5">
+                {PACKAGES.map((pkg) => {
+                  const isPkgActive = packageType === pkg.id;
+                  const totalForGuests = guests * pkg.price;
+                  return (
                     <button
+                      key={pkg.id}
                       type="button"
-                      onClick={() => handleUpsellTo100('Plus')}
-                      className="px-3 py-1.5 rounded-lg bg-primary text-on-primary font-bold text-[11px] shrink-0 hover:opacity-90 transition-opacity cursor-pointer text-center"
+                      onClick={() => {
+                        setPackageType(pkg.id);
+                        trackEvent(
+                          'precotizador_step',
+                          `step1_preview_pkg_${pkg.id.toLowerCase().replace(/\s+/g, '_')}`,
+                          {
+                            section: 'precotizador',
+                            step_number: 1,
+                            guests_range: getGuestsBucket(guests),
+                            package_name: `Paquete ${pkg.name}`,
+                            extra: { exact_guests: guests, estimated_budget: totalForGuests },
+                          }
+                        );
+                      }}
+                      className={`p-2 rounded-xl border text-center transition-all cursor-pointer ${
+                        isPkgActive
+                          ? 'border-primary bg-primary/15 text-primary shadow-xs'
+                          : 'border-outline-variant/30 bg-surface-container-low text-on-surface hover:border-primary/40'
+                      }`}
                     >
-                      <span className="pointer-events-none">Cotizar con 100 pers.</span>
+                      <span className="block text-[10px] font-bold uppercase tracking-wider truncate pointer-events-none">
+                        {pkg.id === 'Plus' ? 'Plus ⭐' : pkg.name}
+                      </span>
+                      <span className="block text-xs font-extrabold text-primary pointer-events-none">
+                        ${totalForGuests.toLocaleString('es-MX')}
+                      </span>
+                      <span className="block text-[10px] text-secondary pointer-events-none">
+                        ${pkg.price} p/p
+                      </span>
                     </button>
-                  </div>
-                ) : (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-500/10 text-green-500 text-[11px] font-semibold rounded-full">
-                    <span data-ux-decorative="true" className="material-symbols-outlined text-xs pointer-events-none">
-                      check_circle
-                    </span>
-                    100+ personas: Todos los paquetes desbloqueados (Premier, Plus y All Inclusive)
-                  </span>
-                )}
+                  );
+                })}
               </div>
             </div>
 
@@ -938,9 +953,11 @@ export default function Precotizador() {
             <button
               type="button"
               onClick={handleStep1Next}
-              className="w-full min-h-[50px] bg-primary text-on-primary font-bold py-3.5 px-6 rounded-2xl hover:opacity-95 active:scale-[0.99] transition-all uppercase tracking-wider text-sm shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full min-h-[50px] bg-primary text-on-primary font-bold py-3.5 px-6 rounded-2xl hover:opacity-95 active:scale-[0.99] transition-all uppercase tracking-wider text-xs sm:text-sm shadow-lg flex items-center justify-center gap-2 cursor-pointer"
             >
-              <span className="pointer-events-none">Siguiente: Día y Beneficios</span>
+              <span className="pointer-events-none">
+                Siguiente: Día y Beneficios ({packageType} ${(guests * getPackagePrice()).toLocaleString('es-MX')})
+              </span>
               <span data-ux-decorative="true" className="material-symbols-outlined text-lg pointer-events-none">
                 arrow_forward
               </span>

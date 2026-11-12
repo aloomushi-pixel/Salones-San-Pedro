@@ -55,7 +55,7 @@ export default function Home() {
                   <TrackedLink
                     eventType="hero_click"
                     source="badge_aforo_50_400"
-                    href="#paquetes"
+                    href="#precotizador"
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/55 hover:bg-primary hover:text-on-primary text-surface-container-lowest text-xs font-semibold border border-white/20 backdrop-blur-xs transition-colors"
                   >
                     <span data-ux-decorative="true" className="text-primary font-bold">✓</span>
