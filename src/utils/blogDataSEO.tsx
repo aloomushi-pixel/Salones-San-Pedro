@@ -14,24 +14,6 @@ const CTA = () => (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
       <TrackedLink
         eventType="cotizar_click"
-        source="blog_cta_chip_50"
-        href="/?guests=50#precotizador-hero"
-        className="px-3 py-2 rounded-xl bg-surface-container-lowest border border-primary/40 hover:border-primary text-center transition-colors shadow-xs"
-      >
-        <span className="block text-xs font-extrabold text-primary">50 Personas</span>
-        <span className="block text-[11px] font-semibold text-on-surface">Desde $26,500</span>
-      </TrackedLink>
-      <TrackedLink
-        eventType="cotizar_click"
-        source="blog_cta_chip_80"
-        href="/?guests=80#precotizador-hero"
-        className="px-3 py-2 rounded-xl bg-surface-container-lowest border border-primary/40 hover:border-primary text-center transition-colors shadow-xs"
-      >
-        <span className="block text-xs font-extrabold text-primary">80 Personas</span>
-        <span className="block text-[11px] font-semibold text-on-surface">Desde $42,400</span>
-      </TrackedLink>
-      <TrackedLink
-        eventType="cotizar_click"
         source="blog_cta_chip_100"
         href="/?guests=100&pkg=Plus#precotizador-hero"
         className="px-3 py-2 rounded-xl bg-primary/15 border-2 border-primary text-center transition-colors shadow-xs"
@@ -41,12 +23,30 @@ const CTA = () => (
       </TrackedLink>
       <TrackedLink
         eventType="cotizar_click"
+        source="blog_cta_chip_120"
+        href="/?guests=120&pkg=Plus#precotizador-hero"
+        className="px-3 py-2 rounded-xl bg-surface-container-lowest border border-primary/40 hover:border-primary text-center transition-colors shadow-xs"
+      >
+        <span className="block text-xs font-extrabold text-primary">120 Personas</span>
+        <span className="block text-[11px] font-semibold text-on-surface">$63,600 – $85,200</span>
+      </TrackedLink>
+      <TrackedLink
+        eventType="cotizar_click"
         source="blog_cta_chip_150"
         href="/?guests=150&pkg=Plus#precotizador-hero"
         className="px-3 py-2 rounded-xl bg-surface-container-lowest border border-primary/40 hover:border-primary text-center transition-colors shadow-xs"
       >
         <span className="block text-xs font-extrabold text-primary">150 Personas</span>
         <span className="block text-[11px] font-semibold text-on-surface">$79,500 – $106,500</span>
+      </TrackedLink>
+      <TrackedLink
+        eventType="cotizar_click"
+        source="blog_cta_chip_200"
+        href="/?guests=200&pkg=Plus#precotizador-hero"
+        className="px-3 py-2 rounded-xl bg-surface-container-lowest border border-primary/40 hover:border-primary text-center transition-colors shadow-xs"
+      >
+        <span className="block text-xs font-extrabold text-primary">200 Personas</span>
+        <span className="block text-[11px] font-semibold text-on-surface">$106,000 – $142,000</span>
       </TrackedLink>
     </div>
     <div className="flex flex-wrap gap-3 pt-1">

@@ -128,7 +128,7 @@ export default function Precotizador() {
   const [eventKind, setEventKind] = useState('Boda');
   const [preferredDay, setPreferredDay] = useState('Sábado');
   const [preferredSeason, setPreferredSeason] = useState('Temporada Alta / Fin de Año (Oct-Dic)');
-  const [packageType, setPackageType] = useState('Premier');
+  const [packageType, setPackageType] = useState('Plus');
   const [selectedExtras, setSelectedExtras] = useState<string[]>([]);
   const [comboVipActive, setComboVipActive] = useState(false);
   const [lockedAttemptPkg, setLockedAttemptPkg] = useState<string | null>(null);
@@ -234,6 +234,15 @@ export default function Precotizador() {
           comboVipActive,
           wantsTour,
           updatedAt: Date.now(),
+        })
+      );
+      window.dispatchEvent(
+        new CustomEvent('ssp:sync-from-precotizador', {
+          detail: {
+            guests,
+            preferredDay,
+            packageType,
+          },
         })
       );
     } catch {

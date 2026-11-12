@@ -615,15 +615,22 @@ export default function GaleriaSection() {
                 type="button"
                 onClick={() => {
                   setLightboxOpen(false);
+                  trackEvent('cotizar_click', `galeria_lightbox_cotizar_${activeTab}`, {
+                    section: 'galeria',
+                    gallery_category: canonicalCategory,
+                    photo_title: photos[activeIndex].caption,
+                  });
                   const el = document.getElementById('precotizador');
                   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }}
-                className="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer border border-white/20"
+                className="px-4 py-2.5 rounded-xl bg-primary text-on-primary hover:opacity-95 text-xs font-extrabold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer shadow-lg"
               >
-                <span data-ux-decorative="true" className="material-symbols-outlined text-base text-primary pointer-events-none">
+                <span data-ux-decorative="true" className="material-symbols-outlined text-base pointer-events-none">
                   calculate
                 </span>
-                <span className="pointer-events-none">Volver a mi Cotización</span>
+                <span className="pointer-events-none">
+                  Simular Paquete en {canonicalCategory} ↑
+                </span>
               </button>
 
               <a

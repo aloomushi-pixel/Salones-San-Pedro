@@ -22,6 +22,40 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.5.2-cycle37',
+    cycle_number: 37,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-11 23:34 CDMX',
+    title:
+      'Ciclo Autónomo #37: 106 Eventos y 3 Conversiones con Nueva Base de 100 Personas — Sincronización Bidireccional #precotizador ↔ #paquetes, CTA Primario en Lightbox y Alineación del Blog SEO',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #36 (>= 2026-11-12T01:29:03Z a 2026-11-12T05:30:00Z): 106 eventos humanos en 3 sesiones reales con 0 dead_clicks, 0 rage_clicks y 3 conversiones directas en ses_1na2b_5cumw5xx (quien usó el nuevo cotizador base 100 personas para simular 120 invitados • Bautizo / Cumpleaños • Viernes • Paquete Plus $85,200 MXN y convirtió en cotizar_click: paquete_plus). Fricciones detectadas: (1) En ses_1na2b_5cumw5xx, tras elegir 120 personas en #precotizador y bajar a #paquetes, el botón paquete_preseleccionar_plus en #paquetes seguía mostrando 100 personas por falta de sincronización en sentido #precotizador -> #paquetes; (2) En ses_3fu1u_xlccu5ey se registraron 38 interacciones en el Lightbox de #galeria (Diamante y Platino); (3) ses_1e59s_bjuoyl22 aterrizó en el blog SEO donde los chips del componente CTA aún mostraban 50/80 en lugar de 100/120/150/200.',
+    autonomousActions: [
+      'Sincronización bidireccional #precotizador ↔ #paquetes (CustomEvent ssp:sync-from-precotizador en Precotizador.tsx y listener en PaquetesInteractiveSection.tsx) para que cuando el usuario elija 120, 150 o 200 invitados en el cotizador y baje a #paquetes, las 3 tarjetas reflejen automáticamente su aforo y día exactos.',
+      'Preselección por defecto de Paquete Plus (⭐ El Más Elegido) al iniciar el cotizador en 100 personas para todos los giros de evento (incluyendo Bautizo / Cumpleaños y Empresarial).',
+      'Refuerzo del CTA primario en el Lightbox de GaleriaSection.tsx ("Simular Paquete en Salón Diamante/Platino ↑" con telemetría galeria_lightbox_cotizar_*) y alineación de los chips del Blog SEO (100, 120, 150 y 200 personas) en blogDataSEO.tsx y blog/[slug]/page.tsx.',
+    ],
+    filesModified: [
+      'src/components/Precotizador.tsx',
+      'src/components/PaquetesInteractiveSection.tsx',
+      'src/components/GaleriaSection.tsx',
+      'src/utils/blogDataSEO.tsx',
+      'src/app/blog/[slug]/page.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'pending',
+    deploymentUuid: 'pending',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Conservar el aforo personalizado (ej. 120 o 150 personas) cuando el usuario navega de #precotizador hacia #paquetes y de regreso, e incrementar los clics desde el Lightbox de #galeria.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.5.1-cycle36',
     cycle_number: 36,
     status: 'IMPLEMENTED',

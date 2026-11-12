@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import TrackedLink from './TrackedLink';
 import { trackEvent } from '@/utils/trackEvent';
@@ -260,6 +260,31 @@ export default function PaquetesInteractiveSection() {
   const [selectedInclusion, setSelectedInclusion] = useState<InclusionDetail | null>(null);
   const [simGuests, setSimGuests] = useState<number>(100);
   const [simDayMode, setSimDayMode] = useState<'viernes_domingo' | 'sabado'>('viernes_domingo');
+
+  useEffect(() => {
+    const handleSyncFromPrecotizador = (e: Event) => {
+      const customEvent = e as CustomEvent<{
+        guests?: number;
+        preferredDay?: string;
+        packageType?: string;
+      }>;
+      const nextGuests = customEvent.detail?.guests;
+      const nextDay = customEvent.detail?.preferredDay;
+      if (typeof nextGuests === 'number' && nextGuests >= 100 && nextGuests <= 250) {
+        setSimGuests(nextGuests);
+      }
+      if (nextDay === 'Sábado') {
+        setSimDayMode('sabado');
+      } else if (nextDay === 'Viernes' || nextDay === 'Domingo' || nextDay === 'Entre Semana') {
+        setSimDayMode('viernes_domingo');
+      }
+    };
+
+    window.addEventListener('ssp:sync-from-precotizador', handleSyncFromPrecotizador);
+    return () => {
+      window.removeEventListener('ssp:sync-from-precotizador', handleSyncFromPrecotizador);
+    };
+  }, []);
 
   const formatMXN = (amount: number) =>
     new Intl.NumberFormat('es-MX', {

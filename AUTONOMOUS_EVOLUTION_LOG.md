@@ -4,6 +4,26 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #37 — `2026-11-11 23:34 CDMX` (`v2.5.2-cycle37` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-12T01:29:03Z` a `2026-11-12T05:30:00Z`)
+- **Telemetría en Supabase (`106` eventos humanos reales en `3` sesiones con `0` `dead_clicks`, `0` `rage_clicks` y `3` conversiones):**
+  1. **Validación Inmediata del Nuevo Cotizador Base `100 Personas` + Conversión a WhatsApp (`ses_1na2b_5cumw5xx`, Mobile `428x781`, CDMX, `281s` activos):**
+     - Aterrizó en `/`, ajustó el aforo a **`120 personas` (`aforo_120`)**, eligió **`Bautizo / Cumpleaños`** (`step_1_completado`), seleccionó **`Viernes`** (`step_2_completado`), eligió **`Paquete Plus` (`$85,200 MXN` / `$710 p/p`)** (`select_pkg_plus` -> `step_3_completado`), bajó a `#paquetes` y convirtió en **`cotizar_click: paquete_plus`**.
+     - **Oportunidad detectada:** Cuando el usuario bajó de `#precotizador` (donde ya había elegido `120 personas` y `Viernes`) hacia `#paquetes` y tocó `paquete_preseleccionar_plus`, el componente `PaquetesInteractiveSection` seguía en su valor inicial (`100 personas`) porque aún no existía sincronización en sentido `#precotizador` -> `#paquetes`.
+  2. **Exploración Profunda de Lightbox en `#galeria` (`ses_3fu1u_xlccu5ey`, Desktop `3432x1316`, Benito Juárez CDMX, `230s` activos):**
+     - Recorrió toda la página (`scroll_100%`), copió la dirección (`text_copy: copy_ubicacion`), permaneció `41s` en `#tiktok-videos` y **`78s` en `#galeria` ejecutando `38` interacciones dentro del Lightbox** (`lightbox_open_diamante`, `lightbox_open_platino`, recorriendo todas las fotos de ambos salones).
+  3. **Tráfico en Blog SEO (`ses_1e59s_bjuoyl22`, Mobile `384x701`, Gustavo A. Madero CDMX):**
+     - Visitó `/blog/salones-de-fiestas-pequenos-en-cdmx-gustavo-a-madero-50-a-80-personas` (que ya acumula **`115` impresiones** en Google Search Console, junto con `123` impresiones del tour fotográfico).
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx) y [`src/components/PaquetesInteractiveSection.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/PaquetesInteractiveSection.tsx) (Nivel 2 — Mediana):**
+   - Sincronización bidireccional `#precotizador` ↔ `#paquetes` mediante `CustomEvent('ssp:sync-from-precotizador')`, de modo que cuando el usuario elige `120`, `150` o `200` invitados y su día preferido en `#precotizador` y baja a `#paquetes`, las tarjetas de `#paquetes` muestran automáticamente ese mismo aforo y tarifa sin reiniciar a `100`. Además, `Paquete Plus` queda preseleccionado por defecto para todos los giros de evento desde `100` personas.
+2. **[`src/components/GaleriaSection.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/GaleriaSection.tsx), [`src/utils/blogDataSEO.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/utils/blogDataSEO.tsx) y [`src/app/blog/[slug]/page.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/blog/%5Bslug%5D/page.tsx) (Nivel 1 — Menor):**
+   - Botón dorado destacado **`"Simular Paquete en {Salón Diamante/Platino} ↑"`** (`galeria_lightbox_cotizar_*`) en el Lightbox de `#galeria` y actualización de los chips del Blog SEO a **`100`, `120`, `150` y `200` personas**.
+
+---
+
 ## Ciclo Autónomo #36 — `2026-11-11 19:26 CDMX` (`v2.5.1-cycle36` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-11T21:22:58Z` a `2026-11-12T01:24:00Z`)
