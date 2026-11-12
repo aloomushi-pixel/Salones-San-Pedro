@@ -47,8 +47,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
-    commitHash: 'pending',
-    deploymentUuid: 'pending',
+    commitHash: 'face9c8',
+    deploymentUuid: 'ottphh0yaxnbdhzuogrkm8h9',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:
