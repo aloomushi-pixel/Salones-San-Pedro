@@ -22,6 +22,35 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.5.5-cycle40',
+    cycle_number: 40,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-12 11:45 CDMX',
+    title:
+      'Ciclo Matutino #40 (POSTPONED): Ventana Matutina 07:43–11:44 CDMX Sin Tráfico Humano — Preservación de Línea Base v2.5.3 (Commit 87155b5)',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #39 (>= 2026-11-12T13:43:45Z a 2026-11-12T17:44:48Z): 0 eventos humanos nuevos y 0 leads durante la ventana matutina (07:43 a 11:44 hrs CDMX). Google Search Console reporta sitemap saludable con 37 URLs enviadas y 0 errores.',
+    autonomousActions: [
+      'Auditoría en vivo de Supabase (analytics_events y leads >= 2026-11-12T13:43:45Z) y Google Search Console API (sc-domain:sanpedro.aionia.com.mx).',
+      'Decisión consciente POSTPONED bajo Estándar Maestro v2.1: se preserva intacta la versión en producción (commit 87155b5, Coolify uo6exu4erbqzrf1xzykfw2e6) para evaluar con el tráfico vespertino el Comparador Táctil de los 3 Paquetes en el Paso 1 y la sincronización bidireccional #precotizador ↔ #paquetes.',
+    ],
+    filesModified: [
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason:
+      'Ventana matutina (07:43 a 11:44 hrs CDMX) con 0 sesiones humanas nuevas. Se evita sobre-editar a ciegas antes de medir el tráfico vespertino.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: '87155b5',
+    deploymentUuid: 'uo6exu4erbqzrf1xzykfw2e6',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Evaluar con el tráfico vespertino (11:45 a 15:45 hrs CDMX) la tasa de selección de paquetes desde el nuevo comparador en vivo del Paso 1 y la sincronización bidireccional con #paquetes.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.5.4-cycle39',
     cycle_number: 39,
     status: 'POSTPONED',
