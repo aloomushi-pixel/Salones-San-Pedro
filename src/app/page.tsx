@@ -150,7 +150,54 @@ export default function Home() {
 
       {/* Premium Footer */}
       <footer data-ux-section="ubicacion" className="w-full bg-[#111111] text-white border-t border-[#333333]" id="ubicacion">
-        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        {/* Banda Superior de Ubicación Rápida y Conversión (Visible al instante al tocar badge_ubicacion_gam en móvil como en ses_bv4a2_s3ihulvg) */}
+        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pt-10 pb-2">
+          <div className="rounded-2xl bg-gradient-to-r from-[#1a160c] via-[#1c1c1c] to-[#1a160c] border border-[#d4af37]/40 p-5 sm:p-6 flex flex-col lg:flex-row items-center justify-between gap-4 shadow-xl">
+            <div className="text-center lg:text-left space-y-1">
+              <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#d4af37] block">
+                📍 Norte de CDMX • Calle Norte 84 #6507, Col. San Pedro el Chico, GAM (A 10 min de Lindavista y Aragón)
+              </span>
+              <h3 className="font-display-lg text-lg sm:text-xl font-bold text-white">
+                Ubicación con Valet Parking, Seguridad y 2 Salones de Gala (Diamante y Platino)
+              </h3>
+              <p className="text-xs sm:text-sm text-[#c4c4c4]">
+                Paquetes Todo Incluido desde <strong className="text-[#d4af37]">$530 MXN p/p</strong> (100 a 250+ invitados). Abre la ruta en Google Maps, cotiza en línea o agenda visita por WhatsApp.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row items-center gap-2.5 w-full lg:w-auto shrink-0">
+              <TrackedLink
+                eventType="footer_click"
+                source="ubicacion_top_google_maps"
+                href="https://maps.app.goo.gl/oarkXjctGWr5d4J96?g_st=ac"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-4 py-3 rounded-xl bg-[#222222] border border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37] hover:text-black font-extrabold text-xs uppercase tracking-wider text-center transition-colors shadow-lg"
+              >
+                📍 Ruta en Google Maps
+              </TrackedLink>
+              <TrackedLink
+                eventType="cotizar_click"
+                source="footer_ubicacion_ir_precotizador"
+                href="#precotizador-hero"
+                className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#d4af37] text-black font-extrabold text-xs uppercase tracking-wider text-center hover:opacity-95 transition-opacity shadow-lg"
+              >
+                Simular Presupuesto ↑
+              </TrackedLink>
+              <TrackedLink
+                eventType="whatsapp_click"
+                source="footer_ubicacion_whatsapp"
+                href="https://wa.me/526633670431?text=%C2%A1Hola%20Salones%20San%20Pedro%20Plus!%20Vi%20su%20ubicaci%C3%B3n%20en%20Norte%2084%20(Gustavo%20A.%20Madero)%20y%20me%20gustar%C3%ADa%20cotizar%20mi%20evento%20o%20agendar%20una%20visita."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#25D366] text-white font-extrabold text-xs uppercase tracking-wider text-center hover:opacity-95 transition-opacity shadow-lg"
+              >
+                Agendar Visita / WhatsApp
+              </TrackedLink>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           
           {/* Brand & Social */}
           <div className="flex flex-col items-center md:items-start gap-6">
@@ -212,43 +259,6 @@ export default function Home() {
               referrerPolicy="no-referrer-when-downgrade"
               title="Mapa de ubicación Salones San Pedro Plus en Gustavo A. Madero"
             />
-          </div>
-        </div>
-
-        {/* Banda de Conversión y Conectividad al Final de #ubicacion (Captura sesiones GEO/ChatGPT y Orgánicas en scroll 90%–100%) */}
-        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pb-10">
-          <div className="rounded-2xl bg-gradient-to-r from-[#1a160c] via-[#1c1c1c] to-[#1a160c] border border-[#d4af37]/40 p-5 sm:p-6 flex flex-col lg:flex-row items-center justify-between gap-4 shadow-xl">
-            <div className="text-center lg:text-left space-y-1">
-              <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#d4af37] block">
-                📍 Norte de CDMX • A 10 min de Lindavista, Aragón y Circuito Interior
-              </span>
-              <h3 className="font-display-lg text-lg sm:text-xl font-bold text-white">
-                ¿Ya revisaste nuestra ubicación en Calle Norte 84, Gustavo A. Madero?
-              </h3>
-              <p className="text-xs sm:text-sm text-[#c4c4c4]">
-                Paquetes Todo Incluido desde <strong className="text-[#d4af37]">$530 MXN p/p</strong> (100 a 250+ invitados). Cotiza en línea en 30 segundos o agenda visita presencial / videollamada por WhatsApp.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto shrink-0">
-              <TrackedLink
-                eventType="cotizar_click"
-                source="footer_ubicacion_ir_precotizador"
-                href="#precotizador-hero"
-                className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#d4af37] text-black font-extrabold text-xs uppercase tracking-wider text-center hover:opacity-95 transition-opacity shadow-lg"
-              >
-                Simular mi Presupuesto ↑
-              </TrackedLink>
-              <TrackedLink
-                eventType="whatsapp_click"
-                source="footer_ubicacion_whatsapp"
-                href="https://wa.me/526633670431?text=%C2%A1Hola%20Salones%20San%20Pedro%20Plus!%20Vi%20su%20ubicaci%C3%B3n%20en%20Norte%2084%20(Gustavo%20A.%20Madero)%20y%20me%20gustar%C3%ADa%20cotizar%20mi%20evento%20o%20agendar%20una%20visita."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#25D366] text-white font-extrabold text-xs uppercase tracking-wider text-center hover:opacity-95 transition-opacity shadow-lg"
-              >
-                Agendar Visita / WhatsApp
-              </TrackedLink>
-            </div>
           </div>
         </div>
 

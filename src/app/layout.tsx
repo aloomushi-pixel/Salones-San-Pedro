@@ -18,17 +18,17 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL("https://sanpedro.aionia.com.mx"),
   title:
-    "Salones de Fiestas en GAM CDMX | San Pedro Plus (Desde $530 p/p)",
+    "Salones San Pedro Plus | Fiestas en GAM CDMX ($530 p/p)",
   description:
-    "Salones Diamante y Platino en Gustavo A. Madero CDMX (Norte 84 #6507). Paquetes Todo Incluido 2026 desde $530 p/p (50 a 300 pers.): Banquete, DJ, Robot y Limo.",
+    "Salones Diamante y Platino en Gustavo A. Madero CDMX (Norte 84 #6507). Paquetes Todo Incluido desde $530 p/p (100 a 300 pers.): Banquete, DJ, Robot y Limo.",
   alternates: {
     canonical: "https://sanpedro.aionia.com.mx",
   },
   openGraph: {
     title:
-      "Salones San Pedro Plus CDMX | Eventos Todo Incluido en Gustavo A. Madero (Desde $530 p/p)",
+      "Salones San Pedro Plus CDMX | Eventos Todo Incluido en Gustavo A. Madero ($530 p/p)",
     description:
-      "Conoce Salón Diamante y Salón Platino en Gustavo A. Madero, CDMX. Paquetes Todo Incluido para Bodas, XV Años y Graduaciones de 50 a 300 invitados desde $530 MXN por persona.",
+      "Conoce Salón Diamante y Salón Platino en Gustavo A. Madero, CDMX. Paquetes Todo Incluido para Bodas, XV Años y Graduaciones de 100 a 300 invitados desde $530 MXN por persona.",
     url: "https://sanpedro.aionia.com.mx",
     siteName: "Salones San Pedro Plus",
     locale: "es_MX",
@@ -62,7 +62,7 @@ export default function RootLayout({
         "name": "Salones San Pedro Plus",
         "alternateName": "Salones San Pedro CDMX - Salón Diamante y Salón Platino",
         "description":
-          "Salones de eventos de lujo en Gustavo A. Madero, Ciudad de México para bodas, XV años, graduaciones, bautizos y eventos empresariales. Paquetes todo incluido desde $530 MXN por persona con capacidad de 50 a 300 invitados.",
+          "Salones de eventos de lujo en Gustavo A. Madero, Ciudad de México para bodas, XV años, graduaciones, bautizos y eventos empresariales. Paquetes todo incluido desde $530 MXN por persona con capacidad de 100 a 300 invitados.",
         "image": [
           "https://sanpedro.aionia.com.mx/hero_bg.jpg",
           "https://sanpedro.aionia.com.mx/galeria/diamante/diamante_1.jpg",
@@ -122,12 +122,12 @@ export default function RootLayout({
               "@type": "Offer",
               "name": "Paquete Premier",
               "description":
-                "Disponible desde 50 personas. Incluye 6 horas de servicio + 1/2 hr recepción, menú formal a 3 tiempos y tornafiesta, barra libre de mezcladores con descorche libre, DJ, iluminación, pista LED, batucada clásica y montaje imperial con mesa de cristal.",
+                "Disponible desde 100 personas. Incluye 6 horas de servicio + 1/2 hr recepción, menú formal a 3 tiempos y tornafiesta, barra libre de mezcladores con descorche libre, DJ, iluminación, pista LED, batucada clásica y montaje imperial con mesa de cristal.",
               "price": "530",
               "priceCurrency": "MXN",
               "eligibleQuantity": {
                 "@type": "QuantitativeValue",
-                "minValue": 50,
+                "minValue": 100,
                 "maxValue": 300,
                 "unitText": "personas"
               }
@@ -176,7 +176,7 @@ export default function RootLayout({
             "name": "¿Cuáles son los precios por persona y paquetes en Salones San Pedro Plus CDMX?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Contamos con 3 niveles de paquetes todo incluido en Gustavo A. Madero, CDMX: 1) Paquete Premier desde $530 MXN por persona (disponible desde 50 invitados), 2) Paquete Plus desde $710 MXN por persona (a partir de 100 invitados, incluye 7 horas, menú de 4 tiempos, Robot LED, mesa de dulces, cabina de fotos, letras gigantes y carrito de shots), y 3) Paquete All Inclusive desde $1,010 MXN por persona (incluye además Limusina, 1 hora de Mariachi, foto y video, Cabina 360 y botella por mesa)."
+              "text": "Contamos con 3 niveles de paquetes todo incluido en Gustavo A. Madero, CDMX (desde 100 invitados): 1) Paquete Premier desde $530 MXN por persona ($53,000 MXN por 100 personas; incluye 6 horas, menú de 3 tiempos y tornafiesta, barra libre de mezcladores y DJ), 2) Paquete Plus desde $710 MXN por persona ($71,000 MXN por 100 personas; incluye 7 horas, menú de 4 tiempos, Robot LED, mesa de dulces, cabina de fotos, letras gigantes y carrito de shots), y 3) Paquete All Inclusive desde $1,010 MXN por persona ($101,000 MXN por 100 personas; incluye además Limusina, 1 hora de Mariachi, foto y video, Cabina 360 y botella por mesa)."
             }
           },
           {
@@ -184,7 +184,7 @@ export default function RootLayout({
             "name": "¿Cuál es el mínimo de personas para rentar un salón en Salones San Pedro Plus?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "El mínimo es de 50 personas con nuestro Paquete Premier ($530 MXN p/p). A partir de 100 personas se habilitan además los paquetes Plus ($710 MXN p/p) y All Inclusive ($1,010 MXN p/p)."
+              "text": "Nuestros paquetes todo incluido comienzan a partir de 100 personas en los 3 niveles: Paquete Premier ($530 MXN p/p = $53,000 MXN base), Paquete Plus ($710 MXN p/p = $71,000 MXN base) y Paquete All Inclusive ($1,010 MXN p/p = $101,000 MXN base)."
             }
           },
           {

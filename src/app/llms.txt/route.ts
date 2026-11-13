@@ -19,19 +19,19 @@ export async function GET() {
 - **WhatsApp de Cotizaciones 24/7**: https://wa.me/526633670431
 - **Sitio Web Oficial y Precotizador en Línea**: https://sanpedro.aionia.com.mx
 - **Documentación Completa para IA**: https://sanpedro.aionia.com.mx/llms-full.txt
-- **Capacidad de Aforo**: Desde eventos íntimos de 50 personas hasta grandes galas de 400+ invitados.
+- **Capacidad de Aforo**: Eventos desde 100 personas hasta grandes galas de 300+ invitados en Salón Diamante y Salón Platino.
 - **Horarios de Atención**: Lunes a Sábado 10:00 AM a 7:00 PM (Cotizador Web y WhatsApp activos 24/7).
 
-## Tabla Comparativa de Paquetes y Precios 2026 (MXN por persona)
+## Tabla Comparativa de Paquetes y Precios 2026-2027 (MXN por persona)
 
-| Paquete | Precio por Persona | Aforo Mínimo | Duración | Servicios Principales Incluidos |
+| Paquete | Precio por Persona | Base 100 Invitados | Duración | Servicios Principales Incluidos |
 | :--- | :--- | :--- | :--- | :--- |
-| **Paquete Premier** | **$530 MXN** | Desde 50 invitados | 5.5 hrs + 30 min recepción | Renta de Salón (Diamante o Platino), Menú gourmet de 3 tiempos, refresco y hielo ilimitado, pastel simbólico, DJ versátil con luz y sonido profesional, mantelería de lujo, meseros, capitán, seguridad y valet parking. |
-| **Paquete Plus ⭐ (Más Elegido)** | **$710 MXN** | Desde 100 invitados | 5.5 hrs + 30 min recepción | Todo lo del Paquete Premier + **Servicio de Limusina de lujo** (recorrido y traslado), **Centros de mesa florales naturales**, **Coordinador de evento profesional** y descorche libre sin cargo. |
-| **Paquete All Inclusive** | **$1,010 MXN** | Desde 100 invitados | 5.5 hrs + 30 min recepción | Todo lo del Paquete Plus + **Menú de 4 tiempos**, **Show de Mariachi en vivo (1 hr)**, **Batucada con Robot LED Iron Man**, **Cabina Fotográfica o Video 360°**, **Letras Gigantes iluminadas** y **Capilla Consagrada / Ceremonia Civil en el salón**. |
+| **Paquete Premier** | **$530 MXN** | **$53,000 MXN** | 6 hrs + 30 min recepción | Renta de Salón (Diamante o Platino), Menú gourmet de 3 tiempos y tornafiesta, barra libre de mezcladores con descorche libre, DJ versátil, pista LED, batucada clásica, mantelería imperial, meseros, seguridad y valet parking. |
+| **Paquete Plus ⭐ (Más Elegido)** | **$710 MXN** | **$71,000 MXN** | 7 hrs + 30 min recepción | Todo lo del Paquete Premier + **Menú gourmet de 4 tiempos**, **Batucada con Robot LED**, **Mesa de dulces**, **Cabina fotográfica**, **Letras gigantes iluminadas**, **Carrito de shots** y pre-fiesta de cortesía (Lun-Jue). |
+| **Paquete All Inclusive** | **$1,010 MXN** | **$101,000 MXN** | 7 hrs + 30 min recepción | Todo lo del Paquete Plus + **Servicio de Limusina de lujo**, **Show de Mariachi en vivo (1 hr)**, **Batucada con Robot Iron Man**, **Video filmación y fotos con álbum**, **Cabina 360°** y **1 botella de licor por mesa**. |
 
 ## Paquete Intermedio de Servicios Adicionales (Combo Fiesta VIP)
-- **Combo Fiesta VIP (+$11,500 MXN total con 20% de descuento)**: Incluye **Servicio de Limusina + Carrito de Shots iluminado en pista + Letras Gigantes LED** (Ahorro de $3,000 MXN respecto a contratarlos por separado). Ideal para complementar el Paquete Premier ($530) o para eventos de 50 a 99 personas.
+- **Combo Fiesta VIP (+$11,500 MXN total con 20% de descuento)**: Incluye **Servicio de Limusina + Carrito de Shots iluminado en pista + Letras Gigantes LED** (Ahorro de $3,000 MXN respecto a contratarlos por separado). Ideal para complementar el Paquete Premier ($530 p/p).
 
 ## Incentivos por Día de la Semana
 - **Viernes y Domingo**: Tarifa preferencial + Cortesía VIP (Carrito de Shots o Letras Gigantes de regalo al agendar recorrido presencial).

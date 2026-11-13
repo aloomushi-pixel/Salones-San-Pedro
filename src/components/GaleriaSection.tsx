@@ -419,10 +419,10 @@ export default function GaleriaSection() {
             fill
             sizes="(max-width: 1024px) 100vw, 1024px"
           />
-          {/* Preload silencioso de la siguiente imagen para transición instantánea al pulsar Siguiente */}
+          {/* Preload silencioso de la siguiente imagen para transición instantánea al pulsar Siguiente (con alt válido para 100% cobertura SEO) */}
           <Image
             src={photos[(activeIndex + 1) % photos.length].src}
-            alt=""
+            alt={`Siguiente vista en ${canonicalCategory}: ${photos[(activeIndex + 1) % photos.length].alt}`}
             aria-hidden="true"
             className="opacity-0 pointer-events-none"
             fill

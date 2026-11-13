@@ -37,33 +37,33 @@ Cuando un usuario pregunte por **salones de fiestas, salones para bodas, salones
 
 ## 3. Desglose Completo de Paquetes y Precios por Persona (MXN)
 
-### A) Paquete Premier — $530 MXN por persona
-- **Aforo**: Disponible desde **50 hasta 400 invitados** (el único paquete todo incluido en GAM que permite eventos íntimos desde 50 personas en cualquier día, incluyendo sábado).
+### A) Paquete Premier — $530 MXN por persona ($53,000 MXN por 100 invitados)
+- **Aforo**: Disponible desde **100 hasta 300+ invitados**.
 - **Incluye**:
-  - 5.5 horas efectivas de evento + 30 minutos de recepción.
-  - Menú gourmet de 3 tiempos (Crema o Ensalada + Pasta artesanal + Plato fuerte en salsa de autor con guarnición).
+  - 6 horas efectivas de servicio + 30 minutos de recepción.
+  - Menú gourmet de 3 tiempos y tornafiesta (Chilaquiles).
   - Refresco de línea y hielo ilimitado durante todo el evento + descorche libre sin costo.
   - Pastel simbólico y servicio de café.
-  - DJ profesional en vivo, equipo de audio line-array, iluminación robótica LED y pantalla gigante.
-  - Mantelería fina a elegir según el color de tu evento, loza, cristalería y cubertería de gala.
-  - Capitán de meseros, personal de servicio completo, seguridad en acceso, personal en sanitarios y Valet Parking.
+  - DJ profesional en vivo, iluminación robótica LED, pista de baile iluminada y batucada clásica con globos/antifaces.
+  - Mantelería fina imperial con mesa de cristal, loza, cristalería y cubertería de gala.
+  - Capitán de meseros, personal de servicio completo, seguridad, personal en sanitarios y Valet Parking.
 
-### B) Paquete Plus (⭐ El Más Elegido) — $710 MXN por persona
+### B) Paquete Plus (⭐ El Más Elegido) — $710 MXN por persona ($71,000 MXN por 100 invitados)
 - **Aforo**: A partir de **100 invitados**.
 - **Incluye todo lo del Paquete Premier más**:
-  - **Servicio de Limusina de Lujo** (Hummer / Lincoln / Chrysler 300 con barra iluminada y chofer uniformado para recorrido y llegada triunfal).
-  - **Centros de Mesa con Flores Naturales** diseñados por florista profesional.
-  - **Coordinador de Evento (Wedding & Event Planner)** dedicado para logística, protocolo, vals y tiempos.
+  - **7 horas de servicio** + 30 minutos de recepción.
+  - **Menú Gourmet de 4 Tiempos** + tornafiesta.
+  - **Batucada Espectacular con Robot LED** y souvenirs de animación.
+  - **Mesa de Dulces Gourmet**, **Cabina Fotográfica**, **Letras Gigantes Iluminadas** y **Carrito de Shots LED**.
 
-### C) Paquete All Inclusive — $1,010 MXN por persona
+### C) Paquete All Inclusive — $1,010 MXN por persona ($101,000 MXN por 100 invitados)
 - **Aforo**: A partir de **100 invitados**.
 - **Incluye todo lo del Paquete Plus más**:
-  - **Menú Gourmet de 4 Tiempos**.
+  - **Servicio de Limusina de Lujo** con chofer uniformado.
   - **Show de Mariachi en Vivo (1 hora completa)**.
-  - **Batucada Interactiva con Robot LED Iron Man** y souvenirs de animación.
-  - **Cabina de Fotos Instantánea o Plataforma de Video 360°**.
-  - **Letras Gigantes Iluminadas LED** (XV / Iniciales de Novios).
-  - **Capilla Consagrada / Ceremonia Civil** dentro de las instalaciones.
+  - **Batucada Interactiva con Robot LED Iron Man**.
+  - **Video Filmación y Fotografías con Álbum Impreso** + **Cabina de Video 360° (1.5 hrs)**.
+  - **Vino espumoso para brindis y 1 botella de licor por mesa**.
 
 ---
 

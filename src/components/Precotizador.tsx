@@ -958,6 +958,27 @@ export default function Precotizador() {
                   );
                 })}
               </div>
+
+              {/* Resumen instantáneo de inclusiones + CTA Above-the-Fold en Paso 1 al tocar cualquier tarjeta de paquete (Atiende ses_ehv9g_eksbku49 en móvil 428x723) */}
+              <div className="mt-2.5 p-2.5 rounded-xl bg-primary/10 border border-primary/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-left">
+                <div className="text-[11px] text-on-surface leading-snug">
+                  <strong className="text-primary block">
+                    Paquete {packageType} (${(guests * getPackagePrice()).toLocaleString('es-MX')} MXN por {guests} pers.):
+                  </strong>
+                  <span className="text-secondary">
+                    {(PACKAGES.find((p) => p.id === packageType)?.features || []).join(' • ')}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleStep1Next}
+                  className="px-3 py-2 rounded-lg bg-primary text-on-primary font-extrabold text-[11px] uppercase tracking-wider shrink-0 hover:opacity-95 transition-opacity cursor-pointer text-center"
+                >
+                  <span className="pointer-events-none">
+                    Cotizar {packageType} →
+                  </span>
+                </button>
+              </div>
             </div>
 
             {/* Giro del Evento */}
