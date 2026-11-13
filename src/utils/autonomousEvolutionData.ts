@@ -22,6 +22,35 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.5.8-cycle43',
+    cycle_number: 43,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-13 00:05 CDMX',
+    title:
+      'Ciclo Nocturno #43 (POSTPONED): 62 Eventos Humanos en 2 Sesiones Móviles con 0 Dead Clicks, 0 Rage Clicks y 0 Exit Intent — Preservación de Línea Base v2.5.7 (Commit ed7cbab)',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #42 (>= 2026-11-13T02:04:07Z a 2026-11-13T06:04:17Z): 62 eventos humanos reales en 2 sesiones móviles con 0 dead_clicks, 0 rage_clicks y 0 exit_intent. En ses_c95jn_ry2z40pv (Mobile 393x695) el usuario navegó desde el menú móvil hacia /blog/menu-de-3-tiempos-vs-buffet-cual-es-la-mejor-opcion-para-tu-boda-o-graduacion (scroll 100%); en ses_jgh9f_1pe9rkpd (Iztapalapa CDMX, Mobile 376x715, Lectura Detenida / Atenta) permaneció 42s en #paquetes y abrió modal_paquete_barra_mezcladores sin fricción. Google Search Console reporta sitemap saludable con 37 URLs enviadas y 0 errores.',
+    autonomousActions: [
+      'Auditoría en vivo de Supabase (analytics_events y leads >= 2026-11-13T02:04:07Z) y Google Search Console API (sc-domain:sanpedro.aionia.com.mx).',
+      'Decisión consciente POSTPONED bajo Estándar Maestro v2.1: con 0 dead_clicks, 0 rage_clicks y 0 exit_intent en la ventana nocturna (20:04 a 00:04 CDMX), se preserva intacta la versión en producción (commit ed7cbab, Coolify 1yj2jbbpfshavx9p2gccc64b) para acumular muestra diurna sobre el input numérico directo en Paso 1, los steppers [-10/+10] en Pasos 2–3 y el CTA Above-the-Fold en Paso 4.',
+    ],
+    filesModified: [
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason:
+      'Muestra nocturna de 2 sesiones móviles con 0 dead_clicks, 0 rage_clicks y 0 exit_intent tras el despliegue del Ciclo #42 (commit ed7cbab). No se realizan cambios forzados.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'ed7cbab',
+    deploymentUuid: '1yj2jbbpfshavx9p2gccc64b',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Acumular sesiones adicionales para evaluar la conversión en el Paso 4 y el uso de los steppers de aforo dentro del Paso 3.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.5.7-cycle42',
     cycle_number: 42,
     status: 'IMPLEMENTED',
