@@ -1,0 +1,29 @@
+{
+  "project_name": "Salones San Pedro Plus (Salones Classics)",
+  "standard_version": "v4.0",
+  "last_updated": "2026-11-13T20:50:00Z",
+  "items": [
+    {
+      "id": "QUEUE-001",
+      "created_at": "2026-11-08T18:00:00Z",
+      "category": "MEDIA_ASSETS",
+      "level": "NIVEL_2_REQUIERE_INSUMO_HUMANO",
+      "status": "PENDIENTE",
+      "title": "Video vertical corto (MP4 10-15s) de fiesta real en Salón Diamante o Platino",
+      "description": "Opcional para reemplazar el poster estático en el modal de video recorrido y aumentar retención en visitantes móviles.",
+      "proposed_action": "Subir archivo a public/videos/ o compartir por WhatsApp para integrarlo con lazy-load en el Hero.",
+      "human_decision": null
+    },
+    {
+      "id": "QUEUE-002",
+      "created_at": "2026-11-10T16:00:00Z",
+      "category": "SEO_LOCAL_GBP",
+      "level": "NIVEL_3_EXTERNO",
+      "status": "EN_COLA_AUTORIZACION",
+      "title": "Publicación de enlace directo al Precotizador (?guests=100) en Google Business Profile",
+      "description": "Alinear la ficha de Google Maps de Salones San Pedro Plus con el nuevo mínimo de 100 invitados para aumentar el CTR orgánico local desde alcaldía GAM.",
+      "proposed_action": "Autorizar o actualizar el enlace de 'Reservar / Cotizar' en el perfil de Google Business hacia https://sanpedro.aionia.com.mx/#precotizador.",
+      "human_decision": null
+    }
+  ]
+}

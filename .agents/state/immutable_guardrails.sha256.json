@@ -1,0 +1,6 @@
+{
+  "algorithm": "SHA-256",
+  "sha256": "55cace178ac4d457e35e4971cf143f7f401258ea265bae6c42fec020183e01a8",
+  "sealed_at": "2026-11-13T20:51:02.209Z",
+  "protected_file": ".agents/rules/reglas_autonomas_proyecto.md"
+}

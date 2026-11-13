@@ -1,0 +1,12 @@
+{
+  "autonomous-cron-resumer": {
+    "enabled": true,
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "node ./scripts/session_start_resume_crons.js",
+        "timeout": 15
+      }
+    ]
+  }
+}
