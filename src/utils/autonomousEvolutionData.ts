@@ -22,6 +22,35 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.6.0-cycle45',
+    cycle_number: 45,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-13 08:11 CDMX',
+    title:
+      'Ciclo Amanecer #45 (POSTPONED): Ventana de Amanecer 04:09–08:10 CDMX Sin Tráfico Humano — Preservación de Línea Base v2.5.7 (Commit ed7cbab)',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #44 (>= 2026-11-13T10:09:24Z a 2026-11-13T14:10:40Z): 0 eventos humanos nuevos y 0 leads durante la ventana de amanecer (04:09 a 08:10 hrs CDMX). Google Search Console reporta sitemap saludable con 37 URLs enviadas y 0 errores.',
+    autonomousActions: [
+      'Auditoría en vivo de Supabase (analytics_events y leads >= 2026-11-13T10:09:24Z) y Google Search Console API (sc-domain:sanpedro.aionia.com.mx).',
+      'Decisión consciente POSTPONED bajo Estándar Maestro v2.1: se preserva intacta la versión en producción (commit ed7cbab, Coolify 1yj2jbbpfshavx9p2gccc64b) para evaluar con el tráfico matutino el input numérico directo en Paso 1, los steppers [-10/+10] en Pasos 2–3 y el CTA Above-the-Fold del Paso 4.',
+    ],
+    filesModified: [
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason:
+      'Ventana de amanecer (04:09 a 08:10 hrs CDMX) con 0 sesiones humanas nuevas. Se evita sobre-editar a ciegas antes de medir el tráfico matutino.',
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'ed7cbab',
+    deploymentUuid: '1yj2jbbpfshavx9p2gccc64b',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Evaluar con el tráfico matutino (08:11 a 12:11 hrs CDMX) la conversión en el Paso 4 y el uso de los steppers de aforo dentro del Paso 3.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.5.9-cycle44',
     cycle_number: 44,
     status: 'POSTPONED',
