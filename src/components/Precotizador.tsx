@@ -38,7 +38,7 @@ const GUEST_RANGE_CARDS = [
   { label: '200 – 250', sub: 'Gran Evento', value: 200 },
 ];
 
-const QUICK_GUEST_PRESETS = [100, 120, 150, 180, 200, 220, 250];
+const QUICK_GUEST_PRESETS = [100, 110, 120, 130, 150, 180, 200, 220, 250];
 
 const PREFERRED_DAYS = [
   {
@@ -814,20 +814,59 @@ export default function Precotizador() {
                   <span className="pointer-events-none">−10</span>
                 </button>
 
-                <div className="flex flex-col items-center select-none">
-                  <span className="text-4xl sm:text-5xl font-bold text-primary font-display-lg leading-none">
-                    {guests}
-                  </span>
-                  <span className="text-xs text-secondary font-medium mt-1">
+                <div className="flex flex-col items-center">
+                  <input
+                    type="number"
+                    min={100}
+                    max={250}
+                    step={10}
+                    data-interactive="true"
+                    aria-label="Número exacto de invitados (100 a 250)"
+                    value={guests}
+                    onChange={(e) => {
+                      const rawVal = Number(e.target.value);
+                      if (!Number.isNaN(rawVal)) {
+                        const clamped = Math.max(100, Math.min(250, rawVal));
+                        applyGuestsValue(clamped, true);
+                      }
+                    }}
+                    onClick={() => handleGuestsDelta(10 <= 250 - guests ? 10 : -10)}
+                    title="Toca para ajustar o escribe tu número de invitados (100 a 250)"
+                    className="w-28 text-center text-4xl sm:text-5xl font-bold text-primary font-display-lg leading-none bg-transparent border-b border-dashed border-primary/40 focus:border-primary focus:outline-none cursor-pointer"
+                  />
+                  <span className="text-xs text-secondary font-medium mt-1 pointer-events-none">
                     {guests === 100
                       ? 'invitados (mínimo de paquete)'
                       : guests === 250
                       ? 'invitados (máximo cotizador)'
-                      : 'invitados'}
+                      : 'invitados (toca para ajustar)'}
                   </span>
-                  <span className="mt-1.5 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/15 border border-primary/30 text-[11px] font-bold text-primary">
-                    {`Premier $${(guests * 530).toLocaleString('es-MX')} • Plus ⭐ $${(guests * 710).toLocaleString('es-MX')}`}
-                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const nextPkg = packageType === 'Premier' ? 'Plus' : 'Premier';
+                      setPackageType(nextPkg);
+                      trackEvent(
+                        'precotizador_step',
+                        `step1_badge_toggle_${nextPkg.toLowerCase()}`,
+                        {
+                          section: 'precotizador',
+                          step_number: 1,
+                          guests_range: getGuestsBucket(guests),
+                          package_name: `Paquete ${nextPkg}`,
+                          extra: {
+                            exact_guests: guests,
+                            estimated_budget: guests * (nextPkg === 'Premier' ? 530 : 710),
+                          },
+                        }
+                      );
+                    }}
+                    className="mt-1.5 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/15 hover:bg-primary/25 border border-primary/30 text-[11px] font-bold text-primary transition-colors cursor-pointer"
+                  >
+                    <span className="pointer-events-none">
+                      {`Premier $${(guests * 530).toLocaleString('es-MX')} • Plus ⭐ $${(guests * 710).toLocaleString('es-MX')}`}
+                    </span>
+                  </button>
                 </div>
 
                 <button
@@ -970,12 +1009,35 @@ export default function Precotizador() {
         ================================================================= */}
         {step === 2 && (
           <div className="animate-fade-in space-y-4">
-            <div className="p-2.5 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-between gap-2 text-xs">
-              <span className="text-on-surface font-semibold">
-                {guests} invitados • <strong>{eventKind}</strong>
-              </span>
+            <div
+              data-interactive="true"
+              className="p-2.5 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-between gap-2 text-xs"
+            >
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => handleGuestsDelta(-10)}
+                  disabled={guests <= 100}
+                  className="w-6 h-6 rounded-md bg-surface-container-highest hover:bg-primary hover:text-on-primary font-bold text-xs flex items-center justify-center cursor-pointer disabled:opacity-30"
+                  title="Restar 10 invitados"
+                >
+                  <span className="pointer-events-none">−</span>
+                </button>
+                <span className="text-on-surface font-semibold">
+                  <strong>{guests}</strong> pers. • <strong>{eventKind}</strong>
+                </span>
+                <button
+                  type="button"
+                  onClick={() => handleGuestsDelta(10)}
+                  disabled={guests >= 250}
+                  className="w-6 h-6 rounded-md bg-surface-container-highest hover:bg-primary hover:text-on-primary font-bold text-xs flex items-center justify-center cursor-pointer disabled:opacity-30"
+                  title="Sumar 10 invitados"
+                >
+                  <span className="pointer-events-none">+</span>
+                </button>
+              </div>
               <span className="text-primary font-extrabold shrink-0">
-                Desde ${(guests * 530).toLocaleString('es-MX')} MXN
+                {packageType} ${(guests * getPackagePrice()).toLocaleString('es-MX')} MXN
               </span>
             </div>
             <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-4">
@@ -1108,6 +1170,39 @@ export default function Precotizador() {
         ================================================================= */}
         {step === 3 && (
           <div className="animate-fade-in space-y-3.5">
+            {/* Barra de Ajuste Rápido de Aforo en Paso 3 (Evita back_from_3_to_1 detectado en ses_95bv7_gx4259w8 al comparar Premier vs Plus) */}
+            <div
+              data-interactive="true"
+              className="p-2.5 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-between gap-2 text-xs"
+            >
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => handleGuestsDelta(-10)}
+                  disabled={guests <= 100}
+                  className="w-7 h-7 rounded-lg bg-surface-container-highest hover:bg-primary hover:text-on-primary font-bold text-xs flex items-center justify-center cursor-pointer disabled:opacity-30"
+                  title="Restar 10 invitados"
+                >
+                  <span className="pointer-events-none">−10</span>
+                </button>
+                <span className="text-on-surface font-bold px-1">
+                  {guests} pers. • {preferredDay}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => handleGuestsDelta(10)}
+                  disabled={guests >= 250}
+                  className="w-7 h-7 rounded-lg bg-surface-container-highest hover:bg-primary hover:text-on-primary font-bold text-xs flex items-center justify-center cursor-pointer disabled:opacity-30"
+                  title="Sumar 10 invitados"
+                >
+                  <span className="pointer-events-none">+10</span>
+                </button>
+              </div>
+              <span className="text-primary font-extrabold shrink-0">
+                Total: ${budget.toLocaleString('es-MX')} MXN
+              </span>
+            </div>
+
             {/* Banner de desbloqueo a 100 invitados + Alternativa Combo VIP para 50-90 personas */}
             {guests < 100 && (
               <div className="p-3 bg-amber-500/15 border border-amber-500/40 rounded-2xl text-xs text-amber-300 flex flex-col gap-2.5 animate-fade-in">
@@ -1437,6 +1532,36 @@ export default function Precotizador() {
                   </span>
                 </div>
               </button>
+
+              {/* CTA Primario Instantáneo Above-the-Fold en Paso 4 (Convierte sesiones como ses_yjhug_1f5yj18a apenas entran al Paso 4) */}
+              <div className="mt-2.5 flex flex-col sm:flex-row gap-2">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleWhatsApp}
+                  className="flex-1 py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md transition-colors cursor-pointer"
+                >
+                  <span data-ux-decorative="true" className="material-symbols-outlined text-base pointer-events-none">
+                    forum
+                  </span>
+                  <span className="pointer-events-none">
+                    Recibir Cotización en WhatsApp
+                  </span>
+                </a>
+                <button
+                  type="button"
+                  onClick={handleCopyQuote}
+                  className="px-3.5 py-3 rounded-xl bg-surface-container-high hover:bg-surface-container-highest border border-outline-variant/40 text-on-surface font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer shrink-0"
+                >
+                  <span data-ux-decorative="true" className="material-symbols-outlined text-sm text-primary pointer-events-none">
+                    {copiedQuote ? 'check_circle' : 'content_copy'}
+                  </span>
+                  <span className="pointer-events-none">
+                    {copiedQuote ? '¡Copiada!' : 'Copiar'}
+                  </span>
+                </button>
+              </div>
 
               {/* Desglose Matemático Transparente */}
               {showMathBreakdown && (

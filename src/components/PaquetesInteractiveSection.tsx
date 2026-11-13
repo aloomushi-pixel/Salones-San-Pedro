@@ -488,9 +488,14 @@ export default function PaquetesInteractiveSection() {
             <div className="bg-surface-container-lowest text-on-surface rounded-2xl shadow-xl overflow-hidden flex flex-col justify-between border border-outline-variant/30 transition-all hover:z-30 duration-300 relative z-10 w-full md:w-[360px] flex-shrink-0">
               <div>
                 <div className="p-7 text-center bg-surface-container-low border-b border-outline-variant/30">
-                  <h3 className="font-display-lg text-3xl text-on-surface font-bold mb-1">
-                    Premier
-                  </h3>
+                  <button
+                    type="button"
+                    onClick={() => handlePreselectInCalculator('Premier')}
+                    className="block w-full font-display-lg text-3xl text-on-surface hover:text-primary font-bold mb-1 transition-colors cursor-pointer"
+                    title="Toca para personalizar Paquete Premier en el cotizador"
+                  >
+                    <span className="pointer-events-none">Premier</span>
+                  </button>
                   <button
                     type="button"
                     onClick={() => {
@@ -569,7 +574,14 @@ export default function PaquetesInteractiveSection() {
               </div>
               <div>
                 <div className="p-7 text-center bg-primary-container/10 border-b border-outline-variant/30 mt-6">
-                  <h3 className="font-display-lg text-3xl text-primary font-bold mb-1">Plus</h3>
+                  <button
+                    type="button"
+                    onClick={() => handlePreselectInCalculator('Plus')}
+                    className="block w-full font-display-lg text-3xl text-primary hover:opacity-85 font-bold mb-1 transition-opacity cursor-pointer"
+                    title="Toca para personalizar Paquete Plus en el cotizador"
+                  >
+                    <span className="pointer-events-none">Plus</span>
+                  </button>
                   <button
                     type="button"
                     onClick={() => {
@@ -661,9 +673,14 @@ export default function PaquetesInteractiveSection() {
             <div className="bg-surface-container-lowest text-on-surface rounded-2xl shadow-xl overflow-hidden flex flex-col justify-between border border-outline-variant/30 transition-all hover:z-30 duration-300 relative z-10 w-full md:w-[360px] flex-shrink-0">
               <div>
                 <div className="p-7 text-center bg-surface-container-low border-b border-outline-variant/30">
-                  <h3 className="font-display-lg text-3xl text-on-surface font-bold mb-1">
-                    All Inclusive
-                  </h3>
+                  <button
+                    type="button"
+                    onClick={() => handlePreselectInCalculator('All Inclusive')}
+                    className="block w-full font-display-lg text-3xl text-on-surface hover:text-primary font-bold mb-1 transition-colors cursor-pointer"
+                    title="Toca para personalizar Paquete All Inclusive en el cotizador"
+                  >
+                    <span className="pointer-events-none">All Inclusive</span>
+                  </button>
                   <button
                     type="button"
                     onClick={() => {
@@ -817,25 +834,32 @@ export default function PaquetesInteractiveSection() {
 
               {/* Columna Derecha: Ubicación Exacta en GAM y Botón de Mapa / Recorrido */}
               <div className="lg:col-span-4 bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-5 flex flex-col justify-between space-y-4">
-                <div className="flex items-start gap-3">
+                <TrackedLink
+                  eventType="footer_click"
+                  source="google_maps_midpage_header"
+                  href="https://maps.app.goo.gl/oarkXjctGWr5d4J96?g_st=ac"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 group hover:opacity-95 transition-opacity"
+                >
                   <span
                     data-ux-decorative="true"
-                    className="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5"
+                    className="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5 pointer-events-none"
                   >
                     location_on
                   </span>
-                  <div>
+                  <div className="pointer-events-none">
                     <span className="text-[10px] font-bold uppercase tracking-widest text-primary block">
                       Ubicación Estratégica Norte CDMX
                     </span>
-                    <h4 className="font-display-lg text-base font-bold text-on-surface">
-                      Alcaldía Gustavo A. Madero
+                    <h4 className="font-display-lg text-base font-bold text-on-surface group-hover:text-primary transition-colors">
+                      Alcaldía Gustavo A. Madero ↗
                     </h4>
                     <p className="text-xs text-secondary mt-1 leading-relaxed">
                       Calle Nte 84 No. 6507, Col. San Pedro el Chico, CP 07800, CDMX. A 5 min de Eduardo Molina y Circuito Interior.
                     </p>
                   </div>
-                </div>
+                </TrackedLink>
 
                 <div className="flex flex-col sm:flex-row lg:flex-col gap-2">
                   <TrackedLink
