@@ -4,6 +4,26 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #47 — `2026-11-13 17:20 CDMX` (`v2.6.2-cycle47` — `IMPLEMENTED` • Estándar Maestro v4.0)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-13T18:24:20Z` a `2026-11-13T23:15:45Z`)
+- **Verificación Criptográfica Previa (`SHA-256`):** `[VERIFIED] 55cace178ac4d457e35e4971cf143f7f401258ea265bae6c42fec020183e01a8`.
+- **Telemetría en Supabase (`23` eventos humanos reales en `3` sesiones con `0` `dead_clicks` y `0` `rage_clicks`):**
+  1. **Monitor `web_vitals -> seo_audit` en las 3 sesiones (`ses_bv4a2_s3ihulvg`, `ses_ehv9g_eksbku49`, `ses_kzrmr_os26co05`):** Reportó `title_len: 64` (superando el límite `< 60c` del Estándar v4.0) e `img_missing_alt: 1` (originado por el `alt=""` del preload de galería). Además, se detectó que el Schema `EventVenue`/`FAQPage` JSON-LD en `layout.tsx` y `llms.txt` / `llms-full.txt` aún mencionaban `50 personas` como mínimo en lugar del nuevo mínimo oficial de `100 personas`.
+  2. **`ses_ehv9g_eksbku49` (Benito Juárez CDMX, Mobile `428x723`):** Tocó `step1_preview_pkg_premier` (`100 personas`, `$53,000 MXN`) en el Paso 1 a `scroll: 9%`; en móvil el botón de avance quedaba debajo del pliegue y las 3 minitarjetas no desplegaban qué incluye el paquete elegido.
+  3. **`ses_bv4a2_s3ihulvg` (CDMX, Mobile `375x619`):** Tocó `hero_click -> badge_ubicacion_gam` y permaneció `13s` en `#ubicacion` (su sección de mayor lectura).
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/app/layout.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/layout.tsx), [`src/app/llms.txt/route.ts`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/llms.txt/route.ts) y [`src/app/llms-full.txt/route.ts`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/llms-full.txt/route.ts)**:
+   - Se optimizó `<title>` a `55` caracteres (`< 60c`) y `<meta description>` a `154` caracteres (`< 160c`), logrando paridad `1:1` entre UI, Schema `EventVenue`/`FAQPage` JSON-LD y `llms.txt`/`llms-full.txt` con el mínimo oficial de `100 personas` (`Premier $53,000`, `Plus $71,000`, `All Inclusive $101,000`).
+2. **[`src/components/GaleriaSection.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/GaleriaSection.tsx)**:
+   - Se añadió atributo `alt` descriptivo a la imagen de preload para restablecer `img_missing_alt = 0` (`100%` cobertura en las `34` imágenes).
+3. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx) y [`src/app/page.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/page.tsx)**:
+   - En el Paso 1 del Precotizador, debajo de las 3 minitarjetas de paquetes se muestra ahora en vivo la barra de inclusiones del paquete activo junto con el botón directo `"Cotizar {packageType} →"` Above-the-Fold.
+   - En `#ubicacion`, se colocó al inicio del bloque la tarjeta ejecutiva con botón directo a **Ruta en Google Maps**, **Simular Presupuesto ↑** y **Agendar Visita / WhatsApp**.
+
+---
+
 ## Ciclo Autónomo #46 — `2026-11-13 12:18 CDMX` (`v2.6.1-cycle46` — `IMPLEMENTED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-13T14:13:00Z` a `2026-11-13T18:14:36Z`)

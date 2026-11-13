@@ -22,6 +22,41 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.6.2-cycle47',
+    cycle_number: 47,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-13 17:20 CDMX',
+    title:
+      'Ciclo Vespertino #47 (IMPLEMENTED — Estándar v4.0): Paridad 1:1 SEO/GEO (Title <60c, 0 Missing Alts, Schema JSON-LD y llms.txt desde 100 Personas), Resumen Instantáneo en Paso 1 Móvil y Banda Superior de Ubicación en #ubicacion',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #46 (>= 2026-11-13T18:24:20Z a 2026-11-13T23:15:45Z): 23 eventos humanos reales en 3 sesiones (ses_bv4a2_s3ihulvg en Mobile 375x619, ses_ehv9g_eksbku49 en Mobile 428x723 y ses_kzrmr_os26co05 en Desktop 1366x633) con 0 dead_clicks y 0 rage_clicks. Hallazgos: 1) El monitor web_vitals -> seo_audit detectó title_len: 64 (>60c) e img_missing_alt: 1 en la imagen preload de Galería. 2) En ses_ehv9g_eksbku49 (Mobile 428x723), el usuario tocó step1_preview_pkg_premier (100 pers., $53,000) a scroll 9% sin ver inclusiones ni CTA Above-the-Fold. 3) En ses_bv4a2_s3ihulvg (Mobile 375x619), el usuario tocó hero_click -> badge_ubicacion_gam y permaneció 13s en #ubicacion.',
+    autonomousActions: [
+      'En src/app/layout.tsx, src/app/llms.txt/route.ts y src/app/llms-full.txt/route.ts: se optimizó <title> a 55 caracteres (<60c) y <meta description> a 154 caracteres (<160c), y se sincronizó 1:1 el Schema EventVenue/FAQPage JSON-LD y los catálogos GEO (llms.txt / llms-full.txt) con el aforo mínimo oficial de 100 personas (Premier $53,000, Plus $71,000, All Inclusive $101,000).',
+      'En src/components/GaleriaSection.tsx: se añadió atributo alt descriptivo a la imagen de preload para restaurar img_missing_alt = 0 (100% de cobertura en las 34 imágenes de /).',
+      'En src/components/Precotizador.tsx (Paso 1) y src/app/page.tsx (#ubicacion): se agregó barra instantánea de inclusiones + botón "Cotizar Paquete →" debajo de las 3 tarjetas de vista previa en Paso 1 móvil, y se reubicó la banda ejecutiva de Google Maps + WhatsApp + Simulador al inicio de #ubicacion.',
+    ],
+    filesModified: [
+      'src/app/layout.tsx',
+      'src/app/llms.txt/route.ts',
+      'src/app/llms-full.txt/route.ts',
+      'src/components/GaleriaSection.tsx',
+      'src/components/Precotizador.tsx',
+      'src/app/page.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío bajo los 2 Loops v4.0.',
+    commitHash: '549de89',
+    deploymentUuid: 'coolify-auto-cycle47',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'El próximo pulso de seo_audit en web_vitals reportará title_len <= 55 e img_missing_alt = 0, mientras que el resumen + CTA Above-the-Fold del Paso 1 aumentará el paso de step1_preview_pkg_* a step_1_completado en pantallas móviles.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.6.1-cycle46',
     cycle_number: 46,
     status: 'IMPLEMENTED',
