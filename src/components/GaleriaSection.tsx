@@ -121,6 +121,14 @@ export default function GaleriaSection() {
   const [diamanteIndex, setDiamanteIndex] = useState(0);
   const [platinoIndex, setPlatinoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [userPausedAutoScroll, setUserPausedAutoScroll] = useState(false);
+
+  // Estado sincronizado con el Precotizador (sessionStorage + evento en vivo) para convertir usuarios como ses_9pg0p_leigmtcj que bajan a ver fotos tras cotizar
+  const [syncedGuests, setSyncedGuests] = useState(100);
+  const [syncedEventKind, setSyncedEventKind] = useState('Evento');
+  const [syncedDay, setSyncedDay] = useState('Viernes / Sábado');
+  const [syncedPkg, setSyncedPkg] = useState('Premier');
+  const [hasActiveDraft, setHasActiveDraft] = useState(false);
 
   const touchStartXRef = useRef<number | null>(null);
 
@@ -128,8 +136,56 @@ export default function GaleriaSection() {
   const activeIndex = activeTab === 'diamante' ? diamanteIndex : platinoIndex;
   const canonicalCategory = activeTab === 'diamante' ? 'Salón Diamante' : 'Salón Platino';
 
+  const syncedUnitPrice =
+    syncedPkg === 'Premier' ? 530 : syncedPkg === 'All Inclusive' ? 1010 : 710;
+  const syncedTotal = syncedGuests * syncedUnitPrice;
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const readDraft = () => {
+      try {
+        const raw = window.sessionStorage.getItem('sanpedro_precotizador_draft_v1');
+        if (raw) {
+          const saved = JSON.parse(raw);
+          if (typeof saved.guests === 'number' && saved.guests >= 100 && saved.guests <= 250) {
+            setSyncedGuests(saved.guests);
+          }
+          if (typeof saved.eventKind === 'string' && saved.eventKind) {
+            setSyncedEventKind(saved.eventKind);
+          }
+          if (typeof saved.preferredDay === 'string' && saved.preferredDay) {
+            setSyncedDay(saved.preferredDay);
+          }
+          if (typeof saved.packageType === 'string' && saved.packageType) {
+            setSyncedPkg(saved.packageType);
+          }
+          if ((saved.step && saved.step >= 2) || saved.hasTouchedGuests) {
+            setHasActiveDraft(true);
+          }
+        }
+      } catch {
+        // Ignorar errores de sessionStorage
+      }
+    };
+    readDraft();
+
+    const onSync = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (detail) {
+        if (typeof detail.guests === 'number') setSyncedGuests(Math.max(100, detail.guests));
+        if (typeof detail.eventKind === 'string') setSyncedEventKind(detail.eventKind);
+        if (typeof detail.preferredDay === 'string') setSyncedDay(detail.preferredDay);
+        if (typeof detail.packageType === 'string') setSyncedPkg(detail.packageType);
+        setHasActiveDraft(true);
+      }
+    };
+    window.addEventListener('ssp:sync-from-precotizador', onSync);
+    return () => window.removeEventListener('ssp:sync-from-precotizador', onSync);
+  }, []);
+
   const setActiveIndex = useCallback(
     (index: number) => {
+      setUserPausedAutoScroll(true);
       if (activeTab === 'diamante') {
         setDiamanteIndex(index);
       } else {
@@ -142,6 +198,7 @@ export default function GaleriaSection() {
   const handleNext = useCallback(
     (e?: React.MouseEvent) => {
       if (e) e.stopPropagation();
+      setUserPausedAutoScroll(true);
       if (activeTab === 'diamante') {
         if (diamanteIndex === diamantePhotos.length - 1) {
           setActiveTab('platino');
@@ -190,6 +247,7 @@ export default function GaleriaSection() {
   const handlePrev = useCallback(
     (e?: React.MouseEvent) => {
       if (e) e.stopPropagation();
+      setUserPausedAutoScroll(true);
       if (activeTab === 'diamante') {
         if (diamanteIndex === 0) {
           setActiveTab('platino');
@@ -236,6 +294,7 @@ export default function GaleriaSection() {
   );
 
   const openLightbox = () => {
+    setUserPausedAutoScroll(true);
     setLightboxOpen(true);
     trackEvent('gallery_interaction', `lightbox_open_${activeTab}`, {
       section: 'galeria',
@@ -262,18 +321,18 @@ export default function GaleriaSection() {
     }
   };
 
-  // Auto-scroll cada 7 segundos (pausado cuando el visor Lightbox está abierto)
+  // Auto-scroll cada 7 segundos (pausado cuando el usuario navega manualmente o abre el Lightbox; evita el salto/reset detectado en ses_9pg0p_leigmtcj)
   useEffect(() => {
-    if (lightboxOpen) return;
-    const timer = setInterval(() => {
+    if (lightboxOpen || userPausedAutoScroll) return;
+    const timer = setTimeout(() => {
       if (activeTab === 'diamante') {
         setDiamanteIndex((prev) => (prev + 1) % diamantePhotos.length);
       } else {
         setPlatinoIndex((prev) => (prev + 1) % platinoPhotos.length);
       }
     }, 7000);
-    return () => clearInterval(timer);
-  }, [activeTab, lightboxOpen]);
+    return () => clearTimeout(timer);
+  }, [activeTab, diamanteIndex, platinoIndex, lightboxOpen, userPausedAutoScroll]);
 
   // Navegación con teclado dentro del Lightbox
   useEffect(() => {
@@ -357,6 +416,15 @@ export default function GaleriaSection() {
             src={photos[activeIndex].src}
             alt={photos[activeIndex].alt}
             className="object-cover transition-transform duration-500 group-hover/frame:scale-105 pointer-events-none"
+            fill
+            sizes="(max-width: 1024px) 100vw, 1024px"
+          />
+          {/* Preload silencioso de la siguiente imagen para transición instantánea al pulsar Siguiente */}
+          <Image
+            src={photos[(activeIndex + 1) % photos.length].src}
+            alt=""
+            aria-hidden="true"
+            className="opacity-0 pointer-events-none"
             fill
             sizes="(max-width: 1024px) 100vw, 1024px"
           />
@@ -470,16 +538,29 @@ export default function GaleriaSection() {
           </button>
         </div>
 
-        {/* Barra de Conversión Inline bajo el Carrusel de Galería (Convierte sesiones como ses_7v211_cjcn9adx que navegan las fotos sin abrir Lightbox) */}
+        {/* Barra de Conversión Inline bajo el Carrusel de Galería (Sincronizada con el Precotizador para convertir sesiones como ses_9pg0p_leigmtcj y ses_7v211_cjcn9adx) */}
         <div className="mt-4 pt-4 border-t border-outline-variant/30 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="text-center sm:text-left">
             <span className="text-xs font-extrabold uppercase tracking-wider text-primary block">
               {activeTab === 'diamante'
                 ? '✨ Salón Diamante • Ideal de 100 a 250+ Invitados (Pista LED y Techo Estrellado)'
-                : '✨ Salón Platino • Ideal de 50 a 180 Invitados (Pista LED, Mampara Shimmer y Gala)'}
+                : '✨ Salón Platino • Ideal de 100 a 180 Invitados (Pista LED, Mampara Shimmer y Gala)'}
             </span>
             <p className="text-xs text-secondary mt-0.5">
-              Paquetes Todo Incluido desde <strong className="text-on-surface">$530 MXN por persona</strong> en Calle Norte 84, Gustavo A. Madero, CDMX.
+              {hasActiveDraft ? (
+                <>
+                  Tu cotización activa:{' '}
+                  <strong className="text-on-surface">
+                    {syncedEventKind} • {syncedGuests} pers. ({syncedDay}) • Paquete {syncedPkg}: $
+                    {syncedTotal.toLocaleString('es-MX')} MXN
+                  </strong>
+                </>
+              ) : (
+                <>
+                  Paquetes Todo Incluido para <strong>{syncedGuests} personas</strong> desde{' '}
+                  <strong className="text-on-surface">$53,000 MXN ($530 p/p)</strong> en Calle Norte 84, GAM, CDMX.
+                </>
+              )}
             </p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-2 w-full sm:w-auto shrink-0">
@@ -490,6 +571,9 @@ export default function GaleriaSection() {
                   section: 'galeria',
                   gallery_category: canonicalCategory,
                   photo_title: photos[activeIndex]?.caption,
+                  guests_range: `${syncedGuests} personas`,
+                  package_name: `Paquete ${syncedPkg}`,
+                  extra: { exact_guests: syncedGuests, estimated_budget: syncedTotal },
                 });
                 const el =
                   document.getElementById('precotizador') ||
@@ -498,11 +582,17 @@ export default function GaleriaSection() {
               }}
               className="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-primary text-on-primary font-extrabold text-xs uppercase tracking-wider shadow-md hover:opacity-95 transition-opacity cursor-pointer"
             >
-              <span className="pointer-events-none">Cotizar en {canonicalCategory} ↑</span>
+              <span className="pointer-events-none">
+                {hasActiveDraft
+                  ? `Ver mi Cotización ($${syncedTotal.toLocaleString('es-MX')}) ↑`
+                  : `Cotizar en ${canonicalCategory} ↑`}
+              </span>
             </button>
             <a
               href={`https://wa.me/526633670431?text=${encodeURIComponent(
-                `¡Hola Salones San Pedro Plus! Estuve viendo las fotos del ${canonicalCategory} en su galería web y me gustaría cotizar mi evento o agendar una visita.`
+                hasActiveDraft
+                  ? `¡Hola Salones San Pedro Plus! Estuve viendo las fotos del ${canonicalCategory} y armé mi pre-cotización web para ${syncedEventKind} (${syncedGuests} invitados, día ${syncedDay}, Paquete ${syncedPkg}: $${syncedTotal.toLocaleString('es-MX')} MXN). ¿Me confirman disponibilidad y agendamos visita?`
+                  : `¡Hola Salones San Pedro Plus! Estuve viendo las fotos del ${canonicalCategory} en su galería web y me gustaría cotizar mi evento (${syncedGuests} invitados) o agendar una visita.`
               )}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -511,11 +601,16 @@ export default function GaleriaSection() {
                   section: 'galeria',
                   gallery_category: canonicalCategory,
                   photo_title: photos[activeIndex]?.caption,
+                  guests_range: `${syncedGuests} personas`,
+                  package_name: `Paquete ${syncedPkg}`,
+                  extra: { exact_guests: syncedGuests, estimated_budget: syncedTotal },
                 })
               }
               className="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-[#25D366] text-white font-extrabold text-xs uppercase tracking-wider text-center shadow-md hover:opacity-95 transition-opacity"
             >
-              Agendar Visita
+              {hasActiveDraft
+                ? `WhatsApp: ${canonicalCategory} ($${syncedTotal.toLocaleString('es-MX')})`
+                : 'Agendar Visita en WhatsApp'}
             </a>
           </div>
         </div>

@@ -240,6 +240,7 @@ export default function Precotizador() {
         new CustomEvent('ssp:sync-from-precotizador', {
           detail: {
             guests,
+            eventKind,
             preferredDay,
             packageType,
           },
@@ -1198,9 +1199,16 @@ export default function Precotizador() {
                   <span className="pointer-events-none">+10</span>
                 </button>
               </div>
-              <span className="text-primary font-extrabold shrink-0">
-                Total: ${budget.toLocaleString('es-MX')} MXN
-              </span>
+              <button
+                type="button"
+                onClick={handleStep3Next}
+                className="text-primary font-extrabold shrink-0 bg-primary/15 hover:bg-primary hover:text-on-primary px-2.5 py-1 rounded-lg transition-colors cursor-pointer"
+                title="Ver desglose y cotización final"
+              >
+                <span className="pointer-events-none">
+                  Total: ${budget.toLocaleString('es-MX')} MXN →
+                </span>
+              </button>
             </div>
 
             {/* Banner de desbloqueo a 100 invitados + Alternativa Combo VIP para 50-90 personas */}
@@ -1267,6 +1275,10 @@ export default function Precotizador() {
                     type="button"
                     onClick={() => {
                       if (isAvailable) {
+                        if (isSelected) {
+                          handleStep3Next();
+                          return;
+                        }
                         setPackageType(pkg.id);
                         setLockedAttemptPkg(null);
                         trackEvent(
@@ -1347,6 +1359,12 @@ export default function Precotizador() {
                         </span>
                       ))}
                     </div>
+
+                    {isSelected && isAvailable && (
+                      <div className="mt-2 pl-7 pointer-events-none flex items-center justify-between text-[11px] font-extrabold text-primary">
+                        <span>✓ Paquete seleccionado • Toca de nuevo para ver tu cotización →</span>
+                      </div>
+                    )}
                   </button>
                 );
               })}
@@ -1381,6 +1399,31 @@ export default function Precotizador() {
                 </span>
               </a>
             </div>
+
+            {/* Puente Directo a la Galería desde Paso 3 conservando la cotización (Atiende ses_9pg0p_leigmtcj que recargó la página para ir a #galeria) */}
+            <button
+              type="button"
+              onClick={() => {
+                trackEvent('gallery_interaction', 'precotizador_step3_to_galeria', {
+                  section: 'precotizador',
+                  step_number: 3,
+                  guests_range: getGuestsBucket(guests),
+                  package_name: `Paquete ${packageType}`,
+                  event_kind: eventKind,
+                  preferred_day: preferredDay,
+                  extra: { exact_guests: guests, estimated_budget: budget },
+                });
+                document.getElementById('galeria')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              className="w-full py-2 px-3 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high border border-outline-variant/40 text-xs font-bold text-on-surface flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+            >
+              <span data-ux-decorative="true" className="material-symbols-outlined text-primary text-base pointer-events-none">
+                photo_library
+              </span>
+              <span className="pointer-events-none">
+                Ver fotos de Salones Diamante y Platino (tu cotización se guarda) ↓
+              </span>
+            </button>
 
             {/* NUEVO FRENTE 4.2: COMBO FIESTA VIP (Limusina + Carrito de Shots + Letras Gigantes) */}
             {packageType !== 'All Inclusive' && (
@@ -1757,6 +1800,31 @@ export default function Precotizador() {
                     Quiero agendar visita guiada a los <strong>Salones Diamante y Platino</strong> (sin compromiso)
                   </span>
                 </div>
+              </button>
+
+              {/* Puente Directo a la Galería desde Paso 4 sin perder la cotización */}
+              <button
+                type="button"
+                onClick={() => {
+                  trackEvent('gallery_interaction', 'precotizador_step4_to_galeria', {
+                    section: 'precotizador',
+                    step_number: 4,
+                    guests_range: getGuestsBucket(guests),
+                    package_name: `Paquete ${packageType}`,
+                    event_kind: eventKind,
+                    preferred_day: preferredDay,
+                    extra: { exact_guests: guests, estimated_budget: budget },
+                  });
+                  document.getElementById('galeria')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                className="mt-2 w-full py-2 px-3 rounded-xl bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/40 text-xs font-bold text-on-surface flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+              >
+                <span data-ux-decorative="true" className="material-symbols-outlined text-primary text-base pointer-events-none">
+                  photo_library
+                </span>
+                <span className="pointer-events-none">
+                  Ver fotos de Salones Diamante y Platino (tu cotización se conserva) ↓
+                </span>
               </button>
             </div>
 
