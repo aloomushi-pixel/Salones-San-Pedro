@@ -22,6 +22,38 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.5.7-cycle42',
+    cycle_number: 42,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-12 20:00 CDMX',
+    title:
+      'Ciclo Autónomo #42: Input Numérico Directo en Aforo (Resuelve Rage Click en 100/120), Steppers de Aforo en Pasos 2–3, CTA Above-the-Fold en Paso 4 y Títulos Interactivos en #paquetes',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #41 (>= 2026-11-12T21:54:59Z a 2026-11-13T01:55:16Z): 239 eventos humanos reales en 6 sesiones con 4 conversiones (whatsapp_click: floating_button y cotizar_click: paquete_plus, paquete_premier, paquete_all_inclusive) y validación inmediata del nuevo 4to Tiempo en #banquetes (menu_card_swipe: next_4to Tiempo y Tornafiesta, 0 dead_clicks en #banquetes). Fricciones puntuales detectadas: (1) En ses_95bv7_gx4259w8 (Coyoacán CDMX, Desktop 1536x695, 26 min activos), el usuario regresó del Paso 3 al Paso 1 dos veces (back_from_3_to_2 -> back_from_2_to_1 y back_from_3_to_1) para cambiar entre 100, 110, 120 y 130 invitados mientras comparaba Premier vs Plus, e hizo rage_click sobre el número "100" y "120" intentando editar el número directamente; (2) En ses_8q0mk_snsw2g9n (Pachuca, Mobile 360x637), ocurrió 1 dead_click en la píldora "Premier $53,000 • Plus ⭐ $71,000"; (3) En ses_yjhug_1f5yj18a, ocurrieron 2 dead_clicks en los títulos "All Inclusive" y "Premier" en #paquetes y el usuario llegó a step_3_completado (Empresarial, 100 pers., Viernes, Plus + Letras + Mariachi = $81,000 MXN); (4) En ses_6hwb0_szleo9i5 (GAM, Mobile), 1 dead_click en "Alcaldía Gustavo A. Madero" antes de tocar Abrir en Google Maps.',
+    autonomousActions: [
+      'En Precotizador.tsx (Paso 1): conversión del indicador numérico {guests} en un <input type="number" min={100} max={250} step={10}> interactivo + chips rápidos 110 y 130 + píldora superior "Premier • Plus ⭐" convertida en botón interactivo (elimina dead_click y rage_click en "100" y "120").',
+      'En Precotizador.tsx (Pasos 2 y 3): adición de barra interactiva de ajuste rápido de aforo ([-10] {guests} pers. [+10]) en la cabecera de los Pasos 2 y 3 para que el usuario compare Premier vs Plus con 100, 110, 120 o 130 invitados sin tener que regresar al Paso 1.',
+      'En Precotizador.tsx (Paso 4): incorporación de fila de conversión primaria Above-the-Fold ("Recibir Cotización en WhatsApp" + "Copiar") inmediatamente debajo del monto total estimado ($budget MXN).',
+      'En PaquetesInteractiveSection.tsx: títulos "Premier", "Plus" y "All Inclusive" convertidos en botones interactivos que preseleccionan el paquete en el cotizador, y bloque "Alcaldía Gustavo A. Madero" enlazado directamente a Google Maps.',
+    ],
+    filesModified: [
+      'src/components/Precotizador.tsx',
+      'src/components/PaquetesInteractiveSection.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'ed7cbab',
+    deploymentUuid: 'coolify-auto-cycle42',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Con el input numérico interactivo en el Paso 1, los steppers [-10/+10] dentro del Paso 3 y el botón de WhatsApp Above-the-Fold en el Paso 4, esperamos 0 rage_clicks en el número de invitados, reducción de back_from_3_to_1 y mayor tasa de cierre en el Paso 4.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.5.6-cycle41',
     cycle_number: 41,
     status: 'IMPLEMENTED',
