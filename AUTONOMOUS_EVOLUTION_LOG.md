@@ -4,6 +4,28 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #46 — `2026-11-13 12:18 CDMX` (`v2.6.1-cycle46` — `IMPLEMENTED`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-13T14:13:00Z` a `2026-11-13T18:14:36Z`)
+- **Telemetría en Supabase (`52` eventos humanos reales en `ses_9pg0p_leigmtcj`, Delegación Iztapalapa, CDMX, Desktop `1536x730`, `0` `dead_clicks`, `0` `rage_clicks`):**
+  1. **Avance al Tocar Paquete Preseleccionado en Paso 3 + Necesidad de Ver Fotos de los Salones (`#precotizador` → `#galeria`):**
+     - En el Paso 1 (`17:50:57Z`), el usuario seleccionó la vista previa de **Paquete Premier (`$53,000 MXN` para `100` personas)** (`step1_preview_pkg_premier`), completó el Paso 1 (`Graduación`, `step_1_completado`) y el Paso 2 (`Viernes`, `step_2_completado`).
+     - Al llegar al Paso 3 (`17:52:01Z`), `Paquete Premier` ya estaba seleccionado; el usuario hizo clic sobre la tarjeta `Premier` (`select_pkg_premier`) esperando confirmar y abrir el resumen de cotización, y luego recargó la página (`17:52:08Z`) para pulsar inmediatamente `hero_click -> ver_galeria` (`17:52:14Z`) e inspeccionar las fotografías de los salones antes de enviar su cotización.
+  2. **Condición de Carrera en el Auto-Scroll de `7` Segundos en `#galeria` (`GaleriaSection.tsx`):**
+     - Al recorrer manualmente las fotografías de Salón Diamante (`17:52:24Z` a `17:52:38Z`), el `setInterval` de `7` segundos (que no se pausaba ni reiniciaba al hacer clic manual en `Siguiente`) disparó en segundo plano: primero saltó `diamante_6` y, justo cuando el usuario estaba en la foto `10/10` (`Montaje de Mesa para Quince Años`, `17:52:32.917Z`), reinició `diamanteIndex` de `9` a `0` antes del siguiente clic del usuario (`17:52:34.067Z`), obligándolo a hacer `8` clics rápidos adicionales para alcanzar la transición automática a Salón Platino (`next_platino_auto_from_diamante`).
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx`):** Sitemap saludable con `37` URLs enviadas y `0` errores.
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/components/GaleriaSection.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/GaleriaSection.tsx)**:
+   - Se eliminó la condición de carrera del `setInterval` de `7` segundos pausando el auto-scroll en cuanto el usuario interactúa manualmente (`userPausedAutoScroll = true`) y reiniciando el temporizador tras cada cambio de foto.
+   - Se agregó preload silencioso de la siguiente imagen del carrusel para transiciones instantáneas sin latencia de red.
+   - Se sincronizó la barra inferior de conversión de la galería con el borrador activo del Precotizador (`sessionStorage` + evento `ssp:sync-from-precotizador`), mostrando la cotización activa del visitante (*ej. `Graduación • 100 pers. (Viernes) • Paquete Premier: $53,000 MXN`*) y botones personalizados para enviar esa cotización + el salón elegido por WhatsApp o volver al cotizador.
+2. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx)**:
+   - En el Paso 3, hacer clic sobre una tarjeta de paquete que ya está seleccionada avanza directamente al Paso 4 (`handleStep3Next()`) con indicador visual explícito (`"✓ Paquete seleccionado • Toca de nuevo para ver tu cotización →"`), y el monto total de la barra superior es clicable.
+   - Se agregó en los Pasos 3 y 4 el botón directo `"Ver fotos de Salones Diamante y Platino (tu cotización se guarda) ↓"` que desplaza suavemente hacia `#galeria`.
+
+---
+
 ## Ciclo Autónomo #45 — `2026-11-13 08:11 CDMX` (`v2.6.0-cycle45` — `POSTPONED`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-13T10:09:24Z` a `2026-11-13T14:10:40Z`)

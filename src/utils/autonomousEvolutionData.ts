@@ -22,6 +22,37 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.6.1-cycle46',
+    cycle_number: 46,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-13 12:18 CDMX',
+    title:
+      'Ciclo Mediodía #46 (IMPLEMENTED): Eliminación de Condición de Carrera en Auto-Scroll de Galería, Avance Directo al Tocar Paquete Preseleccionado en Paso 3 y Sincronización Bidireccional Precotizador ↔ Galería',
+    vectors: ['UX', 'CRO', 'PERF'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #45 (>= 2026-11-13T14:13:00Z a 2026-11-13T18:14:36Z): 52 eventos humanos reales en ses_9pg0p_leigmtcj (Delegación Iztapalapa, CDMX | Desktop 1536x730 | 0 dead_clicks | 0 rage_clicks). El usuario preseleccionó Paquete Premier ($53,000) en Paso 1, completó Paso 1 (Graduación, 100 pers.) y Paso 2 (Viernes), y en Paso 3 hizo clic en la tarjeta Premier ya seleccionada (select_pkg_premier) esperando avanzar al resumen; al no avanzar, recargó la página para pulsar ver_galeria y recorrió las 20 fotos de Salón Diamante (16 clics en next_diamante por interferencia del setInterval de 7s que saltó diamante_6 y reinició el índice de 9 a 0 antes del clic 8) y Salón Platino (8 clics en next_platino).',
+    autonomousActions: [
+      'En GaleriaSection.tsx: se eliminó la condición de carrera del setInterval de 7 segundos pausando el auto-scroll en cuanto el usuario interactúa manualmente (userPausedAutoScroll = true) y reiniciando el temporizador tras cada cambio de foto, evitando saltos de fotografías o reinicios de la foto 10 a la 1.',
+      'En GaleriaSection.tsx: se agregó preload silencioso de la siguiente fotografía del carrusel y se sincronizó la barra inferior de conversión con el borrador activo del Precotizador (sessionStorage + evento ssp:sync-from-precotizador), mostrando el resumen personalizado (ej. Graduación • 100 pers. Viernes • Paquete Premier: $53,000 MXN) y CTAs directos de WhatsApp y retorno al cotizador.',
+      'En Precotizador.tsx: en el Paso 3, tocar una tarjeta de paquete que ya estaba seleccionada avanza directamente al Paso 4 (handleStep3Next) con indicador visual explícito, el total de la barra superior es clicable y se añadió un puente directo en Pasos 3 y 4 para bajar a ver la Galería de Salones Diamante y Platino conservando la cotización.',
+    ],
+    filesModified: [
+      'src/components/GaleriaSection.tsx',
+      'src/components/Precotizador.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: 'Ninguna — el agente continúa operando en libre albedrío.',
+    commitHash: 'e7dd147',
+    deploymentUuid: 'coolify-auto-cycle46',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'La pausa automática del auto-scroll al navegar manualmente en #galeria eliminará los clics repetidos por salto de índice, mientras que el puente bidireccional Precotizador ↔ Galería y el avance al tocar el paquete ya seleccionado en el Paso 3 convertirán las sesiones que inspeccionan fotos tras pre-cotizar.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.6.0-cycle45',
     cycle_number: 45,
     status: 'POSTPONED',
