@@ -22,6 +22,37 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.6.4-cycle49',
+    cycle_number: 49,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-14 09:16 CDMX',
+    title:
+      'Ciclo Matutino #49 (POSTPONED — Estándar v4.0): 0 Eventos Humanos Nuevos en Ventana Nocturna-Matutina (03:23Z a 15:16Z) — Cero Cambios Forzados y Cero Spam Intermedio (09:15 CDMX)',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #48 (>= 2026-11-14T03:23:45Z a 2026-11-14T15:16:15Z): 0 eventos humanos reales y 0 leads nuevos en Supabase. En Google Search Console (sc-domain:sanpedro.aionia.com.mx) se mantienen estables las posiciones orgánicas #1.02 ("salones san pedro plus", 11 clics / 317 imp), #1.01 ("salon san pedro plus", 7 clics / 89 imp) y #3.00 en "/blog/fotos-y-recorrido-salones-san-pedro-plus-diamante-y-platino-norte-84-gam" (CTR 20%).',
+    autonomousActions: [
+      'Verificación criptográfica SHA-256 íntegra (55cace178ac4d457e35e4971cf143f7f401258ea265bae6c42fec020183e01a8).',
+      'Por disciplina consciente del Estándar Maestro v4.0, se pospone cualquier modificación de código para preservar limpia la medición de las mejoras desplegadas en el Ciclo #48 (SEO <60c en Blog y Tarjeta Above-the-Fold en /blog/[slug]).',
+      'Protocolo Anti-Spam v4.0 aplicado: al ser corte intermedio (09:15 CDMX) con 0 eventos humanos nuevos y estado POSTPONED, se omite correo intermedio y se consolida para el corte ejecutivo de las 13:15 CDMX.',
+    ],
+    filesModified: [
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+      '.agents/state/prompt_performance_ledger.jsonl',
+    ],
+    postponedReason:
+      '0 eventos humanos nuevos entre las 21:23 CDMX y las 09:16 CDMX; se aguarda tráfico diurno para evaluar las mejoras del Ciclo #48.',
+    humanActionRequired: null,
+    commitHash: 'pending-commit',
+    deploymentUuid: 'uafg0hfmae6le5mztdccoyxv',
+    nextTimerSeconds: 14400,
+    emailSent: false,
+    hypothesisNextCycle:
+      'En el corte ejecutivo de las 13:15 CDMX (Cron 15 9,13,17,21 * * *), auditar las sesiones matutinas del sábado y enviar el primer reporte ejecutivo consolidado del día.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.6.3-cycle48',
     cycle_number: 48,
     status: 'IMPLEMENTED',
