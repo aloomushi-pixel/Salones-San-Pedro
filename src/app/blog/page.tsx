@@ -1,9 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "../../components/Header";
 import { BLOG_POSTS } from "@/utils/blogData";
 import Image from "next/image";
 import TrackedLink from "../../components/TrackedLink";
 import LegalModals from "../../components/LegalModals";
+
+export const metadata: Metadata = {
+  title: "Blog de Eventos y Salones en GAM CDMX | San Pedro Plus",
+  description:
+    "Guía de precios 2026, paquetes desde 100 personas ($530 p/p), bodas, XV años y salones todo incluido en Gustavo A. Madero, CDMX.",
+  alternates: {
+    canonical: "https://sanpedro.aionia.com.mx/blog",
+  },
+};
 
 export default function BlogPage() {
   const SERVICIOS_EXTRAS = ["Servicios Plus", "Bebidas", "Show", "Música"];

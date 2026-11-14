@@ -29,17 +29,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const seoTitle =
-    post.title.length <= 36
-      ? `${post.title} | Salones San Pedro Plus CDMX`
-      : post.title.length <= 49
+    post.title.length <= 31
+      ? `${post.title} | Salones San Pedro CDMX`
+      : post.title.length <= 42
       ? `${post.title} | San Pedro Plus`
-      : post.title.length <= 66
+      : post.title.length <= 58
       ? post.title
-      : `${post.title.slice(0, 63).trim()}...`;
-  const rawDescription = `Desde $530 p/p ($26,500 por 50 pers.) en GAM CDMX: ${post.excerpt}`;
+      : `${post.title.slice(0, 55).trim()}...`;
+  const rawDescription = `Desde $530 p/p ($53,000 por 100 pers.) en GAM CDMX: ${post.excerpt}`;
   const seoDescription =
-    rawDescription.length > 160
-      ? `${rawDescription.slice(0, 157).trim()}...`
+    rawDescription.length > 158
+      ? `${rawDescription.slice(0, 155).trim()}...`
       : rawDescription;
 
   return {
@@ -191,6 +191,44 @@ export default async function BlogPostPage({ params }: PageProps) {
             <p className="font-body-lg text-secondary text-lg leading-relaxed">
               {post.excerpt}
             </p>
+
+            {/* Respuesta Directa & Cotización Rápida Above-the-Fold (Resuelve permanencia fija scroll:0 en móvil) */}
+            <div className="p-3.5 sm:p-4 rounded-xl bg-surface-container-low border border-primary/35 shadow-xs space-y-2.5">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider text-primary">
+                  <span className="material-symbols-outlined text-sm">verified</span>
+                  Precios Oficiales 2026 • GAM CDMX (Base 100 pers.)
+                </span>
+                <span className="text-[11px] font-semibold text-on-surface bg-primary/10 px-2.5 py-0.5 rounded-full">
+                  Norte 84 #5336, a 5 min de Eduardo Molina
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-on-surface leading-snug">
+                <strong>Premier:</strong> $530 p/p ($53,000) • <strong>Plus ⭐:</strong> $710 p/p ($71,000 c/Barra Libre, Robot LED y Carrito de Shots) • <strong>All Inclusive c/Limusina:</strong> $1,010 p/p ($101,000).
+              </p>
+              <div className="flex flex-wrap items-center gap-2 pt-0.5">
+                <TrackedLink
+                  eventType="cotizar_click"
+                  source={`blog_atf_precotizador_${slug}`}
+                  href={precotizadorHref}
+                  className="flex-1 min-w-[160px] min-h-[44px] inline-flex items-center justify-center px-3.5 py-2 rounded-lg bg-primary text-on-primary font-extrabold text-[11px] uppercase tracking-wider text-center shadow-xs hover:opacity-95 transition-opacity"
+                >
+                  Simular Presupuesto (100+ pers.) →
+                </TrackedLink>
+                <TrackedLink
+                  eventType="whatsapp_click"
+                  source={`blog_atf_wa_${slug}`}
+                  href={`https://wa.me/526633670431?text=${encodeURIComponent(
+                    `¡Hola Salones San Pedro! Leí "${post.title}" y quiero cotizar mi evento desde 100 personas.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="min-h-[44px] inline-flex items-center justify-center px-3.5 py-2 rounded-lg bg-[#25D366] text-white font-extrabold text-[11px] uppercase tracking-wider text-center shadow-xs hover:opacity-95 transition-opacity"
+                >
+                  WhatsApp 24/7
+                </TrackedLink>
+              </div>
+            </div>
           </div>
 
           {/* Cover Image Accionable (Convierte dead_clicks en imágenes de blog en tráfico al Precotizador) */}
@@ -234,7 +272,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                   ¿Te gustaría incluir esto en tu Boda, XV Años o Graduación?
                 </h2>
                 <p className="text-sm text-secondary leading-relaxed">
-                  Calcula en menos de 1 minuto el presupuesto exacto para tu evento de 50 a 400 invitados en Gustavo A. Madero, CDMX, o escríbenos por WhatsApp para agendar un recorrido presencial.
+                  Calcula en menos de 1 minuto el presupuesto exacto para tu evento de 100 a 300+ invitados en Gustavo A. Madero, CDMX, o escríbenos por WhatsApp para agendar un recorrido presencial.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 pt-1">
                   <TrackedLink
@@ -353,7 +391,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               href={precotizadorHref}
               className="flex-1 sm:flex-initial py-2 px-4 rounded-xl bg-primary text-on-primary font-extrabold text-[11px] uppercase tracking-wider text-center shadow-md hover:opacity-95 transition-opacity whitespace-nowrap"
             >
-              {isSmallEventsArticle ? "Simular 50–80 Personas ($530 p/p) →" : "Cotizar en 30 Seg ($530 p/p) →"}
+              {isSmallEventsArticle ? "Simular desde 100 Personas ($530 p/p) →" : "Cotizar en 30 Seg ($530 p/p) →"}
             </TrackedLink>
             <TrackedLink
               eventType="whatsapp_click"

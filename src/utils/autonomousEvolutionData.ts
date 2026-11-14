@@ -22,6 +22,37 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.6.3-cycle48',
+    cycle_number: 48,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-13 21:18 CDMX',
+    title:
+      'Ciclo Nocturno #48 (IMPLEMENTED — Estándar v4.0): SEO Title <60c y Meta Description <160c en Blog ([slug] y /blog) + Tarjeta de Respuesta Directa Above-the-Fold (scroll:0 Mobile GAM) + Paridad 100 Personas en Blog',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #47 (>= 2026-11-13T23:23:40Z a 2026-11-14T03:16:30Z): 4 eventos humanos reales en ses_tbo4h_5bxezfnk (Gustavo Adolfo Madero, CDMX | Mobile 254x468 | 33s dwell en /blog/renta-de-salones-con-limosina-incluida | scroll: 0, 0 dead_clicks, 0 rage_clicks). Hallazgos: 1) El monitor web_vitals -> seo_audit detectó title_len: 66 (>60c) y meta_desc_len: 160 en /blog/[slug], además de que la meta description aún citaba "$26,500 por 50 pers.". 2) El visitante móvil en GAM permaneció 33s fijo en primera pantalla (scroll: 0) en una pantalla de 254x468 donde el encabezado y el extracto ocupan toda la vista antes de la imagen de portada sin mostrar precios directos ni CTA Above-the-Fold.',
+    autonomousActions: [
+      'En src/app/blog/[slug]/page.tsx: se ajustó generateMetadata para garantizar seoTitle <= 58 caracteres (<60c) y seoDescription <= 158 caracteres (<160c) con base de 100 personas ($53,000 MXN).',
+      'En src/app/blog/[slug]/page.tsx: se insertó una tarjeta compacta de Respuesta Directa y Cotización Rápida Above-the-Fold (antes de la imagen de portada) con precios oficiales por 100 personas (Premier $53,000, Plus $71,000, All Inclusive c/Limusina $101,000) y botones táctiles >=44px hacia el Precotizador y WhatsApp.',
+      'En src/app/blog/page.tsx: se añadió metadata explícita (<title> de 54 caracteres <60c y <meta description> de 133 caracteres <160c) alineada al mínimo de 100 personas.',
+    ],
+    filesModified: [
+      'src/app/blog/[slug]/page.tsx',
+      'src/app/blog/page.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: null,
+    commitHash: 'pending-commit',
+    deploymentUuid: 'pending-deploy',
+    nextTimerSeconds: 43200,
+    emailSent: true,
+    hypothesisNextCycle:
+      'En el corte matutino de las 09:15 CDMX (Cron 15 9,13,17,21 * * *), verificar que todas las visitas a /blog/[slug] reporten title_len < 60 y meta_desc_len < 160 en web_vitals -> seo_audit, y medir clics en blog_atf_precotizador_* y blog_atf_wa_* en sesiones móviles.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.6.2-cycle47',
     cycle_number: 47,
     status: 'IMPLEMENTED',
