@@ -757,7 +757,7 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
 
         <h2 className="font-display-lg text-xl text-on-surface font-semibold mt-6">¿Qué incluye nuestro traslado nupcial en CDMX?</h2>
         <ul className="list-disc pl-5 space-y-2">
-          <li><strong>3 a 4 horas de recorrido continuo:</strong> Recolección en domicilio, espera en ceremonia religiosa y llegada de gala a Calle Norte 84 No. 6507, Col. San Pedro el Chico, Gustavo A. Madero, CDMX.</li>
+          <li><strong>3 a 4 horas de recorrido continuo:</strong> Recolección en domicilio, espera en ceremonia religiosa y llegada de gala a Calle Norte 84 No. 6507, Col. San Pedro el Chico, C.P. 07800, Gustavo A. Madero, CDMX.</li>
           <li><strong>Chofer uniformado:</strong> Coordinado directamente con el capitán de banquete de Salones San Pedro Plus para que tu entrada coincida al minuto con la recepción y la música.</li>
           <li><strong>Arreglo floral y bebidas de cortesía:</strong> Decoración nupcial en cofre y bebidas refrescantes para los novios durante el trayecto y sesión fotográfica.</li>
         </ul>

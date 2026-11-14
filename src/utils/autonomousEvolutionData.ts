@@ -22,6 +22,37 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.6.5-cycle50',
+    cycle_number: 50,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-14 13:20 CDMX',
+    title:
+      'Ciclo Ejecutivo #50 (IMPLEMENTED — Estándar v4.0): Paridad 1:1 de Aforo Base 100 Personas en Tablas/Chips de Blog SEO Indexado + Consistencia NAP (Calle Norte 84 #6507, San Pedro el Chico GAM)',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte ejecutivo consolidado de las 13:15 CDMX (>= 2026-11-14T15:17:39Z a 2026-11-14T19:16:15Z): 0 eventos humanos nuevos y 0 leads en la ventana matutina. En la auditoría espontánea de Google Search Console (sc-domain:sanpedro.aionia.com.mx) y paridad de contenido indexado (blogDataSEO.tsx), se detectó que los artículos indexados "cuanto-cuesta-un-salon-de-fiestas-en-gustavo-a-madero-cdmx-precios-2026" y "salones-de-fiestas-pequenos-en-cdmx-gustavo-a-madero-50-a-80-personas" aún contenían filas y enlaces al simulador con "?guests=50" ($26,500) y "?guests=80" ($42,400) en lugar del aforo mínimo oficial de 100 personas ($53,000 Premier / $71,000 Plus), además de unificar el NAP oficial (Calle Norte 84 #6507, Col. San Pedro el Chico, GAM) en la tarjeta Above-the-Fold de blog/[slug].',
+    autonomousActions: [
+      'En src/utils/blogDataSEO.tsx: se actualizaron la Tabla Interactiva de Precios 2026 y las tarjetas de simulación rápida para iniciar en 100 personas ($53,000 Premier, $71,000 Plus, $101,000 All Inclusive) y escalar a 120, 150, 200 y 250 invitados, manteniendo intactos los slugs indexados en Google Search Console.',
+      'En src/app/blog/[slug]/page.tsx y src/utils/blogData.tsx: se unificó 1:1 la dirección NAP oficial (Calle Norte 84 #6507, Col. San Pedro el Chico, C.P. 07800, Gustavo A. Madero, CDMX) con el Schema EventVenue JSON-LD y llms.txt.',
+    ],
+    filesModified: [
+      'src/utils/blogDataSEO.tsx',
+      'src/utils/blogData.tsx',
+      'src/app/blog/[slug]/page.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+    ],
+    postponedReason: null,
+    humanActionRequired: null,
+    commitHash: 'pending-commit',
+    deploymentUuid: 'pending-deploy',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'En el corte vespertino de las 17:15 CDMX (Cron 15 9,13,17,21 * * *), auditar las sesiones del sábado por la tarde y verificar que todos los clics desde artículos SEO aterricen en el Precotizador con base >= 100 invitados.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.6.4-cycle49',
     cycle_number: 49,
     status: 'POSTPONED',

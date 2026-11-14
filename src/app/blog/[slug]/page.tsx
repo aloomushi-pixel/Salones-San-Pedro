@@ -200,7 +200,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                   Precios Oficiales 2026 • GAM CDMX (Base 100 pers.)
                 </span>
                 <span className="text-[11px] font-semibold text-on-surface bg-primary/10 px-2.5 py-0.5 rounded-full">
-                  Norte 84 #5336, a 5 min de Eduardo Molina
+                  Norte 84 #6507, San Pedro el Chico GAM
                 </span>
               </div>
               <p className="text-xs sm:text-sm text-on-surface leading-snug">
