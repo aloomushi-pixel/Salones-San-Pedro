@@ -44,8 +44,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: null,
-    commitHash: 'pending-commit',
-    deploymentUuid: 'pending-deploy',
+    commitHash: '9d8cecb',
+    deploymentUuid: 'e9cvphbgup8vk6hxc4typf3o',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:
