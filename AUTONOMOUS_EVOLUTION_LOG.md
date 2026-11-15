@@ -4,6 +4,32 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #55 — `2026-11-15 17:23 CDMX` (`v2.7.0-cycle55` — `IMPLEMENTED` • Estándar Maestro v4.0)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-15T19:23:34Z` a `2026-11-15T23:16:30Z`)
+- **Verificación Criptográfica Previa (`SHA-256`):** `[VERIFIED] 55cace178ac4d457e35e4971cf143f7f401258ea265bae6c42fec020183e01a8`.
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx` — Salto de Tráfico Orgánico):**
+  - `"salones san pedro plus"` subió a **`21` clics / `610` impresiones** (Posición **`#1.02`**).
+  - `"salon san pedro plus"` subió a **`14` clics / `194` impresiones** (`CTR 7.22%`, Posición **`#1.23`**).
+  - `"salon san pedro"` subió a **`5` clics / `181` impresiones** (Posición **`#5.11`**).
+  - Nuevos clics en `"salones de fiesta cerca de mi"` (Posición **`#4.71`**), `"salones para fiestas cerca de mi"` (`CTR 25.00%`, Posición **`#4.25`**), `"fotos de salones san pedro plus"` (`#3.68`) y `"salones de fiestas cdmx"` (`#22.21`).
+- **Telemetría en Supabase (`168` eventos humanos reales en `2` sesiones activas • `0` `dead_clicks`, `3` `rage_clicks`, `title_len: 55`, `meta_desc_len: 155`, `img_missing_alt: 0`):**
+  1. **`ses_95npu_bv49t3mt` (`Delegación Miguel Hidalgo, CDMX CP 11320 | Mobile 432x839 | Canal: IA Generativa ChatGPT / GEO utm_source=chatgpt.com` — `119` eventos y `14.7 minutos` activos):**
+     - **Validación del Ciclo #54:** Ajustó el slider a `250 personas`, saltó desde `#paquetes` al Paso 3 (`paquete_preseleccionar_premier`) y completó `step_3_completado` para **`Bautizo / Cumpleaños` en `Sábado` (`$132,500 MXN`)** usando las nuevas píldoras 1-Tap del Paso 3 sin regresar al Paso 1 ni registrar `dead_clicks`.
+     - **Bug #1 Detectado (`2` `rage_clicks` sobre `button "✕"` en `StickyPriceCompareBar.tsx` a las `20:03:54Z` y `20:03:55Z`):** El botón `✕` ejecutaba `setDismissed(true)` sin llamar a `setVisible(false)`, y `handleScroll` retornaba antes de `setVisible(false)` mientras que el render solo verificaba `if (!visible && !openModal) return null;`. Por ello, la barra flotante nunca se cerraba al tocar `✕`.
+     - **Bug #2 Detectado (`1` `rage_click` sobre `button "SEGUNDO TIEMPO"` en `MenuTinderCards.tsx` a las `20:05:16Z`):** `handleSelectById(id)` llamaba a `handleNext()` cuando `cards[0]?.id === id`, provocando que un doble toque sobre la pestaña `"SEGUNDO TIEMPO"` saltara inmediatamente al `"Tercer Tiempo"`.
+     - **Oportunidad #3 Detectada (`273 segundos / 4.5 min` en el Lightbox de `#galeria`):** El usuario recorrió más de `40` fotos de Salón Diamante y Salón Platino dentro del Lightbox, cuya barra inferior mostraba un mensaje genérico sin incluir su cotización activa (`250 personas • Bautizo / Cumpleaños • Sábado • $132,500 MXN`).
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/components/StickyPriceCompareBar.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/StickyPriceCompareBar.tsx):**
+   - Creación de `handleDismiss()` que invoca `setDismissed(true)`, `setVisible(false)` y `setExitRescueTriggered(false)`, blindaje de `if ((dismissed || !visible) && !openModal) return null;` y ampliación táctil del botón `✕` a `min-w-[36px] min-h-[36px]`.
+2. **[`src/components/MenuTinderCards.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/MenuTinderCards.tsx):**
+   - Eliminación de `handleNext()` cuando `cards[0]?.id === id` en `handleSelectById(id)` para conservar el tiempo elegido en pantalla, adición de controles móviles explícitos `← Tiempo Anterior` y `Siguiente Tiempo →` (`min-h-[44px]`) y sincronización del CTA de WhatsApp con `sessionStorage` (`{syncedGuests} Pers. • Paquete {syncedPkg}`).
+3. **[`src/components/GaleriaSection.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/GaleriaSection.tsx):**
+   - Integración de la cinta de cotización sincronizada (`🎉 {syncedEventKind} • {syncedGuests} pers. ({syncedDay}) • Paquete {syncedPkg}: ${syncedTotal} MXN`) y CTA de WhatsApp personalizado dentro del Lightbox a pantalla completa.
+
+---
+
 ## Ciclo Autónomo #54 — `2026-11-15 13:21 CDMX` (`v2.6.9-cycle54` — `IMPLEMENTED` • Corte Ejecutivo `13:15 CDMX` Estándar Maestro v4.0)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-15T15:23:12Z` a `2026-11-15T19:16:24Z`)

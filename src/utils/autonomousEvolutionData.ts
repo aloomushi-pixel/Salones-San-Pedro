@@ -22,6 +22,39 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.7.0-cycle55',
+    cycle_number: 55,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-15 17:23 CDMX',
+    title:
+      'Ciclo Vespertino #55 (IMPLEMENTED — Estándar v4.0): 168 Eventos Humanos + 2da Sesión ChatGPT GEO (250 Pers. $132,500) + Salto en GSC -> Corrección de Rage Clicks en StickyPriceCompareBar (✕) y MenuTinderCards (#banquetes) + Cotización Sincronizada en Lightbox',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #54 (>= 2026-11-15T19:23:34Z a 2026-11-15T23:16:30Z): 168 eventos humanos reales en 2 sesiones activas (0 dead_clicks, 3 rage_clicks, title_len: 55, meta_desc_len: 155, img_missing_alt: 0) y actualización de índice en Google Search Console ("salones san pedro plus" subió a 21 clics / 610 imp #1.02; "salon san pedro plus" a 14 clics / 194 imp #1.23; "salon san pedro" a 5 clics / 181 imp #5.11; nuevos clics en "salones de fiesta cerca de mi" #4.71 y "salones para fiestas cerca de mi" #4.25). En ses_95npu_bv49t3mt (Miguel Hidalgo, CDMX CP 11320 | Mobile 432x839 | Canal: IA Generativa ChatGPT utm_source=chatgpt.com | 119 eventos y 14.7 min activos), el prospecto configuró 250 personas, saltó desde #paquetes al Paso 3 y completó step_3_completado para Bautizo / Cumpleaños en Sábado ($132,500 MXN, validando los selectores 1-Tap del Ciclo #54 con 0 dead_clicks), exploró 7 modales de inclusiones, pasó 185s en #banquetes y 273s en el Lightbox de #galeria. Se detectaron 3 oportunidades/fricciones reales: 1) 2 rage_clicks sobre el botón "✕" de StickyPriceCompareBar (20:03:54Z y 20:03:55Z) porque setDismissed(true) no llamaba setVisible(false) y el render solo verificaba !visible, impidiendo cerrar la barra flotante; 2) 1 rage_click sobre la pestaña "SEGUNDO TIEMPO" en MenuTinderCards (#banquetes, 20:05:16Z) porque handleSelectById(id) ejecutaba handleNext() cuando cards[0]?.id === id, saltando la tarjeta al tocar dos veces; 3) El Lightbox de #galeria (donde ses_95npu_bv49t3mt permaneció 4.5 min) no mostraba el presupuesto sincronizado ($132,500 MXN • 250 pers.) en su barra inferior.',
+    autonomousActions: [
+      'En src/components/StickyPriceCompareBar.tsx: se implementó handleDismiss() que ejecuta simultáneamente setDismissed(true), setVisible(false) y setExitRescueTriggered(false), se blindó la condición de renderizado ((dismissed || !visible) && !openModal) y se amplió el área táctil del botón "✕" a min-w-[36px] min-h-[36px], eliminando el bug que impedía cerrar la barra flotante.',
+      'En src/components/MenuTinderCards.tsx: se eliminó la llamada a handleNext() dentro de handleSelectById(id) cuando cards[0]?.id === id para mantener el tiempo seleccionado en pantalla sin saltarlo, se añadieron botones móviles explícitos "← Tiempo Anterior" y "Siguiente Tiempo →" (min-h-[44px]) y se sincronizó el CTA de WhatsApp con el aforo y paquete activo en sessionStorage.',
+      'En src/components/GaleriaSection.tsx: se integró en la barra inferior del Lightbox a pantalla completa la cinta de cotización sincronizada ("🎉 {syncedEventKind} • {syncedGuests} pers. ({syncedDay}) • Paquete {syncedPkg}: ${syncedTotal} MXN") y el CTA directo de WhatsApp con el monto calculado y solicitud de recorrido al salón activo.',
+    ],
+    filesModified: [
+      'src/components/StickyPriceCompareBar.tsx',
+      'src/components/MenuTinderCards.tsx',
+      'src/components/GaleriaSection.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+      '.agents/state/prompt_performance_ledger.jsonl',
+    ],
+    postponedReason: null,
+    humanActionRequired: null,
+    commitHash: 'pending',
+    deploymentUuid: 'pending',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'En el corte ejecutivo nocturno de las 21:15 CDMX (Cron 15 9,13,17,21 * * *), verificar 0 rage_clicks en StickyPriceCompareBar y #banquetes y auditar conversiones desde el Lightbox sincronizado.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.6.9-cycle54',
     cycle_number: 54,
     status: 'IMPLEMENTED',

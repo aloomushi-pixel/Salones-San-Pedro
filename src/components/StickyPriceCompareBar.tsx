@@ -113,9 +113,18 @@ export default function StickyPriceCompareBar() {
     return () => obs.disconnect();
   }, []);
 
+  const handleDismiss = () => {
+    setDismissed(true);
+    setVisible(false);
+    setExitRescueTriggered(false);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
-      if (dismissed) return;
+      if (dismissed) {
+        setVisible(false);
+        return;
+      }
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const docHeight =
         document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -143,11 +152,11 @@ export default function StickyPriceCompareBar() {
     };
   }, [dismissed, exitRescueTriggered, precotizadorInView]);
 
-  if (!visible && !openModal) return null;
+  if ((dismissed || !visible) && !openModal) return null;
 
   return (
     <>
-      {visible && (
+      {visible && !dismissed && (
         <div
           data-interactive="true"
           className={`fixed bottom-4 left-3 right-24 sm:left-6 sm:right-28 z-[90] max-w-3xl mx-auto bg-[#121212]/95 text-white border ${
@@ -173,11 +182,11 @@ export default function StickyPriceCompareBar() {
             </div>
             <button
               type="button"
-              onClick={() => setDismissed(true)}
+              onClick={handleDismiss}
               aria-label="Ocultar barra de precios"
-              className="sm:hidden text-white/60 hover:text-white text-xs px-1.5 cursor-pointer"
+              className="sm:hidden min-w-[36px] min-h-[36px] rounded-lg bg-white/10 hover:bg-white/20 text-white/80 hover:text-white text-xs flex items-center justify-center shrink-0 cursor-pointer"
             >
-              ✕
+              <span className="pointer-events-none">✕</span>
             </button>
           </div>
 
@@ -214,11 +223,11 @@ export default function StickyPriceCompareBar() {
             </a>
             <button
               type="button"
-              onClick={() => setDismissed(true)}
+              onClick={handleDismiss}
               aria-label="Cerrar barra de referencia"
-              className="hidden sm:inline-flex text-white/50 hover:text-white text-xs px-1 cursor-pointer"
+              className="hidden sm:inline-flex min-w-[32px] min-h-[32px] rounded-lg bg-white/10 hover:bg-white/20 text-white/70 hover:text-white text-xs items-center justify-center cursor-pointer"
             >
-              ✕
+              <span className="pointer-events-none">✕</span>
             </button>
           </div>
         </div>

@@ -730,12 +730,18 @@ export default function GaleriaSection() {
             </button>
           </div>
 
-          {/* Barra de Conversión Directa en Lightbox + Miniaturas Inferiores */}
+          {/* Barra de Conversión Directa en Lightbox Sincronizada con Cotización + Miniaturas Inferiores */}
           <div
-            className="flex flex-col gap-2.5 max-w-4xl mx-auto w-full"
+            className="flex flex-col gap-2 max-w-4xl mx-auto w-full"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <div className="text-center text-[11px] font-bold text-amber-300 bg-white/10 border border-white/15 rounded-xl px-3 py-1">
+              🎉 {syncedEventKind} • {syncedGuests} pers. ({syncedDay}) • Paquete {syncedPkg}:{' '}
+              <span className="text-white font-extrabold">
+                ${syncedTotal.toLocaleString('es-MX')} MXN
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <button
                 type="button"
                 onClick={() => {
@@ -744,23 +750,25 @@ export default function GaleriaSection() {
                     section: 'galeria',
                     gallery_category: canonicalCategory,
                     photo_title: photos[activeIndex].caption,
+                    package_name: `Paquete ${syncedPkg}`,
+                    guests_range: `${syncedGuests} personas`,
                   });
                   const el = document.getElementById('precotizador');
                   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }}
-                className="px-4 py-2.5 rounded-xl bg-primary text-on-primary hover:opacity-95 text-xs font-extrabold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer shadow-lg"
+                className="min-h-[44px] px-3.5 py-2 rounded-xl bg-primary text-on-primary hover:opacity-95 text-xs font-extrabold uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer shadow-lg"
               >
                 <span data-ux-decorative="true" className="material-symbols-outlined text-base pointer-events-none">
                   calculate
                 </span>
                 <span className="pointer-events-none">
-                  Simular Paquete en {canonicalCategory} ↑
+                  Ajustar Cotización ({syncedGuests} Pers.) ↑
                 </span>
               </button>
 
               <a
                 href={`https://wa.me/526633670431?text=${encodeURIComponent(
-                  `¡Hola! Estuve viendo la galería fotográfica del ${canonicalCategory} (${photos[activeIndex].caption}) en Salones San Pedro Plus y me gustaría agendar una visita guiada y confirmar disponibilidad.`
+                  `¡Hola Salones San Pedro Plus! Vi la galería del ${canonicalCategory} (${photos[activeIndex].caption}) y quiero confirmar disponibilidad y agendar recorrido para mi ${syncedEventKind} de ${syncedGuests} personas en ${syncedDay} con el Paquete ${syncedPkg} ($${syncedTotal.toLocaleString('es-MX')} MXN).`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -769,15 +777,19 @@ export default function GaleriaSection() {
                     section: 'galeria',
                     gallery_category: canonicalCategory,
                     photo_title: photos[activeIndex].caption,
+                    package_name: `Paquete ${syncedPkg}`,
+                    guests_range: `${syncedGuests} personas`,
+                    event_kind: syncedEventKind,
+                    preferred_day: syncedDay,
                   })
                 }
-                className="px-4 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer shadow-lg"
+                className="min-h-[44px] px-3.5 py-2 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-extrabold uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer shadow-lg"
               >
                 <span data-ux-decorative="true" className="material-symbols-outlined text-base pointer-events-none">
                   forum
                 </span>
                 <span className="pointer-events-none">
-                  Agendar Visita a {canonicalCategory} en WhatsApp
+                  Reservar Visita a {canonicalCategory} (${syncedTotal.toLocaleString('es-MX')})
                 </span>
               </a>
             </div>

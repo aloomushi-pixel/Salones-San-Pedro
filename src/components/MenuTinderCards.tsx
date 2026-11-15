@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { trackEvent } from '@/utils/trackEvent';
 
@@ -46,6 +46,53 @@ const initialCards = [
 export default function MenuTinderCards() {
   const [cards, setCards] = useState(initialCards);
   const [animating, setAnimating] = useState<'next' | 'prev' | null>(null);
+  const [syncedGuests, setSyncedGuests] = useState(100);
+  const [syncedPkg, setSyncedPkg] = useState<'Premier' | 'Plus' | 'All Inclusive'>('Plus');
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const readDraft = () => {
+      try {
+        const raw = window.sessionStorage.getItem('sanpedro_precotizador_draft_v1');
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (typeof parsed.guests === 'number' && parsed.guests >= 100 && parsed.guests <= 250) {
+          setSyncedGuests(parsed.guests);
+        }
+        if (
+          parsed.packageType === 'Premier' ||
+          parsed.packageType === 'Plus' ||
+          parsed.packageType === 'All Inclusive'
+        ) {
+          setSyncedPkg(parsed.packageType);
+        }
+      } catch {
+        // Ignore sessionStorage errors
+      }
+    };
+    readDraft();
+
+    const handleSync = (evt: Event) => {
+      const customEvt = evt as CustomEvent<{
+        guests?: number;
+        packageType?: 'Premier' | 'Plus' | 'All Inclusive';
+      }>;
+      const detail = customEvt.detail || {};
+      if (typeof detail.guests === 'number' && detail.guests >= 100 && detail.guests <= 250) {
+        setSyncedGuests(detail.guests);
+      }
+      if (
+        detail.packageType === 'Premier' ||
+        detail.packageType === 'Plus' ||
+        detail.packageType === 'All Inclusive'
+      ) {
+        setSyncedPkg(detail.packageType);
+      }
+    };
+
+    window.addEventListener('ssp:sync-from-precotizador', handleSync as EventListener);
+    return () => window.removeEventListener('ssp:sync-from-precotizador', handleSync as EventListener);
+  }, []);
 
   const handleNext = () => {
     if (animating) return;
@@ -88,8 +135,8 @@ export default function MenuTinderCards() {
 
   const handleSelectById = (id: number) => {
     if (animating) return;
+    // Mantener el tiempo seleccionado al frente sin saltarlo (evita rage_click detectado en ses_95npu_bv49t3mt al tocar "SEGUNDO TIEMPO")
     if (cards[0]?.id === id) {
-      handleNext();
       return;
     }
     const target = initialCards.find((c) => c.id === id);
@@ -243,8 +290,32 @@ export default function MenuTinderCards() {
         </button>
       </div>
 
-      {/* CTA de Degustación y Cotización de Banquete */}
-      <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+      {/* Controles Prev / Next explícitos en Móvil (>=44x44px) */}
+      <div className="md:hidden max-w-sm mx-auto flex items-center justify-between gap-2 pt-2">
+        <button
+          type="button"
+          onClick={handlePrev}
+          className="flex-1 min-h-[44px] px-3 py-2 rounded-xl bg-surface-container-high hover:bg-surface-container-highest border border-outline-variant/40 text-on-surface text-xs font-bold flex items-center justify-center gap-1 cursor-pointer active:scale-95 transition-all"
+        >
+          <span data-ux-decorative="true" className="material-symbols-outlined text-base pointer-events-none">
+            chevron_left
+          </span>
+          <span className="pointer-events-none">Tiempo Anterior</span>
+        </button>
+        <button
+          type="button"
+          onClick={handleNext}
+          className="flex-1 min-h-[44px] px-3 py-2 rounded-xl bg-primary/15 hover:bg-primary hover:text-on-primary border border-primary/40 text-primary text-xs font-bold flex items-center justify-center gap-1 cursor-pointer active:scale-95 transition-all"
+        >
+          <span className="pointer-events-none">Siguiente Tiempo</span>
+          <span data-ux-decorative="true" className="material-symbols-outlined text-base pointer-events-none">
+            chevron_right
+          </span>
+        </button>
+      </div>
+
+      {/* CTA de Degustación y Cotización de Banquete Sincronizado */}
+      <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
         <a
           href="#precotizador-hero"
           onClick={() =>
@@ -252,22 +323,26 @@ export default function MenuTinderCards() {
               section: 'banquetes',
             })
           }
-          className="px-6 py-3 rounded-xl bg-primary text-on-primary font-bold text-xs uppercase tracking-wider shadow-md hover:scale-105 transition-transform"
+          className="px-6 py-3 min-h-[44px] rounded-xl bg-primary text-on-primary font-bold text-xs uppercase tracking-wider shadow-md hover:scale-105 transition-transform flex items-center justify-center"
         >
-          Cotizar Paquete con Banquete Incluido
+          Cotizar Banquete ({syncedGuests} Pers. • Paquete {syncedPkg}) ↑
         </a>
         <a
-          href="https://wa.me/526633670431?text=%C2%A1Hola%20Salones%20San%20Pedro!%20Vi%20su%20men%C3%BA%20de%203%20y%204%20tiempos%20en%20la%20web%20y%20me%20gustar%C3%ADa%20solicitar%20informes%20y%20opciones%20de%20degustaci%C3%B3n."
+          href={`https://wa.me/526633670431?text=${encodeURIComponent(
+            `¡Hola Salones San Pedro! Vi su menú de 3 y 4 tiempos (${cards[0]?.tiempo || 'Menú de Gala'}) y me gustaría recibir opciones de degustación y cotización para ${syncedGuests} personas (Paquete ${syncedPkg}).`
+          )}`}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() =>
             trackEvent('whatsapp_click', 'banquetes_degustacion_wa', {
               section: 'banquetes',
+              package_name: `Paquete ${syncedPkg}`,
+              guests_range: `${syncedGuests} personas`,
             })
           }
-          className="px-6 py-3 rounded-xl border border-primary/50 text-primary hover:bg-primary hover:text-on-primary font-bold text-xs uppercase tracking-wider transition-colors"
+          className="px-6 py-3 min-h-[44px] rounded-xl border border-primary/50 text-primary hover:bg-primary hover:text-on-primary font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center"
         >
-          Consultar Menú Completo por WhatsApp
+          Solicitar Menú y Degustación en WhatsApp
         </a>
       </div>
     </div>
