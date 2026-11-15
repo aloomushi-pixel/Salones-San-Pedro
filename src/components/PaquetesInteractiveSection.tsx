@@ -413,71 +413,122 @@ export default function PaquetesInteractiveSection() {
             </p>
           </div>
 
-          {/* SIMULADOR INSTANTÁNEO DE AFORO Y DÍA EN #PAQUETES (Evita scroll_return_prices) */}
+          {/* SIMULADOR INSTANTÁNEO DE AFORO Y DÍA EN #PAQUETES (Evita scroll_return_prices y muestra los 3 totales lado a lado en móvil) */}
           <div
             data-interactive="true"
-            className="max-w-4xl mx-auto mb-10 bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-4 sm:p-5 shadow-md flex flex-col md:flex-row items-center justify-between gap-4"
+            className="max-w-4xl mx-auto mb-10 bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-4 sm:p-5 shadow-md space-y-3.5"
           >
-            <div className="flex flex-col sm:flex-row items-center gap-2.5 w-full md:w-auto">
-              <span className="text-xs font-extrabold uppercase tracking-wider text-primary shrink-0">
-                👥 Calcular total para:
-              </span>
-              <div className="flex flex-wrap justify-center gap-1.5">
-                {[100, 120, 150, 180, 200, 250].map((g) => (
-                  <button
-                    key={g}
-                    type="button"
-                    onClick={() => {
-                      setSimGuests(g);
-                      syncWithPrecotizador(g, simDayMode);
-                      trackEvent('guests_slider_adjust', `paquetes_sim_${g}`, {
-                        section: 'paquetes',
-                        guests_range: `${g} personas`,
-                        extra: { exact_guests: g, source_widget: 'paquetes_quick_bar' },
-                      });
-                    }}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                      simGuests === g
-                        ? 'bg-primary text-on-primary shadow-sm scale-105'
-                        : 'bg-surface-container-low text-secondary hover:text-on-surface border border-outline-variant/30'
-                    }`}
-                  >
-                    {g} pers.
-                  </button>
-                ))}
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex flex-col sm:flex-row items-center gap-2.5 w-full md:w-auto">
+                <span className="text-xs font-extrabold uppercase tracking-wider text-primary shrink-0">
+                  👥 Calcular total para:
+                </span>
+                <div className="flex flex-wrap justify-center gap-1.5">
+                  {[100, 120, 150, 180, 200, 250].map((g) => (
+                    <button
+                      key={g}
+                      type="button"
+                      onClick={() => {
+                        setSimGuests(g);
+                        syncWithPrecotizador(g, simDayMode);
+                        trackEvent('guests_slider_adjust', `paquetes_sim_${g}`, {
+                          section: 'paquetes',
+                          guests_range: `${g} personas`,
+                          extra: { exact_guests: g, source_widget: 'paquetes_quick_bar' },
+                        });
+                      }}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                        simGuests === g
+                          ? 'bg-primary text-on-primary shadow-sm scale-105'
+                          : 'bg-surface-container-low text-secondary hover:text-on-surface border border-outline-variant/30'
+                      }`}
+                    >
+                      {g} pers.
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex items-center gap-1.5 bg-surface-container-low p-1 rounded-xl border border-outline-variant/30 w-full sm:w-auto justify-center">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSimDayMode('viernes_domingo');
+                    syncWithPrecotizador(simGuests, 'viernes_domingo');
+                    trackEvent('package_select', 'sim_dia_viernes_domingo', { section: 'paquetes' });
+                  }}
+                  className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${
+                    simDayMode === 'viernes_domingo'
+                      ? 'bg-primary text-on-primary shadow-xs'
+                      : 'text-secondary hover:text-on-surface'
+                  }`}
+                >
+                  🎁 Viernes / Dom (Preferencial)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSimDayMode('sabado');
+                    syncWithPrecotizador(simGuests, 'sabado');
+                    trackEvent('package_select', 'sim_dia_sabado', { section: 'paquetes' });
+                  }}
+                  className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${
+                    simDayMode === 'sabado'
+                      ? 'bg-primary text-on-primary shadow-xs'
+                      : 'text-secondary hover:text-on-surface'
+                  }`}
+                >
+                  📅 Sábado Estelar
+                </button>
               </div>
             </div>
 
-            <div className="flex items-center gap-1.5 bg-surface-container-low p-1 rounded-xl border border-outline-variant/30 w-full sm:w-auto justify-center">
+            {/* Resumen Comparativo Instantáneo de los 3 Paquetes (Visible sin hacer scroll de 2,100px en iPhone/Móvil) */}
+            <div className="grid grid-cols-3 gap-2 pt-2.5 border-t border-outline-variant/25">
               <button
                 type="button"
-                onClick={() => {
-                  setSimDayMode('viernes_domingo');
-                  syncWithPrecotizador(simGuests, 'viernes_domingo');
-                  trackEvent('package_select', 'sim_dia_viernes_domingo', { section: 'paquetes' });
-                }}
-                className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${
-                  simDayMode === 'viernes_domingo'
-                    ? 'bg-primary text-on-primary shadow-xs'
-                    : 'text-secondary hover:text-on-surface'
-                }`}
+                onClick={() => handlePreselectInCalculator('Premier')}
+                className="p-2.5 rounded-xl bg-surface-container-low hover:border-primary border border-outline-variant/30 text-left transition-all cursor-pointer"
               >
-                🎁 Viernes / Dom (Preferencial)
+                <span className="block text-[10px] sm:text-xs font-bold text-secondary uppercase tracking-wider">
+                  Premier (${getPackageUnitPrice(530)} p/p)
+                </span>
+                <span className="block text-xs sm:text-base font-extrabold text-on-surface mt-0.5">
+                  {formatMXN(getPackageTotal(530, 100))}
+                </span>
+                <span className="block text-[10px] text-primary font-semibold mt-0.5">
+                  3 Tiempos + DJ →
+                </span>
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  setSimDayMode('sabado');
-                  syncWithPrecotizador(simGuests, 'sabado');
-                  trackEvent('package_select', 'sim_dia_sabado', { section: 'paquetes' });
-                }}
-                className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${
-                  simDayMode === 'sabado'
-                    ? 'bg-primary text-on-primary shadow-xs'
-                    : 'text-secondary hover:text-on-surface'
-                }`}
+                onClick={() => handlePreselectInCalculator('Plus')}
+                className="p-2.5 rounded-xl bg-primary/10 border-2 border-primary text-left transition-all cursor-pointer shadow-xs"
               >
-                📅 Sábado Estelar
+                <span className="block text-[10px] sm:text-xs font-extrabold text-primary uppercase tracking-wider">
+                  Plus ⭐ (${getPackageUnitPrice(710)} p/p)
+                </span>
+                <span className="block text-xs sm:text-base font-extrabold text-on-surface mt-0.5">
+                  {formatMXN(getPackageTotal(710, 100))}
+                </span>
+                <span className="block text-[10px] text-primary font-bold mt-0.5">
+                  Robot LED + Shots →
+                </span>
+              </button>
+              <button
+                type="button"
+                onClick={() => handlePreselectInCalculator('All Inclusive')}
+                className="p-2.5 rounded-xl bg-surface-container-low hover:border-primary border border-outline-variant/30 text-left transition-all cursor-pointer"
+              >
+                <span className="block text-[10px] sm:text-xs font-bold text-secondary uppercase tracking-wider">
+                  All Inc. (${getPackageUnitPrice(1010)} p/p)
+                </span>
+                <span className="block text-xs sm:text-base font-extrabold text-on-surface mt-0.5">
+                  {formatMXN(getPackageTotal(1010, 100))}
+                </span>
+                <span className="block text-[10px] text-primary font-semibold mt-0.5">
+                  Limo + Mariachi →
+                </span>
               </button>
             </div>
           </div>

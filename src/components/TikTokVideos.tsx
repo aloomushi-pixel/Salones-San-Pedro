@@ -58,12 +58,78 @@ const TIKTOK_VIDEOS: VideoData[] = [
 
 export default function TikTokVideos() {
   const [selectedVideo, setSelectedVideo] = useState<VideoData>(TIKTOK_VIDEOS[0]);
+  const [draftQuote, setDraftQuote] = useState<{
+    guests: number;
+    packageType: string;
+    eventType: string;
+  }>({
+    guests: 100,
+    packageType: "Plus",
+    eventType: "Evento",
+  });
+
+  useEffect(() => {
+    const readDraft = () => {
+      try {
+        const raw = sessionStorage.getItem("sanpedro_precotizador_draft_v1");
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        setDraftQuote({
+          guests:
+            typeof parsed.guests === "number" && parsed.guests >= 100
+              ? parsed.guests
+              : 100,
+          packageType: parsed.packageType || "Plus",
+          eventType: parsed.eventType || "Evento",
+        });
+      } catch {}
+    };
+    readDraft();
+
+    const handleSync = (e: Event) => {
+      const custom = e as CustomEvent<{
+        guests?: number;
+        packageType?: string;
+        eventType?: string;
+      }>;
+      if (custom.detail) {
+        setDraftQuote((prev) => ({
+          guests:
+            typeof custom.detail.guests === "number" && custom.detail.guests >= 100
+              ? custom.detail.guests
+              : prev.guests,
+          packageType: custom.detail.packageType || prev.packageType,
+          eventType: custom.detail.eventType || prev.eventType,
+        }));
+      }
+    };
+
+    window.addEventListener("ssp:sync-from-precotizador", handleSync);
+    return () => window.removeEventListener("ssp:sync-from-precotizador", handleSync);
+  }, []);
+
+  const unitPrice =
+    draftQuote.packageType === "Premier"
+      ? 530
+      : draftQuote.packageType === "All Inclusive"
+      ? 1010
+      : 710;
+  const totalFormatted = new Intl.NumberFormat("es-MX", {
+    style: "currency",
+    currency: "MXN",
+    maximumFractionDigits: 0,
+  }).format(draftQuote.guests * unitPrice);
 
   const handleNextVideo = () => {
     setSelectedVideo((current) => {
       const currentIndex = TIKTOK_VIDEOS.findIndex((v) => v.id === current.id);
       const nextIndex = (currentIndex + 1) % TIKTOK_VIDEOS.length;
-      return TIKTOK_VIDEOS[nextIndex];
+      const nextVid = TIKTOK_VIDEOS[nextIndex];
+      trackEvent("tiktok_interaction", `next_video_${nextVid.id}`, {
+        section: "tiktok-videos",
+        experience_title: nextVid.title,
+      });
+      return nextVid;
     });
   };
 
@@ -71,7 +137,12 @@ export default function TikTokVideos() {
     setSelectedVideo((current) => {
       const currentIndex = TIKTOK_VIDEOS.findIndex((v) => v.id === current.id);
       const prevIndex = (currentIndex - 1 + TIKTOK_VIDEOS.length) % TIKTOK_VIDEOS.length;
-      return TIKTOK_VIDEOS[prevIndex];
+      const prevVid = TIKTOK_VIDEOS[prevIndex];
+      trackEvent("tiktok_interaction", `prev_video_${prevVid.id}`, {
+        section: "tiktok-videos",
+        experience_title: prevVid.title,
+      });
+      return prevVid;
     });
   };
 
@@ -119,22 +190,88 @@ export default function TikTokVideos() {
               allowFullScreen
             />
             
-            {/* Quick Manual Nav Buttons overlaying player */}
+            {/* Quick Manual Nav Buttons overlaying player (>=44x44px mobile tap targets) */}
             <button
               onClick={handlePrevVideo}
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-40 w-10 h-10 bg-black/50 text-white rounded-full flex items-center justify-center transition-all opacity-70 md:opacity-0 md:group-hover/player:opacity-100 focus:opacity-100 hover:bg-black/85 hover:scale-105 active:scale-95 shadow-md"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-40 w-11 h-11 bg-black/60 text-white rounded-full flex items-center justify-center transition-all opacity-80 md:opacity-0 md:group-hover/player:opacity-100 focus:opacity-100 hover:bg-black/85 hover:scale-105 active:scale-95 shadow-md cursor-pointer"
               aria-label="Video anterior"
             >
-              <span className="material-symbols-outlined text-2xl font-bold">chevron_left</span>
+              <span className="material-symbols-outlined text-2xl font-bold pointer-events-none">chevron_left</span>
             </button>
 
             <button
               onClick={handleNextVideo}
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-40 w-10 h-10 bg-black/50 text-white rounded-full flex items-center justify-center transition-all opacity-70 md:opacity-0 md:group-hover/player:opacity-100 focus:opacity-100 hover:bg-black/85 hover:scale-105 active:scale-95 shadow-md"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-40 w-11 h-11 bg-black/60 text-white rounded-full flex items-center justify-center transition-all opacity-80 md:opacity-0 md:group-hover/player:opacity-100 focus:opacity-100 hover:bg-black/85 hover:scale-105 active:scale-95 shadow-md cursor-pointer"
               aria-label="Siguiente video"
             >
-              <span className="material-symbols-outlined text-2xl font-bold">chevron_right</span>
+              <span className="material-symbols-outlined text-2xl font-bold pointer-events-none">chevron_right</span>
             </button>
+          </div>
+
+          {/* Barra Rápida de Videos y Conversión en Móvil (Visible al instante en scroll 49-54% sin bajar 500px) */}
+          <div className="lg:hidden mt-3 space-y-2.5 bg-surface-container-lowest border border-primary/30 rounded-2xl p-3 shadow-md">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+              {TIKTOK_VIDEOS.map((vid, idx) => {
+                const active = vid.id === selectedVideo.id;
+                return (
+                  <button
+                    key={vid.id}
+                    type="button"
+                    onClick={() => {
+                      setSelectedVideo(vid);
+                      trackEvent("tiktok_interaction", `mobile_pill_video_${vid.id}`, {
+                        section: "tiktok-videos",
+                        experience_title: vid.title,
+                      });
+                    }}
+                    className={`shrink-0 px-3 py-1.5 rounded-full text-[11px] font-bold transition-all cursor-pointer ${
+                      active
+                        ? "bg-primary text-on-primary shadow-xs"
+                        : "bg-surface-container-low text-secondary border border-outline-variant/30"
+                    }`}
+                  >
+                    {idx + 1}. {vid.title.replace(/✨|💃|🕯️|👰🤵/g, "").trim()}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="flex items-center justify-between gap-2 text-[11px] text-secondary px-1">
+              <span className="font-semibold text-on-surface truncate">
+                Tu cotización: <strong className="text-primary">{draftQuote.guests} pers. • {draftQuote.packageType} ({totalFormatted})</strong>
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <a
+                href="#precotizador"
+                onClick={() =>
+                  trackEvent("cotizar_click", "tiktok_mobile_bar_precotizador", {
+                    section: "tiktok-videos",
+                    experience_title: selectedVideo.title,
+                  })
+                }
+                className="min-h-[44px] flex items-center justify-center gap-1 px-3 py-2 rounded-xl bg-primary text-on-primary font-extrabold text-[11px] uppercase tracking-wider text-center shadow-xs"
+              >
+                <span className="material-symbols-outlined text-sm pointer-events-none">calculate</span>
+                <span className="pointer-events-none">Cotizar Montaje ↑</span>
+              </a>
+              <a
+                href={`https://wa.me/526633670431?text=${encodeURIComponent(
+                  `¡Hola Salones San Pedro Plus! Vi su video "${selectedVideo.title}" y me interesa agendar recorrido para mi ${draftQuote.eventType} de ${draftQuote.guests} personas (Paquete ${draftQuote.packageType} - ${totalFormatted}).`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent("whatsapp_click", "tiktok_mobile_bar_wa", {
+                    section: "tiktok-videos",
+                    experience_title: selectedVideo.title,
+                  })
+                }
+                className="min-h-[44px] flex items-center justify-center gap-1 px-3 py-2 rounded-xl bg-[#25D366] text-white font-extrabold text-[11px] uppercase tracking-wider text-center shadow-xs"
+              >
+                <span className="material-symbols-outlined text-sm pointer-events-none">chat</span>
+                <span className="pointer-events-none">WhatsApp / Visita</span>
+              </a>
+            </div>
           </div>
         </div>
 
