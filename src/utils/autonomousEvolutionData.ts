@@ -22,6 +22,37 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.6.9-cycle54',
+    cycle_number: 54,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-15 13:21 CDMX',
+    title:
+      'Ciclo Ejecutivo #54 (IMPLEMENTED — Estándar v4.0): Validación del Comparador #paquetes con 2 Conversiones WhatsApp (120 Pers. $63,600 + Recorrido) -> Eliminación de Dead Click en Paso 2 y Selector 1-Tap de Evento/Día en Pasos 3 y 4',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte estricto post-Ciclo #53 (>= 2026-11-15T15:23:12Z a 2026-11-15T19:16:24Z): 63 eventos humanos reales en ses_5xwq7_zc0z3yh4 (Delegación Iztapalapa, CDMX | Mobile 390x675 | 12 min de sesión activa | title_len: 55, meta_desc_len: 155, img_missing_alt: 0). El prospecto usó la nueva barra comparativa de 3 columnas en #paquetes desplegada en el Ciclo #53 (paquete_preseleccionar_premier, 200 -> 180 -> 150 -> 120 invitados), abrió 6 modales de inclusiones y generó 2 clics a WhatsApp por $63,600 MXN (120 personas, Paquete Premier + wants_tour: true). Se detectaron 2 fricciones reales: 1) Al saltar desde #paquetes directo al Paso 3, el usuario envió su primer WhatsApp con el default "Boda / Viernes" (18:41:12Z) y luego tuvo que retroceder hasta los Pasos 1 y 2 para cambiar a "Bautizo / Cumpleaños" y "Domingo" antes de enviar su segundo WhatsApp (18:42:22Z). 2) En el Paso 2 se registró 1 dead_click sobre el texto strong "💡 ¿Buscas el mejor precio o beneficio adicional?" (18:41:54Z) al intentar activar el beneficio de Domingo.',
+    autonomousActions: [
+      'En src/components/Precotizador.tsx (Paso 2): se convirtió el bloque de texto persuasivo "💡 ¿Buscas el mejor precio o beneficio adicional?" en un botón interactivo (<button type="button"> con pointer-events-none en hijos y data-interactive="true") que selecciona tarifa preferencial, y el banner verde de beneficio activo en un botón de avance directo al Paso 3, eliminando el dead_click detectado.',
+      'En src/components/Precotizador.tsx (Paso 3): se añadieron en la barra superior de ajuste rápido dos píldoras táctiles 1-Tap ("🎉 {eventKind} • Cambiar ↻" y "📅 {preferredDay} • Día ↻") con telemetría dedicada (step_3_toggle_event_kind y step_3_toggle_day) para que los usuarios que saltan desde #paquetes puedan ajustar su tipo de evento y día sin retroceder al Paso 1 o 2.',
+      'En src/components/Precotizador.tsx (Paso 4): se añadió justo encima del botón primario "Recibir Cotización en WhatsApp" una fila de píldoras interactivas ("🎉 {eventKind} ↻", "📅 {preferredDay} ↻", "👥 {guests} pers. • {packageType}") para confirmar o alternar en 1 toque el tipo de evento y día antes de abrir WhatsApp.',
+    ],
+    filesModified: [
+      'src/components/Precotizador.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+      '.agents/state/prompt_performance_ledger.jsonl',
+    ],
+    postponedReason: null,
+    humanActionRequired: null,
+    commitHash: 'pending',
+    deploymentUuid: 'pending',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'En el corte vespertino de las 17:15 CDMX (Cron 15 9,13,17,21 * * *), verificar 0 dead_clicks en el banner de tarifa preferencial del Paso 2 y medir el uso de step_3_toggle_event_kind / step_3_toggle_day.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.6.8-cycle53',
     cycle_number: 53,
     status: 'IMPLEMENTED',

@@ -1100,36 +1100,55 @@ export default function Precotizador() {
                 })}
               </div>
 
-              {/* Banner persuasivo para descongestionar Sábado hacia Viernes/Domingo */}
+              {/* Banner persuasivo para descongestionar Sábado hacia Viernes/Domingo (Resuelve dead_click en strong detectado en ses_5xwq7_zc0z3yh4) */}
               {preferredDay === 'Sábado' ? (
-                <div className="mt-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-[11px] text-on-surface flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <div>
-                    <strong className="text-amber-400 block">
+                <div
+                  data-interactive="true"
+                  className="mt-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-[11px] text-on-surface flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setPreferredDay('Domingo')}
+                    className="text-left cursor-pointer hover:opacity-90 transition-opacity"
+                  >
+                    <strong className="text-amber-400 block pointer-events-none">
                       💡 ¿Buscas el mejor precio o beneficio adicional?
                     </strong>
-                    En <strong>Viernes o Domingo</strong> aseguras la <strong>Tarifa Preferencial</strong> más baja y recibes <strong>1 Cortesía VIP sin cargo</strong> (Letras Gigantes o Recepción con Coctelería).
-                  </div>
+                    <span className="pointer-events-none">
+                      En <strong className="pointer-events-none">Viernes o Domingo</strong> aseguras la <strong className="pointer-events-none">Tarifa Preferencial</strong> más baja y recibes <strong className="pointer-events-none">1 Cortesía VIP sin cargo</strong> (Letras Gigantes o Recepción con Coctelería).
+                    </span>
+                  </button>
                   <div className="flex gap-1.5 shrink-0">
                     <button
                       type="button"
                       onClick={() => setPreferredDay('Viernes')}
-                      className="px-2.5 py-1.5 rounded-lg bg-primary text-on-primary font-bold text-[10px] cursor-pointer"
+                      className="px-2.5 py-1.5 min-h-[36px] rounded-lg bg-primary text-on-primary font-bold text-[10px] cursor-pointer"
                     >
                       <span className="pointer-events-none">Elegir Viernes 🎁</span>
                     </button>
                     <button
                       type="button"
                       onClick={() => setPreferredDay('Domingo')}
-                      className="px-2.5 py-1.5 rounded-lg bg-surface-container-high text-on-surface border border-outline-variant/40 font-bold text-[10px] cursor-pointer"
+                      className="px-2.5 py-1.5 min-h-[36px] rounded-lg bg-surface-container-high text-on-surface border border-outline-variant/40 font-bold text-[10px] cursor-pointer"
                     >
                       <span className="pointer-events-none">Domingo 🎁</span>
                     </button>
                   </div>
                 </div>
               ) : (
-                <div className="mt-3 p-2.5 rounded-xl bg-green-500/10 border border-green-500/30 text-[11px] text-green-400 font-medium">
-                  🎉 <strong>Beneficio {preferredDay} Activo:</strong> Tu cotización incluye Tarifa Preferencial garantizada + Cortesía Especial al reservar.
-                </div>
+                <button
+                  type="button"
+                  data-interactive="true"
+                  onClick={handleStep2Next}
+                  className="mt-3 w-full p-2.5 rounded-xl bg-green-500/10 hover:bg-green-500/15 border border-green-500/30 text-[11px] text-green-400 font-medium text-left flex items-center justify-between gap-2 transition-colors cursor-pointer"
+                >
+                  <span className="pointer-events-none">
+                    🎉 <strong className="pointer-events-none">Beneficio {preferredDay} Activo:</strong> Tu cotización incluye Tarifa Preferencial garantizada + Cortesía Especial al reservar.
+                  </span>
+                  <span className="text-[10px] font-bold underline shrink-0 pointer-events-none">
+                    Continuar →
+                  </span>
+                </button>
               )}
             </div>
 
@@ -1192,44 +1211,91 @@ export default function Precotizador() {
         ================================================================= */}
         {step === 3 && (
           <div className="animate-fade-in space-y-3.5">
-            {/* Barra de Ajuste Rápido de Aforo en Paso 3 (Evita back_from_3_to_1 detectado en ses_95bv7_gx4259w8 al comparar Premier vs Plus) */}
+            {/* Barra de Ajuste Rápido de Aforo, Evento y Día en Paso 3 (Evita regresos al Paso 1/2 cuando entran desde #paquetes como en ses_5xwq7_zc0z3yh4) */}
             <div
               data-interactive="true"
-              className="p-2.5 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-between gap-2 text-xs"
+              className="p-2.5 rounded-xl bg-primary/10 border border-primary/30 space-y-2 text-xs"
             >
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => handleGuestsDelta(-10)}
+                    disabled={guests <= 100}
+                    className="w-7 h-7 rounded-lg bg-surface-container-highest hover:bg-primary hover:text-on-primary font-bold text-xs flex items-center justify-center cursor-pointer disabled:opacity-30"
+                    title="Restar 10 invitados"
+                  >
+                    <span className="pointer-events-none">−10</span>
+                  </button>
+                  <span className="text-on-surface font-bold px-1">
+                    {guests} pers.
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => handleGuestsDelta(10)}
+                    disabled={guests >= 250}
+                    className="w-7 h-7 rounded-lg bg-surface-container-highest hover:bg-primary hover:text-on-primary font-bold text-xs flex items-center justify-center cursor-pointer disabled:opacity-30"
+                    title="Sumar 10 invitados"
+                  >
+                    <span className="pointer-events-none">+10</span>
+                  </button>
+                </div>
                 <button
                   type="button"
-                  onClick={() => handleGuestsDelta(-10)}
-                  disabled={guests <= 100}
-                  className="w-7 h-7 rounded-lg bg-surface-container-highest hover:bg-primary hover:text-on-primary font-bold text-xs flex items-center justify-center cursor-pointer disabled:opacity-30"
-                  title="Restar 10 invitados"
+                  onClick={handleStep3Next}
+                  className="text-primary font-extrabold shrink-0 bg-primary/15 hover:bg-primary hover:text-on-primary px-2.5 py-1 rounded-lg transition-colors cursor-pointer"
+                  title="Ver desglose y cotización final"
                 >
-                  <span className="pointer-events-none">−10</span>
-                </button>
-                <span className="text-on-surface font-bold px-1">
-                  {guests} pers. • {preferredDay}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => handleGuestsDelta(10)}
-                  disabled={guests >= 250}
-                  className="w-7 h-7 rounded-lg bg-surface-container-highest hover:bg-primary hover:text-on-primary font-bold text-xs flex items-center justify-center cursor-pointer disabled:opacity-30"
-                  title="Sumar 10 invitados"
-                >
-                  <span className="pointer-events-none">+10</span>
+                  <span className="pointer-events-none">
+                    Total: ${budget.toLocaleString('es-MX')} MXN →
+                  </span>
                 </button>
               </div>
-              <button
-                type="button"
-                onClick={handleStep3Next}
-                className="text-primary font-extrabold shrink-0 bg-primary/15 hover:bg-primary hover:text-on-primary px-2.5 py-1 rounded-lg transition-colors cursor-pointer"
-                title="Ver desglose y cotización final"
-              >
-                <span className="pointer-events-none">
-                  Total: ${budget.toLocaleString('es-MX')} MXN →
-                </span>
-              </button>
+              <div className="flex items-center gap-1.5 pt-1 border-t border-primary/20">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const currentIndex = EVENT_KINDS.findIndex((ek) => ek.id === eventKind);
+                    const nextIndex = (currentIndex + 1) % EVENT_KINDS.length;
+                    const nextKind = EVENT_KINDS[nextIndex]?.id || 'XV Años';
+                    setEventKind(nextKind);
+                    trackEvent('precotizador_step', 'step_3_toggle_event_kind', {
+                      section: 'precotizador',
+                      step_number: 3,
+                      event_kind: nextKind,
+                      guests_range: getGuestsBucket(guests),
+                      package_name: `Paquete ${packageType}`,
+                    });
+                  }}
+                  className="flex-1 min-h-[34px] px-2.5 py-1 rounded-lg bg-surface-container-lowest/90 hover:bg-surface-container-high border border-outline-variant/30 text-[11px] font-bold text-on-surface flex items-center justify-between gap-1 cursor-pointer transition-colors"
+                  title="Cambiar tipo de evento sin regresar al Paso 1"
+                >
+                  <span className="truncate pointer-events-none">🎉 {eventKind}</span>
+                  <span className="text-primary text-[10px] shrink-0 pointer-events-none">Cambiar ↻</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const nextIdx =
+                      (PREFERRED_DAYS.findIndex((d) => d.id === preferredDay) + 1) %
+                      PREFERRED_DAYS.length;
+                    const nextDay = PREFERRED_DAYS[nextIdx].id;
+                    setPreferredDay(nextDay);
+                    trackEvent('precotizador_step', 'step_3_toggle_day', {
+                      section: 'precotizador',
+                      step_number: 3,
+                      event_kind: eventKind,
+                      guests_range: getGuestsBucket(guests),
+                      preferred_day: nextDay,
+                    });
+                  }}
+                  className="flex-1 min-h-[34px] px-2.5 py-1 rounded-lg bg-surface-container-lowest/90 hover:bg-surface-container-high border border-outline-variant/30 text-[11px] font-bold text-on-surface flex items-center justify-between gap-1 cursor-pointer transition-colors"
+                  title="Cambiar día del evento sin regresar al Paso 2"
+                >
+                  <span className="truncate pointer-events-none">📅 {preferredDay}</span>
+                  <span className="text-primary text-[10px] shrink-0 pointer-events-none">Día ↻</span>
+                </button>
+              </div>
             </div>
 
             {/* Banner de desbloqueo a 100 invitados + Alternativa Combo VIP para 50-90 personas */}
@@ -1596,6 +1662,41 @@ export default function Precotizador() {
                   </span>
                 </div>
               </button>
+
+              {/* Resumen rápido interactivo de Tipo de Evento y Día antes del CTA de WhatsApp (Evita doble envío de WhatsApp detectado en ses_5xwq7_zc0z3yh4) */}
+              <div className="mt-2 flex flex-wrap items-center justify-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const currentIndex = EVENT_KINDS.findIndex((ek) => ek.id === eventKind);
+                    const nextIndex = (currentIndex + 1) % EVENT_KINDS.length;
+                    const nextKind = EVENT_KINDS[nextIndex]?.id || 'XV Años';
+                    setEventKind(nextKind);
+                  }}
+                  className="px-2.5 py-1 min-h-[32px] rounded-full bg-surface-container-high hover:bg-primary/15 border border-outline-variant/40 text-[11px] font-bold text-on-surface flex items-center gap-1 cursor-pointer transition-colors"
+                  title="Toca para cambiar el tipo de evento antes de enviar a WhatsApp"
+                >
+                  <span className="pointer-events-none">🎉 {eventKind}</span>
+                  <span className="text-primary text-[10px] pointer-events-none">↻</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const nextIdx =
+                      (PREFERRED_DAYS.findIndex((d) => d.id === preferredDay) + 1) %
+                      PREFERRED_DAYS.length;
+                    setPreferredDay(PREFERRED_DAYS[nextIdx].id);
+                  }}
+                  className="px-2.5 py-1 min-h-[32px] rounded-full bg-surface-container-high hover:bg-primary/15 border border-outline-variant/40 text-[11px] font-bold text-on-surface flex items-center gap-1 cursor-pointer transition-colors"
+                  title="Toca para cambiar el día antes de enviar a WhatsApp"
+                >
+                  <span className="pointer-events-none">📅 {preferredDay}</span>
+                  <span className="text-primary text-[10px] pointer-events-none">↻</span>
+                </button>
+                <span className="px-2.5 py-1 min-h-[32px] rounded-full bg-surface-container-low border border-outline-variant/30 text-[11px] font-bold text-secondary flex items-center pointer-events-none">
+                  👥 {guests} pers. • {packageType}
+                </span>
+              </div>
 
               {/* CTA Primario Instantáneo Above-the-Fold en Paso 4 (Convierte sesiones como ses_yjhug_1f5yj18a apenas entran al Paso 4) */}
               <div className="mt-2.5 flex flex-col sm:flex-row gap-2">
