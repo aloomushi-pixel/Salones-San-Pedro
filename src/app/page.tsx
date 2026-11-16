@@ -31,21 +31,21 @@ export default function Home() {
             <div className="absolute inset-0 hero-gradient"></div>
           </div>
           
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pt-4 lg:pt-6">
-            <h1 className="font-display-lg text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl text-surface-container-lowest mb-4 lg:mb-6 text-center lg:text-left drop-shadow-xl font-bold leading-tight">
-              <TrackedLink
-                eventType="hero_click"
-                source="h1_headline_precotizador"
-                href="#precotizador"
-                className="hover:text-primary transition-colors"
-              >
-                Salón de eventos en Gustavo A. Madero - CDMX San Pedro Plus
-              </TrackedLink>
-            </h1>
-            
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pt-2 lg:pt-4">
             <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-center lg:items-start justify-between">
-              {/* Columna Izquierda: Texto, Píldoras Interactivas de Confianza y CTA */}
-              <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-6 pt-1 lg:pt-2">
+              {/* Columna Izquierda: H1 + Texto, Píldoras Interactivas de Confianza y CTA (Alinea el Precotizador al tope en laptops 1366x768 / 1352x636 como ses_ujujf_730usqf2) */}
+              <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-5 pt-1">
+                <h1 className="font-display-lg text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl text-surface-container-lowest text-center lg:text-left drop-shadow-xl font-bold leading-tight">
+                  <TrackedLink
+                    eventType="hero_click"
+                    source="h1_headline_precotizador"
+                    href="#precotizador"
+                    className="hover:text-primary transition-colors"
+                  >
+                    Salón de eventos en Gustavo A. Madero - CDMX San Pedro Plus
+                  </TrackedLink>
+                </h1>
+
                 <p className="font-body-lg text-base sm:text-xl md:text-2xl text-surface-variant max-w-xl drop-shadow-md leading-relaxed">
                   Salón de eventos en Ciudad de México para bodas, XV años, bautizos, graduaciones y eventos corporativos con paquetes todo incluido desde $530 MXN por persona.
                 </p>

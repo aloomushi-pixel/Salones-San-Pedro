@@ -201,26 +201,52 @@ export default function StickyPriceCompareBar() {
               }}
               className="flex-1 sm:flex-initial px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-[11px] font-bold transition-colors cursor-pointer"
             >
-              ¿Qué incluye cada uno?
+              <span className="pointer-events-none">¿Qué incluye cada uno?</span>
             </button>
-            <a
-              href="#precotizador"
-              onClick={(e) => {
-                e.preventDefault();
-                setExitRescueTriggered(false);
-                setVisible(false);
-                trackEvent('cotizar_click', 'sticky_bar_ir_precotizador', {
-                  section: 'sticky_price_bar',
-                });
-                const el =
-                  document.getElementById('precotizador') ||
-                  document.getElementById('precotizador-hero');
-                el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }}
-              className="flex-1 sm:flex-initial px-3.5 py-1.5 rounded-xl bg-primary text-on-primary text-[11px] font-extrabold uppercase tracking-wider text-center hover:opacity-95 transition-opacity"
-            >
-              Cotizar Ahora ↑
-            </a>
+            {exitRescueTriggered || precotizadorInView ? (
+              <a
+                href={`https://wa.me/526633670431?text=${encodeURIComponent(
+                  `¡Hola Salones San Pedro Plus! Vi sus tarifas en la web para ${syncedGuests} personas (Paquete ${syncedPkg}: $${(
+                    syncedGuests *
+                    (syncedPkg === 'Premier' ? 530 : syncedPkg === 'All Inclusive' ? 1010 : 710)
+                  ).toLocaleString('es-MX')} MXN) y me gustaría recibir la cotización rápida y agendar visita.`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  setExitRescueTriggered(false);
+                  trackEvent('whatsapp_click', 'sticky_bar_exit_rescue_wa', {
+                    section: 'sticky_price_bar',
+                    package_name: `Paquete ${syncedPkg}`,
+                    guests_range: `${syncedGuests} personas`,
+                  });
+                }}
+                className="flex-1 sm:flex-initial px-3.5 py-1.5 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white text-[11px] font-extrabold uppercase tracking-wider text-center transition-colors"
+              >
+                <span className="pointer-events-none">
+                  WhatsApp (${(syncedGuests * 530).toLocaleString('es-MX')}+)
+                </span>
+              </a>
+            ) : (
+              <a
+                href="#precotizador"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setExitRescueTriggered(false);
+                  setVisible(false);
+                  trackEvent('cotizar_click', 'sticky_bar_ir_precotizador', {
+                    section: 'sticky_price_bar',
+                  });
+                  const el =
+                    document.getElementById('precotizador') ||
+                    document.getElementById('precotizador-hero');
+                  el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                className="flex-1 sm:flex-initial px-3.5 py-1.5 rounded-xl bg-primary text-on-primary text-[11px] font-extrabold uppercase tracking-wider text-center hover:opacity-95 transition-opacity"
+              >
+                <span className="pointer-events-none">Cotizar Ahora ↑</span>
+              </a>
+            )}
             <button
               type="button"
               onClick={handleDismiss}
