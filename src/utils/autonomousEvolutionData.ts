@@ -22,6 +22,37 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.7.8-cycle63',
+    cycle_number: 63,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-17 17:17 CDMX',
+    title:
+      'Ciclo Vespertino #63 (POSTPONED — Estándar v4.0.2): 8 Eventos en 1 Sesión Rápida (Miguel Hidalgo CDMX) con 0 Dead/Rage Clicks — Cero Spam Intermedio (17:15 CDMX)',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte vespertino de las 17:15 CDMX (>= 2026-11-17T19:24:00Z a 2026-11-17T23:16:40Z): 8 eventos en ses_am47o_n8s2a3ay (Delegación Miguel Hidalgo, CDMX CP 11520 | Viewport 681x613 | 7s activos) con 0 dead_clicks, 0 rage_clicks, title_len: 55, meta_desc_len: 155, img_missing_alt: 0. En Google Search Console (sc-domain:sanpedro.aionia.com.mx) se mantienen consolidados 52 clics / 1,305 impresiones.',
+    autonomousActions: [
+      'Verificación criptográfica SHA-256 íntegra (55cace178ac4d457e35e4971cf143f7f401258ea265bae6c42fec020183e01a8).',
+      'Disciplina consciente v4.0.2 (POSTPONED): con 0 dead_clicks y 0 rage_clicks tras el despliegue y3zlcpkkjpa2r0fozcqio4sz del Ciclo #62, se preserva intacta la versión en producción sin cambios forzados.',
+      'Aplicación de la Regla Anti-Spam en corte intermedio (17:15 CDMX): no se envía correo intermedio; se consolida para el corte ejecutivo nocturno de las 21:15 CDMX.',
+    ],
+    filesModified: [
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+      '.agents/state/prompt_performance_ledger.jsonl',
+    ],
+    postponedReason:
+      '0 dead_clicks y 0 rage_clicks en la ventana 13:24–17:16 CDMX; corte intermedio silencioso (Anti-Spam) que se consolidará a las 21:15 CDMX.',
+    humanActionRequired: null,
+    commitHash: 'd45a70a',
+    deploymentUuid: 'y3zlcpkkjpa2r0fozcqio4sz',
+    nextTimerSeconds: 14400,
+    emailSent: false,
+    hypothesisNextCycle:
+      'En el segundo corte ejecutivo consolidado del día a las 21:15 CDMX (Cron 15 9,13,17,21 * * *), auditar el tráfico vespertino-nocturno y enviar el reporte de cierre diario.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.7.7-cycle62',
     cycle_number: 62,
     status: 'IMPLEMENTED',
