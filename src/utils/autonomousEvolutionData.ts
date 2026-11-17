@@ -22,6 +22,37 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.7.6-cycle61',
+    cycle_number: 61,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-17 09:17 CDMX',
+    title:
+      'Ciclo Matutino #61 (POSTPONED — Estándar v4.0.2): 6 Eventos con 0 Dead/Rage Clicks + Validación SEO en /blog/decoracion-con-globos-moderna-para-fiestas y Mejora de Posiciones en GSC — Cero Spam Intermedio (09:15 CDMX)',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte matutino de las 09:15 CDMX (>= 2026-11-17T03:19:43Z a 2026-11-17T15:16:35Z): 6 eventos en 2 sesiones (0 dead_clicks, 0 rage_clicks) validando /blog/decoracion-con-globos-moderna-para-fiestas (title_len: 58 < 60c, meta_desc_len: 157 < 160c, h1_count: 1, img_missing_alt: 0) y / (title_len: 55, meta_desc_len: 155, img_missing_alt: 0). En Google Search Console (sc-domain:sanpedro.aionia.com.mx) subieron las impresiones y posiciones ("salones san pedro plus" 21 clics / 616 imp #1.02; "salon san pedro plus" 15 clics / 201 imp #1.22; "salones san pedro" mejoró a #8.13 y "salones de fiestas cdmx" a #21.53).',
+    autonomousActions: [
+      'Verificación criptográfica SHA-256 íntegra (55cace178ac4d457e35e4971cf143f7f401258ea265bae6c42fec020183e01a8).',
+      'Disciplina consciente v4.0.2 (POSTPONED): con 0 dead_clicks y 0 rage_clicks y métricas SEO en verde, se conserva intacto el despliegue m4l2viupzg82zbx7zmlcaftk sin cambios forzados.',
+      'Aplicación de la Regla Anti-Spam en corte intermedio (09:15 CDMX): no se envía correo intermedio; se consolida para el primer corte ejecutivo del día a las 13:15 CDMX.',
+    ],
+    filesModified: [
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+      '.agents/state/prompt_performance_ledger.jsonl',
+    ],
+    postponedReason:
+      '0 dead_clicks y 0 rage_clicks en la ventana nocturna-matutina; corte intermedio silencioso (Anti-Spam) que se consolidará a las 13:15 CDMX.',
+    humanActionRequired: null,
+    commitHash: 'eea9ef0',
+    deploymentUuid: 'm4l2viupzg82zbx7zmlcaftk',
+    nextTimerSeconds: 14400,
+    emailSent: false,
+    hypothesisNextCycle:
+      'En el primer corte ejecutivo consolidado del día a las 13:15 CDMX (Cron 15 9,13,17,21 * * *), auditar el tráfico matutino y enviar el reporte consolidado.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.7.5-cycle60',
     cycle_number: 60,
     status: 'POSTPONED',
