@@ -26,11 +26,19 @@ Si el código de salida es distinto de `0`, aborta inmediatamente y alerta al us
 
 ### Protocolo Paso a Paso del Loop 1:
 1. **Corte Estricto de Telemetría (`Supabase` + `Google Search Console`):**
-   - Consultar `analytics_events` y `leads` estrictamente posteriores al timestamp del último corte registrado en `src/utils/autonomousEvolutionData.ts`.
+   - Consultar `analytics_events` y `leads` estrictamente posteriores al timestamp del último corte (`event_type=eq.autonomous_evolution_log&order=created_at.desc&limit=1`).
+   - **Esquema Exacto de `public.analytics_events` (Cero Errores HTTP 400 / Ahorro de Tokens):**
+     - Columnas de lectura/escritura: `id`, `event_type`, `source`, `path`, `user_agent`, `created_at` (no existen columnas `metadata` ni `event_data`).
+     - Para extraer el payload enriquecido de `trackEvent.ts`, buscar el delimitador exacto `__UX_META__:` dentro de `user_agent` (`const idx = ua.indexOf('__UX_META__:'); const meta = idx !== -1 ? JSON.parse(ua.slice(idx + 12)) : {};`).
+     - Para insertar el registro del ciclo (`autonomous_evolution_log`), enviar `{ event_type: 'autonomous_evolution_log', source: '<version>:<status>', path: '/admin#autonomous-evolution', user_agent: JSON.stringify(cyclePayload) }`.
    - Evaluar señales de los **Monitores UX Autónomos**:
      - `dead_click`, `rage_click`, `text_copy`, `scroll_return_prices`, `exit_intent`.
      - Errores JS en cliente, discrepancias de hidratación SSR/CSR, latencia (`web_vitals`) y áreas táctiles móviles (`>= 44×44 px`).
-     - Embudo de 4 pasos de `src/components/Precotizador.tsx` (aforo mínimo oficial: **`100 personas`**, precios base: `Premier $530`, `Plus $710`, `All Inclusive $1,010`) y su puente bidireccional con `src/components/GaleriaSection.tsx` y `src/components/PaquetesInteractiveSection.tsx`.
+     - Embudo de 4 pasos de `src/components/Precotizador.tsx` (aforo mínimo oficial: **`100 personas`**, precios base: `Premier $530`, `Plus $710`, `All Inclusive $1,010`) y su puente bidireccional (`sessionStorage['sanpedro_precotizador_draft_v1']` + evento `ssp:sync-from-precotizador`) con `GaleriaSection.tsx` (incluyendo el Lightbox), `PaquetesInteractiveSection.tsx`, `TikTokVideos.tsx`, `MenuTinderCards.tsx` y `StickyPriceCompareBar.tsx`.
+   - **Heurísticas UX/CRO Validadas Empíricamente (Meta-Auditoría #2):**
+     - **Saltos de Embudo sin Pérdida de Contexto:** Cuando un CTA externo salta directo al Paso 3 o Paso 4 del `Precotizador`, esos pasos deben incluir píldoras interactivas `1-Tap` para `Tipo de Evento` y `Día Preferido` antes del botón de WhatsApp.
+     - **Cierre Determinista en Barras Flotantes:** Todo botón de cierre (`✕`) en barras controladas por scroll debe invocar simultáneamente `setDismissed(true)` y `setVisible(false)`, y el render debe evaluar `(dismissed || !visible)`.
+     - **Visibilidad Above-the-Fold en Laptops `1366×768` (`height ~636px`):** Mantener el `<h1>` dentro de la columna izquierda (`lg:w-1/2`) del Hero para alinear `<Precotizador />` al borde superior y evitar que el botón de avance del Paso 1 quede oculto bajo el pliegue.
    - Consultar `sc-domain:sanpedro.aionia.com.mx` vía Google Search Console API (`.gsc-credentials.json`):
      - Verificar salud de `sitemap.xml`, CTR, posiciones orgánicas, `<title> < 60c`, `<meta description> < 160c` y paridad `1:1` con Schema `EventVenue` / `FAQPage` JSON-LD y `public/llms.txt` (GEO).
 2. **Clasificación bajo Gobernanza (Grupo A / Grupo B y Nivel 1 / 2 / 3):**
