@@ -930,15 +930,23 @@ export default function PaquetesInteractiveSection() {
                   <TrackedLink
                     eventType="whatsapp_click"
                     source="agendar_recorrido_midpage"
-                    href="https://wa.me/526633670431?text=%C2%A1Hola!%20Vi%20sus%20paquetes%20y%20ubicaci%C3%B3n%20en%20Gustavo%20A.%20Madero.%20Me%20gustar%C3%ADa%20agendar%20una%20visita%20para%20conocer%20los%20salones%20Diamante%20y%20Platino."
+                    href={`https://wa.me/526633670431?text=${encodeURIComponent(
+                      `¡Hola Salones San Pedro Plus! Vi sus paquetes para ${simGuests} personas (desde $${(
+                        simGuests * 530
+                      ).toLocaleString(
+                        'es-MX'
+                      )} MXN en Paquete Premier / $${(simGuests * 710).toLocaleString(
+                        'es-MX'
+                      )} MXN en Paquete Plus) y su ubicación en Gustavo A. Madero. Me gustaría agendar una visita para conocer los salones Diamante y Platino.`
+                    )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-2.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-md"
+                    className="w-full py-2.5 px-4 min-h-[44px] rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-md"
                   >
                     <span data-ux-decorative="true" className="material-symbols-outlined text-base">
                       event_available
                     </span>
-                    <span>Agendar Visita al Salón</span>
+                    <span>Agendar Visita ({simGuests} Pers.) en WhatsApp</span>
                   </TrackedLink>
                 </div>
               </div>

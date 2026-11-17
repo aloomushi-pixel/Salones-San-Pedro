@@ -662,7 +662,7 @@ export default function Precotizador() {
   };
 
   const handleCopyLocation = async () => {
-    const locationText = `Salones San Pedro Plus (Salón Diamante y Salón Platino)\n📍 Dirección: Calle Norte 84 No. 6507, Col. San Pedro el Chico, Alcaldía Gustavo A. Madero, CP 07800, CDMX\n🗺️ Google Maps: https://maps.app.goo.gl/sanpedroplus\n📱 WhatsApp Directo: 66 3367 0431`;
+    const locationText = `Salones San Pedro Plus (Salón Diamante y Salón Platino)\n📍 Dirección: Calle Norte 84 No. 6507, Col. San Pedro el Chico, Alcaldía Gustavo A. Madero, CP 07800, CDMX\n🗺️ Google Maps: https://maps.app.goo.gl/oarkXjctGWr5d4J96?g_st=ac\n📱 WhatsApp Directo: 66 3367 0431`;
     try {
       await navigator.clipboard.writeText(locationText);
       setCopiedLocation(true);
@@ -959,8 +959,8 @@ export default function Precotizador() {
                 })}
               </div>
 
-              {/* Resumen instantáneo de inclusiones + CTA Above-the-Fold en Paso 1 al tocar cualquier tarjeta de paquete (Atiende ses_ehv9g_eksbku49 en móvil 428x723) */}
-              <div className="mt-2.5 p-2.5 rounded-xl bg-primary/10 border border-primary/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-left">
+              {/* Resumen instantáneo de inclusiones + CTA Above-the-Fold + WhatsApp Directo en Paso 1 (Atiende ses_v4xg6_gjo8cb6z, ses_v578a_8o73gky0 y ses_xqbwj_3r5laqr2) */}
+              <div className="mt-2.5 p-2.5 rounded-xl bg-primary/10 border border-primary/30 flex flex-col gap-2 text-left">
                 <div className="text-[11px] text-on-surface leading-snug">
                   <strong className="text-primary block">
                     Paquete {packageType} (${(guests * getPackagePrice()).toLocaleString('es-MX')} MXN por {guests} pers.):
@@ -969,15 +969,28 @@ export default function Precotizador() {
                     {(PACKAGES.find((p) => p.id === packageType)?.features || []).join(' • ')}
                   </span>
                 </div>
-                <button
-                  type="button"
-                  onClick={handleStep1Next}
-                  className="px-3 py-2 rounded-lg bg-primary text-on-primary font-extrabold text-[11px] uppercase tracking-wider shrink-0 hover:opacity-95 transition-opacity cursor-pointer text-center"
-                >
-                  <span className="pointer-events-none">
-                    Cotizar {packageType} →
-                  </span>
-                </button>
+                <div className="grid grid-cols-2 gap-1.5">
+                  <button
+                    type="button"
+                    onClick={handleStep1Next}
+                    className="min-h-[38px] px-2.5 py-1.5 rounded-lg bg-primary text-on-primary font-extrabold text-[11px] uppercase tracking-wider hover:opacity-95 transition-opacity cursor-pointer text-center flex items-center justify-center"
+                  >
+                    <span className="pointer-events-none">
+                      Personalizar →
+                    </span>
+                  </button>
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleWhatsApp}
+                    className="min-h-[38px] px-2.5 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#1EBE5D] text-white font-extrabold text-[11px] uppercase tracking-wider transition-colors cursor-pointer text-center flex items-center justify-center gap-1"
+                  >
+                    <span className="pointer-events-none">
+                      WhatsApp (${(guests * getPackagePrice()).toLocaleString('es-MX')})
+                    </span>
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -2011,7 +2024,7 @@ export default function Precotizador() {
         )}
       </div>
 
-      {/* Pie de Ubicación y Confianza Copiable en 1 Clic (Atiende text_copy: copy_precotizador) */}
+      {/* Pie de Ubicación y Confianza Copiable + Google Maps en 1 Clic (Atiende doble tap en precotizador_copy_location de ses_v4xg6_gjo8cb6z) */}
       <div className="relative z-10 mt-4 pt-3 border-t border-outline-variant/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-secondary">
         <div className="flex items-center gap-1.5">
           <span data-ux-decorative="true" className="material-symbols-outlined text-primary text-sm pointer-events-none">
@@ -2021,18 +2034,38 @@ export default function Precotizador() {
             <strong className="text-on-surface">Calle Norte 84 #6507</strong>, San Pedro el Chico, GAM, CDMX • ★ 4.9 Google
           </span>
         </div>
-        <button
-          type="button"
-          onClick={handleCopyLocation}
-          className="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/40 text-on-surface font-semibold text-[11px] transition-colors cursor-pointer shrink-0"
-        >
-          <span data-ux-decorative="true" className="material-symbols-outlined text-xs text-primary pointer-events-none">
-            {copiedLocation ? 'check_circle' : 'content_copy'}
-          </span>
-          <span className="pointer-events-none">
-            {copiedLocation ? '¡Ubicación copiada!' : 'Copiar Ubicación y Teléfono'}
-          </span>
-        </button>
+        <div className="flex items-center gap-1.5 shrink-0">
+          <button
+            type="button"
+            onClick={handleCopyLocation}
+            className="flex-1 sm:flex-initial min-h-[34px] inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/40 text-on-surface font-semibold text-[11px] transition-colors cursor-pointer"
+          >
+            <span data-ux-decorative="true" className="material-symbols-outlined text-xs text-primary pointer-events-none">
+              {copiedLocation ? 'check_circle' : 'content_copy'}
+            </span>
+            <span className="pointer-events-none">
+              {copiedLocation ? '¡Copiada!' : 'Copiar Dirección'}
+            </span>
+          </button>
+          <a
+            href="https://maps.app.goo.gl/oarkXjctGWr5d4J96?g_st=ac"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() =>
+              trackEvent('footer_click', 'precotizador_footer_google_maps', {
+                section: 'precotizador',
+                step_number: step,
+                guests_range: getGuestsBucket(guests),
+              })
+            }
+            className="flex-1 sm:flex-initial min-h-[34px] inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-lg bg-primary/15 hover:bg-primary hover:text-on-primary border border-primary/30 text-primary font-bold text-[11px] transition-colors cursor-pointer"
+          >
+            <span data-ux-decorative="true" className="material-symbols-outlined text-xs pointer-events-none">
+              map
+            </span>
+            <span className="pointer-events-none">Abrir Mapa</span>
+          </a>
+        </div>
       </div>
     </div>
   );
