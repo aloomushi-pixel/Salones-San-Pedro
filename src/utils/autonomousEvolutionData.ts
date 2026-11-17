@@ -22,6 +22,37 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.7.5-cycle60',
+    cycle_number: 60,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-16 21:17 CDMX',
+    title:
+      'Ciclo Ejecutivo Nocturno #60 (POSTPONED — Estándar v4.0.2): Cierre Consolidado 21:15 CDMX (Validación SEO en /blog/renta-de-auto-clasico-para-bodas + Balance Diario de 69 Eventos, Meta-Auditoría #2 Loop 2 y 52 Clics GSC)',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte ejecutivo nocturno de las 21:15 CDMX (>= 2026-11-16T23:18:20Z a 2026-11-17T03:16:35Z): 2 eventos humanos en ses_xeff9_ldsizrfl sobre /blog/renta-de-auto-clasico-para-bodas (0 dead_clicks, 0 rage_clicks, title_len: 58 < 60c, meta_desc_len: 157 < 160c, h1_count: 1, img_missing_alt: 0). Balance diario (Ciclos #57 a #60 + Loop 2 Meta-Auditoría #2): 69 eventos auditados, despliegue m4l2viupzg82zbx7zmlcaftk activo, evolución del sistema de prompts a v4.0.2 y 52 clics orgánicos en Google Search Console.',
+    autonomousActions: [
+      'Verificación criptográfica SHA-256 íntegra (55cace178ac4d457e35e4971cf143f7f401258ea265bae6c42fec020183e01a8).',
+      'Disciplina consciente v4.0.2 (POSTPONED): con 0 dead_clicks y 0 rage_clicks y métricas SEO en verde en los artículos de blog y la página principal, se mantiene intacto el despliegue en producción.',
+      'Envío del Segundo Reporte Ejecutivo Consolidado del Día (Cierre Nocturno 21:15 CDMX) vía Resend con el balance de los Ciclos #59 y #60, la Meta-Auditoría #2 del Loop 2 y la Tabla Persistente Acumulativa de Sugerencias Nivel 3.',
+    ],
+    filesModified: [
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+      '.agents/state/prompt_performance_ledger.jsonl',
+    ],
+    postponedReason:
+      '0 dead_clicks y 0 rage_clicks en la ventana 17:18–21:16 CDMX; se envía el corte ejecutivo nocturno consolidado de las 21:15 CDMX y el sistema entra en reposo nocturno hasta mañana martes a las 09:15 CDMX.',
+    humanActionRequired: null,
+    commitHash: '51263ba',
+    deploymentUuid: 'm4l2viupzg82zbx7zmlcaftk',
+    nextTimerSeconds: 43200,
+    emailSent: true,
+    hypothesisNextCycle:
+      'En el corte matutino de mañana martes a las 09:15 CDMX (Cron 15 9,13,17,21 * * * — cero ejecuciones de madrugada), auditar el tráfico nocturno-matutino bajo las heurísticas v4.0.2.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.7.4-cycle59',
     cycle_number: 59,
     status: 'POSTPONED',
