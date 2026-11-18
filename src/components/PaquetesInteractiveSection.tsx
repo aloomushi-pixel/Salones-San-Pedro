@@ -613,7 +613,7 @@ export default function PaquetesInteractiveSection() {
                   rel="noopener noreferrer"
                   className="block w-full py-3.5 border-2 border-primary text-primary hover:bg-primary hover:text-on-primary rounded-xl font-label-sm transition-all uppercase tracking-wider text-center text-xs font-bold"
                 >
-                  Verificar Disponibilidad Premier
+                  WhatsApp Premier ({formatMXN(getPackageTotal(530, 100))})
                 </TrackedLink>
               </div>
             </div>
@@ -715,7 +715,7 @@ export default function PaquetesInteractiveSection() {
                   rel="noopener noreferrer"
                   className="block w-full py-3.5 bg-primary text-on-primary hover:opacity-90 rounded-xl font-label-sm shadow-md transition-all uppercase tracking-wider text-center text-xs font-bold"
                 >
-                  Verificar Disponibilidad Plus
+                  WhatsApp Plus ({formatMXN(getPackageTotal(710, 100))})
                 </TrackedLink>
               </div>
             </div>
@@ -802,7 +802,7 @@ export default function PaquetesInteractiveSection() {
                   rel="noopener noreferrer"
                   className="block w-full py-3.5 border-2 border-primary text-primary hover:bg-primary hover:text-on-primary rounded-xl font-label-sm transition-all uppercase tracking-wider text-center text-xs font-bold"
                 >
-                  Verificar Disponibilidad All Inclusive
+                  WhatsApp All Inc. ({formatMXN(getPackageTotal(1010, 100))})
                 </TrackedLink>
               </div>
             </div>

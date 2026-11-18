@@ -22,6 +22,37 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.7.9-cycle64',
+    cycle_number: 64,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-17 21:22 CDMX',
+    title:
+      'Ciclo Ejecutivo Nocturno #64 (IMPLEMENTED — Estándar v4.0.2): 66 Eventos Humanos + 9.4 Min en #paquetes (Bautizo 120 Pers. $63,600) -> Barra Superior Interactiva con WhatsApp en Paso 2 y Monto Total en Botones de Tarjetas de #paquetes',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte ejecutivo nocturno de las 21:15 CDMX (>= 2026-11-17T23:18:36Z a 2026-11-18T03:16:40Z): 66 eventos humanos reales en 2 sesiones (0 dead_clicks, 0 rage_clicks, title_len: 55, meta_desc_len: 155, img_missing_alt: 0). En ses_h7at9_ablfb1a5 (Delegación Miguel Hidalgo, CDMX CP 14250 | Mobile 473x917 | Google Orgánico SEO | 58 eventos y 9.4 min activos), el prospecto recorrió el Lightbox de #galeria, ajustó el aforo a 120 personas (aforo_120), previsualizó Paquete Premier ($63,600 MXN), completó step_1_completado para Bautizo / Cumpleaños (120 personas) y luego permaneció 385s (6.4 min) leyendo las 3 tarjetas completas de #paquetes (scroll 23-26%). Se detectaron 2 mejoras de conversión: 1) en la barra superior del Paso 2, el monto "{packageType} ${total} MXN" era un span estático sin botón de avance rápido ni botón WhatsApp 1-Tap; 2) en las 3 tarjetas completas de #paquetes, el CTA inferior decía "Verificar Disponibilidad Premier/Plus/All Inclusive" sin mostrar el monto total calculado para simGuests en la etiqueta del botón.',
+    autonomousActions: [
+      'En src/components/Precotizador.tsx (Paso 2): se convirtió el resumen "{packageType} ${total}" de la barra superior del Paso 2 en un botón interactivo de avance al Paso 3 y se añadió el botón directo "WhatsApp" junto a él.',
+      'En src/components/PaquetesInteractiveSection.tsx: se actualizaron los CTAs inferiores de las 3 tarjetas completas de paquetes para mostrar el total dinámico calculado en la etiqueta ("WhatsApp Premier ($63,600)", "WhatsApp Plus ($85,200)", "WhatsApp All Inc. ($121,200)").',
+    ],
+    filesModified: [
+      'src/components/Precotizador.tsx',
+      'src/components/PaquetesInteractiveSection.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+      '.agents/state/prompt_performance_ledger.jsonl',
+    ],
+    postponedReason: null,
+    humanActionRequired: null,
+    commitHash: 'pending',
+    deploymentUuid: 'pending',
+    nextTimerSeconds: 43200,
+    emailSent: true,
+    hypothesisNextCycle:
+      'En el corte matutino de mañana miércoles a las 09:15 CDMX (Cron 15 9,13,17,21 * * * — cero ejecuciones de madrugada), auditar el tráfico nocturno-matutino y los clics en los botones de WhatsApp con monto visible de #paquetes y Paso 2.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.7.8-cycle63',
     cycle_number: 63,
     status: 'POSTPONED',

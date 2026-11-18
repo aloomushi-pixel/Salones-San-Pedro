@@ -1071,9 +1071,28 @@ export default function Precotizador() {
                   <span className="pointer-events-none">+</span>
                 </button>
               </div>
-              <span className="text-primary font-extrabold shrink-0">
-                {packageType} ${(guests * getPackagePrice()).toLocaleString('es-MX')} MXN
-              </span>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={handleStep2Next}
+                  className="px-2 py-1 rounded-lg bg-primary/15 hover:bg-primary hover:text-on-primary text-primary font-extrabold text-[11px] transition-colors cursor-pointer"
+                  title="Avanzar al Paso 3"
+                >
+                  <span className="pointer-events-none">
+                    {packageType} ${(guests * getPackagePrice()).toLocaleString('es-MX')} →
+                  </span>
+                </button>
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleWhatsApp}
+                  className="px-2 py-1 rounded-lg bg-[#25D366] hover:bg-[#1EBE5D] text-white font-extrabold text-[11px] transition-colors cursor-pointer"
+                  title="Enviar cotización directa por WhatsApp"
+                >
+                  <span className="pointer-events-none">WhatsApp</span>
+                </a>
+              </div>
             </div>
             <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-4">
               <label className="block text-xs font-bold uppercase tracking-wider text-secondary mb-2.5">
