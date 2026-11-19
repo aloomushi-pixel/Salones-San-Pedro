@@ -22,6 +22,37 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.8.3-cycle68',
+    cycle_number: 68,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-18 21:17 CDMX',
+    title:
+      'Ciclo Ejecutivo Nocturno #68 (POSTPONED — Estándar v4.0.2): Cierre Consolidado 21:15 CDMX (0 Eventos Nuevos en Ventana 17:18–21:16 CDMX + Balance Diario de 30 Eventos, 1 Conversión WhatsApp y 52 Clics GSC)',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte ejecutivo nocturno de las 21:15 CDMX (>= 2026-11-18T23:18:58Z a 2026-11-19T03:16:40Z): 0 eventos humanos nuevos y 0 leads en Supabase. Balance diario consolidado (Ciclos #65, #66, #67 y #68): 30 eventos humanos reales auditados hoy en 4 sesiones (0 dead_clicks, 0 rage_clicks), 1 conversión directa a WhatsApp desde Magdalena Contreras CDMX (ses_kcu0s_fpiylb7q) y 52 clics / 1,308 impresiones en Google Search Console (sc-domain:sanpedro.aionia.com.mx).',
+    autonomousActions: [
+      'Verificación criptográfica SHA-256 íntegra (55cace178ac4d457e35e4971cf143f7f401258ea265bae6c42fec020183e01a8).',
+      'Disciplina consciente v4.0.2 (POSTPONED): con 0 dead_clicks y 0 rage_clicks y métricas SEO/UX en verde, se preserva intacto el despliegue yycdakb6ngdxkl2x2f1mqa9g sin cambios forzados.',
+      'Envío del Segundo Reporte Ejecutivo Consolidado del Día (Cierre Nocturno 21:15 CDMX) vía Resend con el balance de los Ciclos #65 a #68 y la Tabla Persistente Acumulativa de Sugerencias Nivel 3.',
+    ],
+    filesModified: [
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+      '.agents/state/prompt_performance_ledger.jsonl',
+    ],
+    postponedReason:
+      '0 eventos humanos nuevos en la ventana 17:18–21:16 CDMX; se envía el corte ejecutivo nocturno consolidado de las 21:15 CDMX y el sistema entra en reposo nocturno hasta mañana jueves a las 09:15 CDMX.',
+    humanActionRequired: null,
+    commitHash: '4175b92',
+    deploymentUuid: 'yycdakb6ngdxkl2x2f1mqa9g',
+    nextTimerSeconds: 43200,
+    emailSent: true,
+    hypothesisNextCycle:
+      'En el corte matutino de mañana jueves a las 09:15 CDMX (Cron 15 9,13,17,21 * * * — cero ejecuciones de madrugada), auditar el tráfico nocturno-matutino.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.8.2-cycle67',
     cycle_number: 67,
     status: 'POSTPONED',
