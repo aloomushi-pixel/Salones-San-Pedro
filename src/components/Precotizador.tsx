@@ -1625,9 +1625,17 @@ export default function Precotizador() {
                         </span>
                         <span className="truncate pointer-events-none">{extra.label}</span>
                       </div>
-                      {isIncludedByPkg && (
+                      {isIncludedByPkg ? (
                         <span className="text-[9px] font-extrabold uppercase tracking-wider px-1.5 py-0.5 rounded bg-green-500/20 text-green-300 shrink-0 pointer-events-none">
                           Incluido
+                        </span>
+                      ) : isIncludedInCombo ? (
+                        <span className="text-[9px] font-extrabold uppercase tracking-wider px-1.5 py-0.5 rounded bg-primary/20 text-primary shrink-0 pointer-events-none">
+                          En Combo
+                        </span>
+                      ) : (
+                        <span className="text-[10px] font-extrabold text-secondary/90 shrink-0 pointer-events-none">
+                          +${extra.approxPrice.toLocaleString('es-MX')}
                         </span>
                       )}
                     </button>
@@ -1936,14 +1944,17 @@ export default function Precotizador() {
                   })}
                 </div>
 
-                {/* 5. Simulador rápido de Extras y Combo Fiesta VIP en Paso 4 (Evita back_from_4_to_3 detectado en ses_1nz7r_igt50e5e al alternar Letras Gigantes vs Cabina 360) */}
+                {/* 5. Simulador rápido de Extras y Combo Fiesta VIP en Paso 4 (Con precios visibles + barra de total inferior para evitar back_from_4_to_3 en móvil detectado en ses_2musk_hk0i6ms6) */}
                 {packageType !== 'All Inclusive' && (
                   <div className="pt-1.5 border-t border-outline-variant/25 space-y-1.5">
                     <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-secondary">
                       <span>✨ Sumar o quitar extras en vivo:</span>
                       <button
                         type="button"
-                        onClick={handleToggleComboVip}
+                        onClick={() => {
+                          setShowMathBreakdown(true);
+                          handleToggleComboVip();
+                        }}
                         className={`px-2 py-0.5 rounded-md border text-[10px] font-extrabold transition-colors cursor-pointer ${
                           comboVipActive
                             ? 'border-primary bg-primary text-on-primary'
@@ -1967,7 +1978,10 @@ export default function Precotizador() {
                             key={extra.id}
                             type="button"
                             disabled={isIncludedByPkg}
-                            onClick={() => handleExtraToggle(extra.id)}
+                            onClick={() => {
+                              setShowMathBreakdown(true);
+                              handleExtraToggle(extra.id);
+                            }}
                             className={`px-2 py-1 rounded-lg border text-[10px] font-bold transition-all cursor-pointer ${
                               isIncludedByPkg
                                 ? 'border-green-500/40 bg-green-500/10 text-green-400 cursor-default'
@@ -1978,7 +1992,10 @@ export default function Precotizador() {
                           >
                             <span className="pointer-events-none">
                               {isSelected ? '✓ ' : '+ '}
-                              {extra.label}
+                              {extra.label}{' '}
+                              <span className="opacity-80 font-extrabold">
+                                ({isIncludedByPkg ? 'Incl.' : `+$${(extra.approxPrice / 1000).toFixed(1)}k`})
+                              </span>
                             </span>
                           </button>
                         );
@@ -1986,6 +2003,30 @@ export default function Precotizador() {
                     </div>
                   </div>
                 )}
+
+                {/* Barra compacta de Total Actualizado + 1-Tap WhatsApp al fondo del simulador de Paso 4 (Evita que el usuario móvil 390x699 tenga que hacer scroll arriba o regresar al Paso 3 tras sumar extras) */}
+                <div className="pt-2 border-t border-primary/25 flex items-center justify-between gap-2">
+                  <div className="min-w-0">
+                    <span className="block text-[9px] font-extrabold uppercase tracking-wider text-secondary">
+                      Total actualizado ({guests} pers. • {preferredDay})
+                    </span>
+                    <span className="text-sm font-black text-primary">
+                      ${budget.toLocaleString('es-MX')} MXN
+                    </span>
+                    {budget - basePackageBudget > 0 && (
+                      <span className="ml-1 text-[10px] font-bold text-green-400">
+                        (incl. +${(budget - basePackageBudget).toLocaleString('es-MX')} extras)
+                      </span>
+                    )}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleWhatsApp}
+                    className="px-3 py-2 min-h-[40px] rounded-xl bg-[#25D366] hover:bg-[#1ebe5d] text-slate-950 font-black text-[11px] uppercase tracking-wider flex items-center gap-1 shadow-sm cursor-pointer shrink-0 active:scale-95 transition-transform"
+                  >
+                    <span className="pointer-events-none">Enviar a WhatsApp →</span>
+                  </button>
+                </div>
               </div>
 
               {/* Opción de Agendar Recorrido Presencial para este Fin de Semana */}

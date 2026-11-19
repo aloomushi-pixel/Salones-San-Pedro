@@ -4,6 +4,22 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #71 — `2026-11-19 17:19 CDMX` (`v2.8.6-cycle71` — `IMPLEMENTED` • Corte Vespertino `17:15 CDMX` Estándar Maestro v4.0.2)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-19T19:19:07Z` a `2026-11-19T23:16:40Z`)
+- **Verificación Criptográfica Previa (`SHA-256`):** `[VERIFIED] 55cace178ac4d457e35e4971cf143f7f401258ea265bae6c42fec020183e01a8`.
+- **Telemetría en Supabase (`52` eventos humanos reales en `3` sesiones • `0` `dead_clicks`, `0` `rage_clicks`, `title_len: 55/58`, `meta_desc_len: 155/156`, `img_missing_alt: 0`):**
+  1. **`ses_2musk_hk0i6ms6` (`Neza, EdoMéx CP 57000 | Mobile 390x699 | Google Orgánico SEO` — `26` eventos y `355s / ~6 min` de lectura activa):**
+     - **Validación inmediata de los Ciclos #69 y #54:** El prospecto completó `step_3_completado` para **`XV Años • 100 personas • Viernes • Paquete Premier ($53,000 MXN)`** (`21:39:48Z`) y, al entrar al Paso 4, **utilizó de inmediato el nuevo Simulador de Extras en Paso 4** desplegado hoy a las `09:20 CDMX` (`extra_mariachi` a las `21:40:19Z` y `extra_dulces` a las `21:40:25Z`), además de las píldoras `step_3_toggle_day` (`Viernes` $\rightarrow$ `Domingo` $\rightarrow$ `Entre Semana` $\rightarrow$ `Sábado`).
+     - **Oportunidad UX/CRO detectada:** `51s` después de activar `+ Mariachi` y `+ Mesa de Dulces` en el Paso 4, el usuario tocó `back_from_4_to_3` (`21:41:16Z`) y alternó extras en el Paso 3 (`extra_cabina`). Al inspeccionar el Paso 4 en un viewport móvil `390x699`, detectamos que las píldoras de extras no mostraban su precio individual (`+$5.8k`, `+$4.2k`, `+$4.8k`) y que, al estar al fondo del simulador del Paso 4, el total actualizado (`$53,000` $\rightarrow$ `$63,000 MXN`) y el botón de WhatsApp quedaban arriba fuera de la pantalla.
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx):**
+   - **Precios explícitos en las tarjetas de Extras del Paso 3 y píldoras del Paso 4:** Cada servicio extra muestra ahora su inversión individual (`+$5,800` en Paso 3 / `+$5.8k` en Paso 4, o `En Combo` / `Incluido`), permitiendo comparar al instante cuánto suma Mariachi, Mesa de Dulces, Cabina 360 o Carrito de Shots.
+   - **Auto-expansión de desglose y Barra Inferior de Total Actualizado + WhatsApp 1-Tap en el Simulador del Paso 4:** Al activar o desactivar cualquier extra o el Combo VIP en el Paso 4, se despliega automáticamente el desglose matemático y el usuario ve justo al pie del simulador la barra **`Total actualizado (100 pers. • Viernes): $63,000 MXN (incl. +$10,000 extras)`** junto al botón **`Enviar a WhatsApp →`**, sin necesidad de hacer scroll hacia arriba ni regresar al Paso 3.
+
+---
+
 ## Ciclo Autónomo #70 — `2026-11-19 13:17 CDMX` (`v2.8.5-cycle70` — `POSTPONED` • Primer Corte Ejecutivo Consolidado `13:15 CDMX` Estándar Maestro v4.0.2)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console (`>= 2026-11-19T15:23:02Z` a `2026-11-19T19:16:45Z`)

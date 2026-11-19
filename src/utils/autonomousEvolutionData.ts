@@ -22,6 +22,37 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.8.6-cycle71',
+    cycle_number: 71,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-19 17:19 CDMX',
+    title:
+      'Ciclo Autónomo #71 (IMPLEMENTED — Estándar v4.0.2): Precios Visibles en Píldoras de Extras (Pasos 3 y 4) + Barra Inferior de Total Actualizado y WhatsApp 1-Tap en el Simulador del Paso 4 tras Auditar 52 Eventos en Neza',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte vespertino de las 17:15 CDMX (>= 2026-11-19T19:19:07Z a 2026-11-19T23:16:40Z): 52 eventos humanos reales en 3 sesiones (0 dead_clicks, 0 rage_clicks). En ses_2musk_hk0i6ms6 (Neza, EdoMéx CP 57000 | Mobile 390x699 | Google Orgánico SEO | 26 eventos y 355s / ~6 min activos), el prospecto completó step_3_completado para XV Años • 100 personas • Viernes • Paquete Premier ($53,000 MXN) y al llegar al Paso 4 utilizó de inmediato el nuevo Simulador de Extras desplegado en el Ciclo #69 (extra_mariachi y extra_dulces a las 21:40:19Z y 21:40:25Z). Sin embargo, 51s después hizo back_from_4_to_3 porque en pantallas móviles 390x699 las píldoras de extras no mostraban el precio individual (+$5.8k / +$4.2k) y el monto total actualizado quedaba arriba fuera del viewport al estar al final del simulador del Paso 4.',
+    autonomousActions: [
+      'Verificación criptográfica SHA-256 íntegra antes y después de cambios (55cace178ac4d457e35e4971cf143f7f401258ea265bae6c42fec020183e01a8).',
+      'En src/components/Precotizador.tsx (Paso 3): se agregó la etiqueta explícita de precio (+$5,800, +$4,200, +$4,800, etc. o "En Combo" / "Incluido") en cada tarjeta de servicio extra.',
+      'En src/components/Precotizador.tsx (Paso 4): se añadió el precio abreviado (+$5.8k, +$4.2k, etc.) en cada píldora del simulador de extras del Paso 4, auto-expansión del desglose matemático al alternar extras, y una barra inferior compacta dentro del simulador con el Total Actualizado ($ MXN) y botón 1-Tap "Enviar a WhatsApp →" justo a la altura del pulgar móvil.',
+    ],
+    filesModified: [
+      'src/components/Precotizador.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+      '.agents/state/prompt_performance_ledger.jsonl',
+    ],
+    postponedReason: null,
+    humanActionRequired: null,
+    commitHash: 'pending-commit-cycle71',
+    deploymentUuid: 'coolify-auto-deploy-cycle71',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Mostrar el precio individual en cada píldora de extra y colocar una barra inferior con el Total Actualizado + CTA de WhatsApp al pie del simulador del Paso 4 eliminará la necesidad de hacer scroll hacia arriba o regresar al Paso 3 (back_from_4_to_3) tras sumar Mariachi, Mesa de Dulces o Cabina 360 en smartphones 390x699.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.8.5-cycle70',
     cycle_number: 70,
     status: 'POSTPONED',
