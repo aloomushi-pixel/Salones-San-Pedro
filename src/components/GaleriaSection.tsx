@@ -349,13 +349,66 @@ export default function GaleriaSection() {
   return (
     <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
       {/* Encabezado */}
-      <div className="text-center mb-8">
+      <div className="text-center mb-5">
         <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-2">
           Nuestros Salones: Diamante y Platino
         </h2>
         <p className="font-body-lg text-secondary max-w-2xl mx-auto mt-3">
           Explora cada detalle de nuestras instalaciones. Toca cualquier fotografía o título para ampliarla a pantalla completa.
         </p>
+      </div>
+
+      {/* Barra Superior de Cotización Sincronizada en #galeria (Atiende precotizador_step4_to_galeria en ses_38se5_5w0muwpi y exit_from_galeria en ses_43i7f_7g2tacz4) */}
+      <div className="max-w-4xl mx-auto mb-5 p-3 rounded-2xl bg-surface-container-low border border-primary/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs shadow-sm">
+        <div className="text-on-surface font-medium text-center sm:text-left">
+          <span className="text-primary font-extrabold uppercase tracking-wider text-[10px] block">
+            {hasActiveDraft ? '✓ Tu cotización activa se conserva:' : 'Cotización rápida en vivo:'}
+          </span>
+          <span>
+            🎉 <strong>{syncedEventKind}</strong> • <strong>{syncedGuests} pers.</strong> ({syncedDay}) • Paquete{' '}
+            <strong>{syncedPkg}</strong>:{' '}
+            <strong className="text-primary">${syncedTotal.toLocaleString('es-MX')} MXN</strong>
+          </span>
+        </div>
+        <div className="flex items-center justify-center gap-2 shrink-0">
+          <button
+            type="button"
+            onClick={() => {
+              trackEvent('cotizar_click', `galeria_top_volver_cotizador_${activeTab}`, {
+                section: 'galeria',
+                gallery_category: canonicalCategory,
+                package_name: `Paquete ${syncedPkg}`,
+                guests_range: `${syncedGuests} personas`,
+              });
+              document.getElementById('precotizador')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
+            className="min-h-[38px] px-3 py-1.5 rounded-xl bg-surface-container-high hover:bg-primary hover:text-on-primary border border-outline-variant/40 text-on-surface font-bold text-[11px] uppercase tracking-wider transition-colors cursor-pointer"
+          >
+            <span className="pointer-events-none">↑ Volver al Cotizador</span>
+          </button>
+          <a
+            href={`https://wa.me/526633670431?text=${encodeURIComponent(
+              `¡Hola Salones San Pedro Plus! Vi las fotos del ${canonicalCategory} y quiero confirmar disponibilidad y agendar recorrido para mi ${syncedEventKind} de ${syncedGuests} personas en ${syncedDay} con el Paquete ${syncedPkg} ($${syncedTotal.toLocaleString('es-MX')} MXN).`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() =>
+              trackEvent('whatsapp_click', `galeria_top_wa_${activeTab}`, {
+                section: 'galeria',
+                gallery_category: canonicalCategory,
+                package_name: `Paquete ${syncedPkg}`,
+                guests_range: `${syncedGuests} personas`,
+                event_kind: syncedEventKind,
+                preferred_day: syncedDay,
+              })
+            }
+            className="min-h-[38px] px-3.5 py-1.5 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-extrabold text-[11px] uppercase tracking-wider flex items-center gap-1 transition-colors cursor-pointer shadow-xs"
+          >
+            <span className="pointer-events-none">
+              WhatsApp (${syncedTotal.toLocaleString('es-MX')})
+            </span>
+          </a>
+        </div>
       </div>
 
       {/* Tabs Selector */}

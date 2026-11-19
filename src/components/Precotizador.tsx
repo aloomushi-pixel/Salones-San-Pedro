@@ -1935,6 +1935,57 @@ export default function Precotizador() {
                     );
                   })}
                 </div>
+
+                {/* 5. Simulador rápido de Extras y Combo Fiesta VIP en Paso 4 (Evita back_from_4_to_3 detectado en ses_1nz7r_igt50e5e al alternar Letras Gigantes vs Cabina 360) */}
+                {packageType !== 'All Inclusive' && (
+                  <div className="pt-1.5 border-t border-outline-variant/25 space-y-1.5">
+                    <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-secondary">
+                      <span>✨ Sumar o quitar extras en vivo:</span>
+                      <button
+                        type="button"
+                        onClick={handleToggleComboVip}
+                        className={`px-2 py-0.5 rounded-md border text-[10px] font-extrabold transition-colors cursor-pointer ${
+                          comboVipActive
+                            ? 'border-primary bg-primary text-on-primary'
+                            : 'border-primary/40 bg-primary/10 text-primary hover:bg-primary/20'
+                        }`}
+                      >
+                        <span className="pointer-events-none">
+                          🔥 Combo VIP {comboVipActive ? '✓' : '+$11.5k'}
+                        </span>
+                      </button>
+                    </div>
+                    <div className="flex flex-wrap gap-1">
+                      {EXTRAS.map((extra) => {
+                        const isIncludedByPkg = includedByPackageIds.includes(extra.id);
+                        const isIncludedInCombo =
+                          comboVipActive && COMBO_VIP_IDS.includes(extra.id);
+                        const isSelected =
+                          isIncludedByPkg || isIncludedInCombo || selectedExtras.includes(extra.id);
+                        return (
+                          <button
+                            key={extra.id}
+                            type="button"
+                            disabled={isIncludedByPkg}
+                            onClick={() => handleExtraToggle(extra.id)}
+                            className={`px-2 py-1 rounded-lg border text-[10px] font-bold transition-all cursor-pointer ${
+                              isIncludedByPkg
+                                ? 'border-green-500/40 bg-green-500/10 text-green-400 cursor-default'
+                                : isSelected
+                                ? 'border-primary bg-primary/20 text-primary shadow-2xs'
+                                : 'border-outline-variant/30 bg-surface-container-lowest text-secondary hover:text-on-surface'
+                            }`}
+                          >
+                            <span className="pointer-events-none">
+                              {isSelected ? '✓ ' : '+ '}
+                              {extra.label}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Opción de Agendar Recorrido Presencial para este Fin de Semana */}

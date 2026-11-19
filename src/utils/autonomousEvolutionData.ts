@@ -22,6 +22,37 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.8.4-cycle69',
+    cycle_number: 69,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-19 09:20 CDMX',
+    title:
+      'Ciclo Matutino #69 (IMPLEMENTED — Estándar v4.0.2): 106 Eventos Humanos + 3 Sesiones Completas en Embudo (XV Años 100 Pers. $67,800 y $101,000 + Retorno GAM) + 53 Clics GSC -> Simulador de Extras en Paso 4 (Evita back_from_4_to_3) y Barra Superior de Cotización en #galeria',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte matutino de las 09:15 CDMX (>= 2026-11-19T03:19:20Z a 2026-11-19T15:16:45Z): 106 eventos humanos reales en 9 sesiones (0 dead_clicks, 0 rage_clicks, title_len: 55/57/58, meta_desc_len: 155/158, img_missing_alt: 0) y avance a 53 clics en Google Search Console ("salon san pedro plus" subió a 16 clics / 204 imp con CTR 7.84% #1.22; "salones san pedro plus" alcanzó 21 clics / 622 imp #1.02). Hallazgos clave: 1) En ses_1nz7r_igt50e5e (Neza, EdoMéx CP 57000 | Mobile 384x699 | Google Orgánico SEO | 22 eventos y 4.3 min activos), el prospecto completó los 4 pasos para XV Años de 100 personas en Sábado con Paquete Premier + Shots + Dulces + Letras ($66,500 MXN) y en el Paso 4 tuvo que hacer back_from_4_to_3 (04:26:06Z) para cambiar Letras Gigantes por Cabina 360 ($67,800 MXN) porque el simulador en vivo del Paso 4 no incluía píldoras de Extras / Combo VIP. 2) En ses_38se5_5w0muwpi (Gustavo Adolfo Madero, CDMX CP 07320 | Mobile 360x648 | Google Orgánico SEO | 42 eventos y 5.1 min activos), el prospecto completó step_3_completado para XV Años de 100 personas en Viernes con Paquete All Inclusive ($101,000 MXN) y en el Paso 4 tocó precotizador_step4_to_galeria (05:11:58Z), recorriendo 14 fotos en #galeria; asimismo, en ses_43i7f_7g2tacz4 (Visitante Recurrente #2 desde GAM CP 07420 | Laptop 1310x654 | Google Orgánico SEO | 30 eventos) se registró exit_from_galeria antes de abrir el Lightbox, evidenciando la utilidad de mostrar una barra superior con la cotización activa y CTA directo a WhatsApp justo arriba de las pestañas de #galeria.',
+    autonomousActions: [
+      'En src/components/Precotizador.tsx (Paso 4): se añadió el bloque "5. Simulador rápido de Extras y Combo Fiesta VIP" dentro del simulador en vivo del Paso 4 para activar o desactivar Combo VIP (+$11.5k) y cualquiera de los servicios extras (Shots, Dulces, Cabina 360, Letras, Mariachi, Limusina) en 1 toque sin tener que regresar al Paso 3 (back_from_4_to_3).',
+      'En src/components/GaleriaSection.tsx: se integró arriba de las pestañas "Salón Diamante / Salón Platino" una barra superior sincronizada ("✓ Tu cotización activa se conserva: 🎉 {syncedEventKind} • {syncedGuests} pers. ({syncedDay}) • Paquete {syncedPkg}: ${syncedTotal} MXN") con botones "↑ Volver al Cotizador" y "WhatsApp (${syncedTotal})".',
+    ],
+    filesModified: [
+      'src/components/Precotizador.tsx',
+      'src/components/GaleriaSection.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+      '.agents/state/prompt_performance_ledger.jsonl',
+    ],
+    postponedReason: null,
+    humanActionRequired: null,
+    commitHash: 'pending',
+    deploymentUuid: 'pending',
+    nextTimerSeconds: 14400,
+    emailSent: true,
+    hypothesisNextCycle:
+      'En el corte ejecutivo de las 13:15 CDMX (Cron 15 9,13,17,21 * * *), verificar la reducción de back_from_4_to_3 al usar las píldoras de extras del Paso 4 y medir las conversiones en galeria_top_wa_diamante/platino.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.8.3-cycle68',
     cycle_number: 68,
     status: 'POSTPONED',
