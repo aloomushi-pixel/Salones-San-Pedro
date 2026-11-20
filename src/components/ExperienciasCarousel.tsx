@@ -20,7 +20,7 @@ const experiencias: ExperienciaItem[] = [
     desc: 'Audio Hi-Fi y DJ sets mezclados en vivo.',
     longDesc:
       'Sistema de audio profesional line-array con DJ versátil en vivo que adapta la música a cada momento de tu evento: recepción, banquete gourmet, brindis y pista abierta.',
-    image: '/animacion/sonido.jpg',
+    image: '/animacion/sonido_v2.jpg',
     includedIn: 'Incluido en Premier ($530), Plus ($710) y All Inclusive ($1,010)',
     badge: '✓ Incluido en todos los paquetes',
     specs: [
@@ -34,7 +34,7 @@ const experiencias: ExperienciaItem[] = [
     desc: 'Pista infinita, techo estrellado y robótica.',
     longDesc:
       'Escenografía lumínica robótica, pista de baile LED infinita y mesas de cristal iluminadas que transforman los Salones Diamante y Platino para el vals y la fiesta.',
-    image: '/animacion/iluminacion.jpg',
+    image: '/animacion/iluminacion_v2.jpg',
     includedIn: 'Incluido en Premier ($530), Plus ($710) y All Inclusive ($1,010)',
     badge: '✓ Incluido en todos los paquetes',
     specs: [
@@ -48,7 +48,7 @@ const experiencias: ExperienciaItem[] = [
     desc: 'Videos slow-motion y tiras impresas al instante.',
     longDesc:
       'Cabina fotográfica instantánea (incluida desde Paquete Plus) o plataforma de video 360° en cámara lenta con aro LED y descarga inmediata por código QR.',
-    image: '/animacion/360.jpg',
+    image: '/animacion/360_v2.jpg',
     includedIn: 'Cabina Fotos en Plus ($710) • Cabina 360° en All Inclusive ($1,010) o Extra (+$4,800 MXN)',
     badge: '⭐ Favorito en Bodas y XV Años',
     specs: [
@@ -62,7 +62,7 @@ const experiencias: ExperienciaItem[] = [
     desc: '1 hora completa de Mariachi de gala en vivo.',
     longDesc:
       'Presentación de Mariachi profesional con traje de gala para cerrar la noche con broche de oro o sorprender durante la recepción y serenata.',
-    image: '/animacion/mariachi.jpg',
+    image: '/animacion/mariachi_v2.jpg',
     includedIn: 'Incluido en Paquete All Inclusive ($1,010) o como Extra (+$5,800 MXN)',
     badge: '🎺 Show en Vivo',
     specs: [
@@ -76,7 +76,7 @@ const experiencias: ExperienciaItem[] = [
     desc: 'Show de 2.20 m con láseres y batucada en pista.',
     longDesc:
       'Show interactivo de batucada con Robot LED gigante de 2.20 metros (incluido desde Paquete Plus) o Robot Iron Man con pirotecnia fría en Paquete All Inclusive.',
-    image: '/animacion/robot_led.jpg',
+    image: '/animacion/robot_led_v2.jpg',
     includedIn: 'Incluido en Paquete Plus ($710) y All Inclusive ($1,010)',
     badge: '🤖 Incluido desde Paquete Plus',
     specs: [
@@ -90,7 +90,7 @@ const experiencias: ExperienciaItem[] = [
     desc: 'Postres, dulces finos y muro shimmer temático.',
     longDesc:
       'Montaje temático de dulces finos, postres individuales, chocolates y botanas gourmet frente a muro shimmer decorado a la paleta de colores de tu evento.',
-    image: '/animacion/mesa_dulces.jpg',
+    image: '/animacion/mesa_dulces_v2.jpg',
     includedIn: 'Incluida en Paquete Plus ($710) y All Inclusive ($1,010) o Extra (+$4,200 MXN)',
     badge: '🍬 Incluida desde Paquete Plus',
     specs: [
@@ -104,7 +104,7 @@ const experiencias: ExperienciaItem[] = [
     desc: 'Letras monumentales de 1.20 m con focos cálidos.',
     longDesc:
       'Letras monumentales iluminadas de 1.20 m (XV, LOVE o iniciales de los novios) montadas junto a la pista LED o mesa de honor para tus fotos oficiales.',
-    image: '/animacion/letras_gigantes.jpg',
+    image: '/animacion/letras_gigantes_v2.jpg',
     includedIn: 'Incluidas en Plus ($710), All Inclusive ($1,010), Combo VIP o Extra (+$2,500 MXN)',
     badge: '🔥 Incluidas en Plus y Combo VIP',
     specs: [
@@ -118,7 +118,7 @@ const experiencias: ExperienciaItem[] = [
     desc: 'Rondas de coctelería y shots iluminados en pista.',
     longDesc:
       'Carrito iluminado que entra directo a la pista de baile durante la batucada para repartir rondas de shots preparados con y sin alcohol.',
-    image: '/animacion/carrito_shots.jpg',
+    image: '/animacion/carrito_shots_v2.jpg',
     includedIn: 'Incluido en Plus ($710), All Inclusive ($1,010), Combo VIP o Extra (+$3,500 MXN)',
     badge: '🔥 Top #1 Extra Más Cotizado',
     specs: [
@@ -132,7 +132,7 @@ const experiencias: ExperienciaItem[] = [
     desc: 'Traslado de gala con chofer uniformado en CDMX.',
     longDesc:
       'Recorrido panorámico y llegada triunfal a la puerta de Salones San Pedro Plus en Limusina de lujo con iluminación interior, sonido y bebidas de cortesía.',
-    image: '/animacion/limusina.jpg',
+    image: '/animacion/limusina_v2.jpg',
     includedIn: 'Incluido en Paquete All Inclusive ($1,010), Combo VIP (+$11,500) o Extra (+$8,500 MXN)',
     badge: '🚘 Incluido en All Inclusive y Combo VIP',
     specs: [

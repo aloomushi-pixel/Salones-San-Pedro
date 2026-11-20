@@ -125,7 +125,7 @@ const INCLUSION_CATALOG: Record<string, InclusionDetail> = {
       'Souvenirs luminosos, sombreros, antifaces y globos largos',
       'Set musical de alta energía mezclado en vivo por el DJ',
     ],
-    image: '/servicios/robot.jpg',
+    image: '/servicios/robot-v2.jpg',
     packageOrigin: 'Plus',
   },
   mesa_dulces_cabina: {
@@ -139,7 +139,7 @@ const INCLUSION_CATALOG: Record<string, InclusionDetail> = {
       'Cabina fotográfica con tiras impresas al instante para tus invitados',
       'Personal encargado de asistir tanto en la mesa como en la cabina',
     ],
-    image: '/servicios/mesa-dulces.jpg',
+    image: '/servicios/mesa-dulces-v2.jpg',
     packageOrigin: 'Plus',
   },
   letras_shots: {
@@ -153,7 +153,7 @@ const INCLUSION_CATALOG: Record<string, InclusionDetail> = {
       'Carrito de shots iluminado recorriendo la pista de baile',
       'Shots preparados con y sin alcohol para todas las edades',
     ],
-    image: '/servicios/carrito-shots.jpg',
+    image: '/servicios/carrito-shots-v2.jpg',
     packageOrigin: 'Plus',
   },
   prefiesta_30: {
@@ -181,7 +181,7 @@ const INCLUSION_CATALOG: Record<string, InclusionDetail> = {
       'Efectos especiales seguros para interiores y batucada VIP',
       'Momento estelar garantizado para fotos, reels y TikTok',
     ],
-    image: '/servicios/robot.jpg',
+    image: '/servicios/robot-v2.jpg',
     packageOrigin: 'All Inclusive',
   },
   mariachi_1h: {
@@ -195,7 +195,7 @@ const INCLUSION_CATALOG: Record<string, InclusionDetail> = {
       '1 hora efectiva de música en vivo dentro del salón',
       'Complacencias para los novios, quinceañera y familiares',
     ],
-    image: '/servicios/mariachi.jpg',
+    image: '/servicios/mariachi-v2.jpg',
     packageOrigin: 'All Inclusive',
   },
   limusina: {
@@ -209,7 +209,7 @@ const INCLUSION_CATALOG: Record<string, InclusionDetail> = {
       'Capacidad para la festejada/novios junto con damas o chambelanes',
       'Chofer profesional, decoración exterior y bebidas de cortesía',
     ],
-    image: '/servicios/limosinas.jpg',
+    image: '/servicios/limosinas-v2.jpg',
     packageOrigin: 'All Inclusive',
   },
   video_fotos: {
@@ -251,7 +251,7 @@ const INCLUSION_CATALOG: Record<string, InclusionDetail> = {
       'Operador profesional y utilería divertida (pistola de burbujas, billetes, lentes)',
       'Descarga inmediata en el celular de cada invitado vía QR',
     ],
-    image: '/servicios/cabina-360.jpg',
+    image: '/servicios/cabina-360-v2.jpg',
     packageOrigin: 'All Inclusive',
   },
 };
