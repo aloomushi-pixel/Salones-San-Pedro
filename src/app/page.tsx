@@ -90,12 +90,15 @@ export default function Home() {
                   </TrackedLink>
                 </div>
 
-                <div className="flex flex-row gap-3 w-full sm:w-auto justify-center lg:justify-start">
-                  <TrackedLink eventType="hero_click" source="ver_precios" className="flex-1 sm:flex-initial bg-primary-container text-on-primary-container px-5 sm:px-8 py-3.5 sm:py-4 font-bold tracking-wider rounded-xl hover:scale-105 transition-transform uppercase text-center text-xs sm:text-sm shadow-lg" href="#paquetes">
+                <div className="flex flex-wrap gap-3 w-full sm:w-auto justify-center lg:justify-start">
+                  <TrackedLink eventType="hero_click" source="ver_precios" className="flex-1 sm:flex-initial bg-primary-container text-on-primary-container px-5 sm:px-7 py-3.5 sm:py-4 font-bold tracking-wider rounded-xl hover:scale-105 transition-transform uppercase text-center text-xs sm:text-sm shadow-lg" href="#paquetes">
                     VER PRECIOS
                   </TrackedLink>
-                  <TrackedLink eventType="hero_click" source="ver_galeria" className="flex-1 sm:flex-initial border-2 border-surface-container-lowest text-surface-container-lowest px-5 sm:px-8 py-3.5 sm:py-4 font-bold tracking-wider rounded-xl hover:bg-surface-container-lowest hover:text-primary transition-all uppercase text-center text-xs sm:text-sm backdrop-blur-sm shadow-lg" href="#galeria">
+                  <TrackedLink eventType="hero_click" source="ver_galeria" className="flex-1 sm:flex-initial border-2 border-surface-container-lowest text-surface-container-lowest px-5 sm:px-7 py-3.5 sm:py-4 font-bold tracking-wider rounded-xl hover:bg-surface-container-lowest hover:text-primary transition-all uppercase text-center text-xs sm:text-sm backdrop-blur-sm shadow-lg" href="#galeria">
                     VER GALERÍA
+                  </TrackedLink>
+                  <TrackedLink eventType="hero_click" source="ver_videos_reales_hero" className="w-full sm:w-auto border border-primary/60 bg-black/65 text-primary hover:bg-primary hover:text-on-primary px-5 py-3.5 sm:py-4 font-bold tracking-wider rounded-xl transition-all uppercase text-center text-xs sm:text-sm backdrop-blur-sm shadow-lg" href="#tiktok-videos">
+                    🎬 VER VIDEOS REALES
                   </TrackedLink>
                 </div>
               </div>

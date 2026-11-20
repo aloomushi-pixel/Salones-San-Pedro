@@ -9,21 +9,32 @@ interface VideoData {
   title: string;
   views: string;
   caption: string;
-  tiktokId: string; // The official numeric TikTok video ID from @salones_sanpedroplus
+  tiktokId?: string; // The official numeric TikTok video ID from @salones_sanpedroplus
+  videoSrc?: string; // Native self-hosted MP4 video in /videos/ for instant playback
   coverUrl: string;
 }
 
 const TIKTOK_VIDEOS: VideoData[] = [
   {
     id: 1,
-    title: "Nuestro Nuevo Video ✨",
-    views: "Nuevo",
-    caption: "Descubre más de la magia de Salones San Pedro Plus en nuestro nuevo video de TikTok. ¡Síguenos!",
-    tiktokId: "7644667860891028756",
-    coverUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+    title: "Recorrido Real XV Años: Pista LED y Escalera Imperial ✨",
+    views: "Video HD Real",
+    caption:
+      "Recorrido real en Salones San Pedro Plus: mesa de dulces con muro shimmer, letras gigantes XV iluminadas, coctelería de bienvenida en escalera imperial, vajilla dorada y pista de baile LED infinita.",
+    videoSrc: "/videos/evento_real_2.mp4",
+    coverUrl: "/galeria/platino/platino_5.jpg",
   },
   {
     id: 2,
+    title: "Recorrido Real de Gala: Pista Infinita, Cristal y Robot 🥂",
+    views: "Video HD Real",
+    caption:
+      "Conoce nuestro montaje real en piso: recepción con coctelería de bienvenida, mesas de cristal iluminadas, centros de mesa florales altos, mesa de dulces con Robot LED, cabina de DJ y pista LED infinita.",
+    videoSrc: "/videos/evento_real_1.mp4",
+    coverUrl: "/videos/evento_real_1_poster.jpg",
+  },
+  {
+    id: 3,
     title: "Montaje de Gala Especial ✨",
     views: "18.4K",
     caption: "La magia de un montaje de gala diseñado a la perfección en Salones San Pedro Plus. Cuidamos cada detalle para hacer tu día inolvidable.",
@@ -31,7 +42,7 @@ const TIKTOK_VIDEOS: VideoData[] = [
     coverUrl: "/galeria/diamante/diamante_1.jpg",
   },
   {
-    id: 3,
+    id: 4,
     title: "Fiesta y Pista de Baile LED 💃",
     views: "12.2K",
     caption: "¡Luces, robótica y la pista LED encendida! Así se vive la máxima diversión en nuestros recintos. #XVAños #BodasDeGala #Party",
@@ -39,20 +50,28 @@ const TIKTOK_VIDEOS: VideoData[] = [
     coverUrl: "/galeria/platino/platino_10.jpg",
   },
   {
-    id: 4,
+    id: 5,
     title: "Experiencia de Gala Boutique 🕯️",
     views: "5.7K",
     caption: "Elegancia contemporánea y un servicio boutique excepcional para tus momentos más especiales. Vive la experiencia San Pedro.",
     tiktokId: "7548605393782541575",
-    coverUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+    coverUrl: "/galeria/diamante/diamante_5.jpg",
   },
   {
-    id: 5,
+    id: 6,
     title: "Entrada de Honor 👰🤵",
     views: "3.1K",
     caption: "Un momento de ensueño: la entrada triunfal rodeada de luces y el cariño de tus seres queridos. Creamos recuerdos eternos.",
     tiktokId: "7501856695526739207",
     coverUrl: "/galeria/diamante/diamante_4.jpg",
+  },
+  {
+    id: 7,
+    title: "Nuestro Video en TikTok ✨",
+    views: "TikTok Oficial",
+    caption: "Descubre más de Salones San Pedro Plus en nuestro perfil oficial de TikTok @salones_sanpedroplus.",
+    tiktokId: "7644667860891028756",
+    coverUrl: "/galeria/diamante/diamante_2.jpg",
   },
 ];
 
@@ -179,16 +198,35 @@ export default function TikTokVideos() {
       {/* Playlist Player Container */}
       <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-stretch justify-center max-w-5xl mx-auto">
         
-        {/* Left Column: Vertical TikTok Player */}
+        {/* Left Column: Vertical Native MP4 / TikTok Player */}
         <div className="w-full sm:max-w-[360px] lg:w-[40%] flex flex-col justify-center">
           <div className="relative aspect-[9/16] bg-black rounded-2xl overflow-hidden shadow-2xl border border-outline-variant/30 group/player animate-fade-in">
-            <iframe
-              src={`https://www.tiktok.com/player/v1/${selectedVideo.tiktokId}?autoplay=1&loop=0&rel=0`}
-              className="w-full h-full"
-              style={{ border: "none" }}
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-            />
+            {selectedVideo.videoSrc ? (
+              <video
+                key={selectedVideo.videoSrc}
+                src={selectedVideo.videoSrc}
+                poster={selectedVideo.coverUrl}
+                controls
+                playsInline
+                preload="metadata"
+                onPlay={() =>
+                  trackEvent("tiktok_interaction", `native_video_play_${selectedVideo.id}`, {
+                    section: "tiktok-videos",
+                    experience_title: selectedVideo.title,
+                  })
+                }
+                onEnded={handleNextVideo}
+                className="w-full h-full object-cover bg-black"
+              />
+            ) : (
+              <iframe
+                src={`https://www.tiktok.com/player/v1/${selectedVideo.tiktokId}?autoplay=1&loop=0&rel=0`}
+                className="w-full h-full"
+                style={{ border: "none" }}
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+              />
+            )}
             
             {/* Quick Manual Nav Buttons overlaying player (>=44x44px mobile tap targets) */}
             <button

@@ -412,7 +412,7 @@ export default function GaleriaSection() {
       </div>
 
       {/* Tabs Selector */}
-      <div className="flex justify-center items-center gap-3 mb-6 border-b border-outline-variant/30 pb-px">
+      <div className="flex flex-wrap justify-center items-center gap-3 mb-6 border-b border-outline-variant/30 pb-px">
         <button
           type="button"
           onClick={() => {
@@ -447,6 +447,17 @@ export default function GaleriaSection() {
         >
           <span className="pointer-events-none">Salón Platino ({platinoPhotos.length} fotos)</span>
         </button>
+        <a
+          href="#tiktok-videos"
+          onClick={() =>
+            trackEvent('gallery_interaction', 'galeria_tab_ver_videos_reales', {
+              section: 'galeria',
+            })
+          }
+          className="px-4 py-2 mb-1 rounded-xl bg-primary/15 hover:bg-primary hover:text-on-primary text-primary border border-primary/35 font-extrabold uppercase tracking-wider text-xs transition-colors cursor-pointer"
+        >
+          <span className="pointer-events-none">🎬 Ver Videos Reales en HD ↓</span>
+        </a>
       </div>
 
       {/* Main Carousel Container */}

@@ -1,18 +1,18 @@
 {
   "project_name": "Salones San Pedro Plus (Salones Classics)",
   "standard_version": "v4.0",
-  "last_updated": "2026-11-13T20:50:00Z",
+  "last_updated": "2026-11-19T21:31:00Z",
   "items": [
     {
       "id": "QUEUE-001",
       "created_at": "2026-11-08T18:00:00Z",
       "category": "MEDIA_ASSETS",
       "level": "NIVEL_2_REQUIERE_INSUMO_HUMANO",
-      "status": "PENDIENTE",
-      "title": "Video vertical corto (MP4 10-15s) de fiesta real en Salón Diamante o Platino",
-      "description": "Opcional para reemplazar el poster estático en el modal de video recorrido y aumentar retención en visitantes móviles.",
-      "proposed_action": "Subir archivo a public/videos/ o compartir por WhatsApp para integrarlo con lazy-load en el Hero.",
-      "human_decision": null
+      "status": "COMPLETADO_E_INTEGRADO",
+      "title": "2 Videos verticales reales en HD (MP4) de montaje en Salón Diamante y Salón Platino",
+      "description": "Entregados vía Google Photos (https://photos.app.goo.gl/6jfAkD3C57ywmVV46) e integrados de forma nativa en public/videos/evento_real_1.mp4 y public/videos/evento_real_2.mp4 dentro de TikTokVideos.tsx con accesos directos desde el Hero y #galeria.",
+      "proposed_action": "Integrado en producción con reproductor HTML5 nativo instantáneo.",
+      "human_decision": "APROBADO_E_INTEGRADO_2026-11-19"
     },
     {
       "id": "QUEUE-002",
