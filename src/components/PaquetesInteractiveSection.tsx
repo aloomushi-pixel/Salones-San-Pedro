@@ -952,6 +952,107 @@ export default function PaquetesInteractiveSection() {
               </div>
             </div>
           </div>
+
+          {/* =================================================================
+              FRENTE 2 (SKILL SEO JRGC 202611): AUTOCALIFICACIÓN HONESTA (FIT / NO-FIT)
+              + PLAN STORYBRAND SB7 DE 3 PASOS + REDUCCIÓN DE ANSIEDAD (JTBD)
+          ================================================================= */}
+          <div
+            data-ux-section="autocalificacion_fit_nofit"
+            className="mt-8 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4"
+          >
+            {/* Columna 1: Fit (Para quién SÍ es) */}
+            <div className="bg-surface-container-lowest border border-green-500/35 rounded-2xl p-5 space-y-2.5 shadow-md">
+              <div className="flex items-center gap-2 text-green-400 font-extrabold text-xs uppercase tracking-wider">
+                <span data-ux-decorative="true" className="material-symbols-outlined text-base">
+                  verified
+                </span>
+                <span>Este servicio ES ideal para ti si:</span>
+              </div>
+              <ul className="space-y-2 text-xs text-secondary leading-relaxed">
+                <li className="flex items-start gap-2">
+                  <span data-ux-decorative="true" className="text-green-400 font-bold shrink-0">✓</span>
+                  <span>
+                    Planeas una <strong>Boda, XV Años, Graduación, Bautizo o Gala Empresarial de 100 a 300 personas</strong> en el norte de CDMX (Gustavo A. Madero y zonas cercanas).
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span data-ux-decorative="true" className="text-green-400 font-bold shrink-0">✓</span>
+                  <span>
+                    Buscas <strong>precio Todo Incluido cerrado desde $530 MXN p/p</strong> ($53,000 MXN por 100 invitados) con banquete caliente, DJ, pista LED y coordinador en un solo contrato.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span data-ux-decorative="true" className="text-green-400 font-bold shrink-0">✓</span>
+                  <span>
+                    Valoras <strong>descorche libre ($0 cargo por botella)</strong>, recepción con valet parking y salones climatizados de gala (<strong>Diamante y Platino</strong>).
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Columna 2: No-Fit Honesto (Efecto Pratfall — Dispara Confianza) */}
+            <div className="bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-5 space-y-2.5 shadow-md">
+              <div className="flex items-center gap-2 text-amber-400 font-extrabold text-xs uppercase tracking-wider">
+                <span data-ux-decorative="true" className="material-symbols-outlined text-base">
+                  info
+                </span>
+                <span>NO somos tu mejor opción si:</span>
+              </div>
+              <ul className="space-y-2 text-xs text-secondary leading-relaxed">
+                <li className="flex items-start gap-2">
+                  <span data-ux-decorative="true" className="text-amber-400 font-bold shrink-0">•</span>
+                  <span>
+                    Buscas un <strong>jardín abierto al aire libre o terraza descubierta</strong> (nuestros salones Diamante y Platino son recintos interiores climatizados con acústica e iluminación controlada).
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span data-ux-decorative="true" className="text-amber-400 font-bold shrink-0">•</span>
+                  <span>
+                    Tu reunión es de <strong>menos de 100 personas</strong> (nuestros paquetes todo incluido operan a partir de un mínimo de 100 invitados o su base de $53,000 MXN).
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span data-ux-decorative="true" className="text-amber-400 font-bold shrink-0">•</span>
+                  <span>
+                    Solo deseas <strong>rentar el local vacío sin banquete ni personal</strong> (operamos con cocina, meseros, audio y seguridad propios para garantizar que todo salga a tiempo).
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Columna 3: Plan Claro en 3 Pasos (StoryBrand SB7 + Riesgo Cero junto al CTA) */}
+            <div className="bg-surface-container-low border border-primary/35 rounded-2xl p-5 flex flex-col justify-between space-y-3 shadow-md">
+              <div className="space-y-2.5">
+                <div className="flex items-center gap-2 text-primary font-extrabold text-xs uppercase tracking-wider">
+                  <span data-ux-decorative="true" className="material-symbols-outlined text-base">
+                    checklist
+                  </span>
+                  <span>Cómo apartar tu fecha en 3 pasos:</span>
+                </div>
+                <ol className="space-y-2 text-xs text-on-surface leading-relaxed">
+                  <li>
+                    <strong>1. Simula tu paquete en 30 s:</strong> elige aforo (100–300 pers.), día (Viernes/Domingo con cortesía VIP o Sábado) y extras en línea.
+                  </li>
+                  <li>
+                    <strong>2. Agenda tu visita guiada:</strong> conoce en persona los Salones Diamante y Platino en Calle Norte 84 #6507, GAM (Lun–Sáb 10:00 a 19:00 hrs).
+                  </li>
+                  <li>
+                    <strong>3. Congela tu tarifa por contrato:</strong> aparta tu fecha con precio fijo por escrito, degustación de menú y cero costos ocultos.
+                  </li>
+                </ol>
+              </div>
+              <button
+                type="button"
+                onClick={() => handlePreselectInCalculator('Plus')}
+                className="w-full py-2.5 px-4 min-h-[44px] rounded-xl bg-primary text-on-primary font-extrabold text-xs uppercase tracking-wider text-center hover:opacity-95 transition-opacity cursor-pointer shadow-sm"
+              >
+                <span className="pointer-events-none">
+                  Cotizar mi Evento ({simGuests} pers.) ↑
+                </span>
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 

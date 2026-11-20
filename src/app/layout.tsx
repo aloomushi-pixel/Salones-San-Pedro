@@ -24,6 +24,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://sanpedro.aionia.com.mx",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     title:
       "Salones San Pedro Plus CDMX | Eventos Todo Incluido en Gustavo A. Madero ($530 p/p)",
@@ -75,7 +86,7 @@ export default function RootLayout({
         "maximumAttendeeCapacity": 300,
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Calle Nte 84 No. 6507, San Pedro el Chico",
+          "streetAddress": "Calle Norte 84 No. 6507, Col. San Pedro el Chico",
           "addressLocality": "Gustavo A. Madero",
           "addressRegion": "Ciudad de México",
           "postalCode": "07800",

@@ -47,11 +47,20 @@ export default function Home() {
                 </h1>
 
                 <p className="font-body-lg text-base sm:text-xl md:text-2xl text-surface-variant max-w-xl drop-shadow-md leading-relaxed">
-                  Salón de eventos en Ciudad de México para bodas, XV años, bautizos, graduaciones y eventos corporativos con paquetes todo incluido desde $530 MXN por persona.
+                  Ahora puedes celebrar tu Boda, XV Años, Graduación o Evento Empresarial de <strong>100 a 300 personas</strong> en nuestros salones climatizados <strong>Diamante y Platino</strong> (Col. San Pedro el Chico, GAM) con paquetes Todo Incluido desde <strong>$530 MXN p/p</strong> y descorche libre.
                 </p>
 
-                {/* Píldoras Interactivas (Sustituyen iconos check estáticos que generaban dead_clicks) */}
+                {/* Píldoras Interactivas con Prueba Real Temprana (Test 5 Segundos SKILL SEO JRGC 202611) */}
                 <div className="flex flex-wrap justify-center lg:justify-start gap-2 max-w-xl">
+                  <TrackedLink
+                    eventType="hero_click"
+                    source="badge_google_49_reviews"
+                    href="#testimonios"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/65 hover:bg-primary hover:text-on-primary text-surface-container-lowest text-xs font-semibold border border-primary/40 backdrop-blur-xs transition-colors"
+                  >
+                    <span data-ux-decorative="true" className="text-primary font-bold">★ 4.9</span>
+                    <span>Google Maps (350+ eventos)</span>
+                  </TrackedLink>
                   <TrackedLink
                     eventType="hero_click"
                     source="badge_aforo_50_400"
@@ -59,7 +68,7 @@ export default function Home() {
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/55 hover:bg-primary hover:text-on-primary text-surface-container-lowest text-xs font-semibold border border-white/20 backdrop-blur-xs transition-colors"
                   >
                     <span data-ux-decorative="true" className="text-primary font-bold">✓</span>
-                    <span>Aforos de 100 a 250+ personas</span>
+                    <span>100 a 300 pers. • Descorche Libre $0</span>
                   </TrackedLink>
                   <TrackedLink
                     eventType="hero_click"
@@ -77,7 +86,7 @@ export default function Home() {
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/55 hover:bg-primary hover:text-on-primary text-surface-container-lowest text-xs font-semibold border border-white/20 backdrop-blur-xs transition-colors"
                   >
                     <span data-ux-decorative="true" className="text-primary font-bold">📍</span>
-                    <span>Gustavo A. Madero, Norte CDMX</span>
+                    <span>Norte 84 #6507, San Pedro el Chico GAM</span>
                   </TrackedLink>
                 </div>
 
@@ -122,7 +131,7 @@ export default function Home() {
             </h2>
             <div className="w-24 h-0.5 bg-primary-container mx-auto my-4"></div>
             <p className="font-body-lg text-secondary max-w-2xl mx-auto mb-12">
-              Menú de 3 y 4 tiempos. Descubra nuestra selección exclusiva para eventos inolvidables.
+              Elige tu menú formal de 3 o 4 tiempos servido caliente a cada mesa con vajilla de porcelana, degustación previa y tornafiesta incluida (chilaquiles o taquiza).
             </p>
 
             <MenuTinderCards />
@@ -134,7 +143,7 @@ export default function Home() {
           <div className="max-w-container-max mx-auto text-center mb-12">
             <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface mt-4">Experiencias Multi-sensoriales</h2>
             <p className="font-body-md text-secondary max-w-3xl mx-auto mt-4 px-4">
-              Ofrecemos estos servicios adicionales para personalizar al máximo tu celebración y hacer de tu evento algo verdaderamente inolvidable.
+              Suma o incluye en tu paquete shows reales que mantienen llena la pista: Robot LED de 2.20 m, Cabina 360°, Carrito de Shots iluminado, Letras Gigantes, Mariachi en vivo y traslado en Limusina.
             </p>
           </div>
           <ExperienciasCarousel />
@@ -222,16 +231,24 @@ export default function Home() {
             <h4 className="font-display-lg text-lg text-[#d4af37] uppercase tracking-widest border-b border-[#333333] pb-2 w-full text-center md:text-left">Ubicación</h4>
             <div className="flex items-start gap-3 text-[#a0a0a0]">
               <span data-ux-decorative="true" className="material-symbols-outlined text-xl text-[#d4af37] shrink-0 mt-0.5">pin_drop</span>
-              <span className="leading-relaxed">Calle Nte 84 No. 6507, Gustavo A. Madero,<br/>07800 Ciudad de México, CDMX</span>
+              <span className="leading-relaxed">Calle Norte 84 No. 6507, Col. San Pedro el Chico, Alcaldía Gustavo A. Madero,<br/>C.P. 07800, Ciudad de México, CDMX</span>
             </div>
             <TrackedLink
               eventType="footer_click"
               source="google_maps"
               href="https://maps.app.goo.gl/oarkXjctGWr5d4J96?g_st=ac"
               target="_blank" rel="noopener noreferrer"
-              className="text-[#d4af37] hover:text-white transition-colors mt-2 font-semibold flex items-center gap-2 group"
+              className="text-[#d4af37] hover:text-white transition-colors mt-1 font-semibold flex items-center gap-2 group"
             >
               Abrir en Google Maps <span data-ux-decorative="true" className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">open_in_new</span>
+            </TrackedLink>
+            <TrackedLink
+              eventType="footer_click"
+              source="footer_blog_guias"
+              href="/blog"
+              className="text-xs text-[#c4c4c4] hover:text-[#d4af37] underline underline-offset-4 transition-colors"
+            >
+              Guías de Precios y Consejos para Eventos en GAM CDMX →
             </TrackedLink>
           </div>
 
