@@ -51,11 +51,11 @@ async function main() {
     html.match(/<meta[^>]+content=["']([^"']*)["'][^>]+name=["']description["']/i);
   const desc = descMatch ? descMatch[1].trim() : '';
 
-  const robotsMatch =
-    html.match(/<meta[^>]+name=["']robots["'][^>]+content=["']([^"']*)["']/i) ||
-    html.match(/<meta[^>]+content=["']([^"']*)["'][^>]+name=["']robots["']/i) ||
-    html.match(/<meta[^>]+name=["']googlebot["'][^>]+content=["']([^"']*)["']/i);
-  const robots = robotsMatch ? robotsMatch[1].trim() : '';
+  const robotsTags = [
+    ...html.matchAll(/<meta[^>]+name=["'](?:robots|googlebot)["'][^>]+content=["']([^"']*)["']/gi),
+    ...html.matchAll(/<meta[^>]+content=["']([^"']*)["'][^>]+name=["'](?:robots|googlebot)["']/gi),
+  ].map((m) => m[1].trim());
+  const robots = [...new Set(robotsTags)].join(' | ');
 
   const canonicalMatch =
     html.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']*)["']/i) ||
