@@ -48,8 +48,8 @@ export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
     ],
     postponedReason: null,
     humanActionRequired: null,
-    commitHash: 'pending-commit-cycle73',
-    deploymentUuid: 'coolify-auto-deploy-cycle73',
+    commitHash: '2173ecb',
+    deploymentUuid: 'z2wp0lobchhl3s51ifxgxgzd',
     nextTimerSeconds: 14400,
     emailSent: true,
     hypothesisNextCycle:
