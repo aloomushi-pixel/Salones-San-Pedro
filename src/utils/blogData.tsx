@@ -215,12 +215,12 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "renta-de-auto-clasico-para-bodas",
-    title: "Autos para Bodas en CDMX (DF): Clásico y Limusina Incluida",
-    excerpt: "Renta de autos para bodas en Distrito Federal (CDMX): Mercedes-Benz clásico 1930 y Limusina con chofer incluidos en paquetes de Salones San Pedro Plus GAM.",
+    title: "Renta de Autos para Bodas en CDMX y DF: Clásico o Limo",
+    excerpt: "¿Buscas autos para bodas en CDMX (DF)? Auto Clásico 1930 y Limusina con chofer desde +$8,500 o $0 incluidos en Salones San Pedro Plus GAM (desde 100 pers).",
     date: "28 de Mayo, 2026",
     readTime: "4 min de lectura",
     category: "Servicios Plus",
-    imageUrl: "/servicios/auto-clasico.jpg"
+    imageUrl: "/servicios/limosinas-v2.jpg"
   }
 ];
 
@@ -712,15 +712,26 @@ export const BLOG_POSTS_DETAILS: Record<string, BlogPostDetail> = {
   },
   "renta-de-auto-clasico-para-bodas": {
     slug: "renta-de-auto-clasico-para-bodas",
-    title: "Autos para Bodas en CDMX (DF): Clásico y Limusina Incluida",
-    excerpt: "Renta de autos para bodas en Distrito Federal (CDMX): Mercedes-Benz clásico 1930 y Limusina con chofer incluidos en paquetes de Salones San Pedro Plus GAM.",
+    title: "Renta de Autos para Bodas en CDMX y DF: Clásico o Limo",
+    excerpt: "¿Buscas autos para bodas en CDMX (DF)? Auto Clásico 1930 y Limusina con chofer desde +$8,500 o $0 incluidos en Salones San Pedro Plus GAM (desde 100 pers).",
     date: "28 de Mayo, 2026",
     readTime: "4 min de lectura",
     category: "Servicios Plus",
-    imageUrl: "/servicios/auto-clasico.jpg",
+    imageUrl: "/servicios/limosinas-v2.jpg",
     content: (
       <article className="space-y-6 font-body-md text-secondary">
-        <p>Si estás buscando <strong>autos para bodas en Distrito Federal (Ciudad de México)</strong>, el traslado de los novios en un automóvil de época de los años 1930 o en una Limusina de lujo marca la diferencia desde la salida de la iglesia hasta la entrada triunfal al salón. En <strong>Salones San Pedro Plus (Gustavo A. Madero, Norte CDMX)</strong> integramos el servicio de transporte nupcial directamente en tu paquete de evento para que ahorres hasta un 45% frente a rentadoras externas.</p>
+        <p><strong>Respuesta directa:</strong> Si buscas <strong>autos para bodas en CDMX (Distrito Federal)</strong> junto con tu recepción, en <strong>Salones San Pedro Plus (Norte 84 #6507, Gustavo A. Madero)</strong> incluimos traslado con chofer en <strong>Auto Clásico estilo 1930 o Limusina Lincoln/Chrysler</strong> por <strong>$0 extra en el Paquete All Inclusive ($1,010 p/p)</strong>, dentro del <strong>Combo Fiesta VIP (+$11,500 MXN con Shots y Letras)</strong> o como extra individual (<strong>+$8,500 MXN</strong>) en eventos desde 100 personas.</p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-surface-container-low border border-outline-variant/40 rounded-2xl p-4 text-xs">
+          <div>
+            <strong className="text-green-400 block uppercase tracking-wider mb-1">✓ ES ideal para ti si:</strong>
+            <p>Aún estás cotizando salón + banquete + transporte nupcial para <strong>100 a 300 invitados en CDMX</strong> y quieres ahorrar hasta 45% integrándolo en un solo contrato.</p>
+          </div>
+          <div>
+            <strong className="text-amber-400 block uppercase tracking-wider mb-1">• Toma en cuenta que:</strong>
+            <p>Nuestro servicio de Auto Clásico y Limusina es <strong>exclusivo para eventos contratados en nuestros Salones Diamante y Platino</strong> (no rentamos vehículos sueltos para otros recintos).</p>
+          </div>
+        </div>
         
         <h2 className="font-display-lg text-2xl text-on-surface font-bold mt-8">Un Mercedes-Benz Clásico 1930 o Limusina VIP en CDMX a tu servicio</h2>
         <p>Contamos con un elegante auto clásico tipo Mercedes-Benz años 30 en color marfil y negro, perfectamente restaurado, con interiores de piel, capacidad para 2 personas (ideal para el traslado exclusivo de la novia y su padre, y posteriormente de los recién casados) y chofer formalmente uniformado. Además, si prefieres viajar con tus padrinos o damas de honor, puedes elegir nuestra <strong>Limusina Hummer H2, Lincoln o Chrysler 300</strong> para 10 pasajeros.</p>

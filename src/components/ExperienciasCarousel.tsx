@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { trackEvent } from '@/utils/trackEvent';
 
@@ -12,6 +12,8 @@ interface ExperienciaItem {
   includedIn: string;
   badge: string;
   specs: string[];
+  recommendedPkg: 'Premier' | 'Plus' | 'All Inclusive';
+  extraId?: string;
 }
 
 const experiencias: ExperienciaItem[] = [
@@ -28,6 +30,7 @@ const experiencias: ExperienciaItem[] = [
       'Cabina iluminada con barras LED y microfonía inalámbrica para brindis',
       'Playlist personalizada previa con tus géneros favoritos',
     ],
+    recommendedPkg: 'Premier',
   },
   {
     title: 'Iluminación LED',
@@ -42,6 +45,7 @@ const experiencias: ExperienciaItem[] = [
       'Pista de baile LED infinita y cielo estrellado arquitectónico',
       'Ambientación cromática personalizada al color de tu gala',
     ],
+    recommendedPkg: 'Premier',
   },
   {
     title: 'Cabina Fotográfica / 360',
@@ -56,6 +60,8 @@ const experiencias: ExperienciaItem[] = [
       'Entrega digital inmediata al celular de tus invitados vía QR',
       'Staff operador dedicado durante todo el servicio',
     ],
+    recommendedPkg: 'Plus',
+    extraId: 'cabina',
   },
   {
     title: 'Mariachi',
@@ -70,6 +76,8 @@ const experiencias: ExperienciaItem[] = [
       'Músicos uniformados de gala con trompetas, violines, guitarrón y vihuela',
       'Coordinación exacta de entrada sorpresa con el coordinador del salón',
     ],
+    recommendedPkg: 'Plus',
+    extraId: 'mariachi',
   },
   {
     title: 'Robot LED / Animador',
@@ -84,6 +92,7 @@ const experiencias: ExperienciaItem[] = [
       'Souvenirs luminosos, globos largos, antifaces y animación interactiva',
       'Momento fotográfico estelar con los novios o quinceañera en la pista LED',
     ],
+    recommendedPkg: 'Plus',
   },
   {
     title: 'Mesa de Dulces',
@@ -98,6 +107,8 @@ const experiencias: ExperienciaItem[] = [
       'Decoración con arco de globos, muro shimmer y neón personalizado',
       'Montaje listo previo a la recepción de tus invitados',
     ],
+    recommendedPkg: 'Plus',
+    extraId: 'dulces',
   },
   {
     title: 'Letras Gigantes',
@@ -112,6 +123,8 @@ const experiencias: ExperienciaItem[] = [
       'Montaje durante las 6 a 7 horas completas de recepción y fiesta',
       'Incluidas también dentro del Combo Fiesta VIP (+$11,500 MXN)',
     ],
+    recommendedPkg: 'Plus',
+    extraId: 'letras',
   },
   {
     title: 'Carrito de Shots',
@@ -126,6 +139,8 @@ const experiencias: ExperienciaItem[] = [
       'Variedad de shots de tequila, vodka y coctelería frutal en capas',
       'Integrado en Paquete Plus y en el Combo Fiesta VIP (Limusina + Shots + Letras)',
     ],
+    recommendedPkg: 'Plus',
+    extraId: 'shots',
   },
   {
     title: 'Servicio de Limusina',
@@ -140,19 +155,153 @@ const experiencias: ExperienciaItem[] = [
       'Chofer uniformado, aire acondicionado y barra iluminada interior',
       'Sesión fotográfica al descender frente a la recepción',
     ],
+    recommendedPkg: 'All Inclusive',
+    extraId: 'limusina',
   },
 ];
 
 export default function ExperienciasCarousel() {
-  const [selectedExp, setSelectedExp] = useState<ExperienciaItem | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [draftQuote, setDraftQuote] = useState<{
+    guests: number;
+    packageType: string;
+    eventType: string;
+  }>({
+    guests: 100,
+    packageType: 'Plus',
+    eventType: 'Evento',
+  });
 
-  const handleOpenModal = (exp: ExperienciaItem) => {
-    setSelectedExp(exp);
+  useEffect(() => {
+    const readDraft = () => {
+      try {
+        const raw = sessionStorage.getItem('sanpedro_precotizador_draft_v1');
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        setDraftQuote({
+          guests:
+            typeof parsed.guests === 'number' && parsed.guests >= 100
+              ? parsed.guests
+              : 100,
+          packageType: parsed.packageType || 'Plus',
+          eventType: parsed.eventType || parsed.eventKind || 'Evento',
+        });
+      } catch {}
+    };
+    readDraft();
+
+    const handleSync = (e: Event) => {
+      const custom = e as CustomEvent<{
+        guests?: number;
+        packageType?: string;
+        eventType?: string;
+        eventKind?: string;
+      }>;
+      if (custom.detail) {
+        setDraftQuote((prev) => ({
+          guests:
+            typeof custom.detail.guests === 'number' && custom.detail.guests >= 100
+              ? custom.detail.guests
+              : prev.guests,
+          packageType: custom.detail.packageType || prev.packageType,
+          eventType:
+            custom.detail.eventType || custom.detail.eventKind || prev.eventType,
+        }));
+      }
+    };
+
+    window.addEventListener('ssp:sync-from-precotizador', handleSync);
+    return () => window.removeEventListener('ssp:sync-from-precotizador', handleSync);
+  }, []);
+
+  const selectedExp = selectedIndex !== null ? experiencias[selectedIndex] : null;
+
+  const handleOpenModal = (index: number) => {
+    const exp = experiencias[index];
+    setSelectedIndex(index);
     trackEvent('experience_interaction', `modal_${exp.title}`, {
       section: 'animacion',
       experience_title: exp.title,
     });
   };
+
+  const handleStepModal = useCallback(
+    (delta: number) => {
+      setSelectedIndex((prev) => {
+        if (prev === null) return null;
+        const nextIdx = (prev + delta + experiencias.length) % experiencias.length;
+        const nextExp = experiencias[nextIdx];
+        trackEvent(
+          'experience_interaction',
+          `modal_nav_${delta > 0 ? 'next' : 'prev'}_${nextExp.title}`,
+          {
+            section: 'animacion',
+            experience_title: nextExp.title,
+          }
+        );
+        return nextIdx;
+      });
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (selectedIndex === null) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedIndex(null);
+      if (e.key === 'ArrowRight') handleStepModal(1);
+      if (e.key === 'ArrowLeft') handleStepModal(-1);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [selectedIndex, handleStepModal]);
+
+  const handleIncludeInQuote = (exp: ExperienciaItem) => {
+    const targetPkg =
+      draftQuote.packageType === 'All Inclusive'
+        ? 'All Inclusive'
+        : draftQuote.packageType === 'Plus'
+        ? 'Plus'
+        : exp.recommendedPkg;
+
+    trackEvent('cotizar_click', `modal_exp_${exp.title}`, {
+      section: 'animacion',
+      experience_title: exp.title,
+      package_name: `Paquete ${targetPkg}`,
+      guests_range: `${draftQuote.guests} personas`,
+    });
+
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('ssp:select-package', {
+          detail: {
+            packageId: targetPkg,
+            guests: draftQuote.guests,
+            extraId: exp.extraId,
+          },
+        })
+      );
+      setSelectedIndex(null);
+      const targetEl =
+        document.getElementById('precotizador') ||
+        document.getElementById('precotizador-hero');
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
+  const unitPrice =
+    draftQuote.packageType === 'Premier'
+      ? 530
+      : draftQuote.packageType === 'All Inclusive'
+      ? 1010
+      : 710;
+  const liveTotalFormatted = new Intl.NumberFormat('es-MX', {
+    style: 'currency',
+    currency: 'MXN',
+    maximumFractionDigits: 0,
+  }).format(draftQuote.guests * unitPrice);
 
   return (
     <div className="w-full pb-8">
@@ -162,7 +311,7 @@ export default function ExperienciasCarousel() {
             key={index}
             type="button"
             data-interactive="true"
-            onClick={() => handleOpenModal(exp)}
+            onClick={() => handleOpenModal(index)}
             className="snap-start shrink-0 w-[285px] md:w-[325px] group bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-xl transition-all overflow-hidden border border-outline-variant/40 text-left flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <div className="relative h-48 w-full overflow-hidden pointer-events-none">
@@ -185,7 +334,7 @@ export default function ExperienciasCarousel() {
                 <p className="text-secondary text-sm leading-relaxed">{exp.desc}</p>
               </div>
               <div className="mt-4 pt-3 border-t border-outline-variant/25 flex items-center justify-between text-xs font-bold text-primary">
-                <span>Ver qué paquete lo incluye</span>
+                <span>Ver foto HD y qué paquete lo incluye</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </div>
@@ -193,35 +342,65 @@ export default function ExperienciasCarousel() {
         ))}
       </div>
 
-      {/* MODAL INTERACTIVO DE EXPERIENCIA (ELIMINA CLICS SIN RESPUESTA EN #ANIMACION) */}
-      {selectedExp && (
+      {/* MODAL INTERACTIVO DE EXPERIENCIA CON NAVEGACIÓN ‹ / › Y PUENTE REAL AL PRECOTIZADOR */}
+      {selectedExp && selectedIndex !== null && (
         <div
           className="fixed inset-0 z-[120] bg-black/80 backdrop-blur-xs flex items-center justify-center p-4"
-          onClick={() => setSelectedExp(null)}
+          onClick={() => setSelectedIndex(null)}
         >
           <div
             className="bg-surface-container-lowest border border-outline-variant/40 rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative h-56 w-full">
+            <div className="relative h-60 sm:h-64 w-full bg-black">
               <Image
                 src={selectedExp.image}
-                alt={selectedExp.title}
+                alt={`${selectedExp.title} en Salones San Pedro Plus CDMX`}
                 fill
                 sizes="(max-width: 768px) 100vw, 512px"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/30" />
+
+              {/* Barra superior: Contador 1/9 + Cerrar (>=44x44px) */}
+              <div className="absolute top-3 inset-x-3 flex items-center justify-between z-20">
+                <span className="px-2.5 py-1 rounded-full bg-black/65 text-white text-[11px] font-bold border border-white/15">
+                  Experiencia {selectedIndex + 1} / {experiencias.length}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setSelectedIndex(null)}
+                  aria-label="Cerrar detalle de experiencia"
+                  className="w-11 h-11 rounded-full bg-black/65 hover:bg-black text-white flex items-center justify-center font-bold text-lg cursor-pointer"
+                >
+                  <span className="pointer-events-none">✕</span>
+                </button>
+              </div>
+
+              {/* Flechas ‹ / › para recorrer las 9 experiencias sin cerrar el modal (Resuelve cierres repetidos en ses_hd8io_xnlv8jl9) */}
               <button
                 type="button"
-                onClick={() => setSelectedExp(null)}
-                aria-label="Cerrar detalle de experiencia"
-                className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center font-bold text-lg cursor-pointer"
+                onClick={() => handleStepModal(-1)}
+                aria-label="Experiencia anterior"
+                className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/65 hover:bg-black text-white flex items-center justify-center cursor-pointer active:scale-95 transition-transform"
               >
-                ✕
+                <span className="material-symbols-outlined text-2xl pointer-events-none">
+                  chevron_left
+                </span>
               </button>
-              <div className="absolute bottom-4 left-5 right-5">
-                <span className="inline-block px-3 py-1 rounded-full bg-primary text-on-primary text-xs font-bold mb-2">
+              <button
+                type="button"
+                onClick={() => handleStepModal(1)}
+                aria-label="Siguiente experiencia"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/65 hover:bg-black text-white flex items-center justify-center cursor-pointer active:scale-95 transition-transform"
+              >
+                <span className="material-symbols-outlined text-2xl pointer-events-none">
+                  chevron_right
+                </span>
+              </button>
+
+              <div className="absolute bottom-4 left-5 right-5 pointer-events-none">
+                <span className="inline-block px-3 py-1 rounded-full bg-primary text-on-primary text-xs font-bold mb-1.5">
                   {selectedExp.badge}
                 </span>
                 <h3 className="font-display-lg text-2xl font-bold text-white">
@@ -230,17 +409,17 @@ export default function ExperienciasCarousel() {
               </div>
             </div>
 
-            <div className="p-6 space-y-4 text-left">
+            <div className="p-5 sm:p-6 space-y-3.5 text-left">
               <p className="text-sm text-secondary leading-relaxed">{selectedExp.longDesc}</p>
 
-              <div className="p-3.5 rounded-xl bg-primary/10 border border-primary/25 text-xs font-semibold text-on-surface">
+              <div className="p-3 rounded-xl bg-primary/10 border border-primary/25 text-xs font-semibold text-on-surface">
                 <span className="text-primary font-bold block uppercase tracking-wider text-[10px] mb-0.5">
-                  Disponibilidad en Paquetes:
+                  Disponibilidad en Paquetes ({draftQuote.guests} pers. • {liveTotalFormatted} base {draftQuote.packageType}):
                 </span>
                 {selectedExp.includedIn}
               </div>
 
-              <ul className="space-y-2 text-xs text-secondary">
+              <ul className="space-y-1.5 text-xs text-secondary">
                 {selectedExp.specs.map((spec, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <span className="text-primary font-bold">✓</span>
@@ -249,23 +428,19 @@ export default function ExperienciasCarousel() {
                 ))}
               </ul>
 
-              <div className="pt-3 flex flex-col sm:flex-row gap-3">
-                <a
-                  href="#precotizador-hero"
-                  onClick={() => {
-                    trackEvent('cotizar_click', `modal_exp_${selectedExp.title}`, {
-                      section: 'animacion',
-                      experience_title: selectedExp.title,
-                    });
-                    setSelectedExp(null);
-                  }}
-                  className="flex-1 py-3 px-4 rounded-xl bg-primary text-on-primary font-bold text-xs uppercase tracking-wider text-center hover:opacity-95 transition-opacity"
+              <div className="pt-2 flex flex-col sm:flex-row gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => handleIncludeInQuote(selectedExp)}
+                  className="flex-1 min-h-[44px] py-3 px-4 rounded-xl bg-primary text-on-primary font-extrabold text-xs uppercase tracking-wider text-center hover:opacity-95 transition-opacity cursor-pointer shadow-sm"
                 >
-                  Incluir en mi Cotización
-                </a>
+                  <span className="pointer-events-none">
+                    Incluir en mi Cotización ({draftQuote.guests} pers.) ↑
+                  </span>
+                </button>
                 <a
                   href={`https://wa.me/526633670431?text=${encodeURIComponent(
-                    `¡Hola Salones San Pedro! Vi el servicio de "${selectedExp.title}" en su sitio web y me gustaría cotizarlo para mi evento.`
+                    `¡Hola Salones San Pedro Plus! Vi "${selectedExp.title}" en Experiencias Multi-sensoriales y me interesa cotizarlo para mi ${draftQuote.eventType} de ${draftQuote.guests} personas (Paquete ${draftQuote.packageType} - aprox. ${liveTotalFormatted}).`
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -273,12 +448,13 @@ export default function ExperienciasCarousel() {
                     trackEvent('whatsapp_click', `modal_exp_wa_${selectedExp.title}`, {
                       section: 'animacion',
                       experience_title: selectedExp.title,
+                      guests_range: `${draftQuote.guests} personas`,
                     });
-                    setSelectedExp(null);
+                    setSelectedIndex(null);
                   }}
-                  className="flex-1 py-3 px-4 rounded-xl bg-[#25D366] text-white font-bold text-xs uppercase tracking-wider text-center hover:opacity-95 transition-opacity"
+                  className="flex-1 min-h-[44px] py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#1ebe5d] text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center text-center transition-colors shadow-sm"
                 >
-                  Preguntar por WhatsApp
+                  Preguntar en WhatsApp
                 </a>
               </div>
             </div>

@@ -89,6 +89,7 @@
 | URL | Fecha de Cambio | Tipo de Intervención | Línea Base GSC (`Clics / Imp / Pos`) | Ventana de Enfriamiento (`No Re-editar Title/Meta/H1 hasta`) |
 | :--- | :---: | :--- | :---: | :---: |
 | `https://sanpedro.aionia.com.mx/` | `2026-11-19` | **Higiene Técnica + Síntesis/Persuasión DOM:** Adición de `max-image-preview:large` en `metadata.robots`, bots IA en `robots.ts` y bloque de Autocalificación Honesta *Fit / No-Fit* + Plan `SB7` de 3 pasos en `#paquetes` (**sin alterar `<title>` ni `<meta description>` ganadores** que hoy están en `#1.02` y `#1.22`). | `55 clics / 1,320 imp / Pos #1.02–#5.14` | **`2026-12-14` (`3.5` semanas de enfriamiento sobre `<title>` y `<meta description>` de `/`)** |
+| `https://sanpedro.aionia.com.mx/blog/renta-de-auto-clasico-para-bodas` | `2026-11-20` | **Rankings Push (`Pos #9.68` / `267` imp con `0%` CTR en cluster `"autos para bodas df / cdmx"`):** Eliminación de prefijo repetido en `blog/[slug]/page.tsx` + adición de `max-image-preview:large` + optimización de `<title>` (`54c`), `<meta description>` (`155c` sin truncar), Pirámide Invertida y bloque honesto *Fit / No-Fit*. | `0 clics / 267 imp / Pos #9.68 ("autos para bodas df")` | **`2026-12-15` (`3.5` semanas de enfriamiento sobre `/blog/renta-de-auto-clasico-para-bodas`)** |
 
 ---
 

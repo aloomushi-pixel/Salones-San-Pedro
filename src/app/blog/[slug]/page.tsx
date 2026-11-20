@@ -36,7 +36,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       : post.title.length <= 58
       ? post.title
       : `${post.title.slice(0, 55).trim()}...`;
-  const rawDescription = `Desde $530 p/p ($53,000 por 100 pers.) en GAM CDMX: ${post.excerpt}`;
+  const rawDescription =
+    post.excerpt.includes("$") || post.excerpt.length >= 130
+      ? post.excerpt
+      : `${post.excerpt} (Paquetes desde $530 p/p en GAM CDMX).`;
   const seoDescription =
     rawDescription.length > 158
       ? `${rawDescription.slice(0, 155).trim()}...`
@@ -47,6 +50,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: seoDescription,
     alternates: {
       canonical: `https://sanpedro.aionia.com.mx/blog/${slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
     },
     openGraph: {
       title: seoTitle,

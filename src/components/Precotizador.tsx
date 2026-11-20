@@ -291,10 +291,12 @@ export default function Precotizador() {
         packageId?: string;
         guests?: number;
         dayMode?: 'viernes_domingo' | 'sabado';
+        extraId?: string;
       }>;
       const pkg = customEvent.detail?.packageId || 'Plus';
       const rawGuests = customEvent.detail?.guests || 100;
-      const effectiveGuests = pkg !== 'Premier' && rawGuests < 100 ? 100 : rawGuests;
+      const effectiveGuests = Math.max(100, rawGuests);
+      const requestedExtra = customEvent.detail?.extraId;
 
       setGuests(effectiveGuests);
       setHasTouchedGuests(true);
@@ -303,6 +305,14 @@ export default function Precotizador() {
         setPreferredDay('Viernes');
       } else if (customEvent.detail?.dayMode === 'sabado') {
         setPreferredDay('Sábado');
+      }
+      if (requestedExtra) {
+        const pkgIncluded = PACKAGE_INCLUDED_EXTRAS[pkg] || [];
+        if (!pkgIncluded.includes(requestedExtra)) {
+          setSelectedExtras((prev) =>
+            prev.includes(requestedExtra) ? prev : [...prev, requestedExtra]
+          );
+        }
       }
       setLockedAttemptPkg(null);
       setStep(3);

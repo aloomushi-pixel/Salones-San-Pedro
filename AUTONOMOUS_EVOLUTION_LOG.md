@@ -4,6 +4,30 @@ Este documento registra cada ciclo autónomo de diagnóstico telemétrico (conec
 
 ---
 
+## Ciclo Autónomo #73 — `2026-11-20 09:24 CDMX` (`v2.8.8-cycle73` — `IMPLEMENTED` • Corte Matutino `09:15 CDMX` Estándar Maestro v4.0.2 + `SKILL SEO JRGC 202611 v3.0`)
+
+### 1. Diagnóstico en Vivo: Supabase + Google Search Console + `audit_seo_jrgc.mjs` (`>= 2026-11-20T03:18:25Z` a `2026-11-20T15:16:55Z`)
+- **Verificación Criptográfica Previa (`SHA-256`):** `[VERIFIED] 55cace178ac4d457e35e4971cf143f7f401258ea265bae6c42fec020183e01a8`.
+- **Auditoría en Vivo `SKILL SEO JRGC 202611 (v3.0)` (`https://sanpedro.aionia.com.mx`):** **`score: 100 / 100`** (`findings: []`).
+- **Google Search Console (`sc-domain:sanpedro.aionia.com.mx` — Top 20 `55` clics / `1,526` impresiones):**
+  - `"salon san pedro plus"` subió a **`17` clics / `203` imp** (`CTR 8.37%`, Pos **`#1.22`**).
+  - `"salones de fiesta cerca de mi"` escaló al **Top 3 local (`Pos #2.92`**, `CTR 7.69%`).
+  - **Oportunidad *Striking Distance* detectada (`267` impresiones con `0%` CTR):** `"autos para bodas df"` (`41` imp, **Pos `#9.68`**), `"autos para bodas distrito federal"` (`171` imp, Pos `#23.24`), `"autos para bodas ciudad de méxico"` (`24` imp), `"autos para bodas cdmx"` (`20` imp) y `"autos para bodas centro"` (`11` imp).
+- **Telemetría en Supabase (`188` eventos humanos reales en `5` sesiones • `0` `dead_clicks`, `0` `rage_clicks`):**
+  - **`ses_gpqnt_x3oaces5` (`117` eventos • Benito Juárez, CDMX • `aforo_110`) y `ses_hd8io_xnlv8jl9` (`47` eventos • Benito Juárez, CDMX):**
+    - Alta interacción con las **9 nuevas fotografías hiperrealistas** en `#animacion` (`93 s` y `56 s` activos: `modal_Servicio de Limusina`, `modal_Iluminación LED` $\rightarrow$ `cotizar_click`, `modal_Carrito de Shots`, `modal_Mesa de Dulces`, `modal_Curaduría Sonora`), además de recorrer los 4 tiempos en `MenuTinderCards`.
+    - **Oportunidad UX/CRO detectada:** Para ver varios servicios en `#animacion`, los usuarios tenían que cerrar y reabrir el modal cada vez, y al tocar `"Incluir en mi Cotización"` solo hacía scroll a `#precotizador-hero` sin activar el extra/paquete en el Paso 3 ni mostrar su aforo sincronizado (`110 pers.`).
+
+### 2. Acciones Ejecutadas bajo Gobernanza Nivel 1 y Nivel 2 (`IMPLEMENTED`)
+1. **[`src/components/ExperienciasCarousel.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/ExperienciasCarousel.tsx) y [`src/components/Precotizador.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/components/Precotizador.tsx):**
+   - **Navegación `‹ / ›` (`44×44 px` + contador `1 / 9` + teclado) dentro del Modal de Experiencias:** Permite recorrer las 9 experiencias sin salir del modal.
+   - **Puente Sincronizado al Paso 3 del Precotizador:** El modal lee el presupuesto vivo de `sessionStorage['sanpedro_precotizador_draft_v1']` (`guests`, `packageType`, `eventType`) y, al tocar **`"Incluir en mi Cotización ({guests} pers.) ↑"`**, dispara `ssp:select-package` con `extraId` para abrir directamente el Paso 3 con ese servicio seleccionado.
+2. **[`src/app/blog/[slug]/page.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/app/blog/%5Bslug%5D/page.tsx) y [`src/utils/blogData.tsx`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/src/utils/blogData.tsx) (*Rankings Push* `SKILL SEO JRGC 202611`):**
+   - Se agregó `max-image-preview:large` en todos los artículos del blog y se eliminó la plantilla repetida en `<meta description>` que truncaba los extractos.
+   - Se aplicó `1` cambio SEO atribuible en `/blog/renta-de-auto-clasico-para-bodas` (`<title>` `54c`, `<meta description>` `155c` completa, respuesta directa en 45 palabras y bloque honesto *Fit / No-Fit*), registrando su ventana de enfriamiento hasta el `2026-12-15` en [`.agents/references/seo-jrgc-contexto-proyecto.md`](file:///c:/Users/info/Documents/Desarrollo/SKILLS/Salones%20Classic/.agents/references/seo-jrgc-contexto-proyecto.md) (respetando intacto el enfriamiento de `/` hasta el `2026-12-14`).
+
+---
+
 ## Ciclo Autónomo #72 — `2026-11-19 21:17 CDMX` (`v2.8.7-cycle72` — `POSTPONED` • Segundo Corte Ejecutivo Consolidado `21:15 CDMX` Estándar Maestro v4.0.2 + `SKILL SEO JRGC 202611 v3.0`)
 
 ### 1. Diagnóstico en Vivo: Supabase + Google Search Console + `audit_seo_jrgc.mjs` (`>= 2026-11-19T23:22:09Z` a `2026-11-20T03:16:15Z`)
