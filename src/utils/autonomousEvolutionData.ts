@@ -22,6 +22,36 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.9.0-cycle75',
+    cycle_number: 75,
+    status: 'POSTPONED',
+    date_cdmx: '2026-11-20 17:17 CDMX',
+    title:
+      'Ciclo Autónomo #75 (POSTPONED Silencioso — Estándar v4.0.2 + SKILL SEO JRGC 202611 v3.0): Corte Vespertino 17:15 CDMX con Score 100/100 en Producción y Cero Spam Intermedio',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Corte vespertino intermedio 17:15 CDMX (>= 2026-11-20T19:19:55Z a 2026-11-20T23:16:45Z): 0 eventos humanos nuevos en la ventana 13:19–17:16 CDMX y validación en vivo de https://sanpedro.aionia.com.mx con Score 100/100 (0 findings). En Google Search Console se mantienen 55 clics / 1,526 impresiones en el Top 20 con "salones de fiesta cerca de mi" en #2.92 y "salon san pedro plus" en 17 clics (#1.22).',
+    autonomousActions: [
+      'Verificación criptográfica SHA-256 íntegra (55cace178ac4d457e35e4971cf143f7f401258ea265bae6c42fec020183e01a8).',
+      'Disciplina consciente v4.0.2 (POSTPONED) + Protocolo Anti-Spam (emailSent: false en corte intermedio 17:15 CDMX sin eventos nuevos): se preserva intacta la versión en producción y se consolida el cierre diario a las 21:15 CDMX.',
+    ],
+    filesModified: [
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+      '.agents/state/prompt_performance_ledger.jsonl',
+    ],
+    postponedReason:
+      '0 eventos humanos nuevos en la ventana 13:19–17:16 CDMX y Score 100/100 en producción; corte silencioso 17:15 CDMX consolidado al reporte nocturno de las 21:15 CDMX.',
+    humanActionRequired: null,
+    commitHash: 'pending-commit-cycle75',
+    deploymentUuid: 'z2wp0lobchhl3s51ifxgxgzd',
+    nextTimerSeconds: 14400,
+    emailSent: false,
+    hypothesisNextCycle:
+      'Evaluar el tráfico vespertino-nocturno (viernes por la tarde/noche, pico habitual de cotizaciones de Bodas y XV Años) en el cierre consolidado de las 21:15 CDMX.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.8.9-cycle74',
     cycle_number: 74,
     status: 'POSTPONED',
