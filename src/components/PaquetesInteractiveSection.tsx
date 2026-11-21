@@ -270,7 +270,7 @@ export default function PaquetesInteractiveSection() {
       }>;
       const nextGuests = customEvent.detail?.guests;
       const nextDay = customEvent.detail?.preferredDay;
-      if (typeof nextGuests === 'number' && nextGuests >= 100 && nextGuests <= 250) {
+      if (typeof nextGuests === 'number' && nextGuests >= 100 && nextGuests <= 300) {
         setSimGuests(nextGuests);
       }
       if (nextDay === 'Sábado') {
@@ -424,7 +424,7 @@ export default function PaquetesInteractiveSection() {
                   👥 Calcular total para:
                 </span>
                 <div className="flex flex-wrap justify-center gap-1.5">
-                  {[100, 120, 150, 180, 200, 250].map((g) => (
+                  {[100, 120, 150, 180, 200, 250, 300].map((g) => (
                     <button
                       key={g}
                       type="button"

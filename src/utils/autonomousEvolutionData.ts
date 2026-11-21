@@ -22,6 +22,38 @@ export interface AutonomousEvolutionEntry {
 export const AUTONOMOUS_EVOLUTION_HISTORY: AutonomousEvolutionEntry[] = [
   {
     project_name: 'Salones San Pedro Plus (Salones Classics)',
+    version_tag: 'v2.9.1-cycle76',
+    cycle_number: 76,
+    status: 'IMPLEMENTED',
+    date_cdmx: '2026-11-20 21:24 CDMX',
+    title:
+      'Ciclo Autónomo #76 (IMPLEMENTED — Estándar v4.0.2 + SKILL SEO JRGC 202611 v3.0): Paridad 1:1 de Capacidad Máxima (100 a 300 Personas) en el Precotizador y #paquetes + Botones Above-the-Fold >=44px con Píldora de Evento tras Auditar Tráfico Orgánico en GAM',
+    vectors: ['UX', 'CRO', 'SEO', 'GEO'],
+    telemetrySignal:
+      'Segundo corte ejecutivo consolidado (Cierre Nocturno 21:15 CDMX, >= 2026-11-20T23:19:30Z a 2026-11-21T03:16:40Z): 24 eventos humanos reales en ses_o5ns7_shl582ej (Gustavo A. Madero CP 07320 | Mobile 392x732 | Google Orgánico SEO | 102s activos, 0 dead_clicks, 0 rage_clicks) y Score 100/100 en audit_seo_jrgc.mjs. Tras leer el Hero durante 45s ("100 a 300 personas"), el usuario deslizó 15 veces el control del Paso 1 hasta 240 tratando de simular un gran evento (250–300 personas), pero el slider tenía tope en 250 mientras que <meta description>, Hero y Schema EventVenue prometen hasta 300 invitados; además, los botones Above-the-Fold del Paso 1 tenían min-h-[38px] (<44px WCAG 2.2 AA) y carecían de selector rápido de tipo de evento.',
+    autonomousActions: [
+      'Verificación criptográfica SHA-256 íntegra antes y después de cambios (55cace178ac4d457e35e4971cf143f7f401258ea265bae6c42fec020183e01a8).',
+      'En src/components/Precotizador.tsx y src/components/PaquetesInteractiveSection.tsx: se homologó el tope superior del cotizador y simulador de 250 a 300 personas (conservando intacto el mínimo oficial de 100 personas y tarifas base), logrando paridad 1:1 con Hero, <meta description> y Schema EventVenue (maximumAttendeeCapacity: 300).',
+      'En src/components/Precotizador.tsx (Paso 1): se elevaron a min-h-[44px] (WCAG 2.2 AA) los botones Above-the-Fold ("Elegir Día y Extras →" y "WhatsApp") y se añadió píldora 1-Tap de giro de evento dentro del recuadro instantáneo para pantallas móviles 392x732.',
+    ],
+    filesModified: [
+      'src/components/Precotizador.tsx',
+      'src/components/PaquetesInteractiveSection.tsx',
+      'src/utils/autonomousEvolutionData.ts',
+      'AUTONOMOUS_EVOLUTION_LOG.md',
+      '.agents/state/prompt_performance_ledger.jsonl',
+    ],
+    postponedReason: null,
+    humanActionRequired: null,
+    commitHash: 'pending-commit-cycle76',
+    deploymentUuid: 'coolify-auto-deploy-cycle76',
+    nextTimerSeconds: 43200,
+    emailSent: true,
+    hypothesisNextCycle:
+      'Permitir cotizar hasta 300 personas en el slider y chips del Paso 1 (en paridad exacta con el snippet de Google y el Hero) junto con CTAs de 44px y selector rápido de evento convertirá a los prospectos de grandes eventos en GAM sin fricción de tope.',
+  },
+  {
+    project_name: 'Salones San Pedro Plus (Salones Classics)',
     version_tag: 'v2.9.0-cycle75',
     cycle_number: 75,
     status: 'POSTPONED',

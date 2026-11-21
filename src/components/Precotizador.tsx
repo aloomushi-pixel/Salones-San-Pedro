@@ -35,10 +35,10 @@ const GUEST_RANGE_CARDS = [
   { label: '100', sub: 'Desde 100 pers.', value: 100 },
   { label: '120 – 140', sub: 'Estándar Plus', value: 120 },
   { label: '150 – 180', sub: 'Clásico Gala', value: 150 },
-  { label: '200 – 250', sub: 'Gran Evento', value: 200 },
+  { label: '200 – 300', sub: 'Gran Evento', value: 200 },
 ];
 
-const QUICK_GUEST_PRESETS = [100, 110, 120, 130, 150, 180, 200, 220, 250];
+const QUICK_GUEST_PRESETS = [100, 120, 150, 180, 200, 230, 250, 300];
 
 const PREFERRED_DAYS = [
   {
@@ -161,7 +161,7 @@ export default function Precotizador() {
       const params = new URLSearchParams(window.location.search);
       const queryGuests = Number(params.get('guests'));
       const queryPkg = params.get('pkg');
-      if (queryGuests && queryGuests >= 50 && queryGuests <= 250) {
+      if (queryGuests && queryGuests >= 50 && queryGuests <= 300) {
         const clampedGuests = Math.max(100, queryGuests);
         setGuests(clampedGuests);
         setHasTouchedGuests(true);
@@ -179,7 +179,7 @@ export default function Precotizador() {
       const raw = window.sessionStorage.getItem('sanpedro_precotizador_draft_v1');
       if (raw) {
         const saved = JSON.parse(raw);
-        if (typeof saved.guests === 'number' && saved.guests >= 50 && saved.guests <= 250) {
+        if (typeof saved.guests === 'number' && saved.guests >= 50 && saved.guests <= 300) {
           setGuests(Math.max(100, saved.guests));
         }
         if (typeof saved.hasTouchedGuests === 'boolean') {
@@ -326,7 +326,7 @@ export default function Precotizador() {
       }>;
       const rawGuests = customEvent.detail?.guests;
       const pkg = customEvent.detail?.packageId;
-      if (typeof rawGuests === 'number' && rawGuests >= 50 && rawGuests <= 250) {
+      if (typeof rawGuests === 'number' && rawGuests >= 50 && rawGuests <= 300) {
         const clampedGuests = Math.max(100, rawGuests);
         setGuests(clampedGuests);
         setHasTouchedGuests(true);
@@ -359,7 +359,7 @@ export default function Precotizador() {
   };
 
   const applyGuestsValue = (newVal: number, recordTelemetry = false) => {
-    const clamped = Math.min(250, Math.max(100, newVal));
+    const clamped = Math.min(300, Math.max(100, newVal));
     setGuests(clamped);
     setHasTouchedGuests(true);
     setLockedAttemptPkg(null);
@@ -375,7 +375,7 @@ export default function Precotizador() {
   // Actualización funcional sin latencia para evitar rage_click en botones -10 / +10
   const handleGuestsDelta = (delta: number) => {
     setGuests((prev) => {
-      const clamped = Math.min(250, Math.max(100, prev + delta));
+      const clamped = Math.min(300, Math.max(100, prev + delta));
       setHasTouchedGuests(true);
       setLockedAttemptPkg(null);
       trackEvent('guests_slider_adjust', `aforo_${clamped}`, {
@@ -829,27 +829,27 @@ export default function Precotizador() {
                   <input
                     type="number"
                     min={100}
-                    max={250}
+                    max={300}
                     step={10}
                     data-interactive="true"
-                    aria-label="Número exacto de invitados (100 a 250)"
+                    aria-label="Número exacto de invitados (100 a 300)"
                     value={guests}
                     onChange={(e) => {
                       const rawVal = Number(e.target.value);
                       if (!Number.isNaN(rawVal)) {
-                        const clamped = Math.max(100, Math.min(250, rawVal));
+                        const clamped = Math.max(100, Math.min(300, rawVal));
                         applyGuestsValue(clamped, true);
                       }
                     }}
-                    onClick={() => handleGuestsDelta(10 <= 250 - guests ? 10 : -10)}
-                    title="Toca para ajustar o escribe tu número de invitados (100 a 250)"
+                    onClick={() => handleGuestsDelta(10 <= 300 - guests ? 10 : -10)}
+                    title="Toca para ajustar o escribe tu número de invitados (100 a 300)"
                     className="w-28 text-center text-4xl sm:text-5xl font-bold text-primary font-display-lg leading-none bg-transparent border-b border-dashed border-primary/40 focus:border-primary focus:outline-none cursor-pointer"
                   />
                   <span className="text-xs text-secondary font-medium mt-1 pointer-events-none">
                     {guests === 100
                       ? 'invitados (mínimo de paquete)'
-                      : guests === 250
-                      ? 'invitados (máximo cotizador)'
+                      : guests === 300
+                      ? 'invitados (capacidad máxima 300)'
                       : 'invitados (toca para ajustar)'}
                   </span>
                   <button
@@ -884,7 +884,7 @@ export default function Precotizador() {
                   type="button"
                   data-ux-stepper="true"
                   onClick={() => handleGuestsDelta(10)}
-                  disabled={guests >= 250}
+                  disabled={guests >= 300}
                   aria-label="Sumar 10 invitados"
                   className="w-12 h-12 rounded-2xl bg-surface-container-high hover:bg-primary hover:text-on-primary active:scale-90 disabled:opacity-30 font-bold text-lg flex items-center justify-center transition-transform border border-outline-variant/40 cursor-pointer shrink-0 select-none"
                 >
@@ -913,11 +913,11 @@ export default function Precotizador() {
                 })}
               </div>
 
-              {/* Slider táctil grueso */}
+              {/* Slider táctil grueso (100 a 300 personas en paridad 1:1 con Schema y Hero) */}
               <input
                 type="range"
                 min="100"
-                max="250"
+                max="300"
                 step="10"
                 value={guests}
                 onChange={(e) => applyGuestsValue(Number(e.target.value), false)}
@@ -969,24 +969,39 @@ export default function Precotizador() {
                 })}
               </div>
 
-              {/* Resumen instantáneo de inclusiones + CTA Above-the-Fold + WhatsApp Directo en Paso 1 (Atiende ses_v4xg6_gjo8cb6z, ses_v578a_8o73gky0 y ses_xqbwj_3r5laqr2) */}
+              {/* Resumen instantáneo de inclusiones + Píldora Evento 1-Tap + CTA Above-the-Fold >=44px (Atiende ses_o5ns7_shl582ej en GAM 392x732) */}
               <div className="mt-2.5 p-2.5 rounded-xl bg-primary/10 border border-primary/30 flex flex-col gap-2 text-left">
-                <div className="text-[11px] text-on-surface leading-snug">
-                  <strong className="text-primary block">
-                    Paquete {packageType} (${(guests * getPackagePrice()).toLocaleString('es-MX')} MXN por {guests} pers.):
-                  </strong>
-                  <span className="text-secondary">
-                    {(PACKAGES.find((p) => p.id === packageType)?.features || []).join(' • ')}
-                  </span>
+                <div className="flex items-start justify-between gap-2 text-[11px] text-on-surface leading-snug">
+                  <div>
+                    <strong className="text-primary block">
+                      Paquete {packageType} (${(guests * getPackagePrice()).toLocaleString('es-MX')} MXN por {guests} pers.):
+                    </strong>
+                    <span className="text-secondary">
+                      {(PACKAGES.find((p) => p.id === packageType)?.features || []).join(' • ')}
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const nextIdx =
+                        (EVENT_KINDS.findIndex((ek) => ek.id === eventKind) + 1) %
+                        EVENT_KINDS.length;
+                      setEventKind(EVENT_KINDS[nextIdx].id);
+                    }}
+                    className="shrink-0 px-2 py-1 rounded-lg bg-surface-container-lowest border border-outline-variant/40 text-[10px] font-bold text-on-surface hover:border-primary cursor-pointer"
+                    title="Toca para cambiar tipo de evento"
+                  >
+                    <span className="pointer-events-none">{eventKind} ↻</span>
+                  </button>
                 </div>
                 <div className="grid grid-cols-2 gap-1.5">
                   <button
                     type="button"
                     onClick={handleStep1Next}
-                    className="min-h-[38px] px-2.5 py-1.5 rounded-lg bg-primary text-on-primary font-extrabold text-[11px] uppercase tracking-wider hover:opacity-95 transition-opacity cursor-pointer text-center flex items-center justify-center"
+                    className="min-h-[44px] px-2.5 py-2 rounded-xl bg-primary text-on-primary font-extrabold text-[11px] uppercase tracking-wider hover:opacity-95 transition-opacity cursor-pointer text-center flex items-center justify-center shadow-xs"
                   >
                     <span className="pointer-events-none">
-                      Personalizar →
+                      Elegir Día y Extras →
                     </span>
                   </button>
                   <a
@@ -994,7 +1009,7 @@ export default function Precotizador() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={handleWhatsApp}
-                    className="min-h-[38px] px-2.5 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#1EBE5D] text-white font-extrabold text-[11px] uppercase tracking-wider transition-colors cursor-pointer text-center flex items-center justify-center gap-1"
+                    className="min-h-[44px] px-2.5 py-2 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-extrabold text-[11px] uppercase tracking-wider transition-colors cursor-pointer text-center flex items-center justify-center gap-1 shadow-xs"
                   >
                     <span className="pointer-events-none">
                       WhatsApp (${(guests * getPackagePrice()).toLocaleString('es-MX')})
@@ -1074,7 +1089,7 @@ export default function Precotizador() {
                 <button
                   type="button"
                   onClick={() => handleGuestsDelta(10)}
-                  disabled={guests >= 250}
+                  disabled={guests >= 300}
                   className="w-6 h-6 rounded-md bg-surface-container-highest hover:bg-primary hover:text-on-primary font-bold text-xs flex items-center justify-center cursor-pointer disabled:opacity-30"
                   title="Sumar 10 invitados"
                 >
@@ -1275,7 +1290,7 @@ export default function Precotizador() {
                   <button
                     type="button"
                     onClick={() => handleGuestsDelta(10)}
-                    disabled={guests >= 250}
+                    disabled={guests >= 300}
                     className="w-7 h-7 rounded-lg bg-surface-container-highest hover:bg-primary hover:text-on-primary font-bold text-xs flex items-center justify-center cursor-pointer disabled:opacity-30"
                     title="Sumar 10 invitados"
                   >
@@ -1871,7 +1886,7 @@ export default function Precotizador() {
                     <button
                       type="button"
                       onClick={() => handleGuestsDelta(10)}
-                      disabled={guests >= 250}
+                      disabled={guests >= 300}
                       className="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-primary hover:text-on-primary font-bold text-xs flex items-center justify-center cursor-pointer disabled:opacity-30"
                     >
                       <span className="pointer-events-none">+10</span>
